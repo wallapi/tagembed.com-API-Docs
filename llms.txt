@@ -1,0 +1,133 @@
+# Tagembed Developer API v3 — LLM-ready specification
+
+Paste this whole file into an AI assistant (Claude, ChatGPT, Gemini, Copilot)
+together with your task, e.g.:
+
+  "Using the API described below, build a social wall page in
+   Node.js/Express (or PHP) that shows the latest 30 Instagram image posts,
+   refreshes every 60 seconds, and renders carousels as sliders. My access token
+   is in the TAGEMBED_ACCESS_TOKEN environment variable."
+
+Everything an integration needs is in this file; no other docs are required.
+Human-readable docs: https://github.com/wallapi/tagembed.com-API-Docs
+
+## Facts
+
+- Base URL: https://staging-apis.tagembed.com/api
+- Protocol: HTTPS, JSON only. All endpoints are GET. The API is READ-ONLY —
+  there are no create/update/delete endpoints.
+- Auth: every request needs a credential, one of:
+  (a) the account's access token — access to every wall on the account;
+  (b) a wall token (starts with "wt1_", issued from the dashboard) — same
+      auth, but every query is pinned to one wall; wall_id may be omitted
+      (implied) or must name exactly that wall, anything else is a 422.
+  Preferred: header  Authorization: Bearer <CREDENTIAL>
+  Also accepted: query  ?access_token=<CREDENTIAL>
+  Both are server-side secrets. NEVER put them in browser JavaScript; build a
+  small server proxy if a web page needs the data.
+- Rate: 1–2 requests/second is fine. Plans have a daily hit ceiling; when
+  exhausted the API answers 401 with an explanatory message.
+- Every success response is wrapped in an envelope; the payload is in `body`:
+  { "status": true, "message": "Operation successful", "code": 200, "body": { ... } }
+- Errors: 401 (bad/missing key, API off, daily limit — message says which),
+  404 (post not on this account), 422 (invalid parameters). A 422 body lists
+  EVERY bad parameter:
+  { "status": false, "code": 422, "message": "Validation Failed",
+    "body": { "fields": [ { "field": "limit", "code": "isInt", "detail": "..." } ] } }
+- Ids are prefixed strings in responses (post_4421, wall_123, feed_88,
+  network_2). Request parameters accept prefixed or bare numeric ids.
+- Responses always contain the FULL post object. There is no `fields`
+  parameter.
+
+## Endpoints
+
+### GET /v3/posts — list approved posts
+
+Optional query parameters (all filters AND together):
+- wall_id      csv of wall ids (wall_123 or 123). Omit = all walls on account.
+- feed_ids     csv of feed ids.
+- networks     csv of network slugs or numeric ids (see GET /v3/networks).
+               Unknown slug => 422.
+- media_types  csv of: text, image, video.
+- languages    csv of ISO 639-1 codes (en,de).
+- sort         csv, `-` prefix = descending. Sortable: created_at,
+               modified_at, id, pinned. Default: -pinned,-created_at
+               (pinned first, then newest).
+- limit        page size, default 50, silently capped by the plan.
+- after        opaque cursor from the previous response's paging.next_cursor.
+               Bound to the sort that minted it; changing sort mid-pagination
+               => 422. Never construct a cursor yourself.
+- pinned_only  1 = only pinned posts.
+- min_rating   integer 0–5, reviews only.
+- created_after / created_before   ISO 8601 or unix seconds.
+- expand       csv of: products (UGC shopping tags), album (merge carousel
+               sibling media into the post's `media`). Each costs extra
+               queries; off by default.
+
+Response body: { "posts": [Post, ...], "paging": { "limit": n,
+"has_more": bool, "next_cursor": string|null } }
+
+Pagination algorithm: request page; while body.paging.has_more, repeat the SAME
+request adding after=body.paging.next_cursor.
+
+### GET /v3/posts/:postid — one post
+
+:postid = post_4421 or 4421. Accepts `expand` exactly as the list route.
+Response body: { "post": Post }. 404 if the post is not on the caller's
+account (hidden/deleted posts also answer 404).
+
+### GET /v3/networks — slug vocabulary
+
+No parameters. Response body: { "networks": ["facebook", "instagram", ...] }.
+Use these slugs in ?networks=.
+
+## Post object
+
+{
+  "id": "post_4421",                 // string, prefixed
+  "object": "post",
+  "wall_id": "wall_123" | null,
+  "feed_id": "feed_88" | null,
+  "album_id": "album_17" | null,     // carousel group key; slides share it
+  "network": { "id": "network_2", "slug": "instagram", "name": "Instagram" },
+  "media_type": "text" | "image" | "video",
+  "language": "en" | null,           // ISO 639-1
+  "pinned": boolean,
+  "active": boolean,
+  "created_at": "2026-08-30T09:12:44.000Z",   // ISO 8601
+  "created_timestamp": 1787238764,             // unix seconds, same instant
+  "modified_at": string | null,
+  "modified_timestamp": number | null,
+  "content": { "title": string | null, "text": string },  // plain text, tags stripped
+  "media": [ { "type": "image"|"video", "url": string,
+               "cdn_url": string, "width": number|null, "height": number|null } ],
+  "author": { "name": string|null, "handle": string|null,
+              "avatar_url": string|null, "profile_url": string|null,
+              "external_id": string|null },
+  "source": { "external_post_id": string|null, "permalink": string|null },
+  "counts": { "likes": number, "comments": number },
+  "sentiment": string | null,
+  "rating": number | null,           // reviews only
+  "products": array | null           // null unless expand=products
+}
+
+Notes:
+- Absent values are null, never "" or 0.
+- Carousels: without expand=album each slide is its own post sharing album_id
+  (group client-side); with expand=album the parent's `media` contains every
+  slide's media.
+- With expand=products each product is: { id, external_id, sku, title, url,
+  image_url, price, discount, currency, currency_symbol, in_stock, position }.
+
+## Integration rules for generated code
+
+1. Keep the access token out of client-side code; read it from an environment
+   variable and call the API from the server.
+2. Check the HTTP status AND the envelope's `status` flag; on 422 surface
+   body.fields to the developer.
+3. For display order, trust the API's default sort (pinned first, newest
+   next) unless the task says otherwise.
+4. Cache responses for at least 30–60 seconds instead of calling per page
+   view; respect the 1–2 req/s guideline.
+5. Render `content.text` as text, not HTML (it is already entity-decoded and
+   tag-stripped). Prefer `media[].cdn_url` for display.
