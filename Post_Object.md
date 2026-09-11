@@ -12,11 +12,10 @@ carry the full object — there is no `fields` parameter to slim it down.
   "album_id": null,
   "network": { "id": "network_2", "slug": "instagram", "name": "Instagram" },
   "media_type": "image",
-  "language": "en",
   "pinned": false,
   "active": true,
   "created_at": "2026-08-30T09:12:44.000Z",
-  "created_timestamp": 1787238764,
+  "created_timestamp": 1788081164,
   "modified_at": null,
   "modified_timestamp": null,
   "content": { "title": null, "text": "Sunset at the summit #hiking" },
@@ -52,13 +51,12 @@ carry the full object — there is no `fields` parameter to slim it down.
 | Field | Notes |
 |---|---|
 | `id`, `wall_id`, `feed_id`, `album_id` | Prefixed string ids (`post_4421`); `null` where absent |
-| `network` | `{ id, slug, name }` — the slug is what `?networks=` accepts, see [GET /v3/networks](endpoints/GET_networks.md) |
+| `network` | `{ id, slug, name }` — where the post came from. The slug vocabulary is listed by [GET /v3/networks](endpoints/GET_networks.md); to filter posts by network, use `feed_ids` |
 | `media_type` | `text`, `image` or `video` — never a bare numeric type code |
-| `language` | ISO 639-1 code, or `null` |
 | `pinned` | Pinned posts sort first by default |
 | `created_at` / `created_timestamp` | The same instant as ISO 8601 and as unix seconds — pick whichever your stack prefers |
 | `content.text` | Plain text: tags stripped, entities decoded. Render it as text, not HTML |
-| `media[]` | `cdn_url` is the cached copy — prefer it for display; `width`/`height` are `null` when unknown |
+| `media[]` | Use the FIRST entry whose `type` is `"image"` for an `<img>` — a `"video"` entry is a video file, not a poster image. `cdn_url` is the cached copy, prefer it over `url`; `width`/`height` are `null` when unknown |
 | `author` | Some networks populate only `name` or only `handle`; each falls back to the other so a byline is never blank |
 | `source.permalink` | Link to the original post on its network, when the network provides one |
 | `sentiment` | Read from moderation analysis, or `null` |

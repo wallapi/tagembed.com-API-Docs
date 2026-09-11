@@ -1,6 +1,6 @@
 # Single Post [GET]
 
-Returns one post by id. The same post object and the same `expand` handling as
+Returns one post by id. The same post object as
 [GET /v3/posts](GET_posts.md).
 
 ## Resource URL
@@ -13,23 +13,31 @@ GET /v3/posts/:postid
 
 ## Parameters
 
-| Name     | Type | Description                                                        |
-| -------- | ---- | ------------------------------------------------------------------ |
-| `expand` | csv  | Optional. `products` and/or `album`, exactly as on the list route. |
+None. The id already names exactly one row, so this route reads no query
+string at all — the list route's parameters (`expand`, `feed_ids`,
+`media_types`, `pinned_only`, `min_rating`, `created_after`,
+`created_before`, `sort`, `limit`, `after`) are ignored here, not rejected.
+
+Two consequences of dropping `expand`: `products` is always `null`, and a
+carousel's slides stay separate posts rather than merging into one `media`
+array. Use [GET /v3/posts](GET_posts.md) with `expand=` when you need either.
+
+A wall-scoped token still only sees its own wall's posts — that comes from the
+credential, not the query.
 
 ## Example requests
 
 **cURL**
 
 ```bash
-curl -s 'https://staging-apis.tagembed.com/api/v3/posts/post_4421?expand=products' \
+curl -s 'https://staging-apis.tagembed.com/api/v3/posts/post_4421' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
 **Node.js** (18+, native `fetch`)
 
 ```js
-const res = await fetch(`${BASE}/v3/posts/post_4421?expand=products`, {
+const res = await fetch(`${BASE}/v3/posts/post_4421`, {
   headers: { Authorization: `Bearer ${KEY}` },
 });
 if (res.status === 404) throw new Error('post not found');
@@ -41,7 +49,7 @@ console.log(body.post);
 
 ```php
 <?php
-$ch = curl_init("$base/v3/posts/post_4421?expand=products");
+$ch = curl_init("$base/v3/posts/post_4421");
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER     => ["Authorization: Bearer $key"],
@@ -72,11 +80,10 @@ $post = $json['body']['post'];
       "album_id": null,
       "network": { "id": "network_2", "slug": "instagram", "name": "Instagram" },
       "media_type": "image",
-      "language": "en",
       "pinned": false,
       "active": true,
       "created_at": "2026-08-30T09:12:44.000Z",
-      "created_timestamp": 1787238764,
+      "created_timestamp": 1788081164,
       "modified_at": null,
       "modified_timestamp": null,
       "content": { "title": null, "text": "Sunset at the summit #hiking" },
@@ -103,22 +110,7 @@ $post = $json['body']['post'];
       "counts": { "likes": 240, "comments": 12 },
       "sentiment": "positive",
       "rating": null,
-      "products": [
-        {
-          "id": "product_31",
-          "external_id": "SKU-1001",
-          "sku": "SKU-1001",
-          "title": "Trail Backpack 30L",
-          "url": "https://shop.example.com/p/trail-backpack",
-          "image_url": "https://shop.example.com/i/backpack.jpg",
-          "price": "89.00",
-          "discount": null,
-          "currency": "USD",
-          "currency_symbol": "$",
-          "in_stock": true,
-          "position": 0
-        }
-      ]
+      "products": null
     }
   }
 }

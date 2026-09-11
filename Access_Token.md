@@ -10,9 +10,9 @@ request made with it reads that wall and nothing else. It is what you should
 paste into a website config or hand to a contractor — it cannot touch the rest
 of the account.
 
-Get it from your wall's settings in the dashboard (API section). With a wall
-token, the `wall_id` parameter can be omitted — the wall is implied — or must
-name exactly that wall; anything else is a `422`.
+Get it from your wall's settings in the dashboard (API section). Every request
+made with it is pinned to that wall automatically — there is no wall parameter
+to pass, and no way to widen the scope.
 
 The `wt1_` prefix is a version tag. A future token scheme would use a new
 prefix, and previously issued tokens keep working.

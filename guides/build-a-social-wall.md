@@ -26,7 +26,8 @@ Rules that matter more than the rest:
   don't need a sort fix. Pass `sort=-created_at` only if you don't want
   pinned posts floated to the top.
 - Escape all output — `content.text` is plain text, render it as text.
-- Prefer `media[].cdn_url` for images.
+- For the image, take the FIRST `media[]` entry whose `type` is `"image"` and
+  use its `cdn_url`. A `"video"` entry is a video file, not a poster image.
 
 ## PHP
 
@@ -96,7 +97,9 @@ $posts = getPosts($base, $accessToken, $cacheFile, $cacheTtl);
     <article>
       <p><strong><?= htmlspecialchars($post['author']['name'] ?? 'Unknown') ?></strong>
         <small><?= htmlspecialchars($post['network']['name'] ?? '') ?></small></p>
-      <?php $img = $post['media'][0]['cdn_url'] ?? null; ?>
+      <?php // a "video" entry is a video FILE, not a poster - take the first image
+            $images = array_filter($post['media'] ?? [], fn($m) => ($m['type'] ?? '') === 'image');
+            $img = $images ? reset($images)['cdn_url'] : null; ?>
       <?php if ($img): ?>
         <img src="<?= htmlspecialchars($img) ?>" alt="" width="300">
       <?php endif; ?>
@@ -164,7 +167,9 @@ function escapeHtml(str = '') {
 }
 
 function renderPost(post) {
-  const image = post.media[0]?.cdn_url;
+  // A "video" entry is a video FILE, not a poster image - only an image
+  // entry belongs in an <img>.
+  const image = post.media?.find((m) => m.type === 'image')?.cdn_url;
   const permalink = post.source?.permalink;
   return `
     <article>
@@ -194,55 +199,31 @@ app.listen(PORT, () => console.log(`Social wall running on http://localhost:${PO
 
 ## The universal AI-agent prompt
 
-Paste this into any coding agent, together with the contents of
-[llms.txt](../llms.txt) (the API reference the agent needs — also at
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt for agents that can browse). Switch the
-language line to Node.js if you prefer.
+Four lines, any agent. Everything else — endpoints, field names, the
+envelope, the caching and security rules, and "code first, questions last" —
+is in [llms.txt](../llms.txt), which the prompt points the agent at. Switch
+the third line to PHP if you prefer.
 
 ```
-I want to build a social wall - a single web page that displays a live
-feed of social media posts aggregated by Tagembed. The complete API
-specification is at https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt (fetch it; if you cannot browse, ask me to paste it); follow it exactly for endpoints,
-field names and the response envelope.
-
-The wall pulls its content from GET {BASE}/v3/posts using my access token.
-
-Please build it with these requirements:
-
-Tech and structure
-- Language: PHP, delivered as a single self-contained index.php file.
-- Read the access token from the TAGEMBED_ACCESS_TOKEN environment variable and
-  the API base URL from TAGEMBED_API_BASE. Never hard-code either.
-
-Fetching data
-- Call GET /v3/posts with limit=24. The payload is inside the response
-  envelope: body.posts and body.paging.
-- The default sort is already display-ready (pinned posts first, then
-  newest by creation time) - do not override it.
-
-Caching and resilience
-- Cache the API response for 5 minutes; only call the API again when
-  the cache is older than that. This stays inside the rate guideline.
-- If an API request fails, fall back to the last successfully cached
-  response so the wall never renders blank. If there is no cache at
-  all, degrade gracefully to an empty state.
-
-Rendering
-- For each post show: the author (author.name), the network
-  (network.name), the first image or video poster (media[0].cdn_url -
-  omit the element entirely when media is empty), the text
-  (content.text, render as TEXT), and a link to the original post
-  (source.permalink) when present.
-- Escape all output to prevent XSS.
-- Keep the markup simple and semantic; I will add my own CSS later.
-
-Security
-- The access token is private, so all API calls happen server-side, never
-  in the browser.
-
-When you are done, add short comments explaining each part and tell me
-exactly how to set the environment variables and run the page locally.
+Build me a social wall: one web page that shows the live posts from my Tagembed wall.
+API docs: https://github.com/wallapi/tagembed.com-API-Docs - read llms.txt there and follow its "Integration rules for generated code".
+Use Node.js 18+ with Express: server.js and package.json. Token comes from the TAGEMBED_ACCESS_TOKEN env var, so don't ask me for it.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 ```
+
+PHP: `Use PHP 8: one self-contained index.php, nothing to install.`
+
+Browser AI (no filesystem access)? Add a fifth line:
+
+```
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+```
+
+What a fresh agent does with this: it opens the repo README, fetches llms.txt,
+reads the GET /posts and Post object pages, and writes a server that checks
+the HTTP status and the envelope, keeps the default sort, caches with a stale
+fallback and never lets the token reach the browser. The spec carries the
+rules, so the prompt does not have to.
 
 ## Per-tool context files
 
@@ -286,11 +267,15 @@ Rules for all code in this project:
 - Cache API responses for 5 minutes; serve the last good cache if a
   request fails.
 - Render content.text as text and escape all output to prevent XSS.
-- Prefer media[].cdn_url for images.
+- For the image, take the first media[] entry whose type is "image" and use
+  its cdn_url; a "video" entry is a video file, not a poster image.
 ```
 
 Optionally copy `llms.txt` into the project so the agent can read the spec
 locally.
+
+Step-by-step per tool (install, setup commands for the context file, a PHP
+and a Node.js prompt, run commands): [../prompts/README.md](../prompts/README.md).
 
 Three habits make this land well in any tool: give the agent the spec
 (../llms.txt) instead of letting it guess field names, state the constraints

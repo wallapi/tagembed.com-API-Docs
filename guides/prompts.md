@@ -8,10 +8,13 @@ paste it into your AI — every prompt works in both modes:
   agent creates and edits files in your project directly. Put the
   [context file](build-a-social-wall.md#per-tool-context-files) and a copy of
   [llms.txt](../llms.txt) in the project first; then these prompts can be short.
-- **Browser AI** (ChatGPT, Gemini, claude.ai — no filesystem access): start
-  with [Prompt 0](#prompt-0--browser-ai-preamble) so the AI outputs every file
-  complete and ready to save, plus a setup checklist telling you where each
-  file goes and what to configure.
+- **Browser AI** (ChatGPT, Gemini, claude.ai — no filesystem access): add
+  the [Prompt 0 line](#prompt-0--browser-ai-line) so the AI outputs every file
+  complete and ready to save, plus a setup checklist.
+
+Want a tool-specific walkthrough instead (install, where the context file
+goes, PHP and Node.js prompts, run commands)? Use the per-tool documents in
+[../prompts/README.md](../prompts/README.md).
 
 Always attach or paste the contents of [llms.txt](../llms.txt) with the first
 message — it is the API spec (endpoints, field names, envelope, pagination);
@@ -19,66 +22,40 @@ without it the AI will guess.
 
 ---
 
-## Prompt 0 — Browser-AI preamble
+## Prompt 0 — Browser-AI line
 
-Prepend this when you are NOT in a code editor (ChatGPT/Gemini/claude.ai web).
-It makes the AI hand you finished files and exact setup steps instead of
-fragments.
+Browser tools (ChatGPT, Gemini, claude.ai) cannot create files for you. Add
+this one line to any prompt and they hand you complete files with a header
+naming where each goes, plus a setup checklist:
 
 ```
-You cannot access my filesystem, so work in "deliverable mode":
-
-1. Output every file COMPLETE and ready to save - no placeholders, no
-   "rest stays the same", no truncation. Start each file with a header
-   line naming its exact path, e.g. `### FILE: public/wall/index.php`.
-2. After the files, give me a SETUP CHECKLIST with exact steps:
-   - where to place each file in my project,
-   - which environment variables to set (TAGEMBED_ACCESS_TOKEN,
-     TAGEMBED_API_BASE), and where to set them on my hosting
-     (.env file, cPanel, Vercel/Netlify dashboard, Docker, etc. -
-     ask me which one I use if it matters),
-   - any install commands (composer/npm) and how to run it locally,
-   - how to verify it works (a curl test and what I should see).
-3. If a file is downloadable in this chat, also offer it as a download.
-4. When I report an error, reply with the corrected COMPLETE file(s),
-   not a diff.
-
-The full API specification is pasted below as llms.txt (also at
-   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) - follow it
-exactly for endpoints, field names and the response envelope.
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
 ```
 
 ---
 
 ## Prompt 1 — Standalone wall page
 
-A self-contained page (the [guide](build-a-social-wall.md) shows finished
-examples of exactly this).
+Four lines. The rules (server-side token, envelope, default sort, 5-minute
+cache with stale fallback, escaping, code before questions) live in llms.txt,
+and the agent reads them there. Tested on a fresh agent: it fetched the repo
+README, then llms.txt, then the endpoint and Post object pages, and produced
+a correct wall without a single question.
 
 ```
-Build me a social wall - a single web page showing the live feed from
-the Tagembed v3 API (spec attached as llms.txt, also at
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt).
+Build me a social wall: one web page that shows the live posts from my Tagembed wall.
+API docs: https://github.com/wallapi/tagembed.com-API-Docs - read llms.txt there and follow its "Integration rules for generated code".
+Use Node.js 18+ with Express: server.js and package.json. Token comes from the TAGEMBED_ACCESS_TOKEN env var, so don't ask me for it.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+```
 
-Choices:
-- Language: [PHP | Node.js + Express | Python + Flask]
-- Cache: [file cache | in-memory | Redis] with a
-  [5]-minute TTL, and ALWAYS fall back to the last good cached copy
-  when an API request fails - the wall must never render blank.
-- Layout: [masonry grid | uniform card grid | vertical feed]
-- Posts per load: [24]
+PHP instead: swap the third line for
+`Use PHP 8: one self-contained index.php, nothing to install.`
 
-Fixed requirements (not choices):
-- Read TAGEMBED_ACCESS_TOKEN and TAGEMBED_API_BASE from environment
-  variables; never hard-code them. All API calls run server-side.
-- The payload is inside the envelope: body.posts / body.paging.
-- Keep the API's default sort (pinned first, then newest).
-- For each post render: author.name, network.name, media[0].cdn_url
-  (omit the element when media is empty), content.text (as TEXT,
-  escaped), and source.permalink as "View original" when present.
-- Escape all output (XSS). Semantic markup, minimal CSS I can extend.
+Browser AI (ChatGPT, Gemini, claude.ai)? Add a fifth line:
 
-When done, tell me exactly how to set the env vars and run it locally.
+```
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
 ```
 
 ## Prompt 2 — Integrate into my existing website
@@ -129,10 +106,12 @@ layer and caching untouched - CSS/markup changes only.
 ```
 
 ```
-Add a network filter bar above the feed. Build the list from
-GET /v3/networks (server-side, cached with the same TTL), and filter
-with the ?networks= parameter. Selecting a network must go through my
-server route/proxy - never call the Tagembed API from the browser.
+Add a network filter bar above the feed. There is no networks
+parameter: a feed is one network's source on the wall, so filter with
+?feed_ids= using the feed ids of the selected network. Each post
+carries feed_id and network.name, so build the bar from the posts you
+already have. Selecting a filter must go through my server
+route/proxy - never call the Tagembed API from the browser.
 ```
 
 ```
@@ -170,10 +149,16 @@ Show me exactly what to install and which env vars to add
 
 1. **Give the spec, don't let it guess**: attach `llms.txt` in the first
    message (in-editor: keep it in the repo). Field names like
-   `content.text` / `media[0].cdn_url` are not guessable.
+   `content.text` / `media[].cdn_url` are not guessable.
 2. **State the constraints** — they are what separate a demo from shippable:
    key server-side in an env var, 5-minute cache with stale fallback,
    escaped output, cursor pagination via `next_cursor`.
-3. **Iterate in small steps**: one prompt = one change ("make it masonry",
+3. **Never write "ask me first"**: a browser AI that is told to ask before
+   starting will end its turn with questions and a plan, and the code only
+   arrives after you answer (Gemini does this literally). The base URL is in
+   `llms.txt` and the token comes from `TAGEMBED_ACCESS_TOKEN`, so nothing needs
+   asking. If you want the AI to confirm something, say "build it now with
+   sensible defaults and list your assumptions at the end".
+4. **Iterate in small steps**: one prompt = one change ("make it masonry",
    "swap file cache for Redis"). When something breaks, paste the exact error
    back and ask for the corrected complete file.

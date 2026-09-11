@@ -1,8 +1,12 @@
 # Networks Collection [GET]
 
-Returns the network slug vocabulary that [GET /v3/posts](GET_posts.md)'s
-`?networks=` parameter accepts. The list is derived from the live networks
-table, so it can never disagree with what the posts endpoint resolves.
+Returns the network vocabulary used across the API — the values that can
+appear as `network.slug` on a post. The list is derived from the live networks
+table, so it can never disagree with what the posts endpoint returns.
+
+This is a reference list, **not a filter**. There is no `?networks=`
+parameter: to show one network's posts, pass that network's feed ids to
+`?feed_ids=` on [GET /v3/posts](GET_posts.md).
 
 ## Resource URL
 
@@ -70,6 +74,5 @@ $networks = $json['body']['networks'];
 }
 ```
 
-`?networks=` also accepts the numeric network id anywhere a slug is accepted.
-An unknown slug in `?networks=` is answered with a 422 naming the slug — never
-with silently empty results.
+Each entry is also addressable by its numeric id, which is what a post's
+`network.id` carries (`network_2`).

@@ -1,8 +1,8 @@
 # Posts Collection [GET]
 
 Returns the approved posts for the authenticated account — pinned first, then
-newest. `wall_id` is optional; omit it to read across every wall on the
-account. Moderation-hidden and deleted posts are never returned.
+newest. Which wall it reads is decided by your token, not by a parameter.
+Moderation-hidden and deleted posts are never returned.
 
 ## Resource URL
 
@@ -16,11 +16,8 @@ All parameters are optional.
 
 | Name             | Type    | Description                                                                                                                                                             |
 | ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `wall_id`        | id list | Restrict to one or more walls, comma-separated. Prefixed (`wall_123`) or bare (`123`) ids both accepted.                                                                |
-| `feed_ids`       | id list | Restrict to specific feeds (`feed_88,feed_90`).                                                                                                                         |
-| `networks`       | csv     | Network slugs or numeric ids (`instagram,facebook`). See [GET /v3/networks](GET_networks.md) for the vocabulary. An unknown slug is a 422, never silently zero results. |
+| `feed_ids`       | id list | Restrict to specific feeds (`feed_88,feed_90`). A feed is one network's source on the wall, so this is **also how you filter by network** — pass that network's feed ids. Every post carries both `feed_id` and `network`. |
 | `media_types`    | csv     | Any of `text`, `image`, `video`.                                                                                                                                        |
-| `languages`      | csv     | ISO 639-1 codes (`en,de`).                                                                                                                                              |
 | `sort`           | csv     | Comma-separated, `-` prefix for descending. Sortable: `created_at`, `modified_at`, `id`, `pinned`. Default: `-pinned,-created_at`.                                      |
 | `limit`          | int     | Page size, default 50. Silently capped at your plan's per-call ceiling.                                                                                                 |
 | `after`          | cursor  | Opaque cursor from the previous response's `paging.next_cursor`. Bound to the `sort` it was issued under — changing `sort` mid-pagination is a 422.                     |
@@ -37,7 +34,7 @@ Call the API from your server only — the access token must never reach a brows
 **cURL**
 
 ```bash
-curl -s 'https://staging-apis.tagembed.com/api/v3/posts?networks=instagram&media_types=image&sort=-created_at&limit=2' \
+curl -s 'https://staging-apis.tagembed.com/api/v3/posts?media_types=image&sort=-created_at&limit=2' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
@@ -49,7 +46,6 @@ const KEY = process.env.TAGEMBED_ACCESS_TOKEN;
 
 const url = new URL(`${BASE}/v3/posts`);
 url.search = new URLSearchParams({
-  networks: 'instagram',
   media_types: 'image',
   sort: '-created_at',
   limit: '2',
@@ -71,7 +67,6 @@ $base = 'https://staging-apis.tagembed.com/api';
 $key  = getenv('TAGEMBED_ACCESS_TOKEN');
 
 $query = http_build_query([
-    'networks'    => 'instagram',
     'media_types' => 'image',
     'sort'        => '-created_at',
     'limit'       => 2,
@@ -109,11 +104,10 @@ $paging = $json['body']['paging'];
         "album_id": null,
         "network": { "id": "network_2", "slug": "instagram", "name": "Instagram" },
         "media_type": "image",
-        "language": "en",
         "pinned": false,
         "active": true,
         "created_at": "2026-08-30T09:12:44.000Z",
-        "created_timestamp": 1787238764,
+        "created_timestamp": 1788081164,
         "modified_at": null,
         "modified_timestamp": null,
         "content": { "title": null, "text": "Sunset at the summit #hiking" },
