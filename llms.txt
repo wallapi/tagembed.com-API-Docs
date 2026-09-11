@@ -21,7 +21,7 @@ Human-readable docs: https://github.com/wallapi/tagembed.com-API-Docs
 
 - Base URL: https://<host>/api — the host shown on your wall's
   Settings → API screen, or the TAGEMBED_API_BASE environment variable.
-  Today only https://staging-apis.tagembed.com/api is live.
+  The production host is https://api.tagembed.com/api.
 - Protocol: HTTPS, JSON only. All endpoints are GET. The API is READ-ONLY —
   there are no create/update/delete endpoints.
 - Auth: every request needs a credential, one of:

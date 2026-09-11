@@ -41,7 +41,7 @@ Save as `index.php`, set `TAGEMBED_ACCESS_TOKEN` (and `TAGEMBED_API_BASE`), run
 ```php
 <?php
 // --- Configuration ---
-$base      = rtrim(getenv('TAGEMBED_API_BASE') ?: 'https://staging-apis.tagembed.com/api', '/');
+$base      = rtrim(getenv('TAGEMBED_API_BASE') ?: 'https://api.tagembed.com/api', '/');
 $accessToken   = getenv('TAGEMBED_ACCESS_TOKEN');
 $cacheFile = __DIR__ . '/tagembed-cache.json';
 $cacheTtl  = 300; // 5 minutes, in seconds
@@ -134,7 +134,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-const BASE = (process.env.TAGEMBED_API_BASE || 'https://staging-apis.tagembed.com/api').replace(/\/$/, '');
+const BASE = (process.env.TAGEMBED_API_BASE || 'https://api.tagembed.com/api').replace(/\/$/, '');
 const ACCESS_TOKEN = process.env.TAGEMBED_ACCESS_TOKEN;
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes, in milliseconds
 
@@ -284,7 +284,7 @@ Rules for all code in this project:
 
 - Read the credential from the TAGEMBED_ACCESS_TOKEN env var (an account
   access token or a wt1_ wall token, both work) and the base URL from
-  TAGEMBED_API_BASE (default https://staging-apis.tagembed.com/api). Never
+  TAGEMBED_API_BASE (default https://api.tagembed.com/api). Never
   hard-code either.
 - All Tagembed API calls run server-side; the token must never reach the
   browser.

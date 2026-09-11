@@ -13,7 +13,7 @@ whole API — and see the [prompt library](guides/prompts.md) and the
 ## General
 
 - **Version:** v3
-- **Base URL:** `https://staging-apis.tagembed.com/api`
+- **Base URL:** `https://api.tagembed.com/api`
 - **Format:** JSON only, over HTTPS
 - **Access:** read-only — there are no create/update/delete endpoints.
   Creating, moderating, hiding and pinning posts happens in your dashboard,

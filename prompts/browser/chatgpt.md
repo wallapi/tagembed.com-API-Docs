@@ -74,7 +74,7 @@ macOS / Linux (Terminal):
 ```bash
 cd my-social-wall
 export TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-export TAGEMBED_API_BASE="https://staging-apis.tagembed.com/api"
+export TAGEMBED_API_BASE="https://api.tagembed.com/api"
 php -S localhost:8080
 ```
 
@@ -83,7 +83,7 @@ Windows (PowerShell):
 ```powershell
 cd my-social-wall
 $env:TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-$env:TAGEMBED_API_BASE="https://staging-apis.tagembed.com/api"
+$env:TAGEMBED_API_BASE="https://api.tagembed.com/api"
 php -S localhost:8080
 ```
 
@@ -115,7 +115,7 @@ macOS / Linux (Terminal):
 cd my-social-wall
 npm install
 export TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-export TAGEMBED_API_BASE="https://staging-apis.tagembed.com/api"
+export TAGEMBED_API_BASE="https://api.tagembed.com/api"
 node server.js
 ```
 
@@ -125,7 +125,7 @@ Windows (PowerShell):
 cd my-social-wall
 npm install
 $env:TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-$env:TAGEMBED_API_BASE="https://staging-apis.tagembed.com/api"
+$env:TAGEMBED_API_BASE="https://api.tagembed.com/api"
 node server.js
 ```
 

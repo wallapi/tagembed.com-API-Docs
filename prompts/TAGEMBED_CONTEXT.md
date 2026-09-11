@@ -20,7 +20,7 @@ Rules for all code in this project:
 
 - Read the credential from the TAGEMBED_ACCESS_TOKEN env var (an account
   access token or a wt1_ wall token, both work) and the base URL from
-  TAGEMBED_API_BASE (default https://staging-apis.tagembed.com/api). Never
+  TAGEMBED_API_BASE (default https://api.tagembed.com/api). Never
   hard-code either.
 - All Tagembed API calls run server-side; the token must never reach the
   browser.
