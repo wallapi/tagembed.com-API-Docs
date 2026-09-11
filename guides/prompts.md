@@ -16,9 +16,17 @@ Want a tool-specific walkthrough instead (install, where the context file
 goes, PHP and Node.js prompts, run commands)? Use the per-tool documents in
 [../prompts/README.md](../prompts/README.md).
 
-Always attach or paste the contents of [llms.txt](../llms.txt) with the first
-message — it is the API spec (endpoints, field names, envelope, pagination);
-without it the AI will guess.
+**The brief lives in three files, not in the prompt** — link them (raw URLs, so
+the AI gets the file and not a GitHub HTML page) or attach them:
+
+| File | What it carries |
+| ---- | --------------- |
+| [widget-build-brief.md](widget-build-brief.md) | what to build, wiring, delivery checklist — and it links the other two |
+| [llms.txt](../llms.txt) | the API: endpoints, envelope, field names, integration rules |
+| [widget-design-spec.md](widget-design-spec.md) | the looks: `--tbd-*` tokens, dark theme, card treatment, reel and wall layouts |
+
+Without them the AI guesses, and it guesses from other social-wall APIs:
+field names like `content.text` and `media[].cdn_url` are not derivable.
 
 ---
 
@@ -36,61 +44,67 @@ You can't access my computer, so output every file complete and ready to save, s
 
 ## Prompt 1 — Standalone wall page
 
-Four lines. The rules (server-side token, envelope, default sort, 5-minute
-cache with stale fallback, escaping, code before questions) live in llms.txt,
-and the agent reads them there. Tested on a fresh agent: it fetched the repo
-README, then llms.txt, then the endpoint and Post object pages, and produced
-a correct wall without a single question.
+Four lines. The brief is one link: [widget-build-brief.md](widget-build-brief.md)
+says what to build and links the API spec and the
+[design spec](widget-design-spec.md) itself, so the AI fetches all three and
+nothing has to be retyped into the prompt.
 
 ```
-Build me a social wall: one web page that shows the live posts from my Tagembed wall.
-API docs: https://github.com/wallapi/tagembed.com-API-Docs - read llms.txt there and follow its "Integration rules for generated code".
-Use Node.js 18+ with Express: server.js and package.json. Token comes from the TAGEMBED_ACCESS_TOKEN env var, so don't ask me for it.
-Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+Build me a social wall: one web page that shows the live posts from my
+Tagembed wall.
+The brief is here - fetch it RAW, follow it exactly, and fetch the two
+specs it links (the API spec and the design spec) as well:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+Use [Node.js 18+ with Express: server.js and package.json | PHP 8: one
+self-contained index.php | whatever fits my project]. Don't ask me for
+the base URL or the token - they're in TAGEMBED_API_BASE and
+TAGEMBED_ACCESS_TOKEN. Write the code now, then tell me how to run it
+as if I've never used a terminal.
 ```
 
-PHP instead: swap the third line for
-`Use PHP 8: one self-contained index.php, nothing to install.`
+Want an embeddable widget instead of a standalone page? Say "a WIDGET I can
+drop into any page of my site" in the first line — the brief and llms.txt
+rule 1 cover both, and they differ only in what gets rendered, never in where
+the token lives.
 
-Browser AI (ChatGPT, Gemini, claude.ai)? Add a fifth line:
+Browser AI (ChatGPT, Gemini, claude.ai)? Add the
+[Prompt 0 line](#prompt-0--browser-ai-line).
 
-```
-You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
-```
+Cannot fetch URLs at all? Attach [llms.txt](../llms.txt) and
+[widget-design-spec.md](widget-design-spec.md) with the first message instead;
+the prompt stays the same minus the link.
 
 ## Prompt 2 — Integrate into my existing website
 
 For dropping the wall INTO a site that already exists. In an editor agent it
-will scan the project and adapt; in a browser AI, answer its questions about
-your stack first.
+will scan the project and adapt; in a browser AI, tell it your stack.
 
 ```
-Integrate a Tagembed social wall into my EXISTING website (API spec
-attached as llms.txt). Do not build a standalone app - adjust to my
-project's structure, conventions and templating.
+Integrate a Tagembed social wall into my EXISTING website. Do not build
+a standalone app - adjust to my project's structure, conventions and
+templating.
+
+Fetch these RAW and follow them exactly - together they are the whole
+brief:
+1. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 
 My stack: [WordPress | Laravel | Next.js | Express | plain PHP |
 describe yours]. If you are running inside my repository, inspect it
-and follow its existing patterns; otherwise ask me what you need to
-know before writing code.
+and follow its existing patterns. Cache in [file | Redis | in-memory |
+my framework's cache]. Layout: the WALL in design spec section 5 - the
+section has real width on my site. Mount point named [wall] in my
+stack's idiom: [a WordPress shortcode | a React component | a
+Blade/Twig partial | a <div> + <script> snippet], usable more than
+once on the same page.
 
-Deliver:
-1. A server-side data layer: fetch GET /v3/posts with my key from
-   TAGEMBED_ACCESS_TOKEN, cache for [5] minutes in
-   [file | Redis | in-memory | my framework's cache], serve the last
-   good copy on failure.
-2. A reusable partial/component that renders the feed, matching my
-   site's markup conventions, with all output escaped.
-3. A route/shortcode/component named [wall] where I can mount it:
-   [/community page | a section on the homepage | a WordPress
-   shortcode | a React component].
-4. NO client-side calls to the Tagembed API - the key never reaches
-   the browser. If the frontend needs JSON (e.g. for a "load more"
-   button), add a small same-origin proxy endpoint that serves the
-   cached data and never exposes the key.
-
-Fit into my existing build/deploy; do not introduce new frameworks.
-Tell me which files you added or changed and what I must configure.
+No client-side calls to the Tagembed API: the token stays server-side,
+and anything rendering in the browser reads from a small same-origin
+endpoint serving the cached data. Fit into my existing build/deploy;
+do not introduce new frameworks. Don't ask me for the base URL or the
+token - they're in TAGEMBED_API_BASE and TAGEMBED_ACCESS_TOKEN. Tell me
+which files you added or changed and what I must configure.
 ```
 
 ## Prompt 3 — Design the embed (iterate on looks)
@@ -147,9 +161,10 @@ Show me exactly what to install and which env vars to add
 
 ## Getting good results — three habits
 
-1. **Give the spec, don't let it guess**: attach `llms.txt` in the first
-   message (in-editor: keep it in the repo). Field names like
-   `content.text` / `media[].cdn_url` are not guessable.
+1. **Link the spec, don't retype it**: the raw URLs above are the prompt's
+   payload. If the tool cannot browse, attach `llms.txt` and the design spec
+   in the first message instead (in-editor: keep them in the repo). Field
+   names like `content.text` / `media[].cdn_url` are not guessable.
 2. **State the constraints** — they are what separate a demo from shippable:
    key server-side in an env var, 5-minute cache with stale fallback,
    escaped output, cursor pagination via `next_cursor`.

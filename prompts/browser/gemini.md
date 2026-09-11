@@ -38,7 +38,7 @@ in llms.txt; the AI reads them there.
 
 ```
 Build me a social wall: one web page that shows the live posts from my Tagembed wall.
-API docs: https://github.com/wallapi/tagembed.com-API-Docs - read llms.txt there and follow its "Integration rules for generated code".
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 Use PHP 8: one self-contained index.php, nothing to install. Token comes from the TAGEMBED_ACCESS_TOKEN env var, so don't ask me for it.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
@@ -48,7 +48,7 @@ You can't access my computer, so output every file complete and ready to save, s
 
 ```
 Build me a social wall: one web page that shows the live posts from my Tagembed wall.
-API docs: https://github.com/wallapi/tagembed.com-API-Docs - read llms.txt there and follow its "Integration rules for generated code".
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 Use Node.js 18+ with Express: server.js and package.json. Token comes from the TAGEMBED_ACCESS_TOKEN env var, so don't ask me for it.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.

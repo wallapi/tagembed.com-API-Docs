@@ -6,6 +6,16 @@ API spec: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/l
 (a local llms.txt copy is in this folder) - follow it exactly for endpoints,
 field names and the response envelope ({ status, message, code, body }).
 
+Two more files complete the brief - fetch them RAW when you can reach the
+network, and say so in one line if you cannot:
+- Build brief (what to build, wiring, what to hand over):
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+- Design spec (--tbd-* tokens, dark theme, card treatment, layouts, states):
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+  Without it, at least use the brand colours --tbd-indigo #283da8,
+  --tbd-blue #4462e8, --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb,
+  --tbd-brand #526ff9 on the widget's own root, with a dark theme.
+
 Rules for all code in this project:
 
 - Read the credential from the TAGEMBED_ACCESS_TOKEN env var (an account

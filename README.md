@@ -106,6 +106,12 @@ hand.
   display, with complete PHP and Node.js implementations
 - **[Prompt library](guides/prompts.md)** — copy-paste prompts for building
   and integrating with any AI coding agent
+- **[Widget build brief](guides/widget-build-brief.md)** — the whole brief in
+  one fetchable file (what to build, wiring, delivery checklist); it links the
+  two specs below, so a prompt can be four lines
+- **[Widget design spec](guides/widget-design-spec.md)** — the `--tbd-*`
+  design tokens, dark theme, card treatment, reel and wall layouts; link it
+  from a prompt instead of pasting CSS
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,
   Windsurf) with a PHP and a Node.js prompt, setup and run commands
