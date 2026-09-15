@@ -1,7 +1,7 @@
-# Prompts by tool - build a Tagembed social wall
+# Prompts by tool - build a Tagembed social widget
 
-One document per AI tool. Each contains the setup for that tool, a **PHP**
-prompt, a **Node.js** prompt, the exact run commands for both, and a
+One document per AI tool. Each contains the setup for that tool, one
+prompt that yields **both** languages, the exact run commands for each, and a
 troubleshooting list. Open the file for the tool you use and follow it top to
 bottom.
 
@@ -38,13 +38,15 @@ download it to the right path for that tool.
 - **They say "do not ask me anything before writing code."** Some models
   (Gemini in particular) take "ask me for my token before you start"
   literally: they stop, ask, and print a plan; the code only comes after
-  you answer. The base URL is in the spec and the token comes from an
-  environment variable, so there is nothing to ask.
+  you answer. So the prompts move the question to the end instead of dropping
+  it: the AI writes code that reads `API_BASE_URL` and `ACCESS_TOKEN`, and
+  then asks you for both values and offers to write them into your `.env`.
+  You are asked either way — just after the code exists, not before.
 - **They are short on purpose.** Four or five lines for a browser AI, two for
   an editor agent. Every rule (envelope, default sort, cache, escaping, token
   server-side) is in llms.txt, and a fresh agent given only the repo link
   fetched the README, llms.txt and the endpoint pages on its own and built
-  the wall correctly. A long prompt just repeats the spec.
+  the widget correctly. A long prompt just repeats the spec.
 - **Browser prompts add one line** asking for complete files with `### FILE:`
   headers and a setup checklist, because you will be saving the files by
   hand.

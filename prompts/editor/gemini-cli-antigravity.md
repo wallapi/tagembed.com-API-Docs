@@ -1,4 +1,4 @@
-# Gemini CLI / Antigravity - build a Tagembed social wall
+# Gemini CLI / Antigravity - build a Tagembed social widget
 
 Use this when Gemini CLI / Antigravity works inside your project folder and can create files
 itself. Setup is done once; after that a one-line request is enough because
@@ -54,23 +54,14 @@ Gemini follows instructions literally - the prompts below say "do not ask"
 for that reason. `GEMINI.md` is loaded from the project root automatically;
 run `/memory show` in Gemini CLI to confirm it was picked up.
 
-## 4. Paste ONE of these prompts
+## 4. Paste this prompt
 
 Two lines are enough: the rules file and llms.txt in the folder carry the
 details, and the agent reads them on its own.
 
-### PHP
-
 ```
-Build the Tagembed social wall described in GEMINI.md and llms.txt in this folder. Use PHP 8: one self-contained index.php, nothing to install.
-Don't ask me anything; create the files, then tell me how to run it as if I've never used a terminal.
-```
-
-### Node.js
-
-```
-Build the Tagembed social wall described in GEMINI.md and llms.txt in this folder. Use Node.js 18+ with Express: server.js and package.json.
-Don't ask me anything; create the files, then tell me how to run it as if I've never used a terminal.
+Build the Tagembed social widget described in GEMINI.md and llms.txt in this folder. Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file), plus one README.md covering both.
+Create the files first, then ask me for my base URL and token, and tell me how to run it as if I've never used a terminal.
 ```
 
 Approve the file creations it proposes. When it finishes it prints the run
@@ -90,8 +81,8 @@ macOS / Linux (Terminal):
 
 ```bash
 cd my-social-wall
-export TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-export TAGEMBED_API_BASE="https://api.tagembed.com/api"
+export ACCESS_TOKEN="wt1_your_token_here"
+export API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
 ```
 
@@ -99,8 +90,8 @@ Windows (PowerShell):
 
 ```powershell
 cd my-social-wall
-$env:TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-$env:TAGEMBED_API_BASE="https://api.tagembed.com/api"
+$env:ACCESS_TOKEN="wt1_your_token_here"
+$env:API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
 ```
 
@@ -109,7 +100,7 @@ Open http://localhost:8080 in your browser. Stop the server with Ctrl+C.
 Verify the API side independently of the page:
 
 ```bash
-curl -s -H "Authorization: Bearer $TAGEMBED_ACCESS_TOKEN" "$TAGEMBED_API_BASE/v3/posts?limit=1"
+curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
 ```
 
 You should see `"status":true` and one post inside `body.posts`. A 401 means
@@ -131,8 +122,8 @@ macOS / Linux (Terminal):
 ```bash
 cd my-social-wall
 npm install
-export TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-export TAGEMBED_API_BASE="https://api.tagembed.com/api"
+export ACCESS_TOKEN="wt1_your_token_here"
+export API_BASE_URL="https://api.tagembed.com/api"
 node server.js
 ```
 
@@ -141,8 +132,8 @@ Windows (PowerShell):
 ```powershell
 cd my-social-wall
 npm install
-$env:TAGEMBED_ACCESS_TOKEN="wt1_your_token_here"
-$env:TAGEMBED_API_BASE="https://api.tagembed.com/api"
+$env:ACCESS_TOKEN="wt1_your_token_here"
+$env:API_BASE_URL="https://api.tagembed.com/api"
 node server.js
 ```
 
@@ -151,7 +142,7 @@ Open http://localhost:3000 in your browser. Stop the server with Ctrl+C.
 Verify the API side independently of the page:
 
 ```bash
-curl -s -H "Authorization: Bearer $TAGEMBED_ACCESS_TOKEN" "$TAGEMBED_API_BASE/v3/posts?limit=1"
+curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
 ```
 
 You should see `"status":true` and one post inside `body.posts`. A 401 means
@@ -169,14 +160,14 @@ the cache for Redis with a file fallback". Ready-made versions of these are in
 ## If it goes wrong
 
 - **The AI asked questions instead of writing code** - your prompt (or a
-  follow-up) contained "ask me first" or similar. Reply: "Do not ask, build
-  it now with the defaults in the prompt."
+  follow-up) asked before writing anything. Reply: "Build it now with the
+  defaults in the prompt, and ask me for the credentials at the end."
 - **`Tagembed API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's
   `body.fields` names it. Paste it back to the AI.
-- **Blank wall, no error** - the account has no approved posts, or the wall
-  token points at a wall with none. Test with the curl command above.
+- **Blank widget, no error** - the account has no approved posts, or the wall
+  token points at a widget with none. Test with the curl command above.
 - **Fields look wrong** (`undefined`, empty author) - the AI guessed field
   names; make sure llms.txt was attached or is in the folder, and paste the
   Post object section from it.

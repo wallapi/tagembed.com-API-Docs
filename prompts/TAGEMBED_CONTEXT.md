@@ -1,6 +1,6 @@
-# Tagembed social wall - project context
+# Tagembed social widget - project context
 
-Data source: GET {TAGEMBED_API_BASE}/v3/posts
+Data source: GET {API_BASE_URL}/v3/posts
 API docs: https://github.com/wallapi/tagembed.com-API-Docs
 API spec: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 (a local llms.txt copy is in this folder) - follow it exactly for endpoints,
@@ -14,13 +14,13 @@ network, and say so in one line if you cannot:
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
   Without it, at least use the brand colours --tbd-indigo #283da8,
   --tbd-blue #4462e8, --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb,
-  --tbd-brand #526ff9 on the widget's own root, with a dark theme.
+  --tbd-brand #526ff9 on `:root`, with a dark theme.
 
 Rules for all code in this project:
 
-- Read the credential from the TAGEMBED_ACCESS_TOKEN env var (an account
+- Read the credential from the ACCESS_TOKEN env var (an account
   access token or a wt1_ wall token, both work) and the base URL from
-  TAGEMBED_API_BASE (default https://api.tagembed.com/api). Never
+  API_BASE_URL (default https://api.tagembed.com/api). Never
   hard-code either.
 - All Tagembed API calls run server-side; the token must never reach the
   browser.
@@ -33,6 +33,10 @@ Rules for all code in this project:
   fails, never render blank.
 - Render content.text as text and escape all output to prevent XSS.
 - Prefer media[].cdn_url for images.
-- Never stop to ask for the token or base URL before writing code. Build with
-  the defaults above and tell the user where to set the two env vars at the
-  end.
+- Render on the server. The posts are in the HTML before it leaves the
+  server; nothing in the browser calls the API or any endpoint.
+- Every build ships BOTH languages: a single self-contained index.php, and the
+  Node.js set (server.js, package.json, cache/posts.json) - plus one README.md
+  documenting both.
+- Do not stop to ask for the token or base URL before writing code. Build with
+  the defaults above, then ask the user for both values at the end.

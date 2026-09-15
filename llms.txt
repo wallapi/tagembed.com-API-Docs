@@ -3,12 +3,12 @@
 Paste this whole file into an AI assistant (Claude, ChatGPT, Gemini, Copilot)
 together with your task, e.g.:
 
-  "Using the API described below, build a social wall WIDGET I can drop
+  "Using the API described below, build a social WIDGET I can drop
    into any page of my site, in Node.js/Express (or PHP), showing the
    latest 30 Instagram image posts. My access token is in the
-   TAGEMBED_ACCESS_TOKEN environment variable."
+   ACCESS_TOKEN environment variable."
 
-  ...or say "build a social wall PAGE / a full-width section on my site"
+  ...or say "build a social widget PAGE / a full-width section on my site"
   instead — rule 1 below covers both, and they differ only in what gets
   rendered, never in where the token lives.
 
@@ -19,30 +19,33 @@ Human-readable docs: https://github.com/wallapi/tagembed.com-API-Docs
 
 ## Facts
 
-- Base URL: https://<host>/api — the host shown on your wall's
-  Settings → API screen, or the TAGEMBED_API_BASE environment variable.
-  The production host is https://api.tagembed.com/api.
+- Base URL: https://api.tagembed.com/api — a fixed value, the same for every
+  account. It is NOT shown in the dashboard and there is nothing to copy:
+  put it in the API_BASE_URL environment variable so a different host can be
+  pointed at for staging, and default to the production one above.
 - Protocol: HTTPS, JSON only. All endpoints are GET. The API is READ-ONLY —
   there are no create/update/delete endpoints.
 - Auth: every request needs a credential, one of:
   (a) the account's user key, i.e. its account-wide access token — reaches
-      every wall on the account;
-  (b) a wall token (starts with "wt1_", issued from the dashboard) — same
-      auth, but every query is pinned to that one wall automatically; there
-      is no wall parameter to pass and no way to widen the scope.
+      every widget on the account;
+  (b) a wall token (starts with "wt1_") — taken from the dashboard: open
+      the gallery's card, click its three-dots menu, choose "Access Token".
+      That menu item exists only on plans that include API access. Same
+      auth, but every query is pinned to that one widget automatically; there
+      is no widget parameter to pass and no way to widen the scope.
   Preferred: header  Authorization: Bearer <CREDENTIAL>
   Also accepted: query  ?access_token=<CREDENTIAL>
   Both are server-side secrets. NEVER put them in browser JavaScript. The
-  standard shape is a same-origin endpoint on your own server that holds the
-  token and caches; anything rendering in the browser reads from that
-  endpoint, never from this API directly.
+  standard shape is a page rendered on your own server: it holds the token,
+  calls this API, caches the result and sends finished HTML. The browser
+  never talks to this API, and never needs to.
 - Rate: 1–2 requests/second is fine. Plans have a daily hit ceiling; when
   exhausted the API answers 401 with an explanatory message.
 - Every success response is wrapped in an envelope; the payload is in `body`:
   { "status": true, "message": "Operation successful", "code": 200, "body": { ... } }
 - Errors: 401 — the message says which of these it is: "Missing credentials
   — send `Authorization: Bearer <token>`" (no credential sent), "Invalid
-  Token" (a wall token that is tampered, revoked, or whose wall is gone),
+  Token" (a wall token that is tampered, revoked, or whose gallery is gone),
   "API access is not allowed" (bad account key, or API disabled on the plan),
   "API access limit exceeded" / "Plan limit exceeded" (daily ceiling used up
   — the quota is counted from midnight UTC, so that is when it frees up);
@@ -60,7 +63,7 @@ Human-readable docs: https://github.com/wallapi/tagembed.com-API-Docs
 ### GET /v3/posts — list approved posts
 
 Optional query parameters (all filters AND together):
-- feed_ids     csv of feed ids. A feed is one network's source on the wall,
+- feed_ids     csv of feed ids. A feed is one network's source on the gallery,
                so THIS is also how you filter by network: pass the feed ids
                of the network you want. Every post carries both feed_id and
                network, so the mapping is discoverable from the posts.
@@ -139,52 +142,54 @@ Notes:
 
 ## Integration rules for generated code
 
-When a user asks you to build a social wall (a widget, a page, or any app) on
+When a user asks you to build a social widget (a widget, a page, or any app) on
 this API, apply ALL of these unless the user explicitly says otherwise. The
 user's prompt is deliberately short; this section is the full brief.
 
-1. Deliverable shape. Read which of the two the user asked for and build
-   THAT. They differ only in what is rendered — never in where the token
-   lives (rule 4).
+1. Deliverable shape. ONE SERVER-RENDERED PAGE, always. The server holds the
+   token, calls this API, caches the result and renders finished HTML; the
+   browser makes one request and receives a complete page. There is no widget
+   script, no mount point, no same-origin JSON endpoint and no browser-side
+   fetch of any kind.
 
-   (a) WIDGET — "a widget", "something I can embed / drop into my site",
-       "an embeddable component". It mounts inside a page it does not own.
-       Two parts: a same-origin endpoint on their server that calls this API,
-       holds the token and caches it; and a self-contained script that mounts
-       into <div id="tagembed-wall"></div>, fetches only from that endpoint,
-       and renders the feed. It must work more than once on the same page.
-       Scope every style to it — prefixed classes or a shadow root, and CSS
-       variables on the widget's own root, never on :root or <body>. The host
-       page has its own CSS; the widget must neither leak into it nor break
-       under it. Give the user the exact HTML snippet that mounts it.
-       Default layout: a REEL — 9:16 media tiles in a horizontal scroll-snap
-       rail, text over a bottom scrim, the whole tile linking to the post. A
-       widget has to earn attention in a small space it borrows.
+   Deliver BOTH languages in the same reply — never one or the other, and
+   never a choice handed back to the user:
 
-   (b) PAGE or SECTION — "a page", "a social wall on my site", "a full-width
-       section", or an existing site to integrate into. Render server-side in
-       their stack; it may own :root and <body>, and needs no mount snippet.
-       The API call still runs server-side with the same 5-minute cache.
-       Default layout: a WALL — a masonry mosaic via CSS multi-column, each
-       image keeping its OWN aspect ratio (uniform crops turn a wall into a
-       generic card grid), text-only posts becoming tinted tiles so the
-       mosaic has no gaps.
+   (a) Node.js — `server.js` (the API call, the cache, the HTML and the CSS
+       all inside it), `package.json`, a `cache/posts.json` cache file, and
+       `README.md`.
+   (b) PHP — a single `index.php` holding everything, CSS included: nothing
+       to install and nothing to require.
 
-   If the request is ambiguous, build the WIDGET: it drops into a page, while
-   a page cannot be dropped into anything. Say in one line which you chose.
-2. Credentials: never block on them. Do not stop to ask for the token or the
-   base URL before writing code — even if the task says "ask me first". An
-   assistant told to ask ends its turn with questions and a plan, and the code
-   only arrives after the user answers. Both values come from environment
-   variables (rule 3), so nothing needs asking: deliver the complete, runnable
-   code in the FIRST reply and tell the user where to set them afterwards.
-   Never invent or hard-code either value.
-3. Configuration. Read the base URL from the TAGEMBED_API_BASE environment
-   variable and the token from TAGEMBED_ACCESS_TOKEN. Strip a trailing slash
+   Both render the same layout from the same design tokens, so the two look
+   identical in a browser. The README documents both (rule 13).
+
+   Default layout: a WALL — a masonry mosaic via CSS multi-column, each image
+   keeping its OWN aspect ratio (uniform crops turn a widget into a generic card
+   grid), text-only posts becoming tinted tiles so the mosaic has no gaps.
+
+   Asked for a section inside a site that already exists rather than a whole
+   page? Same code, rendered into their template — still server-side, still
+   both languages.
+2. Credentials: ask for them, but never block on them. The code reads both
+   from environment variables (rule 3), so nothing is missing from it before
+   the user answers — deliver the complete, runnable code in the FIRST reply,
+   then, at the end of that same reply, ask the user for their token and offer
+   to write it into a `.env`. Give them the steps rather than a vague "get your
+   token": dashboard -> the gallery's card -> its three-dots menu -> "Access
+   Token". Never tell them to buy or upgrade a plan, and do not
+   speculate about why a menu item might be missing. The base URL you do not
+   ask for: it is the constant above. Do not open your turn with the
+   question and wait: an assistant that asks first ends its turn with questions
+   and a plan, and the code only arrives after the user answers. Never invent
+   or hard-code either value, and never paste a token the user gives you into
+   the source — it goes in the env file.
+3. Configuration. Read the base URL from the API_BASE_URL environment
+   variable and the token from ACCESS_TOKEN. Strip a trailing slash
    from the base URL. Provide an example env file, never a real value.
 4. Server-side only. Every API call runs on the server (or the framework's
-   server-side layer) — never from the widget. The token must never appear in
-   browser JavaScript, in a data- attribute, in HTML, or in a public URL. Send
+   server-side layer) — never from the browser. The token must never appear in
+   the rendered HTML, in browser JavaScript, in a comment, or in a public URL. Send
    it as `Authorization: Bearer <token>`.
 5. One request. GET {BASE}/v3/posts?limit=24 unless the user asks for a
    different count. Keep the default sort (pinned first, then newest). The
@@ -192,8 +197,8 @@ user's prompt is deliberately short; this section is the full brief.
 6. Check BOTH the HTTP status and the envelope `status` flag. On 422 surface
    body.fields to the developer; on 401 surface the envelope `message` (it
    says whether the token is invalid or the daily limit is reached).
-7. Cache for 5 minutes, and never below 30 seconds (a file, Redis, a
-   WordPress transient, or the framework's revalidate). If a request fails,
+7. Cache for 5 minutes, and never below 30 seconds (a file, Redis, or the
+   framework's own cache). If a request fails,
    keep serving the last successful result; if there is none yet, render a
    friendly empty state. Never crash the surrounding page, never throw into
    its console, and never leave the container blank with no explanation.
@@ -202,8 +207,8 @@ user's prompt is deliberately short; this section is the full brief.
    in-memory caching multiplies the call count by the number of instances.
    When it expires under traffic, exactly ONE request may refresh while the
    others serve the stale copy. One shared cache at a 5-minute TTL costs
-   ~288 calls a day whatever the traffic; cache paginated pages per cursor
-   too, or "load more" scales calls with clicks instead of with time.
+   ~288 calls a day whatever the traffic; cache each page of a cursor walk
+   under its own key, or paging scales calls with clicks instead of with time.
 8. Render per post: author.name (fall back to author.handle), network.name,
    the first media item whose type is "image" via its cdn_url (a "video"
    item is a video file, not a poster image: skip it or render a <video>),
@@ -215,19 +220,24 @@ user's prompt is deliberately short; this section is the full brief.
     true. Never construct a cursor by hand.
 11. Rate: at most 1–2 requests per second in any loop.
 12. Preview sandboxes. Ship a small inline SAMPLE_POSTS array and fall back
-    to it whenever the fetch to the endpoint fails — a preview sandbox whose
+    to it whenever the API call fails — a preview sandbox whose
     CSP blocks connect-src (claude.ai, ChatGPT canvas, an editor preview
     pane), a file:// origin, or no server running yet. Render a short
-    "preview data" note in the container rather than an error: a failed
-    fetch must never be fatal, or the design cannot be reviewed at all.
+    "preview data" note on the page rather than an error: a failed
+    call must never be fatal, or the design cannot be reviewed at all.
     Never put a token on that path.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
-    or a list of what you are about to build. Give complete files with their
-    exact paths, plus the HTML snippet that mounts the widget. Then explain,
-    step by step, how to set the two environment variables and run it
-    locally, assuming the user has never used a terminal, and give the URL
-    to open. If you cannot write files (a browser chat), output every file
-    complete with its filename, then a setup checklist.
+    or a list of what you are about to build. Give every file complete with
+    its exact path, both languages, in the same reply. Then a `README.md`,
+    which is itself a deliverable: what this is, the file list for each
+    language, how to set the two environment variables, how to run each one
+    locally written for someone who has never used a terminal plus the URL to
+    open, how the cache works and how to change the TTL, how to change the
+    layout and the colours, one `curl` that checks this API directly with
+    what a good response looks like, and a short "if it goes wrong" list.
+    Finally ask the user for their base URL and token. If you cannot write
+    files (a browser chat), output every file complete with its filename,
+    then that same README.
 14. Follow-up changes: filter with query parameters (feed_ids= — also the
     way to filter by network — media_types=, pinned_only=1, min_rating=,
     created_after=, sort=-created_at, expand=album or expand=products)

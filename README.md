@@ -102,7 +102,7 @@ hand.
 
 ## Guides
 
-- **[Build a social wall](guides/build-a-social-wall.md)** — fetch → cache →
+- **[Build a social widget](guides/build-a-social-wall.md)** — fetch → cache →
   display, with complete PHP and Node.js implementations
 - **[Prompt library](guides/prompts.md)** — copy-paste prompts for building
   and integrating with any AI coding agent
@@ -110,7 +110,7 @@ hand.
   one fetchable file (what to build, wiring, delivery checklist); it links the
   two specs below, so a prompt can be four lines
 - **[Widget design spec](guides/widget-design-spec.md)** — the `--tbd-*`
-  design tokens, dark theme, card treatment, reel and wall layouts; link it
+  design tokens, dark theme, card treatment, reel and widget layouts; link it
   from a prompt instead of pasting CSS
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,

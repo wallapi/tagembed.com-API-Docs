@@ -19,19 +19,21 @@ pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
 
 ---
 
-## 1. Scoping — a widget is a guest on someone else's page
+## 1. Scoping — the page is yours, but keep it self-contained
 
-- Declare every custom property **on the widget's own root element**, never on
-  `:root` and never on `<body>`. A host page may already define `--surface` or
-  `--radius`; the two must not collide — which is also why every name is
-  prefixed `--tbd-`.
-- Prefix every class (`.tbd-*`) or render inside a shadow root. Do not style
-  bare element selectors, and do not load a CSS framework.
-- Set the font on the widget root only. Load Inter from Google Fonts only if
-  the host page does not already load it; otherwise fall back to the stack.
-- The widget must work more than once on the same page, and take per-instance
-  options from `data-` attributes (`data-limit`, `data-layout`, `data-theme`,
-  `data-mode`), never from globals.
+- The page is server-rendered and you own it, so `:root` and `<body>` are
+  yours to style. Every token still carries the `--tbd-` prefix, so the same
+  CSS can later drop into a template that has its own variables without
+  colliding.
+- Prefix every class (`.tbd-*`). Do not load a CSS framework, and do not pull
+  a stylesheet over the network: the CSS ships **inside** `server.js` and
+  **inside** `index.php`, in one `<style>` block, because each deliverable is
+  meant to be a file you can drop somewhere and run.
+- Set the font on `:root`. Load Inter from Google Fonts only with a fallback
+  stack that still looks right when it does not load.
+- Asked to render into a section of a site that already exists? Then put the
+  tokens on that section's own root instead of `:root`, and keep every
+  selector under its class — the surrounding page has its own CSS.
 
 ## 2. Design tokens
 
@@ -77,9 +79,9 @@ A gradient, where one is wanted:
 ### Dark theme — ON BY DEFAULT
 
 Remap **only** these tokens under `@media (prefers-color-scheme: dark)`, so the
-brand hues stay recognisable. `data-theme="light"` / `data-theme="dark"` on the
-mount element must override the OS preference in both directions — a host page
-is often light while the OS is dark, so that override has to win.
+brand hues stay recognisable. A `data-theme="light"` / `data-theme="dark"`
+attribute on `<html>` must override the OS preference in both directions, so a
+reader who chooses a theme keeps it whatever their OS says.
 
 ```css
 --tbd-ink:      #f4f4f5;   --tbd-body:     #d4d4d8;
@@ -105,8 +107,8 @@ app uses); the other four are derived from it to clear AA as text, which
 ## 3. Card treatment (the shared baseline)
 
 - `--tbd-surface` background, `--tbd-radius` corners, `--tbd-shadow`, **and** a
-  1px `--tbd-line` border — the border is what keeps a card visible on a dark
-  host page, where a shadow alone disappears.
+  1px `--tbd-line` border — the border is what keeps a card visible against a
+  dark page ground, where a shadow alone disappears.
 - Hover lifts the card 2px and swaps to `--tbd-shadow-up` over `--tbd-ease`.
 - Image flush to the top edge, `object-fit: cover`, with a `--tbd-bg`
   placeholder behind it so the grid never jumps while images load. Explicit
@@ -168,20 +170,20 @@ and a wall reads as a wall precisely BECAUSE the tiles are different heights.
   4 above 1100px, 3 above 800px, 2 above 520px, 1 below.
 - Keep each image's OWN aspect ratio: `width:100%`, `height:auto`, and the real
   `width`/`height` attributes on the `<img>` so nothing reflows as it loads. Do
-  NOT crop to a fixed ratio — uniform crops are what turn a wall into a generic
+  NOT crop to a fixed ratio — uniform crops are what turn a widget into a generic
   card grid.
 - Card as in §3, but padding `--tbd-gap` on the text half only; the image stays
   flush to the top and side edges.
 - Text-only posts become a tinted tile rather than an empty card: the
   `--tbd-indigo` → `--tbd-blue` gradient at 8% opacity over `--tbd-surface`,
   `content.text` at 17px/1.5 in `--tbd-ink`, clamped to 10 lines. These tiles
-  give the wall its rhythm — without them a text-heavy feed collapses into gaps.
+  give the widget its rhythm — without them a text-heavy feed collapses into gaps.
 - Footer row per card: 24px avatar, author name in `--tbd-ink`, network name and
   date in `--tbd-muted` at `--tbd-meta`, the "View post" link in `--tbd-blue`
   pushed right.
 - Hover lifts the card 2px to `--tbd-shadow-up` and scales the image inside to
   1.03, clipped by the card's overflow.
-- Every image `loading="lazy" decoding="async"`. A wall puts far more media on
+- Every image `loading="lazy" decoding="async"`. A widget puts far more media on
   screen at once than a reel does; this is where it pays.
 
 Other layouts on request: a uniform card grid, a vertical feed, or a
@@ -189,9 +191,9 @@ full-screen signage view — all of them reuse §2 and §3 unchanged.
 
 ## 6. States
 
-- **Empty and error states render INSIDE the container.** The widget must never
-  throw into the host page and never leave the container blank with no
-  explanation.
+- **Empty and error states render as real markup on the page.** Never a blank
+  body, never a stack trace, and never a page that renders only a header with
+  nothing under it.
 - **Stale over blank.** When the API call fails, the server keeps serving the
   last successful cached copy (see llms.txt rule 7); the UI shows that copy, not
   an error.
@@ -214,3 +216,25 @@ full-screen signage view — all of them reuse §2 and §3 unchanged.
 - Keep every text/surface pair at WCAG AA after any restyle, in both themes.
 - Escape every value you print, and allow only `http(s)` URLs in `href` and
   `src` attributes.
+
+## 8. The page shell
+
+The widget is the content, but it arrives as a whole page, so the frame around
+it is part of the build. Keep it quiet: it exists to make the posts look good,
+not to compete with them.
+
+- **One header** — the wordmark in the
+  `linear-gradient(135deg, var(--tbd-indigo), var(--tbd-blue))` treatment, and a
+  single line of context. No hero, no marketing copy, no second accent colour.
+- **The page ground is `--tbd-bg`**, the cards `--tbd-surface`, so the mosaic
+  reads as one surface instead of floating on bare white.
+- **Content max-width ~1200px**, centred, with a 16px minimum side gutter at
+  every width.
+- **A footer line is enough**: the post count and when the cache last
+  refreshed. That one line is what tells them the page is live, and it costs
+  nothing to render.
+- **Both themes work.** Honour `prefers-color-scheme`. A theme toggle is
+  optional; if you add one, it is a class on `<html>` flipped by a few inline
+  lines — and it is the only JavaScript this build may ship.
+- **Responsive to ~400px**, and byte-for-byte the same result from the Node.js
+  and the PHP deliverable.

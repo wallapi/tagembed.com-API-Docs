@@ -1,7 +1,7 @@
 # Posts Collection [GET]
 
 Returns the approved posts for the authenticated account — pinned first, then
-newest. Which wall it reads is decided by your token, not by a parameter.
+newest. Which widget it reads is decided by your token, not by a parameter.
 Moderation-hidden and deleted posts are never returned.
 
 ## Resource URL
@@ -16,7 +16,7 @@ All parameters are optional.
 
 | Name             | Type    | Description                                                                                                                                                             |
 | ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `feed_ids`       | id list | Restrict to specific feeds (`feed_88,feed_90`). A feed is one network's source on the wall, so this is **also how you filter by network** — pass that network's feed ids. Every post carries both `feed_id` and `network`. |
+| `feed_ids`       | id list | Restrict to specific feeds (`feed_88,feed_90`). A feed is one network's source on the gallery, so this is **also how you filter by network** — pass that network's feed ids. Every post carries both `feed_id` and `network`. |
 | `media_types`    | csv     | Any of `text`, `image`, `video`.                                                                                                                                        |
 | `sort`           | csv     | Comma-separated, `-` prefix for descending. Sortable: `created_at`, `modified_at`, `id`, `pinned`. Default: `-pinned,-created_at`.                                      |
 | `limit`          | int     | Page size, default 50. Silently capped at your plan's per-call ceiling.                                                                                                 |
@@ -42,7 +42,7 @@ curl -s 'https://api.tagembed.com/api/v3/posts?media_types=image&sort=-created_a
 
 ```js
 const BASE = 'https://api.tagembed.com/api';
-const KEY = process.env.TAGEMBED_ACCESS_TOKEN;
+const KEY = process.env.ACCESS_TOKEN;
 
 const url = new URL(`${BASE}/v3/posts`);
 url.search = new URLSearchParams({
@@ -64,7 +64,7 @@ console.log(body.posts, body.paging);
 ```php
 <?php
 $base = 'https://api.tagembed.com/api';
-$key  = getenv('TAGEMBED_ACCESS_TOKEN');
+$key  = getenv('ACCESS_TOKEN');
 
 $query = http_build_query([
     'media_types' => 'image',

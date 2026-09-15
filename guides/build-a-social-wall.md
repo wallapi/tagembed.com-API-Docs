@@ -1,6 +1,6 @@
-# Build a Social Wall with the Tagembed Developer API (v3)
+# Build a Social Widget with the Tagembed Developer API (v3)
 
-One page that shows how to fetch, cache and display your wall's posts with
+One page that shows how to fetch, cache and display your widget's posts with
 working **PHP** and **Node.js** code — plus a prompt and per-tool context
 files so an AI coding agent (Claude Code, Cursor, Codex, ChatGPT, Copilot,
 Gemini/Antigravity) can build the whole thing from a single line.
@@ -20,7 +20,7 @@ mode): [the prompt library](prompts.md)
 Rules that matter more than the rest:
 
 - The access token is a server-side secret — **never call the API from the
-  browser**. Read the key from an env var (`TAGEMBED_ACCESS_TOKEN`).
+  browser**. Read the key from an env var (`ACCESS_TOKEN`).
 - The payload is inside the envelope: `body.posts` and `body.paging`.
 - The default sort is already display-ready (pinned first, then newest) — you
   don't need a sort fix. Pass `sort=-created_at` only if you don't want
@@ -35,14 +35,14 @@ Rules that matter more than the rest:
 
 ## PHP
 
-Save as `index.php`, set `TAGEMBED_ACCESS_TOKEN` (and `TAGEMBED_API_BASE`), run
+Save as `index.php`, set `ACCESS_TOKEN` (and `API_BASE_URL`), run
 `php -S localhost:8080`. File cache, 5-minute TTL, stale fallback.
 
 ```php
 <?php
 // --- Configuration ---
-$base      = rtrim(getenv('TAGEMBED_API_BASE') ?: 'https://api.tagembed.com/api', '/');
-$accessToken   = getenv('TAGEMBED_ACCESS_TOKEN');
+$base      = rtrim(getenv('API_BASE_URL') ?: 'https://api.tagembed.com/api', '/');
+$accessToken   = getenv('ACCESS_TOKEN');
 $cacheFile = __DIR__ . '/tagembed-cache.json';
 $cacheTtl  = 300; // 5 minutes, in seconds
 
@@ -93,10 +93,10 @@ $posts = getPosts($base, $accessToken, $cacheFile, $cacheTtl);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><title>Our Social Wall</title></head>
+<head><meta charset="utf-8"><title>Our Social Widget</title></head>
 <body>
   <h1>What people are saying</h1>
-  <div class="wall">
+  <div class="widget">
   <?php foreach ($posts as $post): ?>
     <article>
       <?php // name can be null - the handle is the documented fallback
@@ -134,8 +134,8 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-const BASE = (process.env.TAGEMBED_API_BASE || 'https://api.tagembed.com/api').replace(/\/$/, '');
-const ACCESS_TOKEN = process.env.TAGEMBED_ACCESS_TOKEN;
+const BASE = (process.env.API_BASE_URL || 'https://api.tagembed.com/api').replace(/\/$/, '');
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes, in milliseconds
 
 // In-memory: fine for one process. Several workers or instances each keep
@@ -158,7 +158,7 @@ async function fetchPosts() {
 async function getPosts() {
   const now = Date.now();
   if (cache.filled && now - cache.fetchedAt < CACHE_TTL) {
-    return cache.posts; // still fresh - an empty wall counts as a result
+    return cache.posts; // still fresh - an empty widget counts as a result
   }
   try {
     const posts = await fetchPosts();
@@ -202,15 +202,15 @@ app.get('/', async (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="en">
-    <head><meta charset="utf-8"><title>Our Social Wall</title></head>
+    <head><meta charset="utf-8"><title>Our Social Widget</title></head>
     <body>
       <h1>What people are saying</h1>
-      <div class="wall">${posts.map(renderPost).join('')}</div>
+      <div class="widget">${posts.map(renderPost).join('')}</div>
     </body>
     </html>`);
 });
 
-app.listen(PORT, () => console.log(`Social wall running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Social widget running on http://localhost:${PORT}`));
 ```
 
 ## The universal AI-agent prompt
@@ -220,14 +220,15 @@ and it links the other two (the API spec and the design spec), so nothing has
 to be retyped into the prompt:
 
 ```
-Build me a social wall - a live feed of the posts Tagembed aggregates
+Build me a social widget - a live feed of the posts Tagembed aggregates
 for me. The brief is here: fetch it RAW, follow it exactly, and fetch
 the two specs it links as well:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
 Use [PHP 8: one self-contained index.php | Node.js 18+ with Express:
 server.js and package.json]. Don't ask me for the base URL or the
-token - they're in TAGEMBED_API_BASE and TAGEMBED_ACCESS_TOKEN. Write
-the code now, add short comments, then tell me how to set those two
+token up front - read them from the API_BASE_URL and ACCESS_TOKEN
+environment variables. Write the code now, add short comments, ask me
+for both values at the end, then tell me how to set those two
 variables and run it locally.
 ```
 
@@ -244,7 +245,7 @@ the numbered integration rules - and keep the rest of the prompt as it is.
 ## Per-tool context files
 
 Drop the block for your tool into the project, and after that a one-line
-request ("build the social wall", "add a masonry grid", "swap the file cache
+request ("build the social widget", "add a masonry grid", "swap the file cache
 for Redis") is enough — the context file carries the rules every time.
 
 The rules are identical everywhere; only the filename changes:
@@ -262,9 +263,9 @@ The rules are identical everywhere; only the filename changes:
 | ChatGPT (browser)           | paste into Custom Instructions / the top of the chat              |
 
 ```markdown
-# Tagembed social wall - project context
+# Tagembed social widget - project context
 
-Data source: GET {TAGEMBED_API_BASE}/v3/posts
+Data source: GET {API_BASE_URL}/v3/posts
 API docs: https://github.com/wallapi/tagembed.com-API-Docs
 API spec: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 (a local llms.txt copy is in this folder) - follow it exactly for endpoints,
@@ -278,13 +279,13 @@ network, and say so in one line if you cannot:
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
   Without it, at least use the brand colours --tbd-indigo #283da8,
   --tbd-blue #4462e8, --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb,
-  --tbd-brand #526ff9 on the widget's own root, with a dark theme.
+  --tbd-brand #526ff9 on `:root`, with a dark theme.
 
 Rules for all code in this project:
 
-- Read the credential from the TAGEMBED_ACCESS_TOKEN env var (an account
+- Read the credential from the ACCESS_TOKEN env var (an account
   access token or a wt1_ wall token, both work) and the base URL from
-  TAGEMBED_API_BASE (default https://api.tagembed.com/api). Never
+  API_BASE_URL (default https://api.tagembed.com/api). Never
   hard-code either.
 - All Tagembed API calls run server-side; the token must never reach the
   browser.
