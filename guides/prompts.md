@@ -55,7 +55,7 @@ Two environments, same prompts:
 
 - **In-editor agent** (Claude Code, Cursor, Codex, Copilot, Antigravity): the
   agent creates and edits files in your project directly. Optionally drop a
-  [context file](build-a-social-wall.md#per-tool-context-files) in the project
+  [context file](build-a-social-widget.md#per-tool-context-files) in the project
   first; then your follow-ups can be one-liners.
 - **Browser AI** (ChatGPT, Gemini, claude.ai — no filesystem access): start
   with [Prompt 0](#prompt-0--browser-ai-preamble) so the AI outputs every file
@@ -229,7 +229,7 @@ so paste the files instead of the prompt's link list:
    [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md)
    in the first message, then the prompt.
 2. In-editor agents: drop both files in the repo once (see the
-   [context files](build-a-social-wall.md#per-tool-context-files)) and every
+   [context files](build-a-social-widget.md#per-tool-context-files)) and every
    later prompt can be one line.
 
 If you can only paste a few lines, these are the ones that cannot be guessed —

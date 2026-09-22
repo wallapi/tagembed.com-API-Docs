@@ -8,7 +8,7 @@ screen, digital signage.
 Building with an AI coding agent (Claude, ChatGPT, Gemini, Cursor, Copilot)?
 Point it at **[llms.txt](llms.txt)** — a single machine-readable spec of the
 whole API — and see the [prompt library](guides/prompts.md) and the
-[build-a-social-wall guide](guides/build-a-social-wall.md).
+[build-a-social-widget guide](guides/build-a-social-widget.md).
 
 ## General
 
@@ -102,7 +102,7 @@ hand.
 
 ## Guides
 
-- **[Build a social widget](guides/build-a-social-wall.md)** — fetch → cache →
+- **[Build a social widget](guides/build-a-social-widget.md)** — fetch → cache →
   display, with complete PHP and Node.js implementations
 - **[Prompt library](guides/prompts.md)** — copy-paste prompts for building
   and integrating with any AI coding agent
