@@ -13,7 +13,7 @@ Design spec (tokens, layouts, states) - follow it exactly:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 ```
 
-The design itself lives in [themes.json](themes.json) beside this file — read
+The design itself lives in [themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) beside this file — read
 that first (section 2). Only if the AI can reach neither file are the five
 fallback brand colours worth pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
 `--tbd-blue-ink:#3350d6`, `--tbd-blue-lite:#8ea2fb`, `--tbd-brand:#526ff9`.
@@ -44,13 +44,13 @@ fallback brand colours worth pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue
 The token **names** are the contract: `--tbd-bg`, `--tbd-surface`, `--tbd-ink` and the
 rest below, every class under `.tbd-`, and the layouts and rules in
 sections 3–8. The **values** are not yours to invent — they come from a theme in
-[themes.json](themes.json), the catalogue Tagembed itself renders widgets with.
+[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json), the catalogue Tagembed itself renders widgets with.
 Read that file first; the palette further down is only what you fall back to
 when you cannot.
 
 ### Themes — where the design comes from
 
-[themes.json](themes.json) is that catalogue as data: 23 themes (18 social, 5
+[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) is that catalogue as data: 23 themes (18 social, 5
 review), each carrying the `style` object the widget is really rendered with.
 Fetch it raw:
 

@@ -58,7 +58,7 @@ which is how you review the look before you have a token, on a laptop with
 neither PHP nor Node installed, or in a chat window that can run neither.
 Because all three render the same markup from the same tokens, a restyle has to
 land in all three or they drift apart. Its skin comes from
-[themes.json](themes.json) — the 23 shipped widget themes as data. One theme
+[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) — the 23 shipped widget themes as data. One theme
 supplies every colour, the font, the radius, the spacing, the column count and
 the author/date toggles, and that is the whole skin: no light/dark switch
 anywhere in the build. The field-by-field mapping is in [the design spec](widget-design-spec.md),
@@ -124,13 +124,26 @@ What to deliver - all of these, in this reply, not a choice:
   with Express. No separate stylesheet in either version.
 - preview.html: those same sample posts already expanded into static
   HTML. I double-click it, no server and nothing installed, and it
-  calls NOTHING - no fetch, no token, theme toggle aside. Same CSS
-  and markup as the two above, so a later restyle applies to all
-  three. Not index.html - that gets served instead of index.php.
+  calls NOTHING - no fetch, no token, no script at all. Same CSS and
+  markup as the two above, so a later restyle applies to all three.
+  Not index.html - that gets served instead of index.php.
 - README.md covering them: the files, the two environment variables,
   how to run each one written for someone who has never opened a
   terminal, how the cache works, and a short list of what to check when
   it goes wrong.
+
+Looks
+- The design comes from themes.json, which the design spec links and
+  maps field by field. Pick ONE social theme at random and skin the
+  whole build with it: its colours, font, radius, spacing, column
+  count, text alignment, line trim and author/date toggles. Tell me
+  which theme you used so I can ask for another.
+- One skin only - no dark mode, no prefers-color-scheme remap, no
+  data-theme attribute, no light/dark toggle anywhere.
+- Some theme colours are unreadable as plain text (white on a near
+  white card). Keep the theme's colour where it clears WCAG AA,
+  otherwise darken or lighten it until it does, and say what you
+  changed.
 
 Calling the API
 - GET https://api.tagembed.com/api/v3/posts?limit=24, with the header

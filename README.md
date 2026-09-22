@@ -117,7 +117,7 @@ hand.
   [sample-posts-reviews.json](guides/sample-posts-reviews.json), the shape
   `body.posts` returns. Every build bakes them into a `preview.html`: the same
   page as a static file, openable from disk before a token exists
-- **[themes.json](guides/themes.json)** — the 23 shipped widget themes as data:
+- **[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json)** — the 23 shipped widget themes as data:
   per theme the colours, font, radius, spacing, column count, text alignment,
   line trim and the author/date toggles the dashboard renders it with
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
