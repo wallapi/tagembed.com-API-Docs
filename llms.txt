@@ -160,9 +160,20 @@ user's prompt is deliberately short; this section is the full brief.
        `README.md`.
    (b) PHP — a single `index.php` holding everything, CSS included: nothing
        to install and nothing to require.
+   (c) `preview.html` — the same page as a plain static file, with the
+       sample posts of rule 12 written into it as finished markup. It runs
+       from a double-click: no server, no build step, nothing installed. It
+       calls NOTHING — no fetch, no API call, no token, not even a
+       same-origin one — because the posts are already in the file; the
+       theme toggle is the only JavaScript it may carry. Name it
+       `preview.html`, never `index.html`: an `index.html` beside
+       `index.php` is served instead of it by most Apache and nginx
+       configurations, which silently replaces the live page with the
+       sample one.
 
-   Both render the same layout from the same design tokens, so the two look
-   identical in a browser. The README documents both (rule 13).
+   All three render the same layout from the same design tokens, so they look
+   identical in a browser and any restyle lands in all three at once. The
+   README documents them (rule 13).
 
    Default layout: a WALL — a masonry mosaic via CSS multi-column, each image
    keeping its OWN aspect ratio (uniform crops turn a widget into a generic card
@@ -225,14 +236,24 @@ user's prompt is deliberately short; this section is the full brief.
     pane), a file:// origin, or no server running yet. Render a short
     "preview data" note on the page rather than an error: a failed
     call must never be fatal, or the design cannot be reviewed at all.
-    Never put a token on that path.
+    Never put a token on that path. The same array is what `preview.html`
+    (rule 1c) renders, already expanded into markup — so the design can be
+    reviewed with nothing installed and no token in existence. Use the
+    published sample posts when you can reach them:
+    guides/sample-posts-social.json and guides/sample-posts-reviews.json in
+    github.com/wallapi/tagembed.com-API-Docs, fetched raw; otherwise invent
+    8–12 posts in the same shape, including a review post with a `rating`
+    and a text-only post with an empty `media` array.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
     or a list of what you are about to build. Give every file complete with
-    its exact path, both languages, in the same reply. Then a `README.md`,
+    its exact path — both languages and `preview.html` — in the same reply.
+    Then a `README.md`,
     which is itself a deliverable: what this is, the file list for each
     language, how to set the two environment variables, how to run each one
     locally written for someone who has never used a terminal plus the URL to
-    open, how the cache works and how to change the TTL, how to change the
+    open, that `preview.html` is opened by double-clicking it and is a design
+    preview rather than the page to deploy,
+    how the cache works and how to change the TTL, how to change the
     layout and the colours, one `curl` that checks this API directly with
     what a good response looks like, and a short "if it goes wrong" list.
     Finally ask the user for their base URL and token. If you cannot write

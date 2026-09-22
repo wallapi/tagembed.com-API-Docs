@@ -57,8 +57,26 @@ choice put back to the user:
 | `index.php` | **one file, everything in it** — the API call, the cache, the HTML and the CSS. Nothing to install, nothing to require |
 
 The PHP file writes its cache beside itself (`cache/posts.json`) and creates
-the directory if it is missing. Both languages render the same layout from the
-same design tokens, so the two outputs look identical in a browser.
+the directory if it is missing.
+
+**And one static file both of them share:**
+
+| File | Holds |
+| ---- | ----- |
+| `preview.html` | the same page with the §4 sample posts already expanded into markup — the same CSS, the same layout, no server, no build step, no token, and no call of any kind. It opens from a double-click |
+
+`preview.html` is how the design gets reviewed before a token exists, on a
+machine with neither PHP nor Node installed, and inside a chat that can run
+neither. It must call **nothing**: no `fetch`, no API request, not even a
+same-origin one — the posts are in the file already. A theme toggle is the only
+JavaScript it may carry, and it carries the §4 "preview data" note.
+
+Name it `preview.html`, **never `index.html`**: an `index.html` sitting beside
+`index.php` is served *instead of it* by most Apache and nginx configurations,
+so the first upload would quietly swap the live page for the sample one.
+
+All three render the same layout from the same design tokens, so the outputs
+look identical in a browser and any restyle has to land in all three at once.
 
 ## 2. Configuration — ask at the end, never hard-code
 
@@ -114,10 +132,21 @@ markup inside the page — never a blank body and never a stack trace. A stale
 cached copy beats an error. Ship the inline `SAMPLE_POSTS` preview fallback so
 the design can still be reviewed before a token exists (llms.txt rule 12).
 
+The same posts are what `preview.html` renders. Take them from
+[sample-posts-social.json](sample-posts-social.json) and
+[sample-posts-reviews.json](sample-posts-reviews.json) in this folder, fetched
+raw — 8–12 of each is plenty. If you cannot reach them, invent that many in the
+same shape, and include both a review post carrying a `rating` and a text-only
+post whose `media` array is empty, or the wall never shows its star rating and
+its tinted text tiles. [preview.html](preview.html) here is a reference build of
+exactly that.
+
 ## 5. Styling
 
 The CSS lives inside the deliverable — inside `server.js` for Node, inside
-`index.php` for PHP — not in a separate stylesheet. The page is theirs, so it
+`index.php` for PHP, inside `preview.html` for the static one — not in a
+separate stylesheet. The same CSS in all three, so the preview is worth
+trusting. The page is theirs, so it
 may own `:root` and `<body>` freely. Tokens, layouts, dark theme and contrast
 rules: the design spec.
 
@@ -126,12 +155,15 @@ rules: the design spec.
 Deliverable first, commentary last — no opening plan of what you are about to
 build.
 
-1. **Every file, complete, with its exact path** — the Node.js set and the PHP
-   file, both, in the same reply. No "the PHP version is similar".
+1. **Every file, complete, with its exact path** — the Node.js set, the PHP
+   file and `preview.html`, all in the same reply. No "the PHP version is
+   similar".
 2. **`README.md`**, which is a deliverable and not a summary. It covers both
    languages and contains: what this is; the file list for each; how to set
    `API_BASE_URL` and `ACCESS_TOKEN`; how to run each one locally (written for
-   someone who has never used a terminal) and the URL to open; how the cache
+   someone who has never used a terminal) and the URL to open; that
+   `preview.html` needs none of that — it is opened by double-clicking it, and
+   it is a design preview, not the page to deploy; how the cache
    works and how to change the TTL; how to change the layout and the colours;
    one `curl` that checks the Tagembed API directly with what a good response
    looks like; and a short "if it goes wrong" list — 401, empty page, stale

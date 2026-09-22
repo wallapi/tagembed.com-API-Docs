@@ -51,6 +51,20 @@ to wire up:
 | `cache/posts.json` | its own `cache/posts.json`, created on first run |
 | `README.md` — documents **both** languages | covered by the same README |
 
+**And one file both of them share: `preview.html`.** The same wall, the same
+CSS, with the sample posts written straight into the HTML — no server, no
+token, no API call anywhere in it. Double-click it and the design is on screen,
+which is how you review the look before you have a token, on a laptop with
+neither PHP nor Node installed, or in a chat window that can run neither.
+Because all three render the same markup from the same tokens, a restyle has to
+land in all three or they drift apart. A reference build of it is
+[preview.html](preview.html) in this folder.
+
+It is `preview.html` and not `index.html` on purpose: an `index.html` sitting
+next to `index.php` is served *instead* of it by most Apache and nginx
+configurations, so the live page would silently become the sample page the
+first time the folder is uploaded.
+
 Two environments, same prompts:
 
 - **In-editor agent** (Claude Code, Cursor, Codex, Copilot, Antigravity): the
@@ -98,13 +112,18 @@ The API is documented here - read it before writing anything, because
 the field names below are not the ones other social-wall APIs use:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 
-What to deliver - both of these, in this reply, not a choice:
+What to deliver - all of these, in this reply, not a choice:
 - index.php: ONE self-contained PHP 8 file with everything in it, the
   API call, the cache, the HTML and the CSS. Nothing to install and
   nothing to require.
 - server.js + package.json: the same four things again in Node.js 18+
   with Express. No separate stylesheet in either version.
-- README.md covering both: the files, the two environment variables,
+- preview.html: those same sample posts already expanded into static
+  HTML. I double-click it, no server and nothing installed, and it
+  calls NOTHING - no fetch, no token, theme toggle aside. Same CSS
+  and markup as the two above, so a later restyle applies to all
+  three. Not index.html - that gets served instead of index.php.
+- README.md covering them: the files, the two environment variables,
   how to run each one written for someone who has never opened a
   terminal, how the cache works, and a short list of what to check when
   it goes wrong.
@@ -187,7 +206,12 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 Plus the design spec the brief links, for the looks.
 Give me BOTH: the Node.js set (server.js, package.json, cache file)
 and a single self-contained index.php - each with its CSS inside it,
-no separate stylesheet - plus one README.md covering both. The code
+no separate stylesheet - plus a preview.html: the same page as a
+static file with the brief's sample posts baked into the HTML,
+calling nothing, so I can double-click it and see the design before I
+have a token. Same CSS in all three. Then one README.md covering
+them.
+The code
 must read my base URL and token from the API_BASE_URL and ACCESS_TOKEN
 environment variables - never hard-code them. Write the code first,
 then at the end of the same reply ask me for my token, with the steps
@@ -209,7 +233,10 @@ output every file COMPLETE and ready to save - no placeholders, no
 "rest stays the same", no truncation - each starting with a header
 line naming its exact path, e.g. `### FILE: index.php`. That means
 both languages in full: the Node.js files AND the single-file PHP, in
-the same reply, never "the PHP version is similar". Then the README,
+the same reply, never "the PHP version is similar". Include
+preview.html complete as well - the static sample-data version of the
+same page - because it is the only one of the three I can open
+without installing anything. Then the README,
 which the build brief's section 6 describes - including where each
 file goes and where to set the two env vars on my hosting (.env,
 cPanel, Vercel/Netlify, Docker - ask which I use if it matters). Offer
@@ -283,6 +310,13 @@ of my own site rather than a page of its own:
   every selector under its own class - the surrounding page has its
   own CSS and the two must not collide.
 
+Also give me a standalone preview.html: just the widget section, with
+the brief's sample posts baked into the HTML as finished markup and
+the same scoped CSS. It calls nothing - no fetch, no token - so I can
+double-click it and review the section on its own, outside my site's
+stylesheet, before wiring it into a template. Not index.html, which
+would collide with my site's own entry point.
+
 The code reads my base URL and token from the API_BASE_URL and
 ACCESS_TOKEN environment variables - do not open with questions and
 wait. Write the code in this first reply, then tell me which files you
@@ -311,7 +345,9 @@ introduce new colours or a CSS framework, and keep the CSS inside the
 same file. Both themes must still work: check the result in light AND
 dark, and keep every text/surface pair at WCAG AA. Keep the data layer
 and the caching untouched - CSS and markup only, and apply the same
-change to BOTH the Node.js and the PHP file so they stay identical.
+change to ALL THREE - the Node.js file, the PHP file and preview.html -
+so they stay identical. Give me back the updated preview.html too: it
+is how I check the restyle without running anything.
 ```
 
 ```
@@ -321,7 +357,9 @@ no networks parameter: a feed is one network's source on the gallery,
 so filter with ?feed_ids= using the feed ids of the selected network.
 Each post carries feed_id and network.name, so you can build the bar
 from the posts you already fetched. Cache each filter under its own
-key. Apply it to both files.
+key. Apply it to both server files, and put the same bar in the same
+styling into preview.html so the three still look alike - inert there,
+since a static file has no server to reload against.
 ```
 
 ```
@@ -334,7 +372,8 @@ mid-pagination invalidates the cursor and returns 422.
 Cache each page under its own key (the cursor is part of the key) with
 the same TTL as the first page. Otherwise every visitor paging through
 is a fresh API call and my daily hit count scales with traffic instead
-of with time. Apply it to both files.
+of with time. Apply it to both server files. preview.html has no
+second page to go to, so leave it as it is.
 ```
 
 ```
@@ -375,7 +414,8 @@ apply it to both the Node.js and the PHP deliverable.
 
 Worth knowing before you paste one, so you can add the missing line yourself.
 
-**You get, without asking:** both languages in full, the server-side fetch, the
+**You get, without asking:** both languages in full, a `preview.html` that
+renders the sample posts with no server and no token, the server-side fetch, the
 5-minute file cache, the stale-on-failure fallback, an empty state, escaped
 output, the token kept out of the rendered HTML, a README that documents both,
 and step-by-step run instructions. That is the part that decides whether the
@@ -451,6 +491,8 @@ already inside the three linked files — this is what the links are buying you.
 | Missing values are `""` or `0`            | They are `null` — including `network.name` and `author.name`                     |
 | The default sort needs fixing             | It is already pinned-first, then newest by creation time                        |
 | The page can fetch the API from JavaScript | It would succeed — and hand your token to every visitor. Only your server calls Tagembed, and the posts are in the HTML before it is sent |
-| A separate stylesheet is fine             | The CSS lives inside `server.js` and inside `index.php`; each file runs alone    |
+| A separate stylesheet is fine             | The CSS lives inside `server.js`, inside `index.php` and inside `preview.html`; each file runs alone |
+| The sample-data preview can just fetch the API | `preview.html` calls nothing — the sample posts are already markup inside it. Fetching there would mean a token in the browser |
+| The preview may as well be `index.html`   | It is `preview.html`: an `index.html` next to `index.php` is served *instead* of it by most Apache and nginx setups |
 | One language is enough                    | Every build ships both: the Node.js set and the single-file PHP                 |
 | Posts can be created or hidden via API    | Read-only. Moderation happens in the dashboard                                  |

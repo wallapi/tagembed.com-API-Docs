@@ -55,7 +55,7 @@ Two lines are enough: the rules file and llms.txt in the folder carry the
 details, and the agent reads them on its own.
 
 ```
-Build the Tagembed social widget described in AGENTS.md and llms.txt in this folder. Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file), plus one README.md covering both.
+Build the Tagembed social widget described in AGENTS.md and llms.txt in this folder. Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file), plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them.
 Create the files first, then ask me for my base URL and token, and tell me how to run it as if I've never used a terminal.
 ```
 

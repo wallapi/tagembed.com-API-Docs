@@ -33,6 +33,12 @@ Rules for all code in this project:
   fails, never render blank.
 - Render content.text as text and escape all output to prevent XSS.
 - Prefer media[].cdn_url for images.
+- Every build also ships a preview.html: the same page as a static file, with
+  the sample posts baked into the HTML as finished markup. It calls nothing -
+  no fetch, no API call, no token - so the design can be reviewed by
+  double-clicking it, with nothing installed. Same CSS and markup as the two
+  server versions, and a restyle applies to all three. Never call it
+  index.html: it would be served instead of index.php.
 - Render on the server. The posts are in the HTML before it leaves the
   server; nothing in the browser calls the API or any endpoint.
 - Every build ships BOTH languages: a single self-contained index.php, and the

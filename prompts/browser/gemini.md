@@ -37,7 +37,7 @@ in llms.txt; the AI reads them there.
 ```
 Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
 Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
-Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus one README.md covering both. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
 ```

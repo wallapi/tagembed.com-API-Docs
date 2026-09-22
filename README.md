@@ -112,6 +112,12 @@ hand.
 - **[Widget design spec](guides/widget-design-spec.md)** — the `--tbd-*`
   design tokens, dark theme, card treatment, reel and widget layouts; link it
   from a prompt instead of pasting CSS
+- **[preview.html](guides/preview.html)** — what a build looks like before a
+  token exists: the sample posts of
+  [sample-posts-social.json](guides/sample-posts-social.json) and
+  [sample-posts-reviews.json](guides/sample-posts-reviews.json) rendered as a
+  static WALL, no server and no API call in it. Every prompt asks for a
+  `preview.html` of its own beside the PHP and Node files; this is the reference
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,
   Windsurf) with a PHP and a Node.js prompt, setup and run commands

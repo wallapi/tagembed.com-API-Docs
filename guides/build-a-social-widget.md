@@ -225,7 +225,11 @@ for me. The brief is here: fetch it RAW, follow it exactly, and fetch
 the two specs it links as well:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
 Use [PHP 8: one self-contained index.php | Node.js 18+ with Express:
-server.js and package.json]. Don't ask me for the base URL or the
+server.js and package.json]. Add a preview.html alongside it: the
+same page as a static file with the brief's sample posts baked into
+the HTML, calling nothing, so I can double-click it and see the
+design before I have a token - same CSS and markup as the server
+version. Don't ask me for the base URL or the
 token up front - read them from the API_BASE_URL and ACCESS_TOKEN
 environment variables. Write the code now, add short comments, ask me
 for both values at the end, then tell me how to set those two
@@ -298,6 +302,11 @@ Rules for all code in this project:
   fails, never render blank.
 - Render content.text as text and escape all output to prevent XSS.
 - Prefer media[].cdn_url for images.
+- Ship a preview.html beside the server files: the same page as a
+  static file with the sample posts baked in as markup, calling
+  nothing and holding no token, so the design can be reviewed by
+  double-clicking it. Never name it index.html - it would be served
+  instead of index.php. A restyle applies to all three files.
 - Never stop to ask for the token or base URL before writing code. Build with
   the defaults above and tell the user where to set the two env vars at the
   end.

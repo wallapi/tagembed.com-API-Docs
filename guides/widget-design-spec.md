@@ -26,9 +26,11 @@ pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
   CSS can later drop into a template that has its own variables without
   colliding.
 - Prefix every class (`.tbd-*`). Do not load a CSS framework, and do not pull
-  a stylesheet over the network: the CSS ships **inside** `server.js` and
-  **inside** `index.php`, in one `<style>` block, because each deliverable is
-  meant to be a file you can drop somewhere and run.
+  a stylesheet over the network: the CSS ships **inside** `server.js`,
+  **inside** `index.php` and **inside** `preview.html`, in one `<style>` block,
+  because each deliverable is meant to be a file you can drop somewhere and
+  run. The same block in all three, so the preview is worth trusting and a
+  restyle cannot land in one and miss the others.
 - Set the font on `:root`. Load Inter from Google Fonts only with a fallback
   stack that still looks right when it does not load.
 - Asked to render into a section of a site that already exists? Then put the
@@ -204,6 +206,12 @@ full-screen signage view — all of them reuse §2 and §3 unchanged.
   error, with a small dismissible note: "preview data — live posts load when
   this runs on your server". A failed fetch must never be fatal, or the design
   cannot be reviewed at all. Never put a token on that path.
+- **The static preview.** The same posts, already expanded into markup, ship as
+  `preview.html` — a file that opens from a double-click with no server, no
+  build step and no call of any kind. It carries the same note and the same
+  CSS as the two server deliverables, and it is where this spec gets reviewed
+  before a token exists. [preview.html](preview.html) in this folder is a
+  reference build of it.
 - **Loading.** Skeleton tiles in `--tbd-bg` at the final tile shape, so the
   layout does not jump when posts arrive.
 
