@@ -14,7 +14,7 @@ HTML page, the raw one returns the file:
 | ---- | --------------- | ---------------- |
 | Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md) |
 | API spec | endpoints, envelope, field names, integration rules | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) |
-| Design spec | `--tbd-*` tokens, dark theme, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
+| Design spec | `--tbd-*` tokens, the shipped themes in themes.json, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
 
 All three live in the public docs repo
 [github.com/wallapi/tagembed.com-API-Docs](https://github.com/wallapi/tagembed.com-API-Docs),
@@ -57,8 +57,12 @@ token, no API call anywhere in it. Double-click it and the design is on screen,
 which is how you review the look before you have a token, on a laptop with
 neither PHP nor Node installed, or in a chat window that can run neither.
 Because all three render the same markup from the same tokens, a restyle has to
-land in all three or they drift apart. A reference build of it is
-[preview.html](preview.html) in this folder.
+land in all three or they drift apart. Its skin comes from
+[themes.json](themes.json) — the 23 shipped widget themes as data. One theme
+supplies every colour, the font, the radius, the spacing, the column count and
+the author/date toggles, and that is the whole skin: no light/dark switch
+anywhere in the build. The field-by-field mapping is in [the design spec](widget-design-spec.md),
+under **Themes** in section 2, and the build names the theme it used.
 
 It is `preview.html` and not `index.html` on purpose: an `index.html` sitting
 next to `index.php` is served *instead* of it by most Apache and nginx
@@ -179,7 +183,7 @@ and how to set the environment variables and run each version.
 ```
 
 Want it on brand rather than unstyled? Add this line — the design spec carries
-the palette, the dark theme, the card treatment and the layouts:
+the palette, the shipped themes, the card treatment and the layouts:
 
 ```
 For the looks, follow this design spec exactly:
@@ -271,7 +275,8 @@ FIRST media entry whose type is "image" via its cdn_url. Absent values
 are null. Paginate by sending paging.next_cursor back as `after`.
 Brand colours, on :root: --tbd-indigo #283da8, --tbd-blue #4462e8,
 --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb, --tbd-brand #526ff9.
-Ship a dark theme and keep every text/surface pair at WCAG AA.
+Keep every text/surface pair at WCAG AA. One skin only - no dark
+mode, no prefers-color-scheme remap, no theme toggle.
 ```
 
 ---
@@ -342,8 +347,8 @@ in sections 4-5 of
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 Keep using the --tbd-* design tokens already declared - do not
 introduce new colours or a CSS framework, and keep the CSS inside the
-same file. Both themes must still work: check the result in light AND
-dark, and keep every text/surface pair at WCAG AA. Keep the data layer
+same file. Keep every text/surface pair at WCAG AA, and do not add a
+dark mode or a theme toggle - the build is one skin. Keep the data layer
 and the caching untouched - CSS and markup only, and apply the same
 change to ALL THREE - the Node.js file, the PHP file and preview.html -
 so they stay identical. Give me back the updated preview.html too: it
@@ -440,7 +445,7 @@ separately against the daily ceiling.
 
 **You DO get a styled page, on brand.** The full token set (palette, type
 scale, radius, elevation, focus ring, card treatment, responsive rule) plus a
-dark theme, AA-checked contrast and the page shell live in the
+the shipped themes, AA-checked contrast and the page shell live in the
 [design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
 so the first render already looks like ours instead of an unstyled list. The
 layout is decided too: **Prompt 1** and **Prompt 2** both build a WALL mosaic,

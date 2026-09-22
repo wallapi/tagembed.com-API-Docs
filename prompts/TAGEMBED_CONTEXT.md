@@ -10,11 +10,13 @@ Two more files complete the brief - fetch them RAW when you can reach the
 network, and say so in one line if you cannot:
 - Build brief (what to build, wiring, what to hand over):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
-- Design spec (--tbd-* tokens, dark theme, card treatment, layouts, states):
+- Design spec (--tbd-* tokens, the shipped themes in themes.json, card
+  treatment, layouts, states):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
   Without it, at least use the brand colours --tbd-indigo #283da8,
   --tbd-blue #4462e8, --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb,
-  --tbd-brand #526ff9 on `:root`, with a dark theme.
+  --tbd-brand #526ff9 on `:root`. One skin - no dark mode and no
+  theme toggle.
 
 Rules for all code in this project:
 
