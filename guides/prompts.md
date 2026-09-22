@@ -109,90 +109,63 @@ Self-contained: the facts that cannot be guessed are in the prompt itself, so
 it works even when the AI cannot open a link. Paste it as-is.
 
 ```
-Build me a social widget: a web page, rendered by my own server, that
-shows a live feed of the social posts collected in my Tagembed gallery.
+Build me a social widget: a page my own server renders, showing the
+live posts from my Tagembed gallery.
 
-The API is documented here - read it before writing anything, because
-the field names below are not the ones other social-wall APIs use:
+Read both first - the field names and the looks are specified there:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 
-What to deliver - all of these, in this reply, not a choice:
-- index.php: ONE self-contained PHP 8 file with everything in it, the
-  API call, the cache, the HTML and the CSS. Nothing to install and
-  nothing to require.
-- server.js + package.json: the same four things again in Node.js 18+
-  with Express. No separate stylesheet in either version.
-- preview.html: those same sample posts already expanded into static
-  HTML. I double-click it, no server and nothing installed, and it
-  calls NOTHING - no fetch, no token, no script at all. Same CSS and
-  markup as the two above, so a later restyle applies to all three.
-  Not index.html - that gets served instead of index.php.
-- README.md covering them: the files, the two environment variables,
-  how to run each one written for someone who has never opened a
-  terminal, how the cache works, and a short list of what to check when
-  it goes wrong.
+Deliver all four in this reply, not a choice:
+- index.php - ONE self-contained PHP 8 file: API call, cache, HTML,
+  CSS. Nothing to install.
+- server.js + package.json - the same in Node.js 18+ with Express.
+- preview.html - the same page as a static file with the sample posts
+  baked in as markup, calling NOTHING, same CSS as the other two. Not
+  index.html: that gets served instead of index.php.
+- README.md for all of them: files, the two settings, how to run each
+  (assume I have never used a terminal), the cache, what to check
+  when it breaks.
 
-Looks
-- The design comes from themes.json, which the design spec links and
-  maps field by field. Pick ONE social theme at random and skin the
-  whole build with it: its colours, font, radius, spacing, column
-  count, text alignment, line trim and author/date toggles. Tell me
-  which theme you used so I can ask for another.
-- One skin only - no dark mode, no prefers-color-scheme remap, no
-  data-theme attribute, no light/dark toggle anywhere.
-- Some theme colours are unreadable as plain text (white on a near
-  white card). Keep the theme's colour where it clears WCAG AA,
-  otherwise darken or lighten it until it does, and say what you
-  changed.
+Looks: skin everything with ONE social theme picked at random from
+themes.json, which the design spec maps field by field, and tell me
+which one. One skin only - no dark mode, no toggle. Some theme colours
+are white on near-white, so where one fails WCAG AA as text, fix it
+and say so.
 
-Calling the API
-- GET https://api.tagembed.com/api/v3/posts?limit=24, with the header
-  Authorization: Bearer <my token>.
-- Take the token from the ACCESS_TOKEN environment variable and the
-  base URL from API_BASE_URL, defaulting to the address above. Neither
-  belongs in the source.
-- The response is wrapped. Posts are at body.posts and paging at
-  body.paging - never at the top level. A request can fail while
-  returning HTTP 200, so check the envelope's `status` flag as well as
-  the status code.
-- Do not add a `fields` parameter; it does not exist, and the whole
-  post object comes back either way.
-- Do not touch `sort`. Pinned posts first and newest after is already
-  the default, and it is the order a widget wants.
-- For a second page, send body.paging.next_cursor back as `after` on a
-  normal server-side request. Treat that cursor as opaque: never build
-  one, never pass a post id.
+Data: GET https://api.tagembed.com/api/v3/posts?limit=24, header Authorization:
+Bearer <token>; token from ACCESS_TOKEN, base URL from API_BASE_URL,
+neither in the code. Posts are at body.posts and paging at
+body.paging, never the top level, and `status` can be false on an HTTP
+200. No "fields" param exists. Leave `sort` alone. Page 2 =
+body.paging.next_cursor sent back as `after` verbatim, never a post id.
 
-Caching
-- Keep the last response in a local JSON file and reuse it until it is
-  5 minutes old. That holds the whole site to roughly 288 API calls a
-  day no matter how busy it gets.
-- When a refresh fails, keep serving the cached copy - a stale widget
-  beats an empty one. With no cache yet, render the empty state rather
-  than an error.
+Sample posts: fetch these RAW and bake in 8-12 of each, or invent 8-12
+in the same shape - never skip it. An empty ACCESS_TOKEN renders them
+instead of calling the API; a real one switches to live by itself.
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
 
-What each post gives you
-- author.name, or author.handle when the name is null - either can be
-  null, so handle that rather than printing "null".
-- network.name for the source network, content.text for the body (it
-  arrives as plain text), created_at for the date.
-- The image is the FIRST entry in `media` whose type is "image", read
-  from its cdn_url. Do not reach for media[0]: on many posts that is a
-  video file. When there is no image entry, render no image element.
-- source.permalink links back to the original post; add
-  rel="noopener noreferrer". It can be null.
-- Anything missing is null, never an empty string or a zero.
+Cache: a local JSON file, 5 minutes in one named constant, keyed per
+request - about 288 calls a day at any traffic. Create the folder on
+first run, write a temp file and rename it in. A failed refresh keeps
+serving the old copy; empty state only if nothing ever loaded; an
+unwritable folder serves live, noted in the README.
 
-Non-negotiable
-- Every API call happens on the server. The token must not reach the
-  browser - not in the HTML, not in a comment, not in an attribute.
-- Escape everything you print, and allow only http and https URLs in
-  href and src.
+Per post: author.name falling back to author.handle (either can be
+null - never print "null"), network.name, content.text, created_at,
+source.permalink with rel="noopener noreferrer". The image is the
+FIRST media entry of type "image" via cdn_url, NOT media[0], which can
+be a video. rating 0-5 marks a review post and is null on social ones
+- same card, plus stars. Other missing values are null, never "" or 0.
 
-Finish by commenting each part of the code in a line or two, then ask
-me for my access token - and tell me where to find it: my Tagembed
-dashboard, the gallery's card, its three-dots menu, "Access Token" -
-and how to set the environment variables and run each version.
+Non-negotiable: every call runs server-side and the token never
+reaches the browser. Escape everything you print; allow only
+http/https links.
+
+Finish with brief comments through the code, then ask for my access
+token (dashboard - the gallery's card - its three-dot menu - "Access
+Token") and how to set the two settings and run each version.
 ```
 
 Want it on brand rather than unstyled? Add this line — the design spec carries
@@ -301,47 +274,38 @@ will scan the project and adapt; in a browser AI, tell it your stack.
 
 ```
 Render a Tagembed social widget INTO my EXISTING website - a section
-inside pages I already have, adjusted to my project's structure,
-conventions and templating. Still server-side: the posts are in the
-HTML before it leaves my server, and the browser calls nothing.
+inside pages I already have, matching my project's structure and
+templating. Still server-side: the posts are in the HTML before it
+leaves my server, and the browser calls nothing.
 
 Fetch these three RAW and follow them exactly - together they are the
-whole brief, so do not guess and do not borrow conventions from other
-social-wall APIs:
-1. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
-2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
-3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+whole brief, so do not borrow conventions from other social-wall APIs:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 
-My stack: [plain PHP | Express | describe yours]. If you are running
-inside my repository, inspect it and follow its existing patterns;
-otherwise assume a conventional layout for that stack. Fit into my
-existing build and deploy; do not introduce new frameworks. Cache in
+My stack: [plain PHP | Express | describe yours]. Inside my repository,
+inspect it and follow its patterns; otherwise assume a conventional
+layout. Fit my existing build and deploy, no new frameworks. Cache in
 [file | Redis | my framework's cache].
 
-Two things differ from the brief's defaults, because this is a section
-of my own site rather than a page of its own:
-- Layout: the WALL in design spec section 5 - a masonry mosaic. The
-  section gets real width here, and a wall reads as a wall precisely
-  BECAUSE the tiles are different heights. [Swap for: the reel rail in
-  section 4 | uniform card grid | vertical feed.]
-- Keep the tokens on the section's own root rather than :root, and
-  every selector under its own class - the surrounding page has its
-  own CSS and the two must not collide.
+Two changes from the brief's defaults, since this is a section and not
+a page of its own: use the WALL mosaic from design spec section 5
+[swap for: the reel rail in section 4 | uniform grid | vertical feed],
+and scope every style to this section, never site-wide - the
+surrounding page has its own CSS.
 
-Also give me a standalone preview.html: just the widget section, with
-the brief's sample posts baked into the HTML as finished markup and
-the same scoped CSS. It calls nothing - no fetch, no token - so I can
-double-click it and review the section on its own, outside my site's
-stylesheet, before wiring it into a template. Not index.html, which
-would collide with my site's own entry point.
+Also give me a standalone preview.html: the widget section alone, the
+sample posts baked in as markup, the same scoped CSS, calling nothing,
+so I can double-click it and review the section outside my site's
+stylesheet. Not index.html - it would collide with my own entry point.
 
-The code reads my base URL and token from the API_BASE_URL and
-ACCESS_TOKEN environment variables - do not open with questions and
-wait. Write the code in this first reply, then tell me which files you
-added or changed, what I must configure, and how to verify it locally
-- and at the end ask me for my token, with the steps (dashboard - the
-gallery's card - its three-dots menu - "Access Token"), offering to put
-it in my .env.
+Read the base URL and token from API_BASE_URL and ACCESS_TOKEN, and do
+not open with questions and wait. Write the code in this first reply,
+then tell me which files you added or changed, what I must configure
+and how to verify it locally - and ask for my token at the end
+(dashboard - the gallery's card - its three-dot menu - "Access
+Token"), offering to put it in my .env.
 ```
 
 ---
