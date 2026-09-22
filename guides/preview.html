@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Wall Preview</title>
+<meta name="description" content="Static preview of the Tagembed social widget, rendered from the sample posts - no server, no token, no API call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* ---------------------------------------------------------------------------
+   Design tokens - widget-design-spec.md section 2. Do not invent other colours.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Brand - identical in both themes */
+  --tbd-indigo:    #283da8;
+  --tbd-blue:      #4462e8;
+  --tbd-blue-ink:  #3350d6;
+  --tbd-blue-lite: #8ea2fb;
+  --tbd-brand:     #526ff9;
+
+  /* Light theme */
+  --tbd-ink:       #09090b;
+  --tbd-body:      #3f3f46;
+  --tbd-muted:     #6b6478;
+  --tbd-surface:   #ffffff;
+  --tbd-bg:        #f7f7f9;
+  --tbd-line:      rgba(9,9,11,.09);
+
+  /* Shape, depth, motion */
+  --tbd-radius:    14px;
+  --tbd-shadow:    0 1px 2px rgba(9,9,11,.05), 0 4px 12px rgba(9,9,11,.05);
+  --tbd-shadow-up: 0 2px 4px rgba(9,9,11,.06), 0 12px 28px rgba(9,9,11,.10);
+  --tbd-ring:      0 0 0 3px rgba(68,98,232,.35);
+  --tbd-ease:      150ms cubic-bezier(.2,0,.2,1);
+
+  /* Type and rhythm */
+  --tbd-font:      Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --tbd-text:      15px/1.55;
+  --tbd-meta:      13px/1.4;
+  --tbd-gap:       20px;
+}
+
+/* Dark theme - only these tokens are remapped, so the brand hues stay
+   recognisable. data-theme overrides the OS preference in both directions. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tbd-ink:      #f4f4f5;  --tbd-body:     #d4d4d8;
+    --tbd-muted:    #a1a1aa;  --tbd-surface:  #18181b;
+    --tbd-bg:       #101012;  --tbd-line:     rgba(255,255,255,.10);
+    --tbd-blue:     #8ea8ff;  --tbd-blue-ink: #b9c6ff;
+    --tbd-indigo:   #a9b6f0;
+  }
+}
+:root[data-theme="dark"] {
+  --tbd-ink:      #f4f4f5;  --tbd-body:     #d4d4d8;
+  --tbd-muted:    #a1a1aa;  --tbd-surface:  #18181b;
+  --tbd-bg:       #101012;  --tbd-line:     rgba(255,255,255,.10);
+  --tbd-blue:     #8ea8ff;  --tbd-blue-ink: #b9c6ff;
+    --tbd-indigo:   #a9b6f0;
+}
+
+/* --------------------------------------------------------------------------
+   Page shell - design spec section 8. Quiet frame; the posts are the content.
+   -------------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html { font-family: var(--tbd-font); }
+body {
+  margin: 0;
+  background: var(--tbd-bg);
+  color: var(--tbd-body);
+  -webkit-font-smoothing: antialiased;
+}
+.tbd-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 56px;
+}
+.tbd-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tbd-gap);
+  margin-bottom: 28px;
+}
+.tbd-wordmark {
+  margin: 0 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  background: linear-gradient(135deg, var(--tbd-indigo), var(--tbd-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tbd-sub { margin: 0; font: var(--tbd-meta); color: var(--tbd-muted); }
+.tbd-theme {
+  margin-left: auto;
+  flex: none;
+  font: var(--tbd-meta);
+  font-family: inherit;
+  color: var(--tbd-muted);
+  background: var(--tbd-surface);
+  border: 1px solid var(--tbd-line);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: color var(--tbd-ease), border-color var(--tbd-ease);
+}
+.tbd-theme:hover { color: var(--tbd-ink); }
+
+/* The preview note - this page never calls the API, so it always shows. */
+.tbd-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 10px 14px;
+  font: var(--tbd-meta);
+  color: var(--tbd-muted);
+  background: var(--tbd-surface);
+  border: 1px solid var(--tbd-line);
+  border-radius: 8px;
+}
+.tbd-note b { color: var(--tbd-ink); font-weight: 600; }
+.tbd-note button {
+  margin-left: auto;
+  flex: none;
+  border: 0;
+  background: none;
+  color: var(--tbd-blue);
+  font: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+.tbd-note button:hover { color: var(--tbd-blue-ink); text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   Layout B - WALL. Multi-column so heights pack naturally; the breakpoints
+   read the CONTAINER, not the viewport, because a widget can sit in a sidebar.
+   -------------------------------------------------------------------------- */
+.tbd-wall { container-type: inline-size; }
+.tbd-wall__cols { columns: 1; column-gap: var(--tbd-gap); }
+@container (min-width: 520px)  { .tbd-wall__cols { columns: 2; } }
+@container (min-width: 800px)  { .tbd-wall__cols { columns: 3; } }
+@container (min-width: 1100px) { .tbd-wall__cols { columns: 4; } }
+
+/* --------------------------------------------------------------------------
+   Card - design spec section 3, with the section 5 wall treatment: image flush
+   to the top and side edges, padding on the text half only.
+   -------------------------------------------------------------------------- */
+.tbd-card {
+  break-inside: avoid;
+  margin: 0 0 var(--tbd-gap);
+  background: var(--tbd-surface);
+  border: 1px solid var(--tbd-line);
+  border-radius: var(--tbd-radius);
+  box-shadow: var(--tbd-shadow);
+  overflow: hidden;
+  transition: transform var(--tbd-ease), box-shadow var(--tbd-ease);
+}
+.tbd-card:hover { transform: translateY(-2px); box-shadow: var(--tbd-shadow-up); }
+
+/* Each image keeps its OWN aspect ratio - a uniform crop turns a wall into a
+   generic card grid. --tbd-bg behind it so nothing jumps while it loads. */
+.tbd-media { background: var(--tbd-bg); line-height: 0; overflow: hidden; }
+.tbd-media img { width: 100%; height: auto; display: block; transition: transform var(--tbd-ease); }
+.tbd-card:hover .tbd-media img { transform: scale(1.03); }
+/* A post whose only media is a video still keeps its own ratio, but a 9:16
+   clip would otherwise own a whole column - so cap the tile height. */
+.tbd-media--video { max-height: 420px; }
+.tbd-media video { width: 100%; height: 100%; display: block; object-fit: cover; background: #000; }
+
+.tbd-body { padding: var(--tbd-gap) var(--tbd-gap) 0; }
+.tbd-title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--tbd-ink);
+}
+.tbd-text {
+  margin: 0;
+  font: var(--tbd-text);
+  color: var(--tbd-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Text-only posts become a tinted tile rather than an empty card - these are
+   what give the wall its rhythm. */
+.tbd-card--text { background:
+  linear-gradient(135deg, rgba(40,61,168,.08), rgba(68,98,232,.08)), var(--tbd-surface); }
+.tbd-card--text .tbd-text {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--tbd-ink);
+  -webkit-line-clamp: 10;
+}
+
+/* The stars use the link token, not the highlight one: at 14px they are text,
+   and they have to clear WCAG AA on both the light and the dark surface. */
+.tbd-rating {
+  margin: 10px var(--tbd-gap) 0;
+  font-size: 14px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.tbd-rating__on  { color: var(--tbd-blue); }
+.tbd-rating__off { color: var(--tbd-muted); opacity: .45; }
+
+/* Two rows, so the network and the date always get the full card width - in a
+   four-column wall they do not fit beside the name. */
+.tbd-foot {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 10px;
+  padding: 14px var(--tbd-gap) var(--tbd-gap);
+}
+.tbd-avatar { grid-area: 1 / 1; border-radius: 50%; background: var(--tbd-bg); }
+.tbd-name {
+  grid-area: 1 / 2;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tbd-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tbd-meta { grid-area: 2 / 2 / 2 / -1; font: var(--tbd-meta); color: var(--tbd-muted); }
+.tbd-view {
+  grid-area: 1 / 3;
+  font: var(--tbd-meta);
+  font-weight: 500;
+  color: var(--tbd-blue);
+  text-decoration: none;
+}
+.tbd-view:hover { color: var(--tbd-blue-ink); text-decoration: underline; }
+
+.tbd-footline {
+  margin-top: 32px;
+  font: var(--tbd-meta);
+  color: var(--tbd-muted);
+  text-align: center;
+}
+
+/* Accessibility - design spec section 7. Never outline:none without a
+   replacement, and drop every motion under prefers-reduced-motion. */
+a:focus-visible, button:focus-visible, video:focus-visible {
+  outline: none;
+  box-shadow: var(--tbd-ring);
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .tbd-card:hover { transform: none; }
+  .tbd-card:hover .tbd-media img { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="tbd-page">
+
+  <header class="tbd-head">
+    <div>
+      <p class="tbd-wordmark">What people are saying</p>
+      <p class="tbd-sub">A wall of the posts Tagembed collects - social posts and reviews, one shape.</p>
+    </div>
+    <button class="tbd-theme" type="button" id="tbd-theme">Switch theme</button>
+  </header>
+
+  <p class="tbd-note">
+    <span><b>Preview data.</b> This page is a static design preview - it makes no API call
+    and holds no token. Live posts arrive once index.php or server.js runs on your server.</span>
+    <button type="button" id="tbd-dismiss">Dismiss</button>
+  </p>
+
+  <div class="tbd-wall">
+    <div class="tbd-wall__cols">
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1011/1080/1080" alt="" width="1080" height="1080" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Golden hour at the flagship store — thank you for stopping by! 🌞</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=1" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Maya Fernandes</span>
+        <a class="tbd-view" href="https://instagram.com/p/Cx9001Sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Instagram · <time datetime="2026-09-20T14:32:10.000Z">20 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Fast shipping, and the quality is even better than I expected. Will definitely order again.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 5 out of 5"><span class="tbd-rating__on">★★★★★</span><span class="tbd-rating__off"></span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=11" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Sara Kim</span>
+        <a class="tbd-view" href="https://g.page/r/sample9101/review" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Google · <time datetime="2026-09-20T09:02:00.000Z">20 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media tbd-media--video" style="aspect-ratio:1080/1920">
+        <video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" width="1080" height="1920" controls muted playsinline preload="metadata"></video>
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Unboxing day 📦 this is my third order and it never disappoints</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=2" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Devon Cole</span>
+        <a class="tbd-view" href="https://tiktok.com/@devoncole/video/9002sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">TikTok · <time datetime="2026-09-19T08:15:44.000Z">19 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1005/1200/800" alt="" width="1200" height="800" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Had such a great time at the pop-up this weekend. See you all next month!</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=3" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Priya Nair</span>
+        <a class="tbd-view" href="https://facebook.com/priya.nair.98/posts/9003sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Facebook · <time datetime="2026-09-18T19:05:02.000Z">18 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Good experience overall. Staff was friendly and the place was clean. Only reason it&#39;s not 5 stars is the wait time.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 4 out of 5"><span class="tbd-rating__on">★★★★</span><span class="tbd-rating__off">☆</span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=12" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Marcus T.</span>
+        <a class="tbd-view" href="https://yelp.com/biz/sample-store#9102sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Yelp · <time datetime="2026-09-18T15:40:00.000Z">18 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Customer support just resolved my issue in under 10 minutes. That&#39;s how it&#39;s done.</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=4" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Alex Whitmore</span>
+        <a class="tbd-view" href="https://x.com/alexw/status/9004sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">X (Twitter) · <time datetime="2026-09-17T11:48:27.000Z">17 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media tbd-media--video" style="aspect-ratio:1280/720">
+        <video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" width="1280" height="720" controls muted playsinline preload="metadata"></video>
+      </div>
+      <div class="tbd-body">
+        <h2 class="tbd-title">My honest first impressions</h2>
+        <p class="tbd-text">Full walkthrough of everything in the box, plus my honest first impressions after a week of daily use.</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=5" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">The Weekend Reviewer</span>
+        <a class="tbd-view" href="https://youtube.com/watch?v=9005sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">YouTube · <time datetime="2026-09-16T21:12:56.000Z">16 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1060/1024/768" alt="" width="1024" height="768" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <h2 class="tbd-title">Exceeded expectations</h2>
+        <p class="tbd-text">Everything from check-in to check-out was smooth. Adding a couple of photos from our stay.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 5 out of 5"><span class="tbd-rating__on">★★★★★</span><span class="tbd-rating__off"></span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=13" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">The Alvarez Family</span>
+        <a class="tbd-view" href="https://tripadvisor.com/ShowUserReviews-9103sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Tripadvisor · <time datetime="2026-09-16T12:10:00.000Z">16 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1025/1200/627" alt="" width="1200" height="627" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Proud to share that our team shipped this integration a full sprint ahead of schedule.</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=6" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Rahul Menon</span>
+        <a class="tbd-view" href="https://linkedin.com/feed/update/urn:li:activity:9006sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">LinkedIn · <time datetime="2026-09-15T09:40:33.000Z">15 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">It&#39;s decent for the price, but delivery took longer than the estimate I was given.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 3 out of 5"><span class="tbd-rating__on">★★★</span><span class="tbd-rating__off">☆☆</span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=14" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Neha Joshi</span>
+        <a class="tbd-view" href="https://facebook.com/ourbrandpage/reviews/9104sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Facebook · <time datetime="2026-09-14T18:25:00.000Z">14 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1035/736/1104" alt="" width="736" height="1104" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <h2 class="tbd-title">Styling ideas for the living room</h2>
+        <p class="tbd-text">Saved this whole board for my apartment refresh next month.</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=7" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">homeandhue</span>
+        <a class="tbd-view" href="https://pinterest.com/pin/9007sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Pinterest · <time datetime="2026-09-13T17:22:19.000Z">13 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Best customer service I&#39;ve dealt with all year. They went out of their way to fix a sizing issue.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 5 out of 5"><span class="tbd-rating__on">★★★★★</span><span class="tbd-rating__off"></span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=15" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Tom Becker</span>
+        <a class="tbd-view" href="https://g.page/r/sample9105/review" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Google · <time datetime="2026-09-12T07:55:00.000Z">12 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media tbd-media--video" style="aspect-ratio:1080/1350">
+        <video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" width="1080" height="1350" controls muted playsinline preload="metadata"></video>
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Behind the scenes from today&#39;s shoot 🎬</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=8" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Studio Nord</span>
+        <a class="tbd-view" href="https://instagram.com/p/Cx9008Sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Instagram · <time datetime="2026-09-10T13:05:48.000Z">10 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <h2 class="tbd-title">Not what I expected</h2>
+        <p class="tbd-text">Package arrived damaged and support took three days to respond. Hoping this was a one-off.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 2 out of 5"><span class="tbd-rating__on">★★</span><span class="tbd-rating__off">☆☆☆</span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=16" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">L. Petrova</span>
+        <a class="tbd-view" href="https://trustpilot.com/reviews/9106sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Trustpilot · <time datetime="2026-09-09T20:30:00.000Z">9 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Quick question for everyone — which colourway should we restock first?</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=9" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Community Team</span>
+        <a class="tbd-view" href="https://facebook.com/ourbrandpage/posts/9009sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Facebook · <time datetime="2026-09-07T10:18:05.000Z">7 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <p class="tbd-text">Solid neighbourhood favourite. Consistent quality every time I&#39;ve visited.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 4 out of 5"><span class="tbd-rating__on">★★★★</span><span class="tbd-rating__off">☆</span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=17" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Owen R.</span>
+        <a class="tbd-view" href="https://yelp.com/biz/sample-store#9107sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Yelp · <time datetime="2026-09-05T11:15:00.000Z">5 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card">
+      <div class="tbd-media">
+        <img src="https://picsum.photos/id/1043/1200/900" alt="" width="1200" height="900" loading="lazy" decoding="async">
+      </div>
+      <div class="tbd-body">
+        <p class="tbd-text">Set up my desk with the new arrivals today. Obsessed. 💛</p>
+      </div>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=10" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Jordan Lee</span>
+        <a class="tbd-view" href="https://x.com/jordanlee/status/9010sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">X (Twitter) · <time datetime="2026-09-02T16:44:12.000Z">2 Sep 2026</time></span>
+      </footer>
+    </article>
+    <article class="tbd-card tbd-card--text">
+      <div class="tbd-body">
+        <h2 class="tbd-title">Would come back again</h2>
+        <p class="tbd-text">A hidden gem. The staff remembered our order from last time, which was a nice touch.</p>
+      </div>
+      <p class="tbd-rating" role="img" aria-label="Rated 5 out of 5"><span class="tbd-rating__on">★★★★★</span><span class="tbd-rating__off"></span></p>
+      <footer class="tbd-foot">
+        <img class="tbd-avatar" src="https://i.pravatar.cc/150?img=18" alt="" width="24" height="24" loading="lazy" decoding="async">
+        <span class="tbd-name">Grace Lin</span>
+        <a class="tbd-view" href="https://tripadvisor.com/ShowUserReviews-9108sample" target="_blank" rel="noopener noreferrer">View post</a>
+        <span class="tbd-meta">Tripadvisor · <time datetime="2026-08-30T09:12:44.000Z">30 Aug 2026</time></span>
+      </footer>
+    </article>
+    </div>
+  </div>
+
+  <p class="tbd-footline">18 sample posts - the same shape as body.posts from GET /v3/posts</p>
+
+</div>
+
+<script>
+  // The only JavaScript this page ships: the theme toggle and the note dismiss.
+  // No fetch, no token, nothing that talks to the network.
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('tbd-theme').addEventListener('click', function () {
+      var dark = getComputedStyle(root).getPropertyValue('--tbd-surface').trim() === '#18181b';
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    document.getElementById('tbd-dismiss').addEventListener('click', function () {
+      this.parentNode.remove();
+    });
+  })();
+</script>
+</body>
+</html>
