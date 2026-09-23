@@ -313,8 +313,8 @@ Rules for all code in this project:
   double-clicking it. Never name it index.html - it would be served
   instead of index.php. A restyle applies to both.
 - Before any code, ask the user which theme (show the catalogue's list)
-  and then PHP or Node.js, one question per reply, and confirm both in one
-  line - unless they already said. Build only the picked stack.
+  and then PHP or Node.js, one question per reply - unless they already
+  said - and start building as soon as they answer, with no confirm step. Build only the picked stack.
 - Never stop to ask for the token or base URL before writing code. Build with
   the defaults above and tell the user where to set the two env vars at the
   end.

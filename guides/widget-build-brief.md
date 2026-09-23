@@ -19,7 +19,7 @@ rules decide.
 
 ---
 
-## 0. Ask first — theme, then stack, then confirm
+## 0. Ask first — theme, then stack
 
 Two choices change what gets built, so they are asked **before any code**, one
 question per reply:
@@ -27,13 +27,11 @@ question per reply:
 1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw,
    show its theme picker as it says — the thumbnails file as an HTML artifact —
    and ask which one they want. Stop there.
-2. **Stack.** Once they pick, ask: **PHP or Node.js?** Stop there.
-3. **Confirm.** Repeat both choices back in one line — e.g. "Theme 3, Modern
-   Card, in PHP — shall I build it?" — and wait for a yes. Change whatever they
-   correct.
+2. **Stack.** Once they pick, ask: **PHP or Node.js?** Their answer starts the
+   build — do not repeat the choices back or ask them to confirm.
 
 Skip a question the prompt already answers. Never pick either one for them.
-Only after the yes does the build start — and then only the picked stack's
+The build starts on the stack answer — and then only the picked stack's
 parts are fetched and written.
 
 ## 1. What to build

@@ -48,8 +48,8 @@ the rendered HTML. That is what makes the page safe to put on a public site.
 **You pick the look and the language first.** Before any code, the AI shows
 you the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) — 19 widget themes,
 each with a thumbnail — and asks which one you want; then it asks **PHP or
-Node.js**; then it repeats both back and waits for your yes. Only then does it
-build, and only the stack you picked. Each one is complete on its own, CSS
+Node.js**; as soon as you answer, it starts to build — no confirm step —
+and only the stack you picked. Each one is complete on its own, CSS
 included, so there is no stylesheet to wire up:
 
 | If you pick Node.js | If you pick PHP |
@@ -115,11 +115,11 @@ stay out of the source. Nothing runs until you fill them in:
 
 One prompt, pasted once. The AI asks you two things first, one per reply —
 **which theme** (it shows you the list, with a thumbnail image for each) and
-**PHP or Node.js** — then repeats both back for a yes. After that it builds,
-one file per reply: type **next** after each, so every reply stays short and
+**PHP or Node.js** — and starts building the moment you answer the second, with no
+confirm step. It builds one file per reply: type **next** after each, so every reply stays short and
 fast instead of one long reply that runs out of room or times out. The full
 brief is split per deliverable into files in [build/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/build) — `preview.md`, `php.md`, `nodejs.md` and
-`readme-file.md` — and the AI fetches only the server part for the stack you
+`readme-file.md`, listed in order in [parts.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/parts.md) — and the AI fetches only the server part for the stack you
 picked. Each part fetches the shared rules
 ([common.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md) — data, field names, looks,
 security), and the server part also fetches the cache contract
@@ -129,25 +129,18 @@ they link.
 
 ```
 Build me a social widget from my Tagembed gallery. First ask me two
-things, ONE question per reply, and write no code until I confirm:
+things, ONE question per reply, and write no code until I answer both:
 Q1 - theme: fetch this RAW, show me its theme picker (the thumbnails
 file, as an HTML artifact) exactly as it says, and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+After I pick, build from that theme's preview HTML (its "Preview" line
+in the catalogue), never from the thumbnail. Take only its structure
+and CSS - the posts come from the sample posts JSON, never the preview.
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
-Then repeat both choices in one line and wait for my "yes".
-After I confirm, the build comes in 3 parts. Deliver ONE part per
-reply: fetch only that part's link RAW, follow it exactly and write
-its file complete - then stop, and end the reply with one line naming
-the next part. Do not fetch or write a later part until I reply "next".
-1. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md
-2. the server file - fetch ONLY the link for the stack I picked:
-PHP - index.php
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/php.md
-Node.js - server.js + package.json
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/nodejs.md
-3. README.md
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/readme-file.md
+As soon as I answer Q2, start the build - do not repeat my choices or
+ask me to confirm. The build comes in 3 parts. Fetch this RAW - it
+lists the parts and their links - and follow it exactly:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/parts.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -162,13 +155,13 @@ later fetch silently fails.
 ```
 Build me a social widget from my Tagembed gallery (from the build brief).
 First ask me two things, ONE question per reply, and write no code
-until I confirm:
+until I answer both:
 Q1 - theme: fetch this RAW, show me its theme picker (the thumbnails
 file, as an HTML artifact) exactly as it says, and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
-Then repeat both choices in one line and wait for my "yes".
-After I confirm, the build comes in 3 parts. Deliver ONE part per
+As soon as I answer Q2, start the build - do not repeat my choices or
+ask me to confirm. The build comes in 3 parts. Deliver ONE part per
 reply: fetch only that part's link RAW, follow it exactly and write
 its file complete - then stop, and end the reply with one line naming
 the next part. Do not fetch or write a later part until I reply "next".
@@ -441,7 +434,7 @@ tokens already carry.
    a stale fallback, escaped output, cursor pagination via `next_cursor`.
 3. **Choices first, token last.** The theme and the stack change what gets
    built, so the prompts ask for those before any code — one short question
-   per reply, then a one-line confirm. The token changes nothing in the code
+   per reply, and the build starts on the last answer — no confirm step. The token changes nothing in the code
    (it is read from the environment), so it is asked last: code first, then
    "what is your token?". Keep that ordering if you rewrite a prompt.
 4. **Iterate in small steps**: one prompt = one change ("make it masonry",

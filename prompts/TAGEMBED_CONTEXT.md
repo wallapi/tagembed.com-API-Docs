@@ -47,8 +47,8 @@ Rules for all code in this project:
 - Render on the server. The posts are in the HTML before it leaves the
   server; nothing in the browser calls the API or any endpoint.
 - Before any code, ask the user which theme (show the catalogue's list)
-  and then PHP or Node.js, one question per reply, and confirm both in one
-  line - unless they already said. Every build ships ONLY the picked stack -
+  and then PHP or Node.js, one question per reply - unless they already
+  said - and start building as soon as they answer, with no confirm step. Every build ships ONLY the picked stack -
   a single self-contained index.php, or the Node.js set (server.js,
   package.json, cache/posts.json) - plus one README.md for it. Both stacks
   only when the user asks for both.

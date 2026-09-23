@@ -8,8 +8,8 @@ build prompts offer are in [../../guides/themes/](../../guides/themes/).
 
 | Folder | Prompt | Parts, in order |
 | ------ | ------ | --------------- |
-| [build/](build/) | Prompt 1 — the main build | asks theme, then stack, then confirms; then `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md`; shared: `common.md`, `cache.md` |
-| [quick-start/](quick-start/) | Prompt A — the brief-driven build | asks theme, then stack, then confirms; then `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md` |
+| [build/](build/) | Prompt 1 — the main build | asks theme, then stack, then builds at once; `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md`; listed in `parts.md`; shared: `common.md`, `cache.md` |
+| [quick-start/](quick-start/) | Prompt A — the brief-driven build | asks theme, then stack, then builds at once; `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md` |
 | [integrate/](integrate/) | Prompt 2 — into an existing site | `section.md`, `preview.md`, `summary.md` |
 | [restyle/](restyle/) | Prompt 3a — restyle | `change.md`; `preview.md`, `php.md`, `nodejs.md` |
 | [network-filter/](network-filter/) | Prompt 3b — network filter bar | `change.md`; `php.md`, `nodejs.md`, `preview.md` |
