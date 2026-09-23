@@ -13,7 +13,7 @@ Download from https://windsurf.com and install.
 macOS / Linux:
 
 ```bash
-mkdir my-social-wall && cd my-social-wall
+mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 mkdir -p .windsurf/rules
 curl -sSLo .windsurf/rules/tagembed.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/TAGEMBED_CONTEXT.md
@@ -22,7 +22,7 @@ curl -sSLo .windsurf/rules/tagembed.md https://raw.githubusercontent.com/wallapi
 Windows (PowerShell):
 
 ```powershell
-mkdir my-social-wall; cd my-social-wall
+mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 New-Item -ItemType Directory -Force .windsurf/rules | Out-Null
 curl.exe -sSLo .windsurf/rules/tagembed.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/TAGEMBED_CONTEXT.md
@@ -67,7 +67,7 @@ Install PHP if the check fails: macOS `brew install php`, Windows https://window
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -76,7 +76,7 @@ php -S localhost:8080
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -107,7 +107,7 @@ Install Node.js from https://nodejs.org (LTS) if the check fails.
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 npm install
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
@@ -117,7 +117,7 @@ node server.js
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 npm install
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"

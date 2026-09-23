@@ -13,6 +13,9 @@ server.js render the SAME markup with the SAME CSS, so a later restyle
 applies to all three. The CSS lives inside each file - no separate
 stylesheet.
 
+Name: it is a Social Widget. Use that name in the page title, the
+header, the README and the code comments - never "social wall".
+
 Looks: skin everything with ONE social theme picked at random from
 themes-lite.json, which the design spec maps field by field, and tell
 me which one:

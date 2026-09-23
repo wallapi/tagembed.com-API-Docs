@@ -1,9 +1,9 @@
 # Prompt 3a - restyle the widget: the change
 
 My message names the layout and the style; where it does not, use the
-WALL mosaic with rounded cards and soft shadows.
+MOSAIC with rounded cards and soft shadows.
 
-Restyle the widget in the layout I named (WALL mosaic, REEL rail,
+Restyle the widget in the layout I named (MOSAIC, REEL rail,
 3-column card grid or full-screen signage view) and the style I named
 (rounded cards + soft shadows, flat minimal, or editorial with a serif
 headline). Layouts are in sections 4-5 of

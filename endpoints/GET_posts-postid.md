@@ -22,7 +22,7 @@ Two consequences of dropping `expand`: `products` is always `null`, and a
 carousel's slides stay separate posts rather than merging into one `media`
 array. Use [GET /v3/posts](GET_posts.md) with `expand=` when you need either.
 
-A wall-scoped token still only sees its own widget's posts — that comes from the
+A widget-scoped token still only sees its own widget's posts — that comes from the
 credential, not the query.
 
 ## Example requests

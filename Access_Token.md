@@ -28,7 +28,7 @@ prefix, and previously issued tokens keep working.
 ## Account key
 
 Your account's **user key** authorizes every widget on the account. Use it for
-cross-wall reads and server-to-server integrations you fully control.
+cross-widget reads and server-to-server integrations you fully control.
 
 ## How to send it
 
@@ -39,7 +39,7 @@ GET /v3/posts
 Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-Also accepted, for parity with other social-wall APIs:
+Also accepted, for parity with other social-widget APIs:
 
 ```
 GET /v3/posts?access_token=YOUR_ACCESS_TOKEN

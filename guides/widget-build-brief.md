@@ -7,7 +7,7 @@ few things neither of them says:
 | Read | For |
 | ---- | --- |
 | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) | the API: endpoints, envelope, field names, and the numbered **Integration rules** for generated code |
-| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, the shipped themes in themes-lite.json, card treatment, REEL and WALL layouts, states |
+| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, the shipped themes in themes-lite.json, card treatment, REEL and MOSAIC layouts, states |
 | this file | the delivery contract: what to hand over and how it is wired |
 
 **Agents: fetch all three RAW.** A summarising fetch drops the field names,
@@ -19,6 +19,9 @@ rules decide.
 ---
 
 ## 1. What to build
+
+**It is a Social Widget.** Use that name in the page title, the header, the
+README and the code comments — never "social wall".
 
 **Server-rendered, always.** The page arrives with the posts already in the
 HTML. Nothing in the browser calls anything — not the Tagembed API, and not an
@@ -137,7 +140,7 @@ The same posts are what `preview.html` renders. Take them from
 [sample-posts-reviews.json](sample-posts-reviews.json) in this folder, fetched
 raw — 8–12 of each is plenty. If you cannot reach them, invent that many in the
 same shape, and include both a review post carrying a `rating` and a text-only
-post whose `media` array is empty, or the wall never shows its star rating and
+post whose `media` array is empty, or the widget never shows its star rating and
 its tinted text tiles. The whole build is skinned from `themes-lite.json`. That catalogue and the way its
 fields map onto the design tokens are documented in the design spec, under
 **Themes** in section 2 — read it there rather than guessing at the field

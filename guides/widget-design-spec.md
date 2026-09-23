@@ -62,8 +62,8 @@ The full export, with every app field, is [themes.json](https://raw.githubuserco
 not needed for a build.
 
 **Pick one before you write any CSS.** If the user named a theme, use it. If
-not, pick at random — from the `social` themes for a social wall, the `review`
-ones for a reviews wall — and say in one line which one you used, so they can
+not, pick at random — from the `social` themes for a social widget, the `review`
+ones for a reviews widget — and say in one line which one you used, so they can
 ask for a different one.
 
 That theme then supplies the value of every token. The names, the `--tbd-` prefix
@@ -81,7 +81,7 @@ roundEdge                            →  --tbd-radius
 borderRadius                         →  the image corner radius
 spacing                              →  --tbd-gap — the column gutter
 padding                              →  the card padding
-numberOfColumn                       →  wall columns; 0 means the theme is not a grid, so use 4
+numberOfColumn                       →  mosaic columns; 0 means the theme is not a grid, so use 4
 textAlignment                        →  the card's text-align
 lineTrim, with trimcontent           →  -webkit-line-clamp; 0 means no clamp
 postAuthor, postTime                 →  show or hide the author name and the date
@@ -181,10 +181,10 @@ A rail of 9:16 media tiles, for a widget embedded in a page it does not own.
 Fetch its full spec only when a reel is asked for:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/reel-layout.md
 
-## 5. Layout B — WALL (default for a section on your own site)
+## 5. Layout B — MOSAIC (default for a section on your own site)
 
 A masonry mosaic. It is the default there because the section gets real width,
-and a wall reads as a wall precisely BECAUSE the tiles are different heights.
+and a mosaic reads as a mosaic precisely BECAUSE the tiles are different heights.
 
 - Columns via CSS multi-column so heights pack naturally: `columns: 4`,
   `column-gap: --tbd-gap`, every card `break-inside: avoid` with

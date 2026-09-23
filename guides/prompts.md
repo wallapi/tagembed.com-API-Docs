@@ -53,7 +53,7 @@ to wire up:
 | `package.json` | nothing to install |
 | `README.md` — documents **both** languages | covered by the same README |
 
-**And one file both of them share: `preview.html`.** The same wall, the same
+**And one file both of them share: `preview.html`.** The same widget, the same
 CSS, with the sample posts written straight into the HTML — no server, no
 token, no API call anywhere in it. Double-click it and the design is on screen,
 which is how you review the look before you have a token, on a laptop with no
@@ -222,7 +222,7 @@ are in [integrate/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/p
 ```
 Render a Tagembed social widget INTO my existing website.
 My stack: [plain PHP | Express | describe yours]. Cache in
-[file | Redis | my framework's cache]. Layout: [WALL mosaic | reel rail |
+[file | Redis | my framework's cache]. Layout: [MOSAIC | reel rail |
 uniform grid | vertical feed]. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -250,7 +250,7 @@ reel, grid) are specified in the
 [design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md).
 
 ```
-Restyle the widget as a [WALL mosaic | REEL rail | 3-column card grid |
+Restyle the widget as a [MOSAIC | REEL rail | 3-column card grid |
 full-screen signage view] with [rounded cards + soft shadows | flat
 minimal | editorial with a serif headline]. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
@@ -359,7 +359,7 @@ thing survives contact with real traffic, and it is fully specified — in the
 and the specs it links, which is why the prompts themselves are short.
 
 **The one failure mode of the link-based prompts:** an AI that silently could
-not fetch a link builds from memory, and memory means another social-wall API.
+not fetch a link builds from memory, and memory means another social-widget API.
 That is exactly why Prompt 1's shared `common.md` and `cache.md` spell the
 facts out themselves — the unguessable parts arrive with each part's own fetch. The link-based prompts tell the AI to say so in one line
 instead of pretending, and if your tool cannot browse at all, use the
@@ -378,7 +378,7 @@ scale, radius, elevation, focus ring, card treatment, responsive rule) plus a
 the shipped themes, AA-checked contrast and the page shell live in the
 [design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
 so the first render already looks like ours instead of an unstyled list. The
-layout is decided too: **Prompt 1** and **Prompt 2** both build a WALL mosaic,
+layout is decided too: **Prompt 1** and **Prompt 2** both build a MOSAIC,
 because a page and a full-width section each have the width for one. It is a
 bracket you can swap. Iterate on the look with
 [Prompt 3](#prompt-3--design-the-widget-iterate-on-looks); it reuses the same
@@ -413,7 +413,7 @@ tokens already carry.
 
 ## What an AI gets wrong unless you tell it
 
-Assistants have read a lot of other social-wall APIs, and that muscle memory
+Assistants have read a lot of other social-widget APIs, and that muscle memory
 is what produces code that looks right and returns nothing. Each line below is
 already inside the three linked files — this is what the links are buying you.
 

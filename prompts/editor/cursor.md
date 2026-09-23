@@ -15,7 +15,7 @@ Download from https://cursor.com and install. Optional: enable the
 macOS / Linux:
 
 ```bash
-mkdir my-social-wall && cd my-social-wall
+mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 mkdir -p .cursor/rules
 printf -- '---\ndescription: Tagembed social widget rules\nalwaysApply: true\n---\n' > .cursor/rules/tagembed.mdc
@@ -25,7 +25,7 @@ curl -sSL https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/p
 Windows (PowerShell):
 
 ```powershell
-mkdir my-social-wall; cd my-social-wall
+mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 New-Item -ItemType Directory -Force .cursor/rules | Out-Null
 "---`ndescription: Tagembed social widget rules`nalwaysApply: true`n---" | Set-Content .cursor/rules/tagembed.mdc
@@ -42,7 +42,7 @@ Cursor reads automatically - contents in
 cursor .
 ```
 
-(or File > Open Folder > `my-social-wall`). Open the AI pane with
+(or File > Open Folder > `my-social-widget`). Open the AI pane with
 **Cmd+I** (macOS) / **Ctrl+I** (Windows) and make sure the mode selector
 says **Agent**, not Ask.
 
@@ -75,7 +75,7 @@ Install PHP if the check fails: macOS `brew install php`, Windows https://window
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -84,7 +84,7 @@ php -S localhost:8080
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -115,7 +115,7 @@ Install Node.js from https://nodejs.org (LTS) if the check fails.
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 npm install
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
@@ -125,7 +125,7 @@ node server.js
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 npm install
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"

@@ -175,7 +175,7 @@ user's prompt is deliberately short; this section is the full brief.
    identical in a browser and any restyle lands in all three at once. The
    README documents them (rule 13).
 
-   Default layout: a WALL — a masonry mosaic via CSS multi-column, each image
+   Default layout: a MOSAIC — a masonry layout via CSS multi-column, each image
    keeping its OWN aspect ratio (uniform crops turn a widget into a generic card
    grid), text-only posts becoming tinted tiles so the mosaic has no gaps.
 

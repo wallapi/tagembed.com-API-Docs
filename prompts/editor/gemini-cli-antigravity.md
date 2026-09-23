@@ -20,7 +20,7 @@ https://antigravity.google; it reads the same `GEMINI.md`.
 macOS / Linux:
 
 ```bash
-mkdir my-social-wall && cd my-social-wall
+mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 curl -sSLo GEMINI.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/TAGEMBED_CONTEXT.md
 ```
@@ -28,7 +28,7 @@ curl -sSLo GEMINI.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-
 Windows (PowerShell):
 
 ```powershell
-mkdir my-social-wall; cd my-social-wall
+mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 curl.exe -sSLo GEMINI.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/TAGEMBED_CONTEXT.md
 ```
@@ -47,7 +47,7 @@ gemini
 
 Log in with your Google account on first run, then type the prompt.
 
-Antigravity: File > Open Folder > `my-social-wall`, open the agent panel and
+Antigravity: File > Open Folder > `my-social-widget`, open the agent panel and
 paste the prompt there.
 
 Gemini follows instructions literally - the prompts below say "do not ask"
@@ -80,7 +80,7 @@ Install PHP if the check fails: macOS `brew install php`, Windows https://window
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -89,7 +89,7 @@ php -S localhost:8080
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"
 php -S localhost:8080
@@ -120,7 +120,7 @@ Install Node.js from https://nodejs.org (LTS) if the check fails.
 macOS / Linux (Terminal):
 
 ```bash
-cd my-social-wall
+cd my-social-widget
 npm install
 export ACCESS_TOKEN="wt1_your_token_here"
 export API_BASE_URL="https://api.tagembed.com/api"
@@ -130,7 +130,7 @@ node server.js
 Windows (PowerShell):
 
 ```powershell
-cd my-social-wall
+cd my-social-widget
 npm install
 $env:ACCESS_TOKEN="wt1_your_token_here"
 $env:API_BASE_URL="https://api.tagembed.com/api"

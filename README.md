@@ -1,7 +1,7 @@
 # Tagembed Developer API Documentation
 
 The Tagembed Developer API (v3) gives you programmatic, **read-only** access to
-the approved posts on your account's walls — every connected network, one
+the approved posts on your account's widgets — every connected network, one
 uniform JSON shape. Aggregate once, render anywhere: your website, an event
 screen, digital signage.
 
