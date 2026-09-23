@@ -71,8 +71,7 @@ the directory if it is missing.
 `preview.html` is how the design gets reviewed before a token exists, on a
 machine with neither PHP nor Node installed, and inside a chat that can run
 neither. It must call **nothing**: no `fetch`, no API request, not even a
-same-origin one — the posts are in the file already. A theme toggle is the only
-JavaScript it may carry, and it carries the §4 "preview data" note.
+same-origin one — the posts are in the file already. It carries no JavaScript at all, and it carries the §4 "preview data" note.
 
 Name it `preview.html`, **never `index.html`**: an `index.html` sitting beside
 `index.php` is served *instead of it* by most Apache and nginx configurations,
@@ -161,8 +160,8 @@ Deliverable first, commentary last — no opening plan of what you are about to
 build.
 
 1. **Every file, complete, with its exact path** — the Node.js set, the PHP
-   file and `preview.html`, all in the same reply. No "the PHP version is
-   similar".
+   file and `preview.html` — one part per reply when the prompt splits the
+   build into parts. No "the PHP version is similar".
 2. **`README.md`**, which is a deliverable and not a summary. It covers both
    languages and contains: what this is; the file list for each; how to set
    `API_BASE_URL` and `ACCESS_TOKEN`; how to run each one locally (written for
@@ -175,6 +174,9 @@ build.
    posts.
 3. Ask for the base URL and the token, offering to write them into `.env`.
 4. Any assumptions you made, listed at the end — not asked at the start.
+5. **No tests.** Do not write or run tests, audits or checks — no
+   accessibility or contrast scripts, no auth or 401 flow tests, no curl
+   calls, no test files. The `curl` in the README is for the user to run.
 
 If you cannot write files (a browser chat), output every file complete with its
 filename, then that same README.

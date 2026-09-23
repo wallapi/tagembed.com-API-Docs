@@ -152,8 +152,9 @@ user's prompt is deliberately short; this section is the full brief.
    script, no mount point, no same-origin JSON endpoint and no browser-side
    fetch of any kind.
 
-   Deliver BOTH languages in the same reply — never one or the other, and
-   never a choice handed back to the user:
+   Deliver BOTH languages — never one or the other, and never a choice
+   handed back to the user. When the prompt splits the build into parts,
+   deliver one part per reply, in its order:
 
    (a) Node.js — `server.js` (the API call, the cache, the HTML and the CSS
        all inside it), `package.json`, a `cache/posts.json` cache file, and
@@ -163,9 +164,8 @@ user's prompt is deliberately short; this section is the full brief.
    (c) `preview.html` — the same page as a plain static file, with the
        sample posts of rule 12 written into it as finished markup. It runs
        from a double-click: no server, no build step, nothing installed. It
-       calls NOTHING — no fetch, no API call, no token, not even a
-       same-origin one — because the posts are already in the file; the
-       theme toggle is the only JavaScript it may carry. Name it
+       calls NOTHING — no fetch, no API call, no token, not even a same-origin one — because the posts are already in the
+       file; it carries no JavaScript at all. Name it
        `preview.html`, never `index.html`: an `index.html` beside
        `index.php` is served instead of it by most Apache and nginx
        configurations, which silently replaces the live page with the
@@ -245,8 +245,8 @@ user's prompt is deliberately short; this section is the full brief.
     8–12 posts in the same shape, including a review post with a `rating`
     and a text-only post with an empty `media` array.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
-    or a list of what you are about to build. Give every file complete with
-    its exact path — both languages and `preview.html` — in the same reply.
+    or a list of what you are about to build. Give every file complete with its exact path — both languages and
+    `preview.html` — one part per reply when the prompt splits the build into parts.
     Then a `README.md`,
     which is itself a deliverable: what this is, the file list for each
     language, how to set the two environment variables, how to run each one
@@ -263,3 +263,7 @@ user's prompt is deliberately short; this section is the full brief.
     way to filter by network — media_types=, pinned_only=1, min_rating=,
     created_after=, sort=-created_at, expand=album or expand=products)
     instead of filtering client-side.
+15. No tests. Do not write or run tests, audits or checks of any kind — no
+    accessibility or contrast scripts, no auth or 401 flow tests, no curl
+    calls, no test files. Pick AA-safe colours from the values themselves
+    and note any change in a comment. The user runs and checks the build.

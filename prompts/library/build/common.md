@@ -19,9 +19,10 @@ header, the README and the code comments - never "social wall".
 Looks: skin everything with ONE social theme picked at random from
 themes-lite.json, which the design spec maps field by field, and tell
 me which one:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json Once picked, every later part uses that same theme. One
-skin only - no dark mode, no toggle. Some theme colours are white on
-near-white, so where one fails WCAG AA as text, fix it and say so.
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json
+Once picked, every later part uses that same theme. One skin only - no dark mode, no toggle. Some theme colours are white on
+near-white, so where one is too faint to read as text, fix it and
+say so - judged from the values, no contrast script.
 
 Data: GET https://api.tagembed.com/api/v3/posts?limit=24, header Authorization:
 Bearer <token>; token from ACCESS_TOKEN, base URL from API_BASE_URL,
@@ -47,6 +48,11 @@ be a video. rating 0-5 marks a review post and is null on social ones
 Non-negotiable: every call runs server-side and the token never
 reaches the browser. Escape everything you print; allow only
 http/https links.
+
+No tests: do not write or run tests, audits or checks - no
+accessibility or contrast scripts, no auth or 401 flow tests, no curl
+calls, no test files. Pick AA-safe colours from the values and note
+any change in a comment. I run and check the build myself.
 
 Every file complete - no placeholders, no "rest stays the same", no
 truncation - with brief comments through the code.

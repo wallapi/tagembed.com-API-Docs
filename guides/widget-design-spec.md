@@ -95,7 +95,8 @@ Three rules come with it:
   text colour — `iconColor` is for icons and runs as light as `#a3a3a3`. Blend
   `fontColor` toward the card colour and stop at the last step still above
   4.5:1.
-- **Check every pair and raise what fails.** These are production values tuned
+- **Raise any pair too faint to read** — judged from the values, no contrast
+  script or audit. These are production values tuned
   for a widget whose text sits over media behind a scrim, so several are not
   readable as plain text on a card: `Slider` ships `#ffffff` text on its
   `#fafafa` card (1.04:1), `Gallery Slider` a `#FFFFFF` author on `#f0f2ff`
@@ -240,7 +241,8 @@ full-screen signage view — all of them reuse §2 and §3 unchanged.
   `outline: none` without a replacement.
 - Under `prefers-reduced-motion`, drop the hover lift, the image scale and every
   transition; never autoplay video — show the poster and a play affordance.
-- Keep every text/surface pair at WCAG AA after any restyle.
+- Keep every text/surface pair at WCAG AA after any restyle — by choosing the
+  values, not by running an audit.
 - Escape every value you print, and allow only `http(s)` URLs in `href` and
   `src` attributes.
 
