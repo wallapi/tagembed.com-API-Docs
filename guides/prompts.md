@@ -130,8 +130,8 @@ they link.
 ```
 Build me a social widget from my Tagembed gallery. First ask me two
 things, ONE question per reply, and write no code until I confirm:
-Q1 - theme: fetch this RAW, show me its theme list as it is (number,
-name, what it looks like, thumbnail image) and ask which one I want:
+Q1 - theme: fetch this RAW, show me its theme list as it is (only two
+columns: theme name and thumbnail image) and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
 Then repeat both choices in one line and wait for my "yes".
@@ -163,8 +163,8 @@ later fetch silently fails.
 Build me a social widget from my Tagembed gallery (from the build brief).
 First ask me two things, ONE question per reply, and write no code
 until I confirm:
-Q1 - theme: fetch this RAW, show me its theme list as it is (number,
-name, what it looks like, thumbnail image) and ask which one I want:
+Q1 - theme: fetch this RAW, show me its theme list as it is (only two
+columns: theme name and thumbnail image) and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
 Then repeat both choices in one line and wait for my "yes".

@@ -61,7 +61,7 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/them
 ```
 
 **Ask before you write any CSS.** If the user already named a theme, use it.
-If not, show them the catalogue's list — number, name, what it looks like,
+If not, show them the catalogue's list — two columns only, theme name and
 thumbnail image — and ask which one they want; the build prompts do this as
 their first question. Never pick one silently. Only when the prompt tells you
 not to ask, pick one — a social theme for a social widget, a review theme for

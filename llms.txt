@@ -155,7 +155,7 @@ user's prompt is deliberately short; this section is the full brief.
    Ask first, then build. Before any code, ask the user two things, one
    question per reply: (1) which THEME — fetch the theme catalogue RAW,
    https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
-   show its list as it is (number, name, what it looks like, thumbnail
+   show its list as it is (two columns only: theme name and thumbnail
    image inline) and ask; (2) which STACK — PHP or Node.js. Then repeat both
    choices in one line and wait for a yes. Skip a question the user has
    already answered; never pick either one for them. Then deliver ONLY

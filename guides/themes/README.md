@@ -19,33 +19,34 @@ comes from its preview HTML, never from the thumbnail.
 ## Agents: ask first
 
 Before writing any code, show the user the list below exactly as it is —
-number, name, what it looks like and the thumbnail image itself (not a
-link) — and ask which one they want. Take a number or a name. If they
-already named a theme, skip the question. Never pick one for them at random.
+a table of two columns only, the theme name and its thumbnail image (the
+image itself, not a link) — and ask which one they want. Take the name or
+its place in the list. If they already named a theme, skip the question.
+Never pick one for them at random.
 
 ## The list
 
-| # | Theme | For | What it looks like | Thumbnail |
-| - | ----- | --- | ------------------ | --------- |
-| 1 | Classic Card | social | cards: author on top, text, image at the bottom | ![bigThumb5.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb5.png) |
-| 2 | Social Card | social | cards: image on top, author, then text | ![bigThumb19.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb19.png) |
-| 3 | Modern Card | social | cards: image on top, text, author at the bottom | ![bigThumb20.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb20.png) |
-| 4 | Classic Photo | social | 16:9 photo cards with only the author row under them | ![bigThumb3.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb3.png) |
-| 5 | Square Photo | social | a grid of square photos, nothing else | ![bigThumb4.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb4.png) |
-| 6 | Collage | social | one big photo beside two small stacked ones | ![bigThumb50.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb50.png) |
-| 7 | Vivid | social | mosaic of cards with pastel gradient text panels | ![bigThumb83.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb83.png) |
-| 8 | Horizontal Slider | social | one row of photos, arrows on the ends | ![bigThumb16.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb16.png) |
-| 9 | Horizontal Columns | social | a slider of cards, avatar on the photo edge, centred text | ![bigThumb47.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb47.png) |
-| 10 | Slider | social | a slider of square rounded photos | ![bigThumb81.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb81.png) |
-| 11 | Reels | social | a row of tall 9:16 reel tiles | ![bigThumb61.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb61.png) |
-| 12 | Story Theme | social | tall story cards, the middle one in focus | ![bigThumb60.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb60.png) |
-| 13 | Single Post | social | one big photo at a time, arrows on its sides | ![bigThumb52.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb52.png) |
-| 14 | Widget Theme | social | one post centred: author, wide photo, text | ![bigThumb49.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb49.png) |
-| 15 | Review Box | reviews | a grid of review cards, stars on top | ![bigThumb79.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb79.png) |
-| 16 | Review Carousel | reviews | one row of review cards, arrows on the ends | ![bigThumb80.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb80.png) |
-| 17 | Review List | reviews | full-width review rows stacked down the page | ![bigThumb85.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb85.png) |
-| 18 | Rating Badge | reviews | a small badge: logo, average score, stars, count | ![bigThumb82.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb82.png) |
-| 19 | Badge | reviews | a wide badge: network logos, score and stars in one line | ![bigThumb84.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb84.png) |
+| Theme | Thumbnail |
+| ----- | --------- |
+| Classic Card | ![bigThumb5.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb5.png) |
+| Social Card | ![bigThumb19.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb19.png) |
+| Modern Card | ![bigThumb20.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb20.png) |
+| Classic Photo | ![bigThumb3.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb3.png) |
+| Square Photo | ![bigThumb4.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb4.png) |
+| Collage | ![bigThumb50.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb50.png) |
+| Vivid | ![bigThumb83.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb83.png) |
+| Horizontal Slider | ![bigThumb16.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb16.png) |
+| Horizontal Columns | ![bigThumb47.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb47.png) |
+| Slider | ![bigThumb81.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb81.png) |
+| Reels | ![bigThumb61.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb61.png) |
+| Story Theme | ![bigThumb60.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb60.png) |
+| Single Post | ![bigThumb52.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb52.png) |
+| Widget Theme | ![bigThumb49.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb49.png) |
+| Review Box | ![bigThumb79.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb79.png) |
+| Review Carousel | ![bigThumb80.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb80.png) |
+| Review List | ![bigThumb85.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb85.png) |
+| Rating Badge | ![bigThumb82.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb82.png) |
+| Badge | ![bigThumb84.png](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb84.png) |
 
 ## How a theme becomes the build
 
