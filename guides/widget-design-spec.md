@@ -13,7 +13,7 @@ Design spec (tokens, layouts, states) - follow it exactly:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 ```
 
-The design itself lives in [themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) beside this file — read
+The design itself lives in [themes-lite.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json) beside this file — read
 that first (section 2). Only if the AI can reach neither file are the five
 fallback brand colours worth pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
 `--tbd-blue-ink:#3350d6`, `--tbd-blue-lite:#8ea2fb`, `--tbd-brand:#526ff9`.
@@ -39,24 +39,27 @@ fallback brand colours worth pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue
   tokens on that section's own root instead of `:root`, and keep every
   selector under its class — the surrounding page has its own CSS.
 
-## 2. Design tokens — the values come from themes.json
+## 2. Design tokens — the values come from themes-lite.json
 
 The token **names** are the contract: `--tbd-bg`, `--tbd-surface`, `--tbd-ink` and the
 rest below, every class under `.tbd-`, and the layouts and rules in
 sections 3–8. The **values** are not yours to invent — they come from a theme in
-[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json), the catalogue Tagembed itself renders widgets with.
+[themes-lite.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json), the catalogue Tagembed itself renders widgets with.
 Read that file first; the palette further down is only what you fall back to
 when you cannot.
 
 ### Themes — where the design comes from
 
-[themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) is that catalogue as data: 23 themes (18 social, 5
-review), each carrying the `style` object the widget is really rendered with.
-Fetch it raw:
+[themes-lite.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json) is that catalogue as data: 23 themes (18 social, 5
+review), each carrying the `style` fields mapped below, as the widget is really
+rendered with them. Fetch it raw:
 
 ```
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json
 ```
+
+The full export, with every app field, is [themes.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes.json) —
+not needed for a build.
 
 **Pick one before you write any CSS.** If the user named a theme, use it. If
 not, pick at random — from the `social` themes for a social wall, the `review`
@@ -103,15 +106,13 @@ Three rules come with it:
   build carries no `prefers-color-scheme` remap, no `data-theme` attribute and
   no toggle — one set of values, the same page for every reader.
 
-Ignore `transparent`, `cardType`, `cardSize`, `iconType`, `iconColor`,
-`socialAction`, `shareOption` and the popup fields: they drive widget behaviour
-a rendered page does not have.
+themes-lite.json carries only the fields in this table; the rest of the app's
+fields drive widget behaviour a rendered page does not have.
 
-### Fallback palette — only when themes.json cannot be read
+### Tokens no theme sets — always these
 
-If the network is blocked and you genuinely cannot fetch the catalogue, say so
-in one line and use these instead. Never mix them with a theme's values — a
-build is skinned by one or the other, not both.
+A theme sets the page, card, text, font, radius and spacing values. These it
+does not, so every build declares them as they are, alongside the theme's:
 
 ```css
 /* Brand */
@@ -122,16 +123,8 @@ build is skinned by one or the other, not both.
 --tbd-brand:     #526ff9;  /* the product CTA blue — fills and buttons,
                               never body text: 4.2:1 on white            */
 
-/* Light theme */
---tbd-ink:       #09090b;  /* author names, headings              */
---tbd-body:      #3f3f46;  /* post text — softer than ink         */
---tbd-muted:     #6b6478;  /* handles, network, dates             */
---tbd-surface:   #ffffff;  /* card                                */
---tbd-bg:        #f7f7f9;  /* widget background behind the cards  */
+/* Shape, depth, motion - not in any theme */
 --tbd-line:      rgba(9,9,11,.09);    /* hairline card border     */
-
-/* Shape, depth, motion */
---tbd-radius:    14px;     /* cards; 8px for chips and buttons    */
 --tbd-shadow:    0 1px 2px rgba(9,9,11,.05),
                  0 4px 12px rgba(9,9,11,.05);
 --tbd-shadow-up: 0 2px 4px rgba(9,9,11,.06),
@@ -139,27 +132,19 @@ build is skinned by one or the other, not both.
 --tbd-ring:      0 0 0 3px rgba(68,98,232,.35); /* focus ring    */
 --tbd-ease:      150ms cubic-bezier(.2,0,.2,1);
 
-/* Type and rhythm */
---tbd-font:      Inter, -apple-system, "Segoe UI", Roboto,
-                 Helvetica, Arial, sans-serif;
+/* Type - not in any theme */
 --tbd-text:      15px/1.55;   /* post text                        */
 --tbd-meta:      13px/1.4;    /* handle, network, date            */
---tbd-gap:       20px;        /* grid gutter and card padding     */
 ```
 
-A gradient, where one is wanted:
-`linear-gradient(135deg, var(--tbd-indigo), var(--tbd-blue))`.
+### Fallback palette — only when the themes cannot be read
 
-Every text/surface pair above is at or beyond WCAG AA. Measured on white:
-`--tbd-indigo` 9.0:1, `--tbd-blue` 5.1:1, `--tbd-blue-ink` 6.4:1, the muted
-tone 5.6:1. Two consequences worth keeping: `--tbd-blue-lite` and `--tbd-brand`
-are fills, never text, and a lighter grey must not be substituted for the muted
-tone — that is the usual way this palette gets broken, and dates and handles
-are the first things to become unreadable.
-
-`--tbd-brand` is Tagembed's product CTA blue (`#526ff9`, the same value the
-app uses); the other four are derived from it to clear AA as text, which
-`#526ff9` itself does not at body size.
+If the network is blocked and you genuinely cannot fetch the themes, say so in
+one line and use the fallback palette instead — never mixed with a theme's
+values:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/fallback-palette.md
+If that cannot be read either, the five brand colours at the top of this file
+are enough.
 
 ### One skin — no dark mode
 
@@ -167,17 +152,6 @@ The build ships a single palette. Do **not** add a
 `@media (prefers-color-scheme: dark)` remap, a `data-theme` attribute or a theme
 toggle: the values above — or a theme's, below — are the whole skin, and the page
 looks the same whatever the reader's OS is set to.
-
-Every text/surface pair above is at or beyond WCAG AA. Measured on white:
-`--tbd-indigo` 9.0:1, `--tbd-blue` 5.1:1, `--tbd-blue-ink` 6.4:1, the muted
-tone 5.6:1. Two consequences worth keeping: `--tbd-blue-lite` and `--tbd-brand`
-are fills, never text, and a lighter grey must not be substituted for the muted
-tone — that is the usual way this palette gets broken, and dates and handles
-are the first things to become unreadable.
-
-`--tbd-brand` is Tagembed's product CTA blue (`#526ff9`, the same value the
-app uses); the other four are derived from it to clear AA as text, which
-`#526ff9` itself does not at body size.
 
 ## 3. Card treatment (the shared baseline)
 
@@ -203,36 +177,9 @@ app uses); the other four are derived from it to clear AA as text, which
 
 ## 4. Layout A — REEL (default for an embedded widget)
 
-A rail of 9:16 media tiles, the shape people already read on their phone. It is
-the default for a widget because the widget sits inside a page it does not own
-and has to earn attention in a small space.
-
-- Each post is one tile at `aspect-ratio: 9/16`, `--tbd-radius` corners,
-  overflow hidden. Media fills the tile (`object-fit: cover`). No white card
-  frame around it — the media IS the card.
-- Horizontal scroll-snap rail: `display:flex`, `overflow-x:auto`,
-  `scroll-snap-type: x mandatory`, `gap: --tbd-gap`. Each tile gets
-  `scroll-snap-align: start` and a flex-basis near 280px. Hide the scrollbar
-  visually, keep wheel and keyboard scrolling. Below a **container** width of
-  480px, switch the same tiles to one column and let the page scroll them.
-- Text sits ON the media, never under it: a bottom scrim
-  `linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.35) 45%, transparent)`
-  with `content.text` over it in white, clamped to 3 lines. The scrim is what
-  keeps text readable over an unpredictable photo — never put white text
-  straight on an image.
-- Author overlays the top-left over a matching top scrim: 28px round avatar
-  plus handle in white at `--tbd-meta`.
-- The whole tile is one `<a>` to `source.permalink`, showing `--tbd-ring` on
-  `:focus-visible`. No separate "View post" button — the tile is the link.
-- A post with no `"image"` entry in `media` gets a gradient tile instead:
-  `linear-gradient(135deg, var(--tbd-indigo), var(--tbd-blue))` with the text
-  centred, white, clamped to 6 lines. A reel with holes in it looks broken; a
-  text tile does not.
-- A `"video"` entry renders as `<video muted playsinline loop preload="none">`
-  with a poster, playing only while the tile is in view
-  (`IntersectionObserver`) and pausing when it leaves.
-- Arrow buttons at each end scroll by exactly one tile and hide when there is
-  nothing further to scroll to. Left/right arrow keys move focus between tiles.
+A rail of 9:16 media tiles, for a widget embedded in a page it does not own.
+Fetch its full spec only when a reel is asked for:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/reel-layout.md
 
 ## 5. Layout B — WALL (default for a section on your own site)
 
@@ -272,13 +219,12 @@ full-screen signage view — all of them reuse §2 and §3 unchanged.
 - **Stale over blank.** When the API call fails, the server keeps serving the
   last successful cached copy (see llms.txt rule 7); the UI shows that copy, not
   an error.
-- **Preview fallback.** Ship a small inline `SAMPLE_POSTS` array (3–4 posts, the
-  same shape as `body.posts`). On load, try the endpoint first; if that fetch
-  fails for ANY reason — a preview sandbox whose CSP blocks `connect-src`, a
-  `file://` origin, no server running yet — render `SAMPLE_POSTS` instead of an
-  error, with a small dismissible note: "preview data — live posts load when
-  this runs on your server". A failed fetch must never be fatal, or the design
-  cannot be reviewed at all. Never put a token on that path.
+- **Preview fallback.** The server files carry a small inline `SAMPLE_POSTS`
+  array (the same posts `preview.html` shows, in the shape of `body.posts`).
+  When `ACCESS_TOKEN` is empty, or the API call fails with no cached copy yet,
+  the server renders `SAMPLE_POSTS` instead of an error, with a small note:
+  "preview data — live posts load once the token is set". The browser never
+  fetches anything, on this path or any other, and a token is never on it.
 - **The static preview.** The same posts, already expanded into markup, ship as
   `preview.html` — a file that opens from a double-click with no server, no
   build step and no call of any kind. It carries the same note and the same
