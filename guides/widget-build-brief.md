@@ -25,7 +25,7 @@ Two choices change what gets built, so they are asked **before any code**, one
 question per reply:
 
 1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw,
-   show its list as it is — two columns only, theme name and thumbnail image —
+   show its theme picker as it says — the thumbnails file as an HTML artifact —
    and ask which one they want. Stop there.
 2. **Stack.** Once they pick, ask: **PHP or Node.js?** Stop there.
 3. **Confirm.** Repeat both choices back in one line — e.g. "Theme 3, Modern

@@ -18,11 +18,22 @@ comes from its preview HTML, never from the thumbnail.
 
 ## Agents: ask first
 
-Before writing any code, show the user the list below exactly as it is —
-a table of two columns only, the theme name and its thumbnail image (the
-image itself, not a link) — and ask which one they want. Take the name or
-its place in the list. If they already named a theme, skip the question.
-Never pick one for them at random.
+Before writing any code, fetch the theme picker RAW and show it to the user
+as an HTML artifact, exactly as it is:
+
+```
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+```
+
+It is one small page with every theme's name and its thumbnail, the images
+embedded as base64 so they show inside the chat. Copy the file character for
+character, the base64 included: never retype, shorten, resize or redraw it,
+and add nothing to it. Then ask which theme they want. Take the name or its
+place in the list. If they already named a theme, skip the question. Never
+pick one for them at random.
+
+If you cannot make an artifact, show the table below instead, exactly as it
+is — two columns only, the theme name and its thumbnail image.
 
 ## The list
 
@@ -57,12 +68,15 @@ Never pick one for them at random.
   card) are the design. Copy that CSS as it is and repeat that card markup for
   every post: same classes, same order of parts, same `--tbd-*` values in
   `:root`. Do not redraw the layout from the thumbnail or the *Look* line.
-- **Replace the sample content, keep the structure.** The preview's posts,
-  names, avatars, links and images are samples: render the real post's author
-  name, date, `content.text`, media and network in the same elements. Drop the
-  sample-only bits: the base64 `--tbd-ph` placeholder on `.tbd-media`, the
-  `.tbd-note` line and the "Social Widget" sample header text (use the
-  user's own, or none).
+- **Take the structure, never the posts.** The preview's posts, names,
+  avatars, links and image URLs are placeholders: do not copy a single one of
+  them into the build. The posts come from the sample posts JSON (or the live
+  API), exactly as the build prompt says, with every image and video URL
+  copied from that JSON character for character. Render each post's author
+  name, date, `content.text`, media and network in the preview's elements.
+  Drop the sample-only bits: the base64 `--tbd-ph` placeholder on
+  `.tbd-media`, the `.tbd-note` line and the "Social Widget" sample header
+  text (use the user's own, or none).
 - **Where they disagree, the preview wins.** The *Look* and *Values* lines
   below describe the same theme in words and are there for when the preview
   cannot be fetched; if a value there differs from the preview's `:root`, use

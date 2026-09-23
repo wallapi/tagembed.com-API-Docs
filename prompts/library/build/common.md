@@ -25,8 +25,9 @@ header, the README and the code comments - never "social wall".
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue. Fetch that theme's preview HTML RAW (the
 "Preview" line under it in the catalogue) and build from it: copy its
-CSS and card markup, put my real posts in place of the samples, and
-leave out its <script>. The thumbnail is only for picking - never
+CSS and card markup, leave out its <script>, and never copy its
+sample posts, names or image URLs - the posts come only from the
+sample posts JSON below (or the live API). The thumbnail is only for picking - never
 build from it. The design spec maps the tokens (section 2, Themes):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 If I have not picked a theme yet, show me the catalogue's list and
