@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Widget</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+<style>
+  /* Reels theme - values from themes-lite.json. Change the look here. */
+  :root {
+    --tbd-bg: #ffffff;
+    --tbd-surface: #ffffff;
+    --tbd-text: #000000;
+    --tbd-author: #2B2B2B;
+    --tbd-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --tbd-weight: regular;
+    --tbd-size: 14px;
+    --tbd-radius: 8px;
+    --tbd-img-radius: 8px;
+    --tbd-gap: 12px;
+    --tbd-pad: 14px;
+    --tbd-cols: 3;
+    --tbd-align: left;
+    --tbd-lines: none;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--tbd-bg); color: var(--tbd-text);
+    font-family: var(--tbd-font); font-weight: var(--tbd-weight); font-size: var(--tbd-size); }
+  .tbd-widget { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
+  .tbd-header { margin: 0 0 24px; text-align: center; font-size: 1.9em; font-weight: 700; }
+  /* Card: one markup for every theme; the theme block below orders and hides parts */
+  .tbd-card { display: flex; flex-direction: column; background: var(--tbd-surface); color: inherit;
+    text-decoration: none; border-radius: var(--tbd-radius); overflow: hidden; text-align: var(--tbd-align); }
+  /* --tbd-ph: the sample file's tiny base64 thumbnail (preview only; live posts have none) */
+  .tbd-media { position: relative; overflow: hidden; border-radius: var(--tbd-img-radius);
+    aspect-ratio: var(--tbd-ar, auto);
+    background: var(--tbd-ph, none) center / cover no-repeat, linear-gradient(135deg, #e6e8f2, #f3e6ee); }
+  /* Fallback tile: chat preview panes block outside images, so show the network name */
+  .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
+    place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
+    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
+    border-radius: 50%; background: rgba(0,0,0,.55); }
+  .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
+    border-left: 9px solid #fff; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+  .tbd-head { display: flex; align-items: center; gap: 10px; padding: var(--tbd-pad); }
+  .tbd-avatar { flex: none; width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+    background: #d9dbe3; display: grid; place-items: center; font-weight: 700; color: #555; }
+  /* Blocked avatar: show the author's initial instead of a broken-image icon */
+  img.tbd-avatar { position: relative; }
+  img.tbd-avatar::before { content: attr(data-initial); position: absolute; inset: 0; display: grid;
+    place-items: center; border-radius: 50%; background: #d9dbe3; }
+  .tbd-who { flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: left; }
+  .tbd-author { color: var(--tbd-author); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tbd-date { font-size: .8em; opacity: .6; }
+  .tbd-net { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+    background: #888; color: #fff; font: 700 11px/1 system-ui, sans-serif; }
+  .tbd-net::before { content: attr(data-mark); }
+  .tbd-net[data-net="instagram"] { background: linear-gradient(45deg, #f9ce34, #ee2a7b 55%, #6228d7); }
+  .tbd-net[data-net="facebook"] { background: #1877f2; }
+  .tbd-net[data-net="twitter"], .tbd-net[data-net="x"], .tbd-net[data-net="tiktok"] { background: #111; }
+  .tbd-net[data-net="youtube"] { background: #ff0000; }
+  .tbd-net[data-net="linkedin"] { background: #0a66c2; }
+  .tbd-net[data-net="pinterest"] { background: #e60023; }
+  .tbd-net[data-net="google"] { background: #4285f4; }
+  .tbd-net[data-net="yelp"] { background: #d32323; }
+  .tbd-net[data-net="tripadvisor"] { background: #34e0a1; color: #000; }
+  .tbd-net[data-net="trustpilot"] { background: #00b67a; }
+  .tbd-stars { padding: var(--tbd-pad) var(--tbd-pad) 0; text-align: center; color: #f5b50a; letter-spacing: 2px; }
+  .tbd-text { margin: 0; padding: 0 var(--tbd-pad) var(--tbd-pad); line-height: 1.5; }
+  .tbd-card > :first-child.tbd-text { padding-top: var(--tbd-pad); }
+  .tbd-clamp .tbd-text { display: -webkit-box; -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--tbd-lines); line-clamp: var(--tbd-lines); overflow: hidden; }
+  /* Starters only: no posts yet, and the "sample posts" note */
+  .tbd-empty, .tbd-note { text-align: center; opacity: .7; margin: 0 0 16px; }
+
+  /* Slider: one row that scrolls sideways; the arrows scroll one view */
+  .tbd-slider { position: relative; }
+  .tbd-track { display: flex; gap: var(--tbd-gap); overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; padding: 4px 2px 12px; }
+  .tbd-track::-webkit-scrollbar { display: none; }
+  .tbd-card { flex: 0 0 calc((100% - (var(--tbd-cols) - 1) * var(--tbd-gap)) / var(--tbd-cols));
+    scroll-snap-align: start; }
+  @media (max-width: 900px) { .tbd-card { flex-basis: calc((100% - var(--tbd-gap)) / 2); } }
+  @media (max-width: 560px) { .tbd-card { flex-basis: 85%; } }
+  .tbd-arrow { position: absolute; z-index: 4; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
+    border: 0; border-radius: 50%; background: #fff; color: #333; font-size: 20px; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+  .tbd-arrow--prev { left: -10px; }
+  .tbd-arrow--next { right: -10px; }
+
+  .tbd-card { background: none; }
+  .tbd-media { aspect-ratio: 9 / 16; }
+  .tbd-arrow { display: none; }
+</style>
+</head>
+<body>
+<!-- Social Widget preview: Reels. Sample posts only - calls no API. -->
+<section class="tbd-widget tbd-t-reels tbd-l-slider">
+  <h1 class="tbd-header">Social Widget</h1>
+  <div class="tbd-slider">
+  <button class="tbd-arrow tbd-arrow--prev" type="button" data-dir="-1" aria-label="Previous">‹</button>
+  <div class="tbd-track">
+    <a class="tbd-card" href="https://instagram.com/p/Cx9001Sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-media" data-network="Instagram" style="--tbd-ar:1080 / 1080;--tbd-ph:url(data:image/jpeg;base64,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)"><img src="https://cloud.tagbox.com/media/141712/2231424/561924/17888143008614381/810182212_18113135807127332_4549521118308771593_n.jpg" alt="" loading="lazy"></div>
+    </a>
+    <a class="tbd-card" href="https://tiktok.com/@devoncole/video/9002sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-media" data-network="TikTok" style="--tbd-ar:720 / 720;--tbd-ph:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8IAEQgAMAAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAMCBAEFAAYHCAkKC//EAMMQAAEDAwIEAwQGBAcGBAgGcwECAAMRBBIhBTETIhAGQVEyFGFxIweBIJFCFaFSM7EkYjAWwXLRQ5I0ggjhU0AlYxc18JNzolBEsoPxJlQ2ZJR0wmDShKMYcOInRTdls1V1pJXDhfLTRnaA40dWZrQJChkaKCkqODk6SElKV1hZWmdoaWp3eHl6hoeIiYqQlpeYmZqgpaanqKmqsLW2t7i5usDExcbHyMnK0NTV1tfY2drg5OXm5+jp6vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAQIAAwQFBgcICQoL/8QAwxEAAgIBAwMDAgMFAgUCBASHAQACEQMQEiEEIDFBEwUwIjJRFEAGMyNhQhVxUjSBUCSRoUOxFgdiNVPw0SVgwUThcvEXgmM2cCZFVJInotIICQoYGRooKSo3ODk6RkdISUpVVldYWVpkZWZnaGlqc3R1dnd4eXqAg4SFhoeIiYqQk5SVlpeYmZqgo6SlpqeoqaqwsrO0tba3uLm6wMLDxMXGx8jJytDT1NXW19jZ2uDi4+Tl5ufo6ery8/T19vf4+fr/2wBDAAYGBgYGBgoGBgoOCgoKDhIODg4OEhcSEhISEhccFxcXFxcXHBwcHBwcHBwiIiIiIiInJycnJywsLCwsLCwsLCz/2wBDAQcHBwsKCxMKChMuHxofLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi7/2gAMAwEAAhEDEQAAAX+ud3LS66mqSbrVTzUQqktKOVN5qSGFypKo6Y1SmYr/2gAIAQEAAQUCwvXy718u8fKvHybt8i6+/wA4Pnh3FwpBFwH7wH7yl8y0fNtGZLVQEtvTmwvON0+9VLql1DqHUOof/9oACAEDEQE/AWmtLbaaaf/aAAgBAhEBPwGmmncUWCTbubbbf//aAAgBAQAGPwL20fg/3if8F/vU/wCC/wB6P8F/vh/gv9//ALz9/wBp+0GJEKr8H7QfEP2g+KXxH4Onr8HwJ+wv2Ff4LqIlf4L4fe4vj93/xAAzEAEAAwACAgICAgMBAQAAAgsBEQAhMUFRYXGBkaGxwfDREOHxIDBAUGBwgJCgsMDQ4P/aAAgBAQABPyH/AOl/4b/Mf7v+W/3fJ+J/u/4B/v8A/H6n5v8A9i4+GQc/FWDyeyv/AKxYcfyl/wDnXx/4vivZ8Ixf6oAED/Li+BPtdpFoPj+LEdXbt27Txf8Ak9l9n/a//9oADAMBAAIRAxEAABCLvaNlsa5T/8QAMxEBAQEAAwABAgUFAQEAAQEJAQARITEQQVFhIHHwkYGhsdHB4fEwQFBgcICQoLDA0OD/2gAIAQMRAT8QyxYtJKBP0WrVq//aAAgBAhEBPxD81+a/NfcL6wP6WrFj6yPrf//aAAgBAQABPxCfp+z+6p0/C/3ZuR+KScn8GhuB8WD8x+LssXLH/T/y1P8AxlhotAK8iPPmh0YDDJv3ZR1sz/6VYBrwf+1T5+kP9VH+Cv6ojxElPJ7IpMsAmZY7r+vv7Sy+5kuvmi6PgWXEHxZ6AWY833hvnE1PP0J/ui6H8l9d/F8I/JXyH5p5j8l//9k=)"><img src="https://cloud.tagbox.com/media/141712/2231424/561924/18103532516193855/thumb_v7i8h3mu.jpg" alt="" loading="lazy"><span class="tbd-play"></span></div>
+    </a>
+    <a class="tbd-card" href="https://facebook.com/priya.nair.98/posts/9003sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-media" data-network="Facebook" style="--tbd-ar:594 / 594;--tbd-ph:url(data:image/jpeg;base64,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)"><img src="https://cloud.tagbox.com/media/141712/2231424/561924/18088373651668689/801181501_18112526939127332_1972507973509491791_n.jpg" alt="" loading="lazy"></div>
+    </a>
+    <a class="tbd-card" href="https://youtube.com/watch?v=9005sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-media" data-network="YouTube" style="--tbd-ar:720 / 720;--tbd-ph:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8IAEQgAMAAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAMCBAEFAAYHCAkKC//EAMMQAAEDAwIEAwQGBAcGBAgGcwECAAMRBBIhBTETIhAGQVEyFGFxIweBIJFCFaFSM7EkYjAWwXLRQ5I0ggjhU0AlYxc18JNzolBEsoPxJlQ2ZJR0wmDShKMYcOInRTdls1V1pJXDhfLTRnaA40dWZrQJChkaKCkqODk6SElKV1hZWmdoaWp3eHl6hoeIiYqQlpeYmZqgpaanqKmqsLW2t7i5usDExcbHyMnK0NTV1tfY2drg5OXm5+jp6vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAQIAAwQFBgcICQoL/8QAwxEAAgIBAwMDAgMFAgUCBASHAQACEQMQEiEEIDFBEwUwIjJRFEAGMyNhQhVxUjSBUCSRoUOxFgdiNVPw0SVgwUThcvEXgmM2cCZFVJInotIICQoYGRooKSo3ODk6RkdISUpVVldYWVpkZWZnaGlqc3R1dnd4eXqAg4SFhoeIiYqQk5SVlpeYmZqgo6SlpqeoqaqwsrO0tba3uLm6wMLDxMXGx8jJytDT1NXW19jZ2uDi4+Tl5ufo6ery8/T19vf4+fr/2wBDAAYGBgYGBgoGBgoOCgoKDhIODg4OEhcSEhISEhccFxcXFxcXHBwcHBwcHBwiIiIiIiInJycnJywsLCwsLCwsLCz/2wBDAQcHBwsKCxMKChMuHxofLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi7/2gAMAwEAAhEDEQAAAWjoyvW8keLEAAfS6MLS9tPJ9flmtq034GyW7PTH0MI54vYYrQZedu2etzz/AP/aAAgBAQABBQLF8oPkpfKQ+UHRgAvB4vF4PBonQDGrMrIQ+dG+ch8+NpsLSNkAOlWqAFqhIZSsOopMvFI7EMpaZUiWdIIjOLyqyy//2gAIAQMRAT8BMCPLx+TTKALkBHhGQoTFyYg//9oACAECEQE/ARMS5BefzbYTIRlRNlw27n//2gAIAQEABj8Cfth+0/aftD+YqXRKS+rt5vz/AAdcfxeXw+5oWajSvm6Vp933aMajU9tPuf/EADMQAQADAAICAgICAwEBAAACCwERACExQVFhcYGRobHB8NEQ4fEgMEBQYHCAkKCwwNDg/9oACAEBAAE/ISt8qKxBjsblMDe2xJ/z8B/wM0s3n/ogkCtMPYxB+7gh+tvzX0/hY+f2XQ8O0tCRoYOr2pzeqvCfq8k/d5CMH18/FIDJ4PFc+W7/AMCebrYMjwH8zSItASK8kRURN8r/AP/aAAwDAQACEQMRAAAQvMhoaOzTn//EADMRAQEBAAMAAQIFBQEBAAEBCQEAESExEEFRYSBx8JGBobHRweHxMEBQYHCAkKCwwNDg/9oACAEDEQE/EG8M8I76LkWbU8XQwuUb3Kv/2gAIAQIRAT8QElu+OEZ7YfL60LDxGX//2gAIAQEAAT8QlQ4l5qUEHnf9VgBDUJynj4/JZ4swJBRBHjgnfhsI5hlHhEA++fijsqczpvwq8qPkqyZKEfVnSoiSosT4OCa+AumZPUwq0EnMID8lPL+Fyn9mvSKRcxQ886mWP1XYeYJIbMe+LiypLx5p64fJdyfyka3g9f8AuzGI0yHwSuuuPi9sDIuGceLG5k4qPC+QpUARqxAygp9yqfTX3My7rvU+KFJPO+TKKlptnWgAqvQUqQ0dL//Z)"><img src="https://cloud.tagbox.com/media/141712/2231424/561924/17984344209062084/thumb_i389dkb4.jpg" alt="" loading="lazy"><span class="tbd-play"></span></div>
+    </a>
+    <a class="tbd-card" href="https://linkedin.com/feed/update/urn:li:activity:9006sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-media" data-network="LinkedIn" style="--tbd-ar:1440 / 1440;--tbd-ph:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8IAEQgAMAAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAMCBAEFAAYHCAkKC//EAMMQAAEDAwIEAwQGBAcGBAgGcwECAAMRBBIhBTETIhAGQVEyFGFxIweBIJFCFaFSM7EkYjAWwXLRQ5I0ggjhU0AlYxc18JNzolBEsoPxJlQ2ZJR0wmDShKMYcOInRTdls1V1pJXDhfLTRnaA40dWZrQJChkaKCkqODk6SElKV1hZWmdoaWp3eHl6hoeIiYqQlpeYmZqgpaanqKmqsLW2t7i5usDExcbHyMnK0NTV1tfY2drg5OXm5+jp6vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAQIAAwQFBgcICQoL/8QAwxEAAgIBAwMDAgMFAgUCBASHAQACEQMQEiEEIDFBEwUwIjJRFEAGMyNhQhVxUjSBUCSRoUOxFgdiNVPw0SVgwUThcvEXgmM2cCZFVJInotIICQoYGRooKSo3ODk6RkdISUpVVldYWVpkZWZnaGlqc3R1dnd4eXqAg4SFhoeIiYqQk5SVlpeYmZqgo6SlpqeoqaqwsrO0tba3uLm6wMLDxMXGx8jJytDT1NXW19jZ2uDi4+Tl5ufo6ery8/T19vf4+fr/2wBDAAYGBgYGBgoGBgoOCgoKDhIODg4OEhcSEhISEhccFxcXFxcXHBwcHBwcHBwiIiIiIiInJycnJywsLCwsLCwsLCz/2wBDAQcHBwsKCxMKChMuHxofLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi7/2gAMAwEAAhEDEQAAAeQa+k0415Fjb4K06jly64XrwMeB3Jhux6upa2Tbbz7lpa3fQGvnXr/NJrw76zrDl//aAAgBAQABBQKSYk0Wk4yrNKu2QMxqmSzSozWC2mNYcljIhpQQ5FyQqTFIlqMhcK+WLi8ChHfRwM7nkfI1a0ko5OY5BQVUqu2gLFpKpdwnk2JKnkwqqXYAKXcmrFrHJEuzS1W8iH//2gAIAQMRAT8Bn8hHJ6UxNl6npBkG6+WMIu3CMX9UxYcmnKiT/9oACAECEQE/Af05HILLhwdWYcVw+9k/xkZLH3FjIejKgLYpjb//2gAIAQEABj8CqWFMoT9rxS65BkJ1dU0+D5n8DXjqK0rRhSiNXw1YPCrFJVaGr1kU5cVaZf1MCWqqa0DyijILqYgfL/b0fHsVJ/LqXVaqVftBXzdP+CvoyT9rCEreMVXr2xSr9XZTxfMWR8i6xqfr8n//xAAzEAEAAwACAgICAgMBAQAAAgsBEQAhMUFRYXGBkaGxwfDREOHxIDBAUGBwgJCgsMDQ4P/aAAgBAQABPyHRRPZxRZJJmD+aATRdlTKCT3/Fglg6PP1Y8pcvq75M7+KCVM8ry+7HIhplL/8AKX89H+ruGXZtDE/5fmkxuX0t2eMn09VXQjwHnhtbbkIAGtAB2vPzQkgGmFD7oe34VT/ulFlIX+DU4dHUtqxHHQ/3f9pFRXvmcLGbPPKy9/N4XL3TMJ97QgkvPD91c91gTYCmXpxWU+Z2P/GNAMfK/wD/2gAMAwEAAhEDEQAAEG4u/wCEUBWH/8QAMxEBAQEAAwABAgUFAQEAAQEJAQARITEQQVFhIHHwkYGhsdHB4fEwQFBgcICQoLDA0OD/2gAIAQMRAT8Q7H6WfHH9M8ZNwjq7aQ0Gb/fv+kvb/YgnBvJ8WF//2gAIAQIRAT8Q+SP7xDrKB3N+IgrZ/P8AqTw1PzYIRADW7xf/2gAIAQEAAT8QdyQ8K8HeVFypcmYh6j3WBKD4ATFzvIrWjIqNj2yLGhUDqA7Rn7qlcRgVxoIcb5pMTLFYVuZMRtbklMFJnkOo8PqukUlB3Y5nETjHm7mxUgBN3tPVkJ+Ji2fqncsIXjgXiTltep/jDhSk9MccVFnOKhtKvJVmTOLUFEGJeY7K2gACCOHg4yK6yHKuEiQka8WLIoIyRApB8VJBsuaj5/8AlRAIA5cfnzXkLkAx6+Z/ilEUU5O+ZSKUeMCwl1Hk9XBHsYfPJ/iySfCEQ/ZXwhcvFq4vBteEETKYYDLsfjrivV1lvafdjEB9pfiadAygVD55tEOPk2W0AT4VX+CrcOw9U3l2AEXKaMVmT8KD42Gyb5txyPDv6v8A/9k=)"><img src="https://cloud.tagbox.com/media/141712/2231424/561924/17901115977202806/616461587_18087833159127332_2981774030571158343_n.jpg" alt="" loading="lazy"></div>
+    </a>
+  </div>
+  <button class="tbd-arrow tbd-arrow--next" type="button" data-dir="1" aria-label="Next">›</button>
+  </div>
+</section>
+<script>
+  // Arrows scroll the row by one view. No data is fetched.
+  document.querySelectorAll('.tbd-arrow').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.parentNode.querySelector('.tbd-track');
+      t.scrollBy({ left: b.dataset.dir * t.clientWidth, behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>

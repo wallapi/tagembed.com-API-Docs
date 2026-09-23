@@ -23,9 +23,11 @@ Name: it is a Social Widget. Use that name in the page title, the
 header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
-catalogue. Build the layout its thumbnail and "Look" line show, and
-take the colours, font, radius and spacing from its "Values" line -
-the design spec maps them onto the tokens (section 2, Themes):
+catalogue. Fetch that theme's preview HTML RAW (the
+"Preview" line under it in the catalogue) and build from it: copy its
+CSS and card markup, put my real posts in place of the samples, and
+leave out its <script>. The thumbnail is only for picking - never
+build from it. The design spec maps the tokens (section 2, Themes):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 If I have not picked a theme yet, show me the catalogue's list and
 ask - never pick one for me. Every part uses that same theme. One

@@ -18,7 +18,7 @@ HTML page, the raw one returns the file:
 | ---- | --------------- | ---------------- |
 | Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md) |
 | API spec | endpoints, envelope, field names, integration rules | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) |
-| Theme catalogue | the 19 widget themes — a thumbnail, the layout and the values of each; the AI shows you this list first | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
+| Theme catalogue | the 19 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you this list first | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
 | Design spec | `--tbd-*` tokens, how a theme maps onto them, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
 
 All of them live in the public docs repo
@@ -67,8 +67,8 @@ which is how you review the look before you have a token, on a laptop with no
 PHP and no Node installed, or in a chat window that cannot run either. Because
 it and the server file render the same markup from the same tokens, a restyle
 has to land in both or they drift apart. Its skin is the theme you picked: its
-thumbnail gives the layout, and its values every colour, the font, the radius
-and the spacing. That is the whole skin — no light/dark switch anywhere in the
+preview HTML is copied for the layout, every colour, the font, the radius and
+the spacing (the thumbnail is only for picking). That is the whole skin — no light/dark switch anywhere in the
 build. How the values map onto the tokens is in [the design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
 under **Themes** in section 2, and the build names the theme it used.
 
@@ -114,7 +114,7 @@ stay out of the source. Nothing runs until you fill them in:
 ## Prompt 1 — The main prompt (start here)
 
 One prompt, pasted once. The AI asks you two things first, one per reply —
-**which theme** (it shows you the list, with a thumbnail link for each) and
+**which theme** (it shows you the list, with a thumbnail image for each) and
 **PHP or Node.js** — then repeats both back for a yes. After that it builds,
 one file per reply: type **next** after each, so every reply stays short and
 fast instead of one long reply that runs out of room or times out. The full
@@ -131,7 +131,7 @@ they link.
 Build me a social widget from my Tagembed gallery. First ask me two
 things, ONE question per reply, and write no code until I confirm:
 Q1 - theme: fetch this RAW, show me its theme list as it is (number,
-name, what it looks like, thumbnail link) and ask which one I want:
+name, what it looks like, thumbnail image) and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
 Then repeat both choices in one line and wait for my "yes".
@@ -164,7 +164,7 @@ Build me a social widget from my Tagembed gallery (from the build brief).
 First ask me two things, ONE question per reply, and write no code
 until I confirm:
 Q1 - theme: fetch this RAW, show me its theme list as it is (number,
-name, what it looks like, thumbnail link) and ask which one I want:
+name, what it looks like, thumbnail image) and ask which one I want:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Q2 - stack: once I pick, ask whether I want PHP or Node.js.
 Then repeat both choices in one line and wait for my "yes".
@@ -211,8 +211,8 @@ so paste the files instead of the prompt's link list:
 1. Open the prompt's file from
    [prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library)
    and paste the text of every file the prompt links instead of the prompt —
-   for Prompt 1, `guides/themes/README.md` (attach the thumbnail of the theme
-   you want, or just name it), `build/common.md`, `build/cache.md`, then
+   for Prompt 1, `guides/themes/README.md` (name the theme you want and paste
+   its preview from `guides/previews/`), `build/common.md`, `build/cache.md`, then
    `preview.md`, the server part for your stack only, and `readme-file.md`.
 2. Attach or paste [llms.txt](../llms.txt) and
    [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md)
@@ -412,7 +412,7 @@ theme maps onto it, AA-checked contrast and the page shell live in the
 [design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
 so the first render already looks like ours instead of an unstyled list. The
 layout is decided too: in **Prompt 1** it is the theme you pick — its
-thumbnail is what you get. **Prompt 2** builds a MOSAIC, because a full-width
+preview HTML is what you get. **Prompt 2** builds a MOSAIC, because a full-width
 section has the width for one; it is a bracket you can swap. Iterate on the look with
 [Prompt 3](#prompt-3--design-the-widget-iterate-on-looks); it reuses the same
 tokens, so restyling never drifts off-brand.

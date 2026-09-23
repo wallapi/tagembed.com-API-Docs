@@ -52,7 +52,8 @@ when you cannot.
 ### Themes — where the design comes from
 
 The catalogue is a folder, `guides/themes/`: 19 themes (14 social, 5 review),
-each with a thumbnail PNG of the real widget, a *Look* line describing its
+each with a thumbnail PNG (to pick from), a preview HTML of the finished
+widget in `guides/previews/` (to build from), a *Look* line describing its
 layout in words, and a *Values* line. Fetch its README raw:
 
 ```
@@ -61,7 +62,7 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/them
 
 **Ask before you write any CSS.** If the user already named a theme, use it.
 If not, show them the catalogue's list — number, name, what it looks like,
-thumbnail link — and ask which one they want; the build prompts do this as
+thumbnail image — and ask which one they want; the build prompts do this as
 their first question. Never pick one silently. Only when the prompt tells you
 not to ask, pick one — a social theme for a social widget, a review theme for
 reviews — and say in one line which one you used.
@@ -69,11 +70,15 @@ reviews — and say in one line which one you used.
 That theme then decides two things:
 
 - **The layout** — which parts a card shows, in what order, and how the cards
-  are arranged — comes from its thumbnail and its *Look* line. Sections 4 and
+  are arranged — comes from its preview HTML: copy its card markup and
+  CSS, with the real posts in place of the samples. The *Look* line says the
+  same in words. Sections 4 and
   5 are how the reel and the mosaic are built when the theme is one of them
   (Reels is the reel; the card themes that say "mosaic" are the mosaic);
   every other layout keeps section 3's card treatment and section 6–8's rules.
-- **The value of every token** comes from its *Values* line. The names, the
+- **The value of every token** comes from the preview's `:root`; the
+  *Values* line is the same set in words, and where they differ the preview
+  wins. The names, the
   `--tbd-` prefix and sections 3–8 stay exactly as they are, so one theme
   reskins the whole page:
 
@@ -94,8 +99,8 @@ image ratio         →  natural keeps each image's own ratio; square, 16:9,
                        4:3, 9:16 crop to it with object-fit: cover
 ```
 
-Where the thumbnail and a value disagree about what is shown, follow the
-thumbnail; the values decide colour, type and spacing only.
+The thumbnail is only for the user to pick from; never build from it. Where
+the preview and a value disagree, follow the preview.
 
 Three rules come with it:
 

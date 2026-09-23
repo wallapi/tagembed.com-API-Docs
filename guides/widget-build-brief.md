@@ -25,7 +25,7 @@ Two choices change what gets built, so they are asked **before any code**, one
 question per reply:
 
 1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw,
-   show its list as it is — number, name, what it looks like, thumbnail link —
+   show its list as it is — number, name, what it looks like, thumbnail image —
    and ask which one they want. Stop there.
 2. **Stack.** Once they pick, ask: **PHP or Node.js?** Stop there.
 3. **Confirm.** Repeat both choices back in one line — e.g. "Theme 3, Modern
@@ -162,9 +162,10 @@ never retype, shorten or invent one. If you cannot reach them, write that many
 in the same shape with no media rather than a made-up URL, and include a review
 post carrying a `rating`, or the widget never shows its star rating. Video posts
 and the media placeholder follow the design spec §3. The whole build is skinned from the theme picked in §0,
-from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) — its thumbnail
-and *Look* line give the layout, its *Values* line the colours, font and
-spacing. How those values map onto the design tokens is in the design spec,
+from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) — copy the picked
+theme's preview HTML (its CSS and card markup, the real posts in place of the
+samples, no `<script>`) for the layout, colours, font and spacing; the
+thumbnail is only for the question. How those values map onto the design tokens is in the design spec,
 under **Themes** in section 2. One theme is the entire skin: no light/dark
 mode, no toggle.
 

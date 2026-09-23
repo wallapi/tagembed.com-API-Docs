@@ -156,7 +156,7 @@ user's prompt is deliberately short; this section is the full brief.
    question per reply: (1) which THEME — fetch the theme catalogue RAW,
    https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
    show its list as it is (number, name, what it looks like, thumbnail
-   link) and ask; (2) which STACK — PHP or Node.js. Then repeat both
+   image inline) and ask; (2) which STACK — PHP or Node.js. Then repeat both
    choices in one line and wait for a yes. Skip a question the user has
    already answered; never pick either one for them. Then deliver ONLY
    the picked stack, plus preview.html — both stacks only if they ask for
@@ -182,9 +182,10 @@ user's prompt is deliberately short; this section is the full brief.
    design tokens, so they look identical in a browser and any restyle lands
    in both at once. The README documents them (rule 13).
 
-   Layout: the one the picked theme's thumbnail and "Look" line show; its
-   "Values" line gives the colours, font and spacing (the widget design spec
-   maps them). With no theme, a MOSAIC — a masonry layout via CSS
+   Layout and skin: copy the picked theme's preview HTML (its "Preview"
+   file in the catalogue) — its CSS and card markup, with the real posts in
+   place of the samples and without its <script>. The thumbnail is only for
+   the question; never build from it. With no theme, a MOSAIC — a masonry layout via CSS
    multi-column, each image keeping its OWN aspect ratio, text-only posts
    becoming tinted tiles so the mosaic has no gaps.
 

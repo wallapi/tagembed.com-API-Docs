@@ -118,8 +118,8 @@ hand.
   `body.posts` returns. Every build bakes them into a `preview.html`: the same
   page as a static file, openable from disk before a token exists
 - **[Widget themes](guides/themes/)** — the 19 widget themes a build can
-  wear, each with a thumbnail of the real widget, its layout and its colour,
-  font and spacing values. The build prompts show this list first and ask
+  wear, each with a thumbnail to pick from, an HTML preview the build copies,
+  and its colour, font and spacing values. The build prompts show this list first and ask
   which one you want, then ask PHP or Node.js
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,

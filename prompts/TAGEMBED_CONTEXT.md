@@ -10,8 +10,8 @@ Two more files complete the brief - fetch them RAW when you can reach the
 network, and say so in one line if you cannot:
 - Build brief (what to build, wiring, what to hand over):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
-- Theme catalogue (19 widget themes - thumbnail, layout, values; ask the
-  user which one before writing code):
+- Theme catalogue (19 widget themes - thumbnail to pick, preview HTML to
+  build from; ask the user which one before writing code):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 - Design spec (--tbd-* tokens, how a theme maps onto them, card
   treatment, layouts, states):
