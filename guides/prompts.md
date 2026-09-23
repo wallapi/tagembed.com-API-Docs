@@ -417,7 +417,13 @@ section has the width for one; it is a bracket you can swap. Iterate on the look
 [Prompt 3](#prompt-3--design-the-widget-iterate-on-looks); it reuses the same
 tokens, so restyling never drifts off-brand.
 
-Also only-if-you-ask: video playback (`<video>` for video media), carousels
+Video posts play without asking: a `<video>` with controls and the post's
+photo as its poster. A chat's own preview pane (Claude's artifact view,
+ChatGPT canvas) blocks outside photos and video, so there each one shows as a
+coloured tile with the network name; open `preview.html` in a browser for the
+real media.
+
+Also only-if-you-ask: carousels
 (`expand=album`), shopping tags (`expand=products`), filters, a network bar,
 auto-refresh, i18n, and accessibility beyond the contrast and focus rules the
 tokens already carry.

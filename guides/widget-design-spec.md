@@ -164,7 +164,16 @@ looks the same whatever the reader's OS is set to.
 - Hover lifts the card 2px and swaps to `--tbd-shadow-up` over `--tbd-ease`.
 - Image flush to the top edge, `object-fit: cover`, with a `--tbd-bg`
   placeholder behind it so the grid never jumps while images load. Explicit
-  `width`/`height` plus `loading="lazy" decoding="async"`.
+    `width`/`height` plus `loading="lazy" decoding="async"`.
+- **Media box.** Every image and video sits in a box with its own background:
+  the header gradient (§8) with the network name centred on it in white, and
+  the `<img>` alt text set to `color: transparent`. Preview panes (Claude's
+  artifact view, ChatGPT canvas) block outside images and video, so there the
+  card shows that tile instead of a broken icon; everywhere else the real media
+  loads over it.
+- **Video posts** render `<video controls muted playsinline preload="none">`
+  with the video entry's `cdn_url` as the source and the post's first image as
+  the `poster` — never autoplay (§7), no JavaScript.
 - Header row: 32px round avatar (`author.avatar_url`, omitted entirely when
   null) beside the author name in `--tbd-ink` at 14px/600. Under it, handle +
   network name + date in `--tbd-muted` at `--tbd-meta`, separated by "·", the

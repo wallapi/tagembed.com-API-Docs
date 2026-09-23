@@ -40,8 +40,10 @@ body.paging, never the top level, and `status` can be false on an HTTP
 200. No "fields" param exists. Leave `sort` alone. Page 2 =
 body.paging.next_cursor sent back as `after` verbatim, never a post id.
 
-Sample posts: fetch these RAW and bake in 8-12 of each, or invent 8-12
-in the same shape - never skip it. In the server file an empty
+Sample posts: fetch these RAW and bake in 8-12 of each - never skip it.
+Copy every image and video URL character for character: never retype,
+shorten or invent one. If you cannot reach them, write 8-12 posts in
+the same shape with no media rather than a made-up URL. In the server file an empty
 ACCESS_TOKEN renders them instead of calling the API; a real one
 switches to live by itself.
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
@@ -53,6 +55,16 @@ source.permalink with rel="noopener noreferrer". The image is the
 FIRST media entry of type "image" via cdn_url, NOT media[0], which can
 be a video. rating 0-5 marks a review post and is null on social ones
 - same card, plus stars. Other missing values are null, never "" or 0.
+
+Media: a video post renders <video controls muted playsinline
+preload="none"> with the video entry's cdn_url as its source and the
+post's first image as its poster - never autoplay, no JavaScript.
+Every image and video sits in a box with its own background - the
+header gradient with the network name centred on it - and the <img>
+alt text is transparent. Claude's artifact view and ChatGPT canvas
+block outside photos and video, so there the card still shows a
+coloured tile instead of a broken icon; in a browser the real media
+loads over it.
 
 Non-negotiable: every call runs server-side and the token never
 reaches the browser. Escape everything you print; allow only

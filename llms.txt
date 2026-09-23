@@ -233,7 +233,9 @@ user's prompt is deliberately short; this section is the full brief.
    under its own key, or paging scales calls with clicks instead of with time.
 8. Render per post: author.name (fall back to author.handle), network.name,
    the first media item whose type is "image" via its cdn_url (a "video"
-   item is a video file, not a poster image: skip it or render a <video>),
+   item is a video file, not a poster image: render it as a <video controls
+   muted playsinline preload="none"> with the post's first image as its
+   poster — never autoplay),
    content.text as plain text (it is already tag-stripped), and a "View
    post" link to source.permalink when it is not null, with
    rel="noopener noreferrer". Show the date from created_at.
@@ -252,9 +254,14 @@ user's prompt is deliberately short; this section is the full brief.
     reviewed with nothing installed and no token in existence. Use the
     published sample posts when you can reach them:
     guides/sample-posts-social.json and guides/sample-posts-reviews.json in
-    github.com/wallapi/tagembed.com-API-Docs, fetched raw; otherwise invent
-    8–12 posts in the same shape, including a review post with a `rating`
-    and a text-only post with an empty `media` array.
+    github.com/wallapi/tagembed.com-API-Docs, fetched raw, copying every media URL
+    character for character — never retype, shorten or invent one. If you
+    cannot reach them, write 8–12 posts in the same shape with no media
+    (never a made-up URL), including a review post with a `rating`.
+    Preview panes (Claude's artifact view, ChatGPT canvas) also block
+    outside images and video, so every media box carries its own background
+    — the header gradient with the network name on it — and the real photo
+    or video loads over it wherever it is allowed.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
     or a list of what you are about to build. Give every file complete with its exact path — the picked stack and
     `preview.html` — one part per reply when the prompt splits the build into parts.
