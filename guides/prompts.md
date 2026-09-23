@@ -119,7 +119,8 @@ One prompt, pasted once. The AI asks you two things first, one per reply —
 confirm step. It builds one file per reply: type **next** after each, so every reply stays short and
 fast instead of one long reply that runs out of room or times out. The full
 brief is split per deliverable into files in [build/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/build) — `preview.md`, `php.md`, `nodejs.md` and
-`readme-file.md`, listed in order in [parts.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/parts.md) — and the AI fetches only the server part for the stack you
+`readme-file.md` — and the prompt itself is one link, to [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md),
+which carries both questions and the build parts in order. The AI fetches only the server part for the stack you
 picked. Each part fetches the shared rules
 ([common.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md) — data, field names, looks,
 security), and the server part also fetches the cache contract
@@ -128,19 +129,10 @@ guessed, so the build still works when the AI then fails to open the specs
 they link.
 
 ```
-Build me a social widget from my Tagembed gallery. First ask me two
-things, ONE question per reply, and write no code until I answer both:
-Q1 - theme: fetch this RAW, show me its theme picker (the thumbnails
-file, as an HTML artifact) exactly as it says, and ask which one I want:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
-After I pick, build from that theme's preview HTML (its "Preview" line
-in the catalogue), never from the thumbnail. Take only its structure
-and CSS - the posts come from the sample posts JSON, never the preview.
-Q2 - stack: once I pick, ask whether I want PHP or Node.js.
-As soon as I answer Q2, start the build - do not repeat my choices or
-ask me to confirm. The build comes in 3 parts. Fetch this RAW - it
-lists the parts and their links - and follow it exactly:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/parts.md
+Build me a social widget from my Tagembed gallery.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer. Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -204,7 +196,7 @@ so paste the files instead of the prompt's link list:
 1. Open the prompt's file from
    [prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library)
    and paste the text of every file the prompt links instead of the prompt —
-   for Prompt 1, `guides/themes/README.md` (name the theme you want and paste
+   for Prompt 1, `build/steps.md`, `guides/themes/README.md` (name the theme you want and paste
    its preview from `guides/previews/`), `build/common.md`, `build/cache.md`, then
    `preview.md`, the server part for your stack only, and `readme-file.md`.
 2. Attach or paste [llms.txt](../llms.txt) and
