@@ -43,7 +43,7 @@ body.paging, never the top level, and `status` can be false on an HTTP
 200. No "fields" param exists. Leave `sort` alone. Page 2 =
 body.paging.next_cursor sent back as `after` verbatim, never a post id.
 
-Sample posts: fetch these RAW and bake in 8-12 of each - never skip it.
+Sample posts: fetch these RAW and bake in every post in them - never skip it.
 Copy every image and video URL character for character: never retype,
 shorten or invent one. If you cannot reach them, write 8-12 posts in
 the same shape with no media rather than a made-up URL. In the server file an empty

@@ -155,8 +155,8 @@ the design can still be reviewed before a token exists (llms.txt rule 12).
 The same posts are what `preview.html` renders. Take them from
 [sample-posts-social.json](sample-posts-social.json) and
 [sample-posts-reviews.json](sample-posts-reviews.json) in this folder, fetched
-raw — 8–12 of each is plenty — and copy every media URL character for character:
-never retype, shorten or invent one. If you cannot reach them, write that many
+raw — use every post in them — and copy every media URL character for character:
+never retype, shorten or invent one. If you cannot reach them, write 8–12 posts
 in the same shape with no media rather than a made-up URL, and include a review
 post carrying a `rating`, or the widget never shows its star rating. Video posts
 and the media placeholder follow the design spec §3. The whole build is skinned from the theme picked in §0,
