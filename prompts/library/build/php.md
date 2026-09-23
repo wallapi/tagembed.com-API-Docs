@@ -1,5 +1,6 @@
-# Prompt 1, part 2 of 4 - index.php
+# Prompt 1, part 2 of 3 - index.php (when I picked PHP)
 
+Fetch this part only if my stack is PHP - Node.js has its own part 2.
 Fetch both RAW first and follow them - the shared rules and the cache:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md

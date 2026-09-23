@@ -7,16 +7,34 @@ few things neither of them says:
 | Read | For |
 | ---- | --- |
 | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) | the API: endpoints, envelope, field names, and the numbered **Integration rules** for generated code |
-| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, the shipped themes in themes-lite.json, card treatment, REEL and MOSAIC layouts, states |
+| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
+| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) | the theme catalogue: 19 themes, each with a thumbnail, its layout and its values — the user picks one |
 | this file | the delivery contract: what to hand over and how it is wired |
 
-**Agents: fetch all three RAW.** A summarising fetch drops the field names,
+**Agents: fetch them RAW.** A summarising fetch drops the field names,
 which are the one thing that cannot be guessed.
 
 Nothing here overrides llms.txt. Where this file is silent, its Integration
 rules decide.
 
 ---
+
+## 0. Ask first — theme, then stack, then confirm
+
+Two choices change what gets built, so they are asked **before any code**, one
+question per reply:
+
+1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw,
+   show its list as it is — number, name, what it looks like, thumbnail link —
+   and ask which one they want. Stop there.
+2. **Stack.** Once they pick, ask: **PHP or Node.js?** Stop there.
+3. **Confirm.** Repeat both choices back in one line — e.g. "Theme 3, Modern
+   Card, in PHP — shall I build it?" — and wait for a yes. Change whatever they
+   correct.
+
+Skip a question the prompt already answers. Never pick either one for them.
+Only after the yes does the build start — and then only the picked stack's
+parts are fetched and written.
 
 ## 1. What to build
 
@@ -41,19 +59,19 @@ endpoint of their own:
 No mount point, no widget script, no same-origin JSON endpoint, no `data-`
 attributes. One request from the browser gets a finished page.
 
-**Deliver BOTH languages, every time.** Not one or the other, and never a
-choice put back to the user:
+**Deliver the stack they picked** (§0) — PHP or Node.js — plus
+`preview.html`. Never write the other stack unless they ask for both.
 
-**Node.js**
+**Node.js** — when they picked Node.js
 
 | File | Holds |
 | ---- | ----- |
 | `server.js` | everything: the API call, the cache, the HTML and the CSS |
 | `package.json` | Express, and a `start` script |
 | `cache/posts.json` | the cache file — ship it empty or gitignored, and make the code create it if it is missing |
-| `README.md` | the documentation, covering **both** languages (§6) |
+| `README.md` | the documentation for the picked stack (§6) |
 
-**PHP**
+**PHP** — when they picked PHP
 
 | File | Holds |
 | ---- | ----- |
@@ -62,7 +80,7 @@ choice put back to the user:
 The PHP file writes its cache beside itself (`cache/posts.json`) and creates
 the directory if it is missing.
 
-**And one static file both of them share:**
+**And one static file, whichever stack they picked:**
 
 | File | Holds |
 | ---- | ----- |
@@ -77,10 +95,11 @@ Name it `preview.html`, **never `index.html`**: an `index.html` sitting beside
 `index.php` is served *instead of it* by most Apache and nginx configurations,
 so the first upload would quietly swap the live page for the sample one.
 
-All three render the same layout from the same design tokens, so the outputs
-look identical in a browser and any restyle has to land in all three at once.
+`preview.html` and the server file render the same layout from the same design
+tokens, so they look identical in a browser and any restyle has to land in
+both at once. The layout is the one the picked theme shows.
 
-## 2. Configuration — ask at the end, never hard-code
+## 2. Configuration — the token is asked at the end, never hard-coded
 
 | Value | Environment variable | Where the user gets it |
 | ----- | -------------------- | ---------------------- |
@@ -99,10 +118,11 @@ token":
 4. Click **Access Token** and copy the value.
 
 If "Access Token" is not in that menu, say so plainly and stop there — do not
-speculate about why, and do not tell them to buy or upgrade anything. Write the code first — it reads them
-from the environment, so it is complete without them — then ask for both at
-the end of that same reply and offer to write them into a `.env`. Never open
-with the question and wait, and never hard-code either value. Ship an example
+speculate about why, and do not tell them to buy or upgrade anything. Theme
+and stack are the only questions asked up front (§0). The token is not one of
+them: the code reads it from the environment, so it is complete without it —
+ask for it at the end of the README reply and offer to write it into a `.env`.
+Never hard-code either value. Ship an example
 env file with empty values, never a real token. The token is read on the
 server and printed nowhere: it must not appear in the rendered HTML, in a
 comment, or in a data attribute.
@@ -116,8 +136,8 @@ then newest), payload at `body.posts` / `body.paging`, check the HTTP status
 copy served on failure, every printed value escaped.
 
 - Cache to a JSON file, read it when it is younger than 5 minutes, otherwise
-  refresh. Both languages do this the same way, so the README can describe it
-  once.
+  refresh. PHP and Node.js do this the same way, so the README describes it the
+  same whichever stack was picked.
 - One cache at a 5-minute TTL ≈ **288 API calls a day**, whatever the traffic.
   Say in one line what the TTL you implemented will cost them.
 - If they run several PHP workers or Node instances, each keeps its own file
@@ -140,17 +160,19 @@ The same posts are what `preview.html` renders. Take them from
 raw — 8–12 of each is plenty. If you cannot reach them, invent that many in the
 same shape, and include both a review post carrying a `rating` and a text-only
 post whose `media` array is empty, or the widget never shows its star rating and
-its tinted text tiles. The whole build is skinned from `themes-lite.json`. That catalogue and the way its
-fields map onto the design tokens are documented in the design spec, under
-**Themes** in section 2 — read it there rather than guessing at the field
-names. One theme is the entire skin: no light/dark mode, no toggle.
+its tinted text tiles. The whole build is skinned from the theme picked in §0,
+from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) — its thumbnail
+and *Look* line give the layout, its *Values* line the colours, font and
+spacing. How those values map onto the design tokens is in the design spec,
+under **Themes** in section 2. One theme is the entire skin: no light/dark
+mode, no toggle.
 
 ## 5. Styling
 
 The CSS lives inside the deliverable — inside `server.js` for Node, inside
 `index.php` for PHP, inside `preview.html` for the static one — not in a
-separate stylesheet. The same CSS in all three, so the preview is worth
-trusting. The page is theirs, so it
+separate stylesheet. The same CSS in `preview.html` and the server file, so
+the preview is worth trusting. The page is theirs, so it
 may own `:root` and `<body>` freely. Tokens, layouts, themes and contrast
 rules: the design spec.
 
@@ -159,12 +181,13 @@ rules: the design spec.
 Deliverable first, commentary last — no opening plan of what you are about to
 build.
 
-1. **Every file, complete, with its exact path** — the Node.js set, the PHP
-   file and `preview.html` — one part per reply when the prompt splits the
-   build into parts. No "the PHP version is similar".
-2. **`README.md`**, which is a deliverable and not a summary. It covers both
-   languages and contains: what this is; the file list for each; how to set
-   `API_BASE_URL` and `ACCESS_TOKEN`; how to run each one locally (written for
+1. **Every file, complete, with its exact path** — `preview.html` and the
+   picked stack's files (the PHP file, or the Node.js set) — one part per
+   reply when the prompt splits the build into parts.
+2. **`README.md`**, which is a deliverable and not a summary. It covers the
+   picked stack only and contains: what this is and which theme it wears; the
+   file list; how to set
+   `API_BASE_URL` and `ACCESS_TOKEN`; how to run it locally (written for
    someone who has never used a terminal) and the URL to open; that
    `preview.html` needs none of that — it is opened by double-clicking it, and
    it is a design preview, not the page to deploy; how the cache
@@ -172,8 +195,9 @@ build.
    one `curl` that checks the Tagembed API directly with what a good response
    looks like; and a short "if it goes wrong" list — 401, empty page, stale
    posts.
-3. Ask for the base URL and the token, offering to write them into `.env`.
-4. Any assumptions you made, listed at the end — not asked at the start.
+3. Ask for the token, offering to write it into `.env`.
+4. Any assumptions you made, listed at the end — theme and stack are the only
+   things asked at the start.
 5. **No tests.** Do not write or run tests, audits or checks — no
    accessibility or contrast scripts, no auth or 401 flow tests, no curl
    calls, no test files. The `curl` in the README is for the user to run.

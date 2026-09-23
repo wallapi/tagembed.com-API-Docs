@@ -3,12 +3,13 @@
 Each prompt in [../../guides/prompts.md](../../guides/prompts.md) is one short
 block you paste once. It links one file per deliverable from this folder, and
 the AI fetches each raw URL and follows it. A follow-up's `change.md` says what
-changes; its part files say how that lands in each file.
+changes; its part files say how that lands in each file. The themes the
+build prompts offer are in [../../guides/themes/](../../guides/themes/).
 
 | Folder | Prompt | Parts, in order |
 | ------ | ------ | --------------- |
-| [build/](build/) | Prompt 1 — the main build | `preview.md`, `php.md`, `nodejs.md`, `readme-file.md`; shared: `common.md`, `cache.md` |
-| [quick-start/](quick-start/) | Prompt A — the brief-driven build | `preview.md`, `php.md`, `nodejs.md`, `readme-file.md` |
+| [build/](build/) | Prompt 1 — the main build | asks theme, then stack, then confirms; then `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md`; shared: `common.md`, `cache.md` |
+| [quick-start/](quick-start/) | Prompt A — the brief-driven build | asks theme, then stack, then confirms; then `preview.md`, `php.md` **or** `nodejs.md`, `readme-file.md` |
 | [integrate/](integrate/) | Prompt 2 — into an existing site | `section.md`, `preview.md`, `summary.md` |
 | [restyle/](restyle/) | Prompt 3a — restyle | `change.md`; `preview.md`, `php.md`, `nodejs.md` |
 | [network-filter/](network-filter/) | Prompt 3b — network filter bar | `change.md`; `php.md`, `nodejs.md`, `preview.md` |

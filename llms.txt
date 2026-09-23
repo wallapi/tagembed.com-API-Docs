@@ -152,16 +152,23 @@ user's prompt is deliberately short; this section is the full brief.
    script, no mount point, no same-origin JSON endpoint and no browser-side
    fetch of any kind.
 
-   Deliver BOTH languages — never one or the other, and never a choice
-   handed back to the user. When the prompt splits the build into parts,
-   deliver one part per reply, in its order:
+   Ask first, then build. Before any code, ask the user two things, one
+   question per reply: (1) which THEME — fetch the theme catalogue RAW,
+   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+   show its list as it is (number, name, what it looks like, thumbnail
+   link) and ask; (2) which STACK — PHP or Node.js. Then repeat both
+   choices in one line and wait for a yes. Skip a question the user has
+   already answered; never pick either one for them. Then deliver ONLY
+   the picked stack, plus preview.html — both stacks only if they ask for
+   both. When the prompt splits the build into parts, deliver one part per
+   reply, in its order, fetching only the picked stack's part:
 
-   (a) Node.js — `server.js` (the API call, the cache, the HTML and the CSS
+   (a) Node.js, when picked — `server.js` (the API call, the cache, the HTML and the CSS
        all inside it), `package.json`, a `cache/posts.json` cache file, and
        `README.md`.
-   (b) PHP — a single `index.php` holding everything, CSS included: nothing
+   (b) PHP, when picked — a single `index.php` holding everything, CSS included: nothing
        to install and nothing to require.
-   (c) `preview.html` — the same page as a plain static file, with the
+   (c) `preview.html`, always — the same page as a plain static file, with the
        sample posts of rule 12 written into it as finished markup. It runs
        from a double-click: no server, no build step, nothing installed. It
        calls NOTHING — no fetch, no API call, no token, not even a same-origin one — because the posts are already in the
@@ -171,28 +178,32 @@ user's prompt is deliberately short; this section is the full brief.
        configurations, which silently replaces the live page with the
        sample one.
 
-   All three render the same layout from the same design tokens, so they look
-   identical in a browser and any restyle lands in all three at once. The
-   README documents them (rule 13).
+   preview.html and the server file render the same markup from the same
+   design tokens, so they look identical in a browser and any restyle lands
+   in both at once. The README documents them (rule 13).
 
-   Default layout: a MOSAIC — a masonry layout via CSS multi-column, each image
-   keeping its OWN aspect ratio (uniform crops turn a widget into a generic card
-   grid), text-only posts becoming tinted tiles so the mosaic has no gaps.
+   Layout: the one the picked theme's thumbnail and "Look" line show; its
+   "Values" line gives the colours, font and spacing (the widget design spec
+   maps them). With no theme, a MOSAIC — a masonry layout via CSS
+   multi-column, each image keeping its OWN aspect ratio, text-only posts
+   becoming tinted tiles so the mosaic has no gaps.
 
    Asked for a section inside a site that already exists rather than a whole
-   page? Same code, rendered into their template — still server-side, still
-   both languages.
-2. Credentials: ask for them, but never block on them. The code reads both
-   from environment variables (rule 3), so nothing is missing from it before
-   the user answers — deliver the complete, runnable code in the FIRST reply,
-   then, at the end of that same reply, ask the user for their token and offer
+   page? Same code, rendered into their template — still server-side, in their
+   stack.
+2. Credentials: ask for them, but never block on them. Theme and stack
+   (rule 1) are the only questions asked before code; the token is not one
+   of them. The code reads both values from environment variables (rule 3),
+   so nothing is missing from it before the user answers — deliver the
+   complete, runnable code, then, at the end of the last reply, ask the
+   user for their token and offer
    to write it into a `.env`. Give them the steps rather than a vague "get your
    token": dashboard -> the gallery's card -> its three-dots menu -> "Access
    Token". Never tell them to buy or upgrade a plan, and do not
    speculate about why a menu item might be missing. The base URL you do not
-   ask for: it is the constant above. Do not open your turn with the
-   question and wait: an assistant that asks first ends its turn with questions
-   and a plan, and the code only arrives after the user answers. Never invent
+   ask for: it is the constant above. Do not hold the code back
+   waiting for the token: an assistant that asks for it first ends its turn
+   with questions and a plan, and the code only arrives after the user answers. Never invent
    or hard-code either value, and never paste a token the user gives you into
    the source — it goes in the env file.
 3. Configuration. Read the base URL from the API_BASE_URL environment
@@ -245,11 +256,11 @@ user's prompt is deliberately short; this section is the full brief.
     8–12 posts in the same shape, including a review post with a `rating`
     and a text-only post with an empty `media` array.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
-    or a list of what you are about to build. Give every file complete with its exact path — both languages and
+    or a list of what you are about to build. Give every file complete with its exact path — the picked stack and
     `preview.html` — one part per reply when the prompt splits the build into parts.
     Then a `README.md`,
-    which is itself a deliverable: what this is, the file list for each
-    language, how to set the two environment variables, how to run each one
+    which is itself a deliverable: what this is and which theme it wears, the
+    file list, how to set the two environment variables, how to run it
     locally written for someone who has never used a terminal plus the URL to
     open, that `preview.html` is opened by double-clicking it and is a design
     preview rather than the page to deploy,

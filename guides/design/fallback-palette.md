@@ -1,7 +1,7 @@
 # Fallback palette — only when the themes cannot be read
 
 Part of [widget-design-spec.md](../widget-design-spec.md), section 2. Use it
-only when themes-lite.json cannot be fetched at all.
+only when the theme catalogue (guides/themes/README.md) cannot be fetched at all.
 
 If the network is blocked and you genuinely cannot fetch the catalogue, say so
 in one line and use these instead. Never mix them with a theme's values — a

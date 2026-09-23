@@ -1,5 +1,6 @@
-# Prompt A, part 2 of 4 - index.php
+# Prompt A, part 2 of 3 - index.php (when I picked PHP)
 
+Fetch this part only if my stack is PHP - Node.js has its own part 2.
 Fetch all three RAW and follow them exactly - the brief is what to
 build, llms.txt carries the exact data field names (unguessable, and
 the brief does not repeat them), the design spec the looks:

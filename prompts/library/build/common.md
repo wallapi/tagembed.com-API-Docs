@@ -1,26 +1,35 @@
 # Social widget - rules every build part follows
 
-This file is shared by the four part prompts (preview.html, index.php,
-server.js, README.md). It carries no deliverable of its own.
+This file is shared by the part prompts (preview.html, the server file
+for my stack - index.php or server.js - and README.md). It carries no
+deliverable of its own.
 
 Read both first - the field names and the looks are specified there:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 
 What it is: a social widget - a page my own server renders, showing
-the live posts from my Tagembed gallery. preview.html, index.php and
-server.js render the SAME markup with the SAME CSS, so a later restyle
-applies to all three. The CSS lives inside each file - no separate
+the live posts from my Tagembed gallery. preview.html and the server
+file render the SAME markup with the SAME CSS, so a later restyle
+applies to both. The CSS lives inside each file - no separate
 stylesheet.
+
+Stack: build ONLY the stack I picked before the build started - PHP
+(index.php) or Node.js (server.js + package.json). Never write the
+other one unless I ask for both. If I have not picked yet, ask me
+before writing code.
 
 Name: it is a Social Widget. Use that name in the page title, the
 header, the README and the code comments - never "social wall".
 
-Looks: skin everything with ONE social theme picked at random from
-themes-lite.json, which the design spec maps field by field, and tell
-me which one:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json
-Once picked, every later part uses that same theme. One skin only - no dark mode, no toggle. Some theme colours are white on
+Looks: skin everything with the ONE theme I picked from the theme
+catalogue. Build the layout its thumbnail and "Look" line show, and
+take the colours, font, radius and spacing from its "Values" line -
+the design spec maps them onto the tokens (section 2, Themes):
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+If I have not picked a theme yet, show me the catalogue's list and
+ask - never pick one for me. Every part uses that same theme. One
+skin only - no dark mode, no toggle. Some theme colours are white on
 near-white, so where one is too faint to read as text, fix it and
 say so - judged from the values, no contrast script.
 
@@ -32,7 +41,7 @@ body.paging, never the top level, and `status` can be false on an HTTP
 body.paging.next_cursor sent back as `after` verbatim, never a post id.
 
 Sample posts: fetch these RAW and bake in 8-12 of each, or invent 8-12
-in the same shape - never skip it. In the server files an empty
+in the same shape - never skip it. In the server file an empty
 ACCESS_TOKEN renders them instead of calling the API; a real one
 switches to live by itself.
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json

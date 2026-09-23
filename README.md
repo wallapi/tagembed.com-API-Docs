@@ -110,16 +110,17 @@ hand.
   one fetchable file (what to build, wiring, delivery checklist); it links the
   two specs below, so a prompt can be four lines
 - **[Widget design spec](guides/widget-design-spec.md)** — the `--tbd-*`
-  design tokens, the shipped themes, card treatment, reel and widget layouts; link it
+  design tokens, how a theme maps onto them, card treatment, reel and widget layouts; link it
   from a prompt instead of pasting CSS
 - **Sample posts** —
   [sample-posts-social.json](guides/sample-posts-social.json) and
   [sample-posts-reviews.json](guides/sample-posts-reviews.json), the shape
   `body.posts` returns. Every build bakes them into a `preview.html`: the same
   page as a static file, openable from disk before a token exists
-- **[themes-lite.json](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes-lite.json)** — the 23 shipped widget themes as data:
-  per theme the colours, font, radius, spacing, column count, text alignment,
-  line trim and the author/date toggles the dashboard renders it with
+- **[Widget themes](guides/themes/)** — the 19 widget themes a build can
+  wear, each with a thumbnail of the real widget, its layout and its colour,
+  font and spacing values. The build prompts show this list first and ask
+  which one you want, then ask PHP or Node.js
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,
   Windsurf) with a PHP and a Node.js prompt, setup and run commands

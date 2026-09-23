@@ -279,7 +279,10 @@ Two more files complete the brief - fetch them RAW when you can reach the
 network, and say so in one line if you cannot:
 - Build brief (what to build, wiring, what to hand over):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
-- Design spec (--tbd-* tokens, the shipped themes in themes-lite.json, card
+- Theme catalogue (19 widget themes - thumbnail, layout, values; ask the
+  user which one before writing code):
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+- Design spec (--tbd-* tokens, how a theme maps onto them, card
   treatment, layouts, states):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
   Without it, at least use the brand colours --tbd-indigo #283da8,
@@ -304,11 +307,14 @@ Rules for all code in this project:
   fails, never render blank.
 - Render content.text as text and escape all output to prevent XSS.
 - Prefer media[].cdn_url for images.
-- Ship a preview.html beside the server files: the same page as a
+- Ship a preview.html beside the server file: the same page as a
   static file with the sample posts baked in as markup, calling
   nothing and holding no token, so the design can be reviewed by
   double-clicking it. Never name it index.html - it would be served
-  instead of index.php. A restyle applies to all three files.
+  instead of index.php. A restyle applies to both.
+- Before any code, ask the user which theme (show the catalogue's list)
+  and then PHP or Node.js, one question per reply, and confirm both in one
+  line - unless they already said. Build only the picked stack.
 - Never stop to ask for the token or base URL before writing code. Build with
   the defaults above and tell the user where to set the two env vars at the
   end.

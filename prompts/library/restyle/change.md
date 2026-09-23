@@ -14,4 +14,5 @@ Keep the --tbd-* tokens already declared - no new colours, no CSS
 framework, CSS stays inside the same file. Every text/surface pair at
 WCAG AA, and no dark mode or theme toggle - the build is one skin.
 Leave the data layer and caching untouched: CSS and markup only, and
-the same change lands in preview.html, index.php and server.js, so the three files stay identical.
+the same change lands in preview.html and in the server file I have
+(index.php or server.js - both, if I built both), so they stay identical.

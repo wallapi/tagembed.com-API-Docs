@@ -10,7 +10,10 @@ Two more files complete the brief - fetch them RAW when you can reach the
 network, and say so in one line if you cannot:
 - Build brief (what to build, wiring, what to hand over):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
-- Design spec (--tbd-* tokens, the shipped themes in themes-lite.json, card
+- Theme catalogue (19 widget themes - thumbnail, layout, values; ask the
+  user which one before writing code):
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+- Design spec (--tbd-* tokens, how a theme maps onto them, card
   treatment, layouts, states):
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
   Without it, at least use the brand colours --tbd-indigo #283da8,
@@ -38,13 +41,17 @@ Rules for all code in this project:
 - Every build also ships a preview.html: the same page as a static file, with
   the sample posts baked into the HTML as finished markup. It calls nothing -
   no fetch, no API call, no token - so the design can be reviewed by
-  double-clicking it, with nothing installed. Same CSS and markup as the two
-  server versions, and a restyle applies to all three. Never call it
+  double-clicking it, with nothing installed. Same CSS and markup as the server
+  version, and a restyle applies to both. Never call it
   index.html: it would be served instead of index.php.
 - Render on the server. The posts are in the HTML before it leaves the
   server; nothing in the browser calls the API or any endpoint.
-- Every build ships BOTH languages: a single self-contained index.php, and the
-  Node.js set (server.js, package.json, cache/posts.json) - plus one README.md
-  documenting both.
-- Do not stop to ask for the token or base URL before writing code. Build with
+- Before any code, ask the user which theme (show the catalogue's list)
+  and then PHP or Node.js, one question per reply, and confirm both in one
+  line - unless they already said. Every build ships ONLY the picked stack -
+  a single self-contained index.php, or the Node.js set (server.js,
+  package.json, cache/posts.json) - plus one README.md for it. Both stacks
+  only when the user asks for both.
+- Theme and stack are the only questions before code. Do not stop to ask
+  for the token or base URL before writing code. Build with
   the defaults above, then ask the user for both values at the end.
