@@ -8,13 +8,19 @@ answered in my message; never pick either one for me.
 
 Fetch this RAW and show me its theme picker the way it says - the
 thumbnails page itself, rendered (an HTML artifact, or the page opened
-in my browser), never a list of theme names - and ask which one I want:
+in my browser), never a list of theme names and never a table of your
+own - and ask which one I want. Only if the page cannot be shown, use the
+catalogue's thumbnail table as it is: two columns, the numbered theme name
+and the thumbnail as a picture, nothing else:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Then stop and wait for my answer.
 
-After I pick, build from that theme's preview HTML (its "Preview" line
-in the catalogue), never from the thumbnail. Take only its structure
-and CSS - the posts come from the sample posts JSON, never the preview.
+After I pick, that theme's preview file (its "Preview" line in the
+catalogue) is the template - never the thumbnail. Copy the whole file
+as it is and only inject the posts: one card per post from its
+<template id="tbd-card-template">, between its tbd:cards marks, as
+the catalogue's "Filling the card" says. The posts come from the
+sample posts JSON (or the live API), never from the preview.
 
 ## Step 2 - language
 
