@@ -184,7 +184,10 @@ from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.co
 is and inject the posts — replace the sample cards between its
 `<!-- tbd:cards -->` marks with one card per post from its
 `<template id="tbd-card-template">`, each `{{slot}}` filled as the catalogue's
-"Filling the card" says. `preview.html` fills it from these sample posts, the
+"Filling the card" says. The preview file's `<style>` is the only source for
+the design — never approximate it from the Values table below or the
+thumbnail; if the preview file will not open, say so and stop instead of
+building from memory. `preview.html` fills it from these sample posts, the
 server code from `body.posts` on every request; the thumbnail is only for the
 question. How those values map onto the design tokens is in the design spec,
 under **Themes** in section 2. One theme is the entire skin: no light/dark

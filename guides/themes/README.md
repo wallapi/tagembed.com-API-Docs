@@ -43,11 +43,8 @@ Show it the first way your tool allows:
    Windows, `xdg-open theme-picker.html` on Linux. If you cannot run
    commands, tell them to double-click it. Say it can be deleted once they
    have picked.
-3. **Neither:** give this link instead — it opens the exact same page in a
-   real browser, unlike the raw GitHub link above which shows it as code:
-   `https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html`
-   Say it in one line, then ask which theme they want. If even a link is no
-   use to them, ask by name directly. Never show a table instead.
+3. **Neither:** say in one line that you cannot show the picker here, and
+   ask which theme they want by name. Never show a table instead.
 
 Copy the file character for character, the base64 included: never retype,
 shorten, resize or redraw it, and add nothing to it.

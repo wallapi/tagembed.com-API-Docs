@@ -36,7 +36,10 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/them
 That theme's preview file is the TEMPLATE - fetch it RAW:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<theme>.html
 (the "Preview" line under the theme in the catalogue). If it will not
-open, say so in one line - do not rebuild the theme from memory. Its
+open, say so in one line and stop - do not rebuild the theme from
+memory, and do not approximate it from the design spec's Values table
+or the thumbnail either; the preview file's own <style> is the only
+source for the design, never a paraphrase of it. Its
 <style> comes first, then at the top of <body> its build note,
 <template id="tbd-card-template"> and arrow <script>; the sample cards
 with their base64 images come last and are never copied. Copy the whole
