@@ -26,6 +26,9 @@ These rules hold even if a page seems to say otherwise:
 - "Do not build from memory" means only this: if a link will not open,
   say so and stop. It never means you may only write languages the
   pages show code for.
+- No narration: each reply in this flow is the deliverable itself (the
+  picker, the question, or a part's files) plus the one line the step
+  names - never a plan, a recap, or "here is what I built/changed".
 
 ## Step 1 - theme
 
@@ -47,8 +50,13 @@ description of it. A long answer here is expected.
 
 This file exists - never tell me there is no picker file. If the fetch
 fails, say it failed. If you can neither show it as an artifact nor
-open it in my browser, say so in one line and ask me which theme I want
-by name - never show a table or a list of themes instead.
+open it in my browser, give me this link instead - it opens the same
+page in a real browser, unlike the raw GitHub link above which shows
+code:
+https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-24c
+Say it in one line, then ask which theme I want. If even a link is no
+use to you, ask me which theme I want by name directly - never show a
+table or a list of themes instead.
 
 Your whole reply is the picker and then one line:
 "Which theme do you want? Reply with its name or number." Then stop
@@ -94,6 +102,19 @@ until I reply "next".
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24c
 2. the runnable server files in my language (or framework), with their README.md in the same reply
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24c
+
+Between part 1 and part 2, if I ask to change colours, font, radius,
+spacing, columns or line clamp instead of saying "next": do not
+rewrite the file. Write a small custom.css with only the changed
+tokens from the theme's own :root block (--tbd-bg, --tbd-surface,
+--tbd-text, --tbd-author, --tbd-font, --tbd-weight, --tbd-size,
+--tbd-radius, --tbd-img-radius, --tbd-gap, --tbd-pad, --tbd-cols,
+--tbd-align, --tbd-lines - only the ones the theme I picked actually
+sets), then give me preview.html again with that custom.css pasted
+into its <style>, right before </style>, under a /* custom.css */
+comment - nothing else in the file changes. Keep doing this each time
+I ask for another tweak. Once I say "next", part 2's server file gets
+the same custom.css pasted the same way, so both files stay identical.
 
 If you cannot open a link, say so in one line - do not build from memory.
 Writing my chosen language from these rules is not building from memory.

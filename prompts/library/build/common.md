@@ -106,5 +106,10 @@ accessibility or contrast scripts, no auth or 401 flow tests, no curl
 calls, no test files. Pick AA-safe colours from the values and note
 any change in a comment. I run and check the build myself.
 
+No narration: do not write a plan, a recap or "here is what I will
+build" before a part, and nothing about a file after it - what it
+contains, whether it is safe, whether it has scripts. The reply is the
+files themselves, then step 3's one line naming the next part.
+
 Every file complete - no placeholders, no "rest stays the same", no
 truncation - with brief comments through the code.

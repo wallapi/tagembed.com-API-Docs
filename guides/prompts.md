@@ -130,7 +130,10 @@ be in** (any language) — and starts building the moment you answer the second,
 with no confirm step. It builds in two replies: `preview.html` first, then —
 after you type **next** — the server code in your language **together with
 its `README.md`**, so every reply stays short instead of one long reply that
-runs out of room or times out. The full brief is split per deliverable into
+runs out of room or times out. Before you type next, ask for colour, font,
+radius or spacing tweaks and the AI patches only the theme's own CSS
+variables into a small `custom.css` — no full rewrite — and that file lands
+in both `preview.html` and the server code once you move on. The full brief is split per deliverable into
 files in [build/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/build) — `preview.md` and `server.md` (one file for
 every language) — and the prompt itself is one link, to [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md),
 which carries both questions and the build parts in order. Each part fetches the shared rules
