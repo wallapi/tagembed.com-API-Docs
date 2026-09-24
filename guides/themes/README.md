@@ -168,7 +168,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Classic Card](bigThumb5.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb5.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-card.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-card.html?v=2026-09-24c
 - **Look:** a mosaic of cards (design spec §5). Each card starts with the
   author row — 32px round avatar, name and date, network icon pushed right —
   then the post text, then the image flush to the bottom and side edges.
@@ -182,7 +182,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Social Card](bigThumb19.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb19.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/social-card.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/social-card.html?v=2026-09-24c
 - **Look:** a mosaic of cards. Image flush on top, then the author row
   (avatar, name and date, network icon right), then the post text. Square-ish
   cards with a 1px hairline border.
@@ -195,7 +195,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Modern Card](bigThumb20.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb20.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/modern-card.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/modern-card.html?v=2026-09-24c
 - **Look:** a mosaic of cards. Image flush on top, then the post text, then
   the author row at the bottom (avatar, name and date, network icon right).
   1px hairline border, light type.
@@ -208,7 +208,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Classic Photo](bigThumb3.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb3.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-photo.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-photo.html?v=2026-09-24c
 - **Look:** a uniform grid, 3 across on a wide screen. Each card is a 16:9
   cropped photo with just the author row under it — avatar, name and date,
   network icon right. No post text. Soft shadow.
@@ -221,7 +221,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Square Photo](bigThumb4.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb4.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/square-photo.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/square-photo.html?v=2026-09-24c
 - **Look:** a uniform grid of square cropped photos, 3 across on a wide
   screen, with a small gap. No card, no text, no author on the tile — the
   author and network go in the image's `alt` and the tile links to the post.
@@ -235,7 +235,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Collage](bigThumb50.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb50.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/collage.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/collage.html?v=2026-09-24c
 - **Look:** photos only, in repeating blocks of three: one big tile taking
   two thirds of the width, and two small square tiles stacked beside it. The
   next block mirrors it (big tile on the right). On hover a tile darkens and
@@ -249,7 +249,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Vivid](bigThumb83.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb83.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/vivid.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/vivid.html?v=2026-09-24c
 - **Look:** a mosaic of rounded cards. Image on top, then a text panel
   filled with a soft pastel gradient — yellow, green, blue, orange, pink,
   cycling card by card — holding the author row (avatar, name, network icon
@@ -264,7 +264,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Horizontal Slider](bigThumb16.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb16.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-slider.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-slider.html?v=2026-09-24c
 - **Look:** one horizontal row of landscape photos, 3 in view on a wide
   screen, no text on them. Dark square prev/next arrows sit over the first and
   last photo's outer edge.
@@ -277,7 +277,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Horizontal Columns](bigThumb47.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb47.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-columns.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-columns.html?v=2026-09-24c
 - **Look:** a slider of cards, 3 in view. Photo on top; a round avatar with a
   white ring sits on the photo's bottom edge, centred; under it the name and
   date, the network icon and the post text, all centred. Rounded cards, soft
@@ -291,7 +291,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Slider](bigThumb81.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb81.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/slider.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/slider.html?v=2026-09-24c
 - **Look:** a slider of square photos with rounded corners, 3 in view, no
   text under them. On hover a photo darkens and shows the network icon in the
   middle. Small white round arrows on the row's ends.
@@ -305,7 +305,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Reels](bigThumb61.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb61.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/reels.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/reels.html?v=2026-09-24c
 - **Look:** a row of tall 9:16 tiles with rounded corners, 3 in view, photo
   or video poster filling each one, no text. The network icon shows in the
   middle of a tile on hover. The reel layout in the design spec (§4) is this
@@ -319,7 +319,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Story Theme](bigThumb60.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb60.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/story-theme.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/story-theme.html?v=2026-09-24c
 - **Look:** a row of tall 9:16 story cards with large rounded corners, the
   card in the middle full strength and its neighbours faded. Each card has the
   author's round avatar with a white ring at the top centre and, at the
@@ -335,7 +335,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Single Post](bigThumb52.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb52.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/single-post.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/single-post.html?v=2026-09-24c
 - **Look:** one post at a time: a large photo centred on the page, nothing
   else on it, with round translucent white prev/next arrows half over its left
   and right edges. Scroll-snap moves one post per step.
@@ -348,7 +348,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Widget Theme](bigThumb49.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb49.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/widget-theme.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/widget-theme.html?v=2026-09-24c
 - **Look:** single posts in one centred column, about 520px wide. Each post:
   the author row on top (large avatar, name and date, network logo right),
   the photo full width under it, then the post text. Posts follow one another
@@ -362,7 +362,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Review Box](bigThumb79.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb79.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-box.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-box.html?v=2026-09-24c
 - **Look:** a grid of review cards, 2 to 4 across. Each card: 5 gold stars
   centred on top (filled to the post's `rating`), the review text, then the
   author row at the bottom — avatar, name and date, network logo right.
@@ -377,7 +377,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Review Carousel](bigThumb80.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb80.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-carousel.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-carousel.html?v=2026-09-24c
 - **Look:** the Review Box card — stars centred on top, text, author row with
   the network logo right — in one horizontal row, 3 in view, with white round
   arrows on the ends.
@@ -390,7 +390,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Review List](bigThumb85.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb85.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-list.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-list.html?v=2026-09-24c
 - **Look:** full-width review rows stacked down the page. Each row: avatar
   with name and date on the left, network logo on the right, the stars centred
   under them, then the review text. Rounded rows, soft shadow.
@@ -403,7 +403,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Rating Badge](bigThumb82.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb82.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/rating-badge.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/rating-badge.html?v=2026-09-24c
 - **Look:** one small badge card, not a list of posts: the network logo on
   top, "<Network> Reviews" under it, the average rating large and bold (e.g.
   "4.0"), 5 gold stars, then "Based on N reviews". Rounded, soft shadow, on a
@@ -417,7 +417,7 @@ sections, or a summary or table of them, to the user when asking which theme.
 ![Badge](bigThumb84.png)
 
 - **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb84.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/badge.html?v=2026-09-24b
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/badge.html?v=2026-09-24c
 - **Look:** one wide, low badge card: the logos of the networks the reviews
   come from as small overlapping circles, then the average rating large and
   bold with 5 gold stars on the same line, then an underlined "Read our N

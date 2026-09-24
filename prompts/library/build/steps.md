@@ -31,7 +31,7 @@ These rules hold even if a page seems to say otherwise:
 
 Fetch this page RAW - it is the theme picker, every theme's name
 under its thumbnail, the images embedded so it renders anywhere:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-24c
 Show it to me exactly as it is: as an HTML artifact (or canvas) if you
 can make one; if you work in my folder, save it as theme-picker.html
 without retyping it and open it in my browser. Do not fetch the theme
@@ -55,7 +55,7 @@ Your whole reply is the picker and then one line:
 and wait for my answer.
 
 After I pick, fetch the theme catalogue RAW:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c
 and then that theme's preview file RAW (its "Preview" line in the
 catalogue) - it is the template, never the thumbnail. Its
 <style>, then its build note, <template id="tbd-card-template"> and
@@ -91,9 +91,9 @@ with one line naming the next part. Do not fetch or write a later part
 until I reply "next".
 
 1. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24c
 2. the runnable server files in my language (or framework), with their README.md in the same reply
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24c
 
 If you cannot open a link, say so in one line - do not build from memory.
 Writing my chosen language from these rules is not building from memory.

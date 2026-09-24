@@ -1,7 +1,7 @@
 # Prompt 1, part 1 of 2 - preview.html
 
 Fetch this RAW first and follow it - the shared rules for every part:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24c
 Already fetched one of these for an earlier part? Do not fetch it again.
 
 Deliver preview.html: the widget page as a static file with the
