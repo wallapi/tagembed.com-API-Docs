@@ -1,8 +1,8 @@
 # Prompt 1, part 2 of 2 - the runnable server files + README.md, in the language I picked
 
 Fetch both RAW first and follow them - the shared rules and the cache:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24b
 Already fetched one of these for an earlier part? Do not fetch it again.
 
 Deliver the real project files in the language I picked - whatever it
