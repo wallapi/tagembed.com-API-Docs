@@ -10,7 +10,14 @@ Two rules even if a page seems to say otherwise:
   body. Copy them as they are and fill the template with the posts.
   Never copy the preview's sample cards and never redesign the theme.
 - Language: build the server in whatever language or framework I name.
-  Never tell me the guide only supports some languages.
+  Never tell me the guide only supports some languages. There is no
+  separate guide per language and none is needed: common.md, cache.md
+  and server.md ARE the guide for every language and framework. Write
+  the code yourself from those rules - that is the job, not "building
+  from memory". Never look for a ready-made version in my language.
+- "Do not build from memory" means only this: if a link will not open,
+  say so and stop. It never means you may only write languages the
+  pages show code for.
 
 ## Step 1 - theme
 
@@ -43,9 +50,8 @@ for my answer, and build in exactly the language I name.
 These guides cover every language: the rules are the same whatever it
 is, and server.md says how to write it in any of them. Never tell me
 the guide only supports some languages, never offer me a shorter list
-to choose from, and never switch to a language I did not name. If
-another page shows code in PHP or Node.js, that is an example, not a
-limit.
+to choose from, and never switch to a language I did not name. Code
+shown on any page is an example, not a limit.
 
 My answer starts the build: do not repeat my choices or ask me to
 confirm - reply straight away with part 1 of step 3.
@@ -63,3 +69,4 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/lib
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md
 
 If you cannot open a link, say so in one line - do not build from memory.
+Writing my chosen language from these rules is not building from memory.

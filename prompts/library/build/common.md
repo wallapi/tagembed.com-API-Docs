@@ -15,7 +15,9 @@ applies to both. The CSS lives inside each file - no separate
 stylesheet.
 
 Language: these rules cover every language - never say the guide
-only supports some. Write the server code in the language (or
+only supports some, and never look for a ready-made example in my
+language: writing it from these rules is the job, not "building from
+memory". Write the server code in the language (or
 framework) I picked before the build started - any server-side one:
 PHP, Node.js, Python, Ruby, Go, Java, C#, Laravel, Django, or whatever I name - as
 the real files it runs. A plain language means ONE file with its own
