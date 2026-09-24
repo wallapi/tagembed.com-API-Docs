@@ -28,9 +28,9 @@ inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
   CSS can later drop into a template that has its own variables without
   colliding.
 - Prefix every class (`.tbd-*`). Do not load a CSS framework, and do not pull
-  a stylesheet over the network: the CSS ships **inside** `server.js`,
-  **inside** `index.php` and **inside** `preview.html` — whichever of them the
-  build has — in one `<style>` block, because each deliverable is meant to be a
+  a stylesheet over the network: the CSS ships **inside** the server file
+  (`app.py`, `server.js`, `index.php`, … or the framework's template) and
+  **inside** `preview.html` — in one `<style>` block, because each deliverable is meant to be a
   file you can drop somewhere and run. The same block in every one, so the preview is worth trusting and a
   restyle cannot land in one and miss the others.
 - Set the font on `:root`, from the theme's font, and load that family from
@@ -70,9 +70,10 @@ reviews — and say in one line which one you used.
 That theme then decides two things:
 
 - **The layout** — which parts a card shows, in what order, and how the cards
-  are arranged — comes from its preview HTML: copy its card markup and
-  CSS, with the real posts in place of the samples. The *Look* line says the
-  same in words. Sections 4 and
+  are arranged — comes from its preview HTML, which is the template: copy
+  the file as it is and inject the posts through its
+  `<template id="tbd-card-template">` (the theme catalogue's "Filling the
+  card"). The *Look* line says the same in words. Sections 4 and
   5 are how the reel and the mosaic are built when the theme is one of them
   (Reels is the reel; the card themes that say "mosaic" are the mosaic);
   every other layout keeps section 3's card treatment and section 6–8's rules.
@@ -228,8 +229,9 @@ and a mosaic reads as a mosaic precisely BECAUSE the tiles are different heights
 
 Other layouts — the grids, sliders, collage, single-post and badge themes in
 the catalogue, or on request a vertical feed or a full-screen signage view —
-all reuse §2 and §3 unchanged. Sliders and carousels are a CSS scroll-snap row
-with plain `#id` links for arrows: no JavaScript anywhere in the build.
+all reuse §2 and §3 unchanged. Sliders and carousels are a CSS scroll-snap row;
+their arrows use the theme preview's own small `<script>`, copied as it is —
+the only JavaScript in the build, and it fetches nothing.
 
 ## 6. States
 
@@ -284,5 +286,5 @@ not to compete with them.
 - **One skin, no switching.** No `prefers-color-scheme` remap, no `data-theme`
   attribute and no light/dark toggle anywhere in the build.
 - **Responsive to ~400px**, and byte-for-byte the same result from
-  `preview.html` and the server deliverable — and from the Node.js and the PHP
-  one, when both were asked for.
+  `preview.html` and the server deliverable, whatever language it is
+  written in.

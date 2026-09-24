@@ -38,7 +38,7 @@
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
   /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
   .tbd-media img::before { content: ""; position: absolute; inset: -16px;
     background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
@@ -94,6 +94,7 @@
 <section class="tbd-widget tbd-t-review-box tbd-l-grid tbd-clamp">
   <h1 class="tbd-header">Social Widget</h1>
   <div class="tbd-track">
+    <!-- tbd:cards -->
     <a class="tbd-card" href="https://g.page/r/sample9101/review" target="_blank" rel="noopener noreferrer">
       <div class="tbd-stars" aria-label="5 out of 5">★★★★★</div>
       <p class="tbd-text">Fast shipping, and the quality is even better than I expected. Will definitely order again.</p>
@@ -124,7 +125,44 @@
       <p class="tbd-text">Package arrived damaged and support took three days to respond. Hoping this was a one-off.</p>
       <div class="tbd-head"><img class="tbd-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&amp;h=150&amp;fit=crop&amp;crop=faces&amp;auto=format&amp;q=80" alt="" loading="lazy" data-initial="L"><div class="tbd-who"><span class="tbd-author">L. Petrova</span><time class="tbd-date" datetime="2026-09-09T20:30:00.000Z">Sep 9, 2026</time></div><span class="tbd-net" data-net="trustpilot" data-mark="★" title="Trustpilot"></span></div>
     </a>
+    <a class="tbd-card" href="https://yelp.com/biz/sample-store#9107sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-stars" aria-label="4 out of 5">★★★★☆</div>
+      <p class="tbd-text">Solid neighbourhood favourite. Consistent quality every time I&#x27;ve visited — snapped the counter on my way out.</p>
+      <div class="tbd-head"><img class="tbd-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&amp;h=150&amp;fit=crop&amp;crop=faces&amp;auto=format&amp;q=80" alt="" loading="lazy" data-initial="O"><div class="tbd-who"><span class="tbd-author">Owen R.</span><time class="tbd-date" datetime="2026-09-05T11:15:00.000Z">Sep 5, 2026</time></div><span class="tbd-net" data-net="yelp" data-mark="y" title="Yelp"></span></div>
+    </a>
+    <a class="tbd-card" href="https://tripadvisor.com/ShowUserReviews-9108sample" target="_blank" rel="noopener noreferrer">
+      <div class="tbd-stars" aria-label="5 out of 5">★★★★★</div>
+      <p class="tbd-text">A hidden gem. The staff remembered our order from last time, which was a nice touch.</p>
+      <div class="tbd-head"><img class="tbd-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&amp;h=150&amp;fit=crop&amp;crop=faces&amp;auto=format&amp;q=80" alt="" loading="lazy" data-initial="G"><div class="tbd-who"><span class="tbd-author">Grace Lin</span><time class="tbd-date" datetime="2026-08-30T09:12:44.000Z">Aug 30, 2026</time></div><span class="tbd-net" data-net="tripadvisor" data-mark="T" title="Tripadvisor"></span></div>
+    </a>
+    <!-- /tbd:cards -->
   </div>
 </section>
+<!-- tbd:template - how a build uses this file.
+  Copy this whole file as it is: the style block, the section, every class.
+  Change only two things:
+  1. Between the tbd:cards marks, replace the sample cards with one card per
+     post: the card in the template below, every {{slot}} filled from the
+     post, each value HTML-escaped.
+  2. Delete this note and the template element.
+  Slots (full rules in guides/themes/README.md, "Filling the card"):
+  {{permalink}} source.permalink, http(s) only; none: the card becomes a div
+  {{network_name}} network.name   {{network_slug}} network.slug
+  {{network_mark}} IG f X in P G y T ▶ ♪ ★ by slug, else the first letter
+  {{media}} the image or video element; none: see the catalogue
+  {{media_width}} {{media_height}} that media entry's width and height
+  {{avatar}} img.tbd-avatar from author.avatar_url, else span.tbd-avatar
+  {{author}} author.name, else author.handle   {{initial}} its first letter
+  {{created_at}} as given   {{date}} the same day as "Sep 16, 2022"
+  {{text}} content.text, as text
+  {{rating}} the number 0-5   {{stars}} that many filled stars, rest hollow
+-->
+<template id="tbd-card-template">
+<a class="tbd-card" href="{{permalink}}" target="_blank" rel="noopener noreferrer">
+  <div class="tbd-stars" aria-label="{{rating}} out of 5">{{stars}}</div>
+  <p class="tbd-text">{{text}}</p>
+  <div class="tbd-head">{{avatar}}<div class="tbd-who"><span class="tbd-author">{{author}}</span><time class="tbd-date" datetime="{{created_at}}">{{date}}</time></div><span class="tbd-net" data-net="{{network_slug}}" data-mark="{{network_mark}}" title="{{network_name}}"></span></div>
+</a>
+</template>
 </body>
 </html>

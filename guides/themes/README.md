@@ -16,26 +16,39 @@ https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/prev
 The thumbnail is for the question only. Once a theme is picked, the build
 comes from its preview HTML, never from the thumbnail.
 
-## Agents: ask first
+## Agents: ask first — show the picture, never a list
 
-Before writing any code, fetch the theme picker RAW and show it to the user
-as an HTML artifact, exactly as it is:
+Before writing any code, show the user **the theme picker page itself,
+rendered** — the thumbnails, not a list of names. The picker is one small
+page with every theme's name under its thumbnail, the images embedded as
+base64 so it renders anywhere:
 
 ```
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
-It is one small page with every theme's name and its thumbnail, the images
-embedded as base64 so they show inside the chat. Copy the file character for
-character, the base64 included: never retype, shorten, resize or redraw it,
-and add nothing to it. Then ask which theme they want. Take the name or its
-place in the list. If they already named a theme, skip the question. Never
-pick one for them at random.
+Show it the first way your tool allows:
 
-If you cannot make an artifact, show the table below instead, exactly as it
-is — two columns only, the theme name and its thumbnail image.
+1. **You can make an HTML artifact** (claude.ai, Claude Code, ChatGPT
+   canvas, Gemini canvas): fetch it RAW and show it as an HTML artifact,
+   exactly as it is.
+2. **You work in the user's folder** (Claude Code, Cursor, Codex, Copilot,
+   Gemini CLI, Windsurf): download it as `theme-picker.html` without
+   retyping it (`curl -sSLo theme-picker.html <url>`), then open it in their
+   browser — `open theme-picker.html` on macOS, `start theme-picker.html` on
+   Windows, `xdg-open theme-picker.html` on Linux. If you cannot run
+   commands, tell them to double-click it. Say it can be deleted once they
+   have picked.
+3. **Neither:** show the [thumbnail table](#thumbnails) below as images —
+   two columns, the name and its thumbnail rendered as a picture.
 
-## The list
+Copy the file character for character, the base64 included: never retype,
+shorten, resize or redraw it, and add nothing to it. **Never answer with only
+the theme names** — a list of names is not a picker. Then ask which theme they
+want; take its name or its place on the page. If they already named a theme,
+skip the question. Never pick one for them at random.
+
+## Thumbnails
 
 | Theme | Thumbnail |
 | ----- | --------- |
@@ -61,34 +74,87 @@ is — two columns only, the theme name and its thumbnail image.
 
 ## How a theme becomes the build
 
-- **Build from the picked theme's preview HTML, not its thumbnail.** Fetch
-  the *Preview* file under the theme below RAW before writing any code. It is
-  the finished widget with sample posts: its `<style>` block and its card
-  markup (`.tbd-widget`, `.tbd-track`, `.tbd-card` and the parts inside a
-  card) are the design. Copy that CSS as it is and repeat that card markup for
-  every post: same classes, same order of parts, same `--tbd-*` values in
-  `:root`. Do not redraw the layout from the thumbnail or the *Look* line.
-- **Take the structure, never the posts.** The preview's posts, names,
-  avatars, links and image URLs are placeholders: do not copy a single one of
-  them into the build. The posts come from the sample posts JSON (or the live
-  API), exactly as the build prompt says, with every image and video URL
-  copied from that JSON character for character. Render each post's author
-  name, date, `content.text`, media and network in the preview's elements.
-  Drop the sample-only bits: the base64 `--tbd-ph` placeholder on
-  `.tbd-media`, the `.tbd-note` line and the "Social Widget" sample header
-  text (use the user's own, or none).
+**The picked theme's preview file is the template.** Fetch it RAW —
+`guides/previews/<theme>.html`, the *Preview* line under the theme below —
+before writing any code. It is the finished widget: the design is already
+done, and the build only puts the posts into it. Never redraw it from the
+thumbnail, the *Look* line or taste.
+
+1. **Copy the whole file as it is** — the `<style>` block (every `:root`
+   value, rule and class), the `<section>` and everything inside it, the
+   header. That copy is `preview.html`, and the same page is what the server
+   code renders.
+2. **Inject the posts.** Between `<!-- tbd:cards -->` and
+   `<!-- /tbd:cards -->` sit the sample cards. Replace them with one card per
+   post: the theme's own card from the `<template id="tbd-card-template">`
+   at the end of the file, every `{{slot}}` filled as the table below says.
+   `preview.html` fills it from the sample posts JSON; the server code fills
+   it from `body.posts`, in a loop, at request time — same template, same
+   output. The two badge themes mark `<!-- tbd:badge -->` instead and
+   fill `<template id="tbd-badge-template">` once, from all review posts.
+3. **Delete the build notes**: the `<!-- tbd:template … -->` comment, the
+   `<template>` element and the two `tbd:cards` marks.
+4. **Keep the `<script>`** if the theme has one — it is the slider arrows,
+   copied as it is (see *Sliders* below).
+
+Nothing else changes: no class renamed, no part moved or dropped, no CSS
+added. The only text a build may set is the `.tbd-header` line (the user's own
+title, or keep it), the `<p class="tbd-note">` "preview data" line the build
+brief asks for, and `<p class="tbd-empty">` in place of the cards when there
+are no posts — all three already styled by the file. The preview's sample
+posts, names, avatars and links are placeholders — none of them goes into the
+build; only the template's markup does.
+
+## Filling the card
+
+Every value is HTML-escaped before it goes in. Absent values are `null` —
+never print "null".
+
+| Slot | From the post |
+| ---- | ------------- |
+| `{{permalink}}` | `source.permalink`, only if it starts `http://` or `https://`. None: the card is `<div class="tbd-card">…</div>` instead of the `<a>`, same classes |
+| `{{network_name}}` | `network.name` |
+| `{{network_slug}}` | `network.slug` |
+| `{{network_mark}}` | by slug: instagram `IG`, facebook `f`, twitter / x `X`, linkedin `in`, pinterest `P`, google `G`, yelp `y`, tripadvisor `TA`, trustpilot `★`, youtube `▶`, tiktok `♪`; any other: the first letter of `network.name` |
+| `{{media}}` | the FIRST `media[]` entry of type `"image"`: `<img src="{cdn_url}" alt="" loading="lazy">`. A post with a `"video"` entry: `<video controls muted playsinline preload="none" poster="{first image cdn_url}"><source src="{video cdn_url}"></video>` (no poster attribute when it has no image). The `src` is `cdn_url` copied character for character — `http(s)`, or the `data:image/…` URI the sample posts carry |
+| `{{media_width}}` `{{media_height}}` | that media entry's `width` and `height`. Either one null: drop the whole `style` attribute |
+| `{{avatar}}` | `author.avatar_url` set: `<img class="tbd-avatar" src="{avatar_url}" alt="" loading="lazy" data-initial="{initial}">`; null: `<span class="tbd-avatar">{initial}</span>`. The initial is the first letter of `{{author}}`, upper-cased |
+| `{{author}}` | `author.name`, else `author.handle` |
+| `{{created_at}}` | `created_at` as given |
+| `{{date}}` | the same instant, UTC, as `Sep 16, 2022` |
+| `{{text}}` | `content.text`, escaped, as plain text (no `<br>`, no links) |
+| `{{rating}}` | `rating`, the number as given (0–5) |
+| `{{stars}}` | `rating` rounded: that many `★`, then `☆` up to five |
+
+When a part has no data:
+
+- **No image and no video.** If the card has a `.tbd-text`, drop the whole
+  `.tbd-media` div. A photo-only card (no `.tbd-text`) keeps the `.tbd-media`
+  div empty, with no `style`: it shows the network-name tile.
+- **`rating` is null.** Drop the `.tbd-stars` div.
+
+Badge themes (`tbd-badge-template`), from the posts whose `rating` is not
+null: `{{average}}` their mean to one decimal (`4.9`), `{{average_stars}}`
+that mean rounded as stars, `{{count}}` how many there are, and
+`{{networks}}` one `<span class="tbd-net" data-net="{slug}" data-mark="{mark}"
+title="{name}"></span>` per network among them, in the order first seen.
+
+Filled with the sample posts JSON, every template gives back exactly the
+sample cards the preview file shows — that is the check that the injection
+is right.
+
 - **Where they disagree, the preview wins.** The *Look* and *Values* lines
   below describe the same theme in words and are there for when the preview
   cannot be fetched; if a value there differs from the preview's `:root`, use
   the preview. The design spec maps each `--tbd-*` token, under **Themes** in
   section 2:
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
-- **Sliders, carousels and rails need no JavaScript.** Some previews carry a
-  small `<script>` that scrolls the row when an arrow is clicked. Do not copy
-  it: keep the preview's row CSS (a scroll-snap row, `overflow-x: auto;
-  scroll-snap-type: x mandatory`) and make the arrows plain links to the next
-  and previous card's `#id`. `preview.html` carries no JavaScript at all, and
-  this keeps the server files the same.
+- **Sliders:** the slider, carousel and rail previews carry one small
+  `<script>` that scrolls the row by one view when an arrow is clicked. It is
+  part of the design: copy it as it is, into `preview.html` and the server's
+  page alike. It fetches nothing and reads no data — the posts are already in
+  the HTML. That script is the only JavaScript a build carries; the row
+  itself is CSS scroll-snap, so it still swipes if scripts are off.
 - Review themes are for review posts (a `rating` 0–5). Badges show the average
   `rating` of the posts, rounded to one decimal, and how many there are.
 - One theme is the whole skin: no dark mode, no toggle, no second theme.

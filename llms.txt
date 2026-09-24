@@ -4,7 +4,7 @@ Paste this whole file into an AI assistant (Claude, ChatGPT, Gemini, Copilot)
 together with your task, e.g.:
 
   "Using the API described below, build a social WIDGET I can drop
-   into any page of my site, in Node.js/Express (or PHP), showing the
+   into any page of my site, in Python (or PHP, Node.js, Go - any), showing the
    latest 30 Instagram image posts. My access token is in the
    ACCESS_TOKEN environment variable."
 
@@ -155,36 +155,52 @@ user's prompt is deliberately short; this section is the full brief.
    Ask first, then build. Before any code, ask the user two things, one
    question per reply: (1) which THEME — fetch the theme catalogue RAW,
    https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
-   show its theme picker as it says (the thumbnails file as an HTML
-   artifact, names and thumbnails) and ask; (2) which STACK — PHP or Node.js. Start the build as
-   soon as the stack is answered - no confirm step. Skip a question the user has
-   already answered; never pick either one for them. Then deliver ONLY
-   the picked stack, plus preview.html — both stacks only if they ask for
-   both. When the prompt splits the build into parts, deliver one part per
-   reply, in its order, fetching only the picked stack's part:
+   and show its theme picker the way it says: the thumbnails page itself,
+   rendered (an HTML artifact, or the page opened in the user's browser),
+   NEVER a list of theme names; (2) which LANGUAGE the server code is in —
+   any server-side language (PHP, Node.js, Python, Go, Java, C#, ...) or a
+   framework they name. Start the build as soon as the language is answered
+   - no confirm step. Skip a question the user has already answered; never
+   pick either one for them, and never swap their language for another.
+   Deliver ONLY that language, plus preview.html. When the prompt splits the
+   build into parts, deliver one part per reply, in its order:
 
-   (a) Node.js, when picked — `server.js` (the API call, the cache, the HTML and the CSS
-       all inside it), `package.json`, a `cache/posts.json` cache file, and
-       `README.md`.
-   (b) PHP, when picked — a single `index.php` holding everything, CSS included: nothing
-       to install and nothing to require.
-   (c) `preview.html`, always — the same page as a plain static file, with the
+   (a) The server code, in the picked language, as the real file(s) it runs,
+       ready to run. A plain language is ONE file with its own extension —
+       `app.py` (Python), `server.js` (Node.js), `index.php` (PHP), `main.go`
+       (Go), ... — holding the API call, the cache, the HTML and the CSS,
+       using only the language's standard library: nothing to install, no
+       dependency file, run with one command (`python app.py`,
+       `node server.js`, `php -S localhost:8080`, `go run main.go`), reading
+       a `.env` beside it on its own when one exists. A framework the user
+       named gets the files it needs in its normal layout (entry point,
+       route, template, config, dependency file) and nothing more.
+       `README.md` (rule 13) comes in the SAME reply as this code.
+   (b) `preview.html`, always — the same page as a plain static file, with the
        sample posts of rule 12 written into it as finished markup. It runs
        from a double-click: no server, no build step, nothing installed. It
        calls NOTHING — no fetch, no API call, no token, not even a same-origin one — because the posts are already in the
-       file; it carries no JavaScript at all. Name it
+       file; its only JavaScript is the theme's own slider-arrow script, when
+       the theme has one. Name it
        `preview.html`, never `index.html`: an `index.html` beside
-       `index.php` is served instead of it by most Apache and nginx
-       configurations, which silently replaces the live page with the
-       sample one.
+       `index.php` (or any server entry file) is served instead of it by most
+       Apache and nginx configurations, which silently replaces the live
+       page with the sample one.
 
    preview.html and the server file render the same markup from the same
    design tokens, so they look identical in a browser and any restyle lands
    in both at once. The README documents them (rule 13).
 
-   Layout and skin: copy the picked theme's preview HTML (its "Preview"
-   file in the catalogue) — its CSS and card markup, with the real posts in
-   place of the samples and without its <script>. The thumbnail is only for
+   Layout and skin: the picked theme's preview file (its "Preview" line in
+   the catalogue, guides/previews/<theme>.html) is the TEMPLATE. Copy the
+   whole file as it is — <style>, <section>, its arrow <script> — and inject
+   the posts: replace the sample cards between <!-- tbd:cards --> and
+   <!-- /tbd:cards --> with one card per post from its
+   <template id="tbd-card-template">, every {{slot}} filled and escaped as
+   the catalogue's "Filling the card" table says; then delete the template
+   and its note. preview.html fills it from the sample posts, the server
+   code from body.posts at request time. Do not restyle it from the
+   thumbnail, the design spec or taste. The thumbnail is only for
    the question; never build from it. With no theme, a MOSAIC — a masonry layout via CSS
    multi-column, each image keeping its OWN aspect ratio, text-only posts
    becoming tinted tiles so the mosaic has no gaps.
@@ -192,7 +208,7 @@ user's prompt is deliberately short; this section is the full brief.
    Asked for a section inside a site that already exists rather than a whole
    page? Same code, rendered into their template — still server-side, in their
    stack.
-2. Credentials: ask for them, but never block on them. Theme and stack
+2. Credentials: ask for them, but never block on them. Theme and language
    (rule 1) are the only questions asked before code; the token is not one
    of them. The code reads both values from environment variables (rule 3),
    so nothing is missing from it before the user answers — deliver the
@@ -251,7 +267,7 @@ user's prompt is deliberately short; this section is the full brief.
     "preview data" note on the page rather than an error: a failed
     call must never be fatal, or the design cannot be reviewed at all.
     Never put a token on that path. The same array is what `preview.html`
-    (rule 1c) renders, already expanded into markup — so the design can be
+    (rule 1b) renders, already expanded into markup — so the design can be
     reviewed with nothing installed and no token in existence. Use the
     published sample posts when you can reach them:
     guides/sample-posts-social.json and guides/sample-posts-reviews.json in
@@ -264,13 +280,14 @@ user's prompt is deliberately short; this section is the full brief.
     — the header gradient with the network name on it — and the real photo
     or video loads over it wherever it is allowed.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
-    or a list of what you are about to build. Give every file complete with its exact path — the picked stack and
-    `preview.html` — one part per reply when the prompt splits the build into parts.
-    Then a `README.md`,
+    or a list of what you are about to build. Give every file complete with its exact path — the server code in the
+    picked language and `preview.html` — one part per reply when the prompt
+    splits the build into parts. In the SAME reply as the server code, never
+    on its own, a `README.md`,
     which is itself a deliverable: what this is and which theme it wears, the
-    file list, how to set the two environment variables, how to run it
-    locally written for someone who has never used a terminal plus the URL to
-    open, that `preview.html` is opened by double-clicking it and is a design
+    file list, how to set the two environment variables, how to check the
+    language is installed and the one command that runs it, written for
+    someone who has never used a terminal, plus the URL to open, that `preview.html` is opened by double-clicking it and is a design
     preview rather than the page to deploy,
     how the cache works and how to change the TTL, how to change the
     layout and the colours, one `curl` that checks this API directly with

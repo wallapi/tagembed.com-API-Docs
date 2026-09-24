@@ -103,7 +103,7 @@ hand.
 ## Guides
 
 - **[Build a social widget](guides/build-a-social-widget.md)** — fetch → cache →
-  display, with complete PHP and Node.js implementations
+  display, with complete PHP, Node.js and Python implementations
 - **[Prompt library](guides/prompts.md)** — copy-paste prompts for building
   and integrating with any AI coding agent
 - **[Widget build brief](guides/widget-build-brief.md)** — the whole brief in
@@ -119,9 +119,11 @@ hand.
   page as a static file, openable from disk before a token exists
 - **[Widget themes](guides/themes/)** — the 19 widget themes a build can
   wear, each with a thumbnail to pick from, an HTML preview the build copies,
-  and its colour, font and spacing values. The build prompts show this list first and ask
-  which one you want, then ask PHP or Node.js
+  and its colour, font and spacing values. The build prompts show the thumbnails first — the
+  picture page, not a list of names — and ask which one you want, then ask
+  which language you want the server code in (any language)
 - **[Prompts by tool](prompts/README.md)** — one document per AI (ChatGPT,
   Gemini, claude.ai, Claude Code, Cursor, Codex, Copilot, Gemini CLI,
-  Windsurf) with a PHP and a Node.js prompt, setup and run commands
+  Windsurf) with one prompt that asks your theme and your server language,
+  setup and run commands
 - **[llms.txt](llms.txt)** — the whole API as one file, written for LLMs

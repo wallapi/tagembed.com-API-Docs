@@ -1,8 +1,9 @@
 # Prompts by tool - build a Tagembed social widget
 
 One document per AI tool. Each contains the setup for that tool, one
-prompt that yields **both** languages, the exact run commands for each, and a
-troubleshooting list. Open the file for the tool you use and follow it top to
+prompt that first shows you the theme picker and then asks which language you
+want the server code in - any language - the run commands for the common
+ones, and a troubleshooting list. Open the file for the tool you use and follow it top to
 bottom.
 
 ## Which document?
@@ -10,11 +11,11 @@ bottom.
 **Browser chat** (the AI cannot touch your computer; it hands you complete
 files and you save them yourself):
 
-| Tool      | Document                                | PHP                                | Node.js                                |
-| --------- | --------------------------------------- | ---------------------------------- | -------------------------------------- |
-| ChatGPT   | [browser/chatgpt.md](browser/chatgpt.md)     | [prompt](browser/chatgpt.md#php)   | [prompt](browser/chatgpt.md#nodejs)    |
-| Gemini    | [browser/gemini.md](browser/gemini.md)       | [prompt](browser/gemini.md#php)    | [prompt](browser/gemini.md#nodejs)     |
-| claude.ai | [browser/claude-ai.md](browser/claude-ai.md) | [prompt](browser/claude-ai.md#php) | [prompt](browser/claude-ai.md#nodejs)  |
+| Tool      | Document                                     |
+| --------- | -------------------------------------------- |
+| ChatGPT   | [browser/chatgpt.md](browser/chatgpt.md)     |
+| Gemini    | [browser/gemini.md](browser/gemini.md)       |
+| claude.ai | [browser/claude-ai.md](browser/claude-ai.md) |
 
 **Coding agent in an editor or terminal** (the AI creates the files in your
 project folder itself; a context file carries the rules):
@@ -28,14 +29,19 @@ project folder itself; a context file carries the rules):
 | Gemini CLI / Antigravity | [editor/gemini-cli-antigravity.md](editor/gemini-cli-antigravity.md) | `GEMINI.md`                     |
 | Windsurf                 | [editor/windsurf.md](editor/windsurf.md)                          | `.windsurf/rules/tagembed.md`       |
 
-Every editor document has a PHP and a Node.js prompt under headings `### PHP`
-and `### Node.js`. The context file contents are in
+Every document has one prompt, whatever language you want: the AI asks you
+which one, then writes the server code in exactly that language with its
+`README.md` in the same step. The context file contents are in
 [TAGEMBED_CONTEXT.md](TAGEMBED_CONTEXT.md); the setup commands in each document
 download it to the right path for that tool.
 
 ## Why the prompts are written this way
 
-- **They say "do not ask me anything before writing code."** Some models
+- **They ask two things first, and nothing else.** The theme (shown as the
+  thumbnail picture page, never a list of names) and the server language
+  change what gets built, so they come before the code, one per reply.
+  Anything else waits.
+- **The token comes last.** Some models
   (Gemini in particular) take "ask me for my token before you start"
   literally: they stop, ask, and print a plan; the code only comes after
   you answer. So the prompts move the question to the end instead of dropping

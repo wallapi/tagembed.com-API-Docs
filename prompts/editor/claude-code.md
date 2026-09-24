@@ -55,89 +55,42 @@ Two lines are enough: the rules file and llms.txt in the folder carry the
 details, and the agent reads them on its own.
 
 ```
-Build the Tagembed social widget described in CLAUDE.md and llms.txt in this folder. Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file), plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them.
-Create the files first, then ask me for my base URL and token, and tell me how to run it as if I've never used a terminal.
+Build the Tagembed social widget described in CLAUDE.md and llms.txt in this folder. First open the theme picker from the theme catalogue in my browser - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer.
+Build only in that language: the runnable server file(s) and their README.md in the same step, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Then ask me for my token, and tell me how to run it as if I've never used a terminal.
 ```
 
-Approve the file creations it proposes. When it finishes it prints the run
-commands; they match the ones below.
+Approve the file creations it proposes. When it finishes, its README has the run
+command for your language; the common ones are below.
 
-### Run it (PHP)
+### Run it
 
-Check the runtime once:
+The `README.md` the AI hands over **together with the server code** has the
+exact check and run commands for the language you picked. The common ones:
 
-```bash
-php -v    # must print PHP 8.x
+| Language | Check it is installed | Run it (in `my-social-widget`) | Open |
+| -------- | --------------------- | ------------------------------ | ---- |
+| Python   | `python3 --version` (Windows: `py --version`) | `python3 app.py` | the URL it prints |
+| Node.js  | `node -v` (v18 or higher) | `node server.js` | the URL it prints |
+| PHP      | `php -v` (8.x) | `php -S localhost:8080` | http://localhost:8080 |
+| Go       | `go version` | `go run main.go` | the URL it prints |
+
+Any other language or a framework you named: the README gives its own check,
+install (only if a framework needs one) and run command.
+
+Put your token in a `.env` file beside the server file - the code reads it on
+its own:
+
+```
+ACCESS_TOKEN=wt1_your_token_here
+API_BASE_URL=https://api.tagembed.com/api
 ```
 
-Install PHP if the check fails: macOS `brew install php`, Windows https://windows.php.net/download, Ubuntu `sudo apt install php-cli php-curl`.
-
-macOS / Linux (Terminal):
-
-```bash
-cd my-social-widget
-export ACCESS_TOKEN="wt1_your_token_here"
-export API_BASE_URL="https://api.tagembed.com/api"
-php -S localhost:8080
-```
-
-Windows (PowerShell):
-
-```powershell
-cd my-social-widget
-$env:ACCESS_TOKEN="wt1_your_token_here"
-$env:API_BASE_URL="https://api.tagembed.com/api"
-php -S localhost:8080
-```
-
-Open http://localhost:8080 in your browser. Stop the server with Ctrl+C.
+Stop the server with Ctrl+C.
 
 Verify the API side independently of the page:
 
 ```bash
-curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
-```
-
-You should see `"status":true` and one post inside `body.posts`. A 401 means
-the token is wrong or the API is disabled for the account; the message says
-which.
-
-### Run it (Node.js)
-
-Check the runtime once:
-
-```bash
-node -v   # must print v18 or higher
-```
-
-Install Node.js from https://nodejs.org (LTS) if the check fails.
-
-macOS / Linux (Terminal):
-
-```bash
-cd my-social-widget
-npm install
-export ACCESS_TOKEN="wt1_your_token_here"
-export API_BASE_URL="https://api.tagembed.com/api"
-node server.js
-```
-
-Windows (PowerShell):
-
-```powershell
-cd my-social-widget
-npm install
-$env:ACCESS_TOKEN="wt1_your_token_here"
-$env:API_BASE_URL="https://api.tagembed.com/api"
-node server.js
-```
-
-Open http://localhost:3000 in your browser. Stop the server with Ctrl+C.
-
-Verify the API side independently of the page:
-
-```bash
-curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
+curl -s -H "Authorization: Bearer wt1_your_token_here" "https://api.tagembed.com/api/v3/posts?limit=1"
 ```
 
 You should see `"status":true` and one post inside `body.posts`. A 401 means
@@ -154,9 +107,13 @@ the cache for Redis with a file fallback". Ready-made versions of these are in
 
 ## If it goes wrong
 
-- **The AI asked questions instead of writing code** - your prompt (or a
-  follow-up) asked before writing anything. Reply: "Build it now with the
-  defaults in the prompt, and ask me for the credentials at the end."
+- **The AI asked anything besides the theme and the language before writing
+  code** - reply: "Build it now with the defaults in the prompt, and ask me
+  for the credentials at the end."
+- **It showed a list of theme names instead of the pictures** - reply: "Show
+  me the theme picker page itself, rendered, as the theme catalogue says."
+- **It wrote the server code in a different language than you asked** - reply:
+  "Rewrite the server code in <your language>, with its README."
 - **`Tagembed API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's

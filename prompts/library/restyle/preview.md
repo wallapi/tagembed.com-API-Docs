@@ -1,4 +1,4 @@
-# Prompt 3a, part 1 of 3 - restyle preview.html
+# Prompt 3a, part 1 of 2 - restyle preview.html
 
 Fetch this RAW first and follow it - the change itself:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/restyle/change.md

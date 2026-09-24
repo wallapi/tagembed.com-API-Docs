@@ -1,7 +1,7 @@
 # Social widget - rules every build part follows
 
-This file is shared by the part prompts (preview.html, the server file
-for my stack - index.php or server.js - and README.md). It carries no
+This file is shared by the part prompts (preview.html, then the server
+code in my language together with its README.md). It carries no
 deliverable of its own.
 
 Read both first - the field names and the looks are specified there:
@@ -14,24 +14,39 @@ file render the SAME markup with the SAME CSS, so a later restyle
 applies to both. The CSS lives inside each file - no separate
 stylesheet.
 
-Stack: build ONLY the stack I picked before the build started - PHP
-(index.php) or Node.js (server.js + package.json). Never write the
-other one unless I ask for both. If I have not picked yet, ask me
-before writing code.
+Language: write the server code in the language (or framework) I
+picked before the build started - any server-side one: PHP, Node.js,
+Python, Ruby, Go, Java, C#, Laravel, Django, or whatever I name - as
+the real files it runs. A plain language means ONE file with its own
+extension (app.py, server.js, index.php, main.go), standard library
+only, run with one command and nothing to install. Never switch it to another language
+and never add a second one unless I ask. If I have not picked yet, ask
+me before writing code. The README comes in the same reply as the
+server code, never on its own.
 
 Name: it is a Social Widget. Use that name in the page title, the
 header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
-catalogue. Fetch that theme's preview HTML RAW (the
-"Preview" line under it in the catalogue) and build from it: copy its
-CSS and card markup, leave out its <script>, and never copy its
-sample posts, names or image URLs - the posts come only from the
-sample posts JSON below (or the live API). The thumbnail is only for picking - never
-build from it. The design spec maps the tokens (section 2, Themes):
+catalogue:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
-If I have not picked a theme yet, show me the catalogue's list and
-ask - never pick one for me. Every part uses that same theme. One
+That theme's preview file is the TEMPLATE - fetch it RAW:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<theme>.html
+(the "Preview" line under the theme in the catalogue). Copy the whole
+file as it is - the <style> block with every :root value, rule and
+class, the <section>, and its arrow <script> if it has one - and only
+inject the posts: replace the sample cards between <!-- tbd:cards -->
+and <!-- /tbd:cards --> with one card per post, made from the file's
+<template id="tbd-card-template"> with every {{slot}} filled as the
+catalogue's "Filling the card" table says (badge themes: the
+tbd:badge marks and tbd-badge-template). Then delete the template
+element and its note. Do not restyle it from the thumbnail, the design
+spec or your own taste, and never copy its sample posts, names or
+image URLs - the posts come only from the sample posts JSON below (or
+the live API). If I have not
+picked a theme yet, show me the catalogue's theme picker the way it
+says - the thumbnails page rendered, never a list of names - and ask;
+never pick one for me. Every part uses that same theme. One
 skin only - no dark mode, no toggle. Some theme colours are white on
 near-white, so where one is too faint to read as text, fix it and
 say so - judged from the values, no contrast script.
@@ -61,7 +76,7 @@ be a video. rating 0-5 marks a review post and is null on social ones
 
 Media: a video post renders <video controls muted playsinline
 preload="none"> with the video entry's cdn_url as its source and the
-post's first image as its poster - never autoplay, no JavaScript.
+post's first image as its poster - never autoplay, no JavaScript for it.
 Every image and video sits in a box with its own background - the
 header gradient with the network name centred on it - and the <img>
 alt text is transparent. Claude's artifact view and ChatGPT canvas

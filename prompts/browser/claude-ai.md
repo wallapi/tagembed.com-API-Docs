@@ -2,7 +2,8 @@
 
 Use this when you are chatting with claude.ai in the browser. It cannot touch
 your computer, so the prompts below make it hand you complete files plus a
-setup checklist, and forbid it from asking questions before the code.
+setup checklist. It asks you two things first - which theme, then which
+language the server code should be in - and nothing else before the code.
 
 ## 1. Get the spec file
 
@@ -23,8 +24,9 @@ curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-D
 
 Claude usually puts each file in an **Artifact** panel on the right with a
 **Download** button - use it and rename if needed so the filename matches the
-`### FILE:` header exactly. Claude tends to start coding without asking; if it
-does ask, reply "build it with the defaults in the prompt".
+`### FILE:` header exactly. Claude first shows the theme picker and asks which
+theme, then which language; if it asks anything else before the code, reply
+"build it with the defaults in the prompt".
 
 ## 3. Paste this prompt
 
@@ -35,7 +37,7 @@ in llms.txt; the AI reads them there.
 ```
 Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
 Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
-Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
 ```
@@ -47,82 +49,35 @@ plain-text editor (macOS: TextEdit with Format > Make Plain Text; Windows:
 Notepad; or VS Code), paste, and save with the exact filename shown into a
 new folder called `my-social-widget`. Do not let the editor add `.txt`.
 
-### Run it (PHP)
+### Run it
 
-Check the runtime once:
+The `README.md` the AI hands over **together with the server code** has the
+exact check and run commands for the language you picked. The common ones:
 
-```bash
-php -v    # must print PHP 8.x
+| Language | Check it is installed | Run it (in `my-social-widget`) | Open |
+| -------- | --------------------- | ------------------------------ | ---- |
+| Python   | `python3 --version` (Windows: `py --version`) | `python3 app.py` | the URL it prints |
+| Node.js  | `node -v` (v18 or higher) | `node server.js` | the URL it prints |
+| PHP      | `php -v` (8.x) | `php -S localhost:8080` | http://localhost:8080 |
+| Go       | `go version` | `go run main.go` | the URL it prints |
+
+Any other language or a framework you named: the README gives its own check,
+install (only if a framework needs one) and run command.
+
+Put your token in a `.env` file beside the server file - the code reads it on
+its own:
+
+```
+ACCESS_TOKEN=wt1_your_token_here
+API_BASE_URL=https://api.tagembed.com/api
 ```
 
-Install PHP if the check fails: macOS `brew install php`, Windows https://windows.php.net/download, Ubuntu `sudo apt install php-cli php-curl`.
-
-macOS / Linux (Terminal):
-
-```bash
-cd my-social-widget
-export ACCESS_TOKEN="wt1_your_token_here"
-export API_BASE_URL="https://api.tagembed.com/api"
-php -S localhost:8080
-```
-
-Windows (PowerShell):
-
-```powershell
-cd my-social-widget
-$env:ACCESS_TOKEN="wt1_your_token_here"
-$env:API_BASE_URL="https://api.tagembed.com/api"
-php -S localhost:8080
-```
-
-Open http://localhost:8080 in your browser. Stop the server with Ctrl+C.
+Stop the server with Ctrl+C.
 
 Verify the API side independently of the page:
 
 ```bash
-curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
-```
-
-You should see `"status":true` and one post inside `body.posts`. A 401 means
-the token is wrong or the API is disabled for the account; the message says
-which.
-
-### Run it (Node.js)
-
-Check the runtime once:
-
-```bash
-node -v   # must print v18 or higher
-```
-
-Install Node.js from https://nodejs.org (LTS) if the check fails.
-
-macOS / Linux (Terminal):
-
-```bash
-cd my-social-widget
-npm install
-export ACCESS_TOKEN="wt1_your_token_here"
-export API_BASE_URL="https://api.tagembed.com/api"
-node server.js
-```
-
-Windows (PowerShell):
-
-```powershell
-cd my-social-widget
-npm install
-$env:ACCESS_TOKEN="wt1_your_token_here"
-$env:API_BASE_URL="https://api.tagembed.com/api"
-node server.js
-```
-
-Open http://localhost:3000 in your browser. Stop the server with Ctrl+C.
-
-Verify the API side independently of the page:
-
-```bash
-curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
+curl -s -H "Authorization: Bearer wt1_your_token_here" "https://api.tagembed.com/api/v3/posts?limit=1"
 ```
 
 You should see `"status":true` and one post inside `body.posts`. A 401 means
@@ -131,9 +86,13 @@ which.
 
 ## If it goes wrong
 
-- **The AI asked questions instead of writing code** - your prompt (or a
-  follow-up) asked before writing anything. Reply: "Build it now with the
-  defaults in the prompt, and ask me for the credentials at the end."
+- **The AI asked anything besides the theme and the language before writing
+  code** - reply: "Build it now with the defaults in the prompt, and ask me
+  for the credentials at the end."
+- **It showed a list of theme names instead of the pictures** - reply: "Show
+  me the theme picker page itself, rendered, as the theme catalogue says."
+- **It wrote the server code in a different language than you asked** - reply:
+  "Rewrite the server code in <your language>, with its README."
 - **`Tagembed API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's

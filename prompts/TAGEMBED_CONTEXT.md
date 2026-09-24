@@ -38,20 +38,30 @@ Rules for all code in this project:
   fails, never render blank.
 - Render content.text as text and escape all output to prevent XSS.
 - Prefer media[].cdn_url for images.
+- Render on the server. The posts are in the HTML before it leaves the
+  server; nothing in the browser calls the API or any endpoint.
+- Before any code, ask the user two things, one question per reply -
+  unless they already said - and start building as soon as they answer,
+  with no confirm step:
+  1. Which theme. Show the catalogue's theme picker the way it says - the
+     thumbnails page itself, rendered (an HTML artifact, or the page
+     downloaded and opened in their browser) - never a list of theme names.
+  2. Which language the server code should be in. Any server-side language
+     is fine (Python, PHP, Node.js, Go, Java, C#, ...) or a framework they
+     name. Write the server code in exactly that language - never swap it
+     for another, and never add a second one unless they ask.
+- A plain language is ONE ready-to-run file with its own extension (app.py,
+  server.js, index.php, main.go, ...), standard library only, run with one
+  command; a named framework gets the files it needs in its normal layout.
+  Its README.md is written in the SAME step as the server code, never
+  on its own, and covers that language only.
 - Every build also ships a preview.html: the same page as a static file, with
   the sample posts baked into the HTML as finished markup. It calls nothing -
   no fetch, no API call, no token - so the design can be reviewed by
   double-clicking it, with nothing installed. Same CSS and markup as the server
   version, and a restyle applies to both. Never call it
-  index.html: it would be served instead of index.php.
-- Render on the server. The posts are in the HTML before it leaves the
-  server; nothing in the browser calls the API or any endpoint.
-- Before any code, ask the user which theme (show the catalogue's list)
-  and then PHP or Node.js, one question per reply - unless they already
-  said - and start building as soon as they answer, with no confirm step. Every build ships ONLY the picked stack -
-  a single self-contained index.php, or the Node.js set (server.js,
-  package.json, cache/posts.json) - plus one README.md for it. Both stacks
-  only when the user asks for both.
-- Theme and stack are the only questions before code. Do not stop to ask
+  index.html: it would be served instead of the server's entry file
+  (index.php above all).
+- Theme and language are the only questions before code. Do not stop to ask
   for the token or base URL before writing code. Build with
   the defaults above, then ask the user for both values at the end.
