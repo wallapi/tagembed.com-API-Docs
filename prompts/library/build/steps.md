@@ -4,6 +4,14 @@ Follow the steps in order. Ask ONE question per reply and write no code
 until I have answered both questions. Skip a question I already
 answered in my message; never pick either one for me.
 
+Two rules even if a page seems to say otherwise:
+- Theme: after I pick, build from that theme's preview HTML file -
+  its <style>, card <template> and arrow script are at the top of the
+  body. Copy them as they are and fill the template with the posts.
+  Never copy the preview's sample cards and never redesign the theme.
+- Language: build the server in whatever language or framework I name.
+  Never tell me the guide only supports some languages.
+
 ## Step 1 - theme
 
 Fetch this RAW and show me its theme picker the way it says - the
