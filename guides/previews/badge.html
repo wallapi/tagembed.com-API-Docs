@@ -96,19 +96,13 @@
 </head>
 <body>
 <!-- Social Widget preview: Badge. Sample posts only - calls no API. -->
-<section class="tbd-widget tbd-t-badge tbd-l-badge tbd-clamp">
-  <h1 class="tbd-header">Social Widget</h1>
-  <!-- tbd:badge -->
-  <div class="tbd-badge">
-    <div class="tbd-badge-nets"><span class="tbd-net" data-net="google" data-mark="G" title="Google"></span><span class="tbd-net" data-net="yelp" data-mark="y" title="Yelp"></span><span class="tbd-net" data-net="tripadvisor" data-mark="T" title="Tripadvisor"></span><span class="tbd-net" data-net="facebook" data-mark="f" title="Facebook"></span><span class="tbd-net" data-net="trustpilot" data-mark="★" title="Trustpilot"></span></div>
-    <div class="tbd-badge-title">Customer Reviews</div>
-    <div class="tbd-badge-score"><span class="tbd-badge-avg">4.1</span><span class="tbd-stars" aria-label="4.1 out of 5">★★★★☆</span></div>
-    <div class="tbd-badge-count">Based on 8 reviews</div>
-  </div>
-  <!-- /tbd:badge -->
-</section>
 <!-- tbd:template - how a build uses this file.
-  Copy this whole file as it is: the style block, the section, every class.
+  This note, the template below it and the arrow script (slider themes)
+  sit at the top of the body, above the sample badge, on purpose.
+  Copy this whole file as it is: the style block, this note's template, the
+  arrow script, the section, every class - EXCEPT the sample badge between
+  the tbd:badge marks further down. They are placeholders (with base64
+  images), never copied into a build.
   Change only two things:
   1. Between the tbd:badge marks, replace the sample badge with the one in the
      template below, every {{slot}} filled from the review posts (a rating
@@ -127,5 +121,16 @@
     <div class="tbd-badge-count">Based on {{count}} reviews</div>
   </div>
 </template>
+<section class="tbd-widget tbd-t-badge tbd-l-badge tbd-clamp">
+  <h1 class="tbd-header">Social Widget</h1>
+  <!-- tbd:badge -->
+  <div class="tbd-badge">
+    <div class="tbd-badge-nets"><span class="tbd-net" data-net="google" data-mark="G" title="Google"></span><span class="tbd-net" data-net="yelp" data-mark="y" title="Yelp"></span><span class="tbd-net" data-net="tripadvisor" data-mark="T" title="Tripadvisor"></span><span class="tbd-net" data-net="facebook" data-mark="f" title="Facebook"></span><span class="tbd-net" data-net="trustpilot" data-mark="★" title="Trustpilot"></span></div>
+    <div class="tbd-badge-title">Customer Reviews</div>
+    <div class="tbd-badge-score"><span class="tbd-badge-avg">4.1</span><span class="tbd-stars" aria-label="4.1 out of 5">★★★★☆</span></div>
+    <div class="tbd-badge-count">Based on 8 reviews</div>
+  </div>
+  <!-- /tbd:badge -->
+</section>
 </body>
 </html>

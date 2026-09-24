@@ -15,18 +15,29 @@ and the thumbnail as a picture, nothing else:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 Then stop and wait for my answer.
 
-After I pick, that theme's preview file (its "Preview" line in the
-catalogue) is the template - never the thumbnail. Copy the whole file
-as it is and only inject the posts: one card per post from its
-<template id="tbd-card-template">, between its tbd:cards marks, as
-the catalogue's "Filling the card" says. The posts come from the
-sample posts JSON (or the live API), never from the preview.
+After I pick, fetch that theme's preview file RAW (its "Preview" line
+in the catalogue) - it is the template, never the thumbnail. Its
+<style>, then its build note, <template id="tbd-card-template"> and
+arrow script come first, at the top of <body>; the sample cards come
+last. Copy the whole file as it is except those sample cards, and only
+inject the posts: one card per post from its template, between its
+tbd:cards marks, as the catalogue's "Filling the card" says. The posts
+come from the sample posts JSON (or the live API), never from the
+preview's sample cards.
 
 ## Step 2 - language
 
 Ask which language I want the server code in - any server-side
-language works (PHP, Node.js, Python, Ruby, Go, ...). Then stop and
-wait for my answer, and build in exactly the language I name.
+language works (PHP, Node.js, Python, Ruby, Go, Java, C#, ...) or a
+framework (Laravel, Express, Flask, Django, ...). Then stop and wait
+for my answer, and build in exactly the language I name.
+
+These guides cover every language: the rules are the same whatever it
+is, and server.md says how to write it in any of them. Never tell me
+the guide only supports some languages, never offer me a shorter list
+to choose from, and never switch to a language I did not name. If
+another page shows code in PHP or Node.js, that is an example, not a
+limit.
 
 My answer starts the build: do not repeat my choices or ask me to
 confirm - reply straight away with part 1 of step 3.

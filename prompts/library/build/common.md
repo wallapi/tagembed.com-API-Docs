@@ -14,9 +14,10 @@ file render the SAME markup with the SAME CSS, so a later restyle
 applies to both. The CSS lives inside each file - no separate
 stylesheet.
 
-Language: write the server code in the language (or framework) I
-picked before the build started - any server-side one: PHP, Node.js,
-Python, Ruby, Go, Java, C#, Laravel, Django, or whatever I name - as
+Language: these rules cover every language - never say the guide
+only supports some. Write the server code in the language (or
+framework) I picked before the build started - any server-side one:
+PHP, Node.js, Python, Ruby, Go, Java, C#, Laravel, Django, or whatever I name - as
 the real files it runs. A plain language means ONE file with its own
 extension (app.py, server.js, index.php, main.go), standard library
 only, run with one command and nothing to install. Never switch it to another language
@@ -32,7 +33,11 @@ catalogue:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 That theme's preview file is the TEMPLATE - fetch it RAW:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<theme>.html
-(the "Preview" line under the theme in the catalogue). Copy the whole
+(the "Preview" line under the theme in the catalogue). If it will not
+open, say so in one line - do not rebuild the theme from memory. Its
+<style> comes first, then at the top of <body> its build note,
+<template id="tbd-card-template"> and arrow <script>; the sample cards
+with their base64 images come last and are never copied. Copy the whole
 file as it is - the <style> block with every :root value, rule and
 class, the <section>, and its arrow <script> if it has one - and only
 inject the posts: replace the sample cards between <!-- tbd:cards -->

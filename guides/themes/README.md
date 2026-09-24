@@ -90,16 +90,25 @@ line — "Which theme do you want? Reply with its name or number."
 `guides/previews/<theme>.html`, the *Preview* line under the theme below —
 before writing any code. It is the finished widget: the design is already
 done, and the build only puts the posts into it. Never redraw it from the
-thumbnail, the *Look* line or taste.
+thumbnail, the *Look* line or taste. If you cannot fetch it, say so in one
+line — do not rebuild it from memory.
+
+Read it in this order — the file is laid out so the part the build needs
+comes first, even if a long fetch gets cut off: the `<style>` block in the
+head, then at the top of `<body>` the `<!-- tbd:template … -->` note, the
+card `<template>` and (slider themes) the arrow `<script>`, then the
+`<section>`. The sample cards come last, between the `tbd:cards` marks, and
+carry large base64 images: they only show the look — never copy them, never
+retype their images.
 
 1. **Copy the whole file as it is** — the `<style>` block (every `:root`
-   value, rule and class), the `<section>` and everything inside it, the
-   header. That copy is `preview.html`, and the same page is what the server
-   code renders.
+   value, rule and class), the `<section>` and everything inside it except
+   the sample cards, the header, the arrow `<script>`. That copy is
+   `preview.html`, and the same page is what the server code renders.
 2. **Inject the posts.** Between `<!-- tbd:cards -->` and
    `<!-- /tbd:cards -->` sit the sample cards. Replace them with one card per
    post: the theme's own card from the `<template id="tbd-card-template">`
-   at the end of the file, every `{{slot}}` filled as the table below says.
+   at the top of the body, every `{{slot}}` filled as the table below says.
    `preview.html` fills it from the sample posts JSON; the server code fills
    it from `body.posts`, in a loop, at request time — same template, same
    output. The two badge themes mark `<!-- tbd:badge -->` instead and
@@ -113,9 +122,9 @@ Nothing else changes: no class renamed, no part moved or dropped, no CSS
 added. The only text a build may set is the `.tbd-header` line (the user's own
 title, or keep it), the `<p class="tbd-note">` "preview data" line the build
 brief asks for, and `<p class="tbd-empty">` in place of the cards when there
-are no posts — all three already styled by the file. The preview's sample
-posts, names, avatars and links are placeholders — none of them goes into the
-build; only the template's markup does.
+are no posts — all three already styled by the file. The preview file's
+sample posts, names, avatars and links are placeholders — none of them goes
+into the build; the posts come only from the sample posts JSON or the API.
 
 ## Filling the card
 
@@ -156,9 +165,8 @@ sample cards the preview file shows — that is the check that the injection
 is right.
 
 - **Where they disagree, the preview wins.** The *Look* and *Values* lines
-  below describe the same theme in words and are there for when the preview
-  cannot be fetched; if a value there differs from the preview's `:root`, use
-  the preview. The design spec maps each `--tbd-*` token, under **Themes** in
+  below describe the same theme in words; if a value there differs from the
+  preview's `:root`, use the preview. The design spec maps each `--tbd-*` token, under **Themes** in
   section 2:
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 - **Sliders:** the slider, carousel and rail previews carry one small

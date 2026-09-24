@@ -91,6 +91,37 @@
 </head>
 <body>
 <!-- Social Widget preview: Modern Card. Sample posts only - calls no API. -->
+<!-- tbd:template - how a build uses this file.
+  This note, the template below it and the arrow script (slider themes)
+  sit at the top of the body, above the sample cards, on purpose.
+  Copy this whole file as it is: the style block, this note's template, the
+  arrow script, the section, every class - EXCEPT the sample cards between
+  the tbd:cards marks further down. They are placeholders (with base64
+  images), never copied into a build.
+  Change only two things:
+  1. Between the tbd:cards marks, replace the sample cards with one card per
+     post: the card in the template below, every {{slot}} filled from the
+     post, each value HTML-escaped.
+  2. Delete this note and the template element.
+  Slots (full rules in guides/themes/README.md, "Filling the card"):
+  {{permalink}} source.permalink, http(s) only; none: the card becomes a div
+  {{network_name}} network.name   {{network_slug}} network.slug
+  {{network_mark}} IG f X in P G y T ▶ ♪ ★ by slug, else the first letter
+  {{media}} the image or video element; none: see the catalogue
+  {{media_width}} {{media_height}} that media entry's width and height
+  {{avatar}} img.tbd-avatar from author.avatar_url, else span.tbd-avatar
+  {{author}} author.name, else author.handle   {{initial}} its first letter
+  {{created_at}} as given   {{date}} the same day as "Sep 16, 2022"
+  {{text}} content.text, as text
+  {{rating}} the number 0-5   {{stars}} that many filled stars, rest hollow
+-->
+<template id="tbd-card-template">
+<a class="tbd-card" href="{{permalink}}" target="_blank" rel="noopener noreferrer">
+  <div class="tbd-media" data-network="{{network_name}}" style="--tbd-ar:{{media_width}} / {{media_height}}">{{media}}</div>
+  <p class="tbd-text">{{text}}</p>
+  <div class="tbd-head">{{avatar}}<div class="tbd-who"><span class="tbd-author">{{author}}</span><time class="tbd-date" datetime="{{created_at}}">{{date}}</time></div><span class="tbd-net" data-net="{{network_slug}}" data-mark="{{network_mark}}" title="{{network_name}}"></span></div>
+</a>
+</template>
 <section class="tbd-widget tbd-t-modern-card tbd-l-grid tbd-clamp">
   <h1 class="tbd-header">Social Widget</h1>
   <div class="tbd-track">
@@ -123,31 +154,5 @@
     <!-- /tbd:cards -->
   </div>
 </section>
-<!-- tbd:template - how a build uses this file.
-  Copy this whole file as it is: the style block, the section, every class.
-  Change only two things:
-  1. Between the tbd:cards marks, replace the sample cards with one card per
-     post: the card in the template below, every {{slot}} filled from the
-     post, each value HTML-escaped.
-  2. Delete this note and the template element.
-  Slots (full rules in guides/themes/README.md, "Filling the card"):
-  {{permalink}} source.permalink, http(s) only; none: the card becomes a div
-  {{network_name}} network.name   {{network_slug}} network.slug
-  {{network_mark}} IG f X in P G y T ▶ ♪ ★ by slug, else the first letter
-  {{media}} the image or video element; none: see the catalogue
-  {{media_width}} {{media_height}} that media entry's width and height
-  {{avatar}} img.tbd-avatar from author.avatar_url, else span.tbd-avatar
-  {{author}} author.name, else author.handle   {{initial}} its first letter
-  {{created_at}} as given   {{date}} the same day as "Sep 16, 2022"
-  {{text}} content.text, as text
-  {{rating}} the number 0-5   {{stars}} that many filled stars, rest hollow
--->
-<template id="tbd-card-template">
-<a class="tbd-card" href="{{permalink}}" target="_blank" rel="noopener noreferrer">
-  <div class="tbd-media" data-network="{{network_name}}" style="--tbd-ar:{{media_width}} / {{media_height}}">{{media}}</div>
-  <p class="tbd-text">{{text}}</p>
-  <div class="tbd-head">{{avatar}}<div class="tbd-who"><span class="tbd-author">{{author}}</span><time class="tbd-date" datetime="{{created_at}}">{{date}}</time></div><span class="tbd-net" data-net="{{network_slug}}" data-mark="{{network_mark}}" title="{{network_name}}"></span></div>
-</a>
-</template>
 </body>
 </html>
