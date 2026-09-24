@@ -269,12 +269,14 @@ user's prompt is deliberately short; this section is the full brief.
     Never put a token on that path. The same array is what `preview.html`
     (rule 1b) renders, already expanded into markup — so the design can be
     reviewed with nothing installed and no token in existence. Use the
-    published sample posts when you can reach them:
-    guides/sample-posts-social.json and guides/sample-posts-reviews.json in
+    published sample posts when you can reach them — only the file that
+    matches the picked theme: guides/sample-posts-social.json for a social
+    theme, guides/sample-posts-reviews.json for a review theme (Review Box,
+    Review Carousel, Review List, Rating Badge, Badge), never both — in
     github.com/wallapi/tagembed.com-API-Docs, fetched raw, copying every media URL
     character for character — never retype, shorten or invent one. If you
-    cannot reach them, write 8–12 posts in the same shape with no media
-    (never a made-up URL), including a review post with a `rating`.
+    cannot reach it, write 8–12 posts in the same shape with no media
+    (never a made-up URL); for a review theme each one carries a `rating`.
     Preview panes (Claude's artifact view, ChatGPT canvas) also block
     outside images and video, so every media box carries its own background
     — the header gradient with the network name on it — and the real photo

@@ -65,14 +65,20 @@ body.paging, never the top level, and `status` can be false on an HTTP
 200. No "fields" param exists. Leave `sort` alone. Page 2 =
 body.paging.next_cursor sent back as `after` verbatim, never a post id.
 
-Sample posts: fetch these RAW and bake in every post in them - never skip it.
-Copy every image and video URL character for character: never retype,
-shorten or invent one. If you cannot reach them, write 8-12 posts in
-the same shape with no media rather than a made-up URL. In the server file an empty
-ACCESS_TOKEN renders them instead of calling the API; a real one
-switches to live by itself.
+Sample posts: fetch ONLY the file that matches the theme I picked,
+RAW, and bake in every post in it - never skip it, never add posts
+from the other file:
+- a social theme (1-14 in the catalogue):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
+- a review theme (15-19: Review Box, Review Carousel, Review List,
+  Rating Badge, Badge):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
+Copy every image and video URL character for character: never retype,
+shorten or invent one. If you cannot reach it, write 8-12 posts in
+the same shape with no media rather than a made-up URL (for a review
+theme, each with a rating). In the server file an empty ACCESS_TOKEN
+renders them instead of calling the API; a real one switches to live
+by itself.
 
 Per post: author.name falling back to author.handle (either can be
 null - never print "null"), network.name, content.text, created_at,
