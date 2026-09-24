@@ -9,13 +9,13 @@ field names and the response envelope ({ status, message, code, body }).
 Two more files complete the brief - fetch them RAW when you can reach the
 network, and say so in one line if you cannot:
 - Build brief (what to build, wiring, what to hand over):
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md?v=2026-09-24c
 - Theme catalogue (19 widget themes - thumbnail to pick, preview HTML to
   build from; ask the user which one before writing code):
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c
 - Design spec (--tbd-* tokens, how a theme maps onto them, card
   treatment, layouts, states):
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
   Without it, at least use the brand colours --tbd-indigo #283da8,
   --tbd-blue #4462e8, --tbd-blue-ink #3350d6, --tbd-blue-lite #8ea2fb,
   --tbd-brand #526ff9 on `:root`. One skin - no dark mode and no

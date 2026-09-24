@@ -1,5 +1,10 @@
 # Prompt 1, part 2 of 2 - the runnable server files + README.md, in the language I picked
 
+This file (`server.md`) is the guide for every language and framework -
+there is no `nodejs.md`, `php.md`, `python.md` or any other
+per-language file. If you reached this file by guessing a name and it
+404d first, use this URL instead - it is the only correct one.
+
 Fetch both RAW first and follow them - the shared rules and the cache:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24c
@@ -25,10 +30,16 @@ or framework actually runs, with their real names.
   language truly cannot serve a page without a package (Ruby 3 has no
   built-in web server), use the single smallest one and say so.
 - I named a framework (Flask, Django, Express, Laravel, Next.js,
-  Spring Boot, Rails, ...): write the files that framework needs to
-  serve this page, in its normal layout - entry point, route,
-  view/template, config and its dependency file - and nothing it does
-  not need.
+  Spring Boot, Rails, ...): write ONLY the files that framework needs
+  to serve this ONE page - never its full project scaffold. This
+  widget has no database of its own; it only calls an external API and
+  caches the response in a file, so skip models, migrations, admin,
+  auth and tests for any framework that would normally generate them.
+  A Django build, for example, is one app: the view, its URL, and
+  settings trimmed to what that view needs - no `admin.site`, no
+  `models.py`, no second app. The same rule for every other framework:
+  entry point, route, view/template, config and its dependency file -
+  and nothing beyond what those need.
 
 Ready to run means: I run the command from the README and the page is
 up - no missing file, no placeholder, no "add your routes here", no

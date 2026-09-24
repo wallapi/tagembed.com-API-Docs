@@ -24,7 +24,7 @@ page with every theme's name under its thumbnail, the images embedded as
 base64 so it renders anywhere:
 
 ```
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-24c
 ```
 
 Show it the first way your tool allows:
@@ -147,7 +147,7 @@ is right.
   below describe the same theme in words; if a value there differs from the
   preview's `:root`, use the preview. The design spec maps each `--tbd-*` token, under **Themes** in
   section 2:
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
 - **Sliders:** the slider, carousel and rail previews carry one small
   `<script>` that scrolls the row by one view when an arrow is clicked. It is
   part of the design: copy it as it is, into `preview.html` and the server's

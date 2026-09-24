@@ -4,9 +4,9 @@ This file is shared by the part prompts (preview.html, then the server
 code in my language together with its README.md). It carries no
 deliverable of its own.
 
-Read both first - the field names and the looks are specified there:
+Read both together, in parallel - the field names and the looks are specified there:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
 
 What it is: a social widget - a page my own server renders, showing
 the live posts from my Tagembed gallery. preview.html and the server
@@ -32,7 +32,7 @@ header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c
 That theme's preview file is the TEMPLATE - fetch it RAW:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<theme>.html
 (the "Preview" line under the theme in the catalogue). If it will not

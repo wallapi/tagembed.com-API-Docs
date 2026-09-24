@@ -29,9 +29,19 @@ These rules hold even if a page seems to say otherwise:
 - "Do not build from memory" means only this: if a link will not open,
   say so and stop. It never means you may only write languages the
   pages show code for.
+- File names: the part 2 file is named exactly `server.md`, for every
+  language and framework - there is no `nodejs.md`, `php.md`,
+  `python.md` or any other per-language file, here or anywhere else in
+  this guide. If a link built from the language I named 404s, you
+  invented that name - re-read part 2's link above, character for
+  character, and fetch `server.md` instead.
 - No narration: each reply in this flow is the deliverable itself (the
   picker, the question, or a part's files) plus the one line the step
   names - never a plan, a recap, or "here is what I built/changed".
+- Speed: whenever a step names more than one link, fetch them all at
+  once - in parallel, the same turn - never one, then wait for it,
+  then the next. Only wait between steps for my answer, never between
+  two fetches inside the same step.
 
 ## Step 1 - theme
 
@@ -60,10 +70,14 @@ Your whole reply is the picker and then one line:
 "Which theme do you want? Reply with its name or number." Then stop
 and wait for my answer.
 
-After I pick, fetch the theme catalogue RAW:
+After I pick, fetch the theme catalogue RAW and that theme's preview
+file RAW together, in parallel - not one after the other:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c
-and then that theme's preview file RAW (its "Preview" line in the
-catalogue) - it is the template, never the thumbnail. Its
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-24c
+<slug> is the theme name lower-cased with dashes (Modern Card ->
+modern-card.html); the catalogue's own "Preview" line is the authority
+if that guess is ever wrong - refetch with the right name then. The
+preview file is the template, never the thumbnail. Its
 <style>, then its build note, <template id="tbd-card-template"> and
 arrow script come first, at the top of <body>; the sample cards come
 last. Copy the whole file as it is except those sample cards, and only
@@ -91,14 +105,19 @@ confirm - reply straight away with part 1 of step 3.
 
 ## Step 3 - the build, in 2 parts
 
-Deliver ONE part per reply: fetch only that part's link RAW, follow it
-exactly and write its files complete - then stop, and end the reply
-with one line naming the next part. Do not fetch or write a later part
-until I reply "next".
+Deliver ONE part per reply: fetch every link that part needs together,
+in parallel, follow them exactly and write its files complete - then
+stop, and end the reply with one line naming the next part. Do not
+fetch or write a later part until I reply "next".
 
-1. preview.html
+1. preview.html - fetch these two together, in parallel (skip common.md
+   if you already fetched it earlier in this build):
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24c
-2. the runnable server files in my language (or framework), with their README.md in the same reply
+2. the runnable server files in my language (or framework), with their
+   README.md in the same reply - fetch these two together, in parallel
+   (common.md too, only if you have not fetched it yet):
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24c
 
 Between part 1 and part 2, if I ask to change colours, font, radius,

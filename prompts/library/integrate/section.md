@@ -2,9 +2,9 @@
 
 Fetch these three RAW and follow them exactly - together they are the
 whole brief, so do not borrow conventions from other social-widget APIs:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
 Already fetched one of these for an earlier part? Do not fetch it again.
 
 My message names my stack, cache and layout; where it does not,
@@ -17,7 +17,7 @@ leaves my server, and the browser calls nothing. Inside my
 repository, inspect it and follow its patterns; otherwise assume a
 conventional layout. Fit my existing build and deploy, no new
 frameworks. A file cache follows this contract:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24c
 
 Two changes from the brief's defaults, since this is a section and not
 a page of its own: use the layout I named (the MOSAIC from design

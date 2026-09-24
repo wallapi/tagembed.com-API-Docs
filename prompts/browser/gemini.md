@@ -38,7 +38,7 @@ in llms.txt; the AI reads them there.
 
 ```
 Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
-Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md?v=2026-09-24c - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
 Give me the complete code first, then tell me how to run it as if I've never used a terminal.
 You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.

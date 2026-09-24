@@ -7,8 +7,8 @@ few things neither of them says:
 | Read | For |
 | ---- | --- |
 | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) | the API: endpoints, envelope, field names, and the numbered **Integration rules** for generated code |
-| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
-| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) | the theme catalogue: 19 themes, each with a thumbnail, its layout and its values — the user picks one |
+| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
+| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c) | the theme catalogue: 19 themes, each with a thumbnail, its layout and its values — the user picks one |
 | this file | the delivery contract: what to hand over and how it is wired |
 
 **Agents: fetch them RAW.** A summarising fetch drops the field names,
@@ -24,7 +24,7 @@ rules decide.
 Two choices change what gets built, so they are asked **before any code**, one
 question per reply:
 
-1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw
+1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c) raw
    and show its theme picker the way it says — the thumbnails page itself,
    rendered (an HTML artifact, or the page opened in their browser), **never a
    list of theme names** — and ask which one they want. Stop there.
@@ -179,7 +179,7 @@ reach it, write 8–12 posts in the same shape with no media rather than a
 made-up URL; for a review theme every one carries a `rating`, or the widget
 never shows its star rating. Video posts
 and the media placeholder follow the design spec §3. The whole build is skinned from the theme picked in §0,
-from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md). The picked theme's preview file
+from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c). The picked theme's preview file
 (`guides/previews/<theme>.html`) is the **template**: copy the whole file as it
 is and inject the posts — replace the sample cards between its
 `<!-- tbd:cards -->` marks with one card per post from its
