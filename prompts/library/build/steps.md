@@ -5,6 +5,15 @@ prompt that sent you here gave; if none was given, BASE is
 `https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main`
 (change `main` to test another branch).
 
+`BASE/<path>` is never a literal address - every time you see it, in
+this file or in any file it tells you to fetch, replace `BASE` with
+its value first so you have one real `https://...` URL, then fetch
+that. If you try to open the literal text `BASE/guides/...` (or any
+other `BASE/...` string unchanged), it will fail - that failure means
+you skipped the substitution, not that the file does not exist. Do
+this replacement yourself before every single fetch in this build,
+not just the first one.
+
 Follow the steps in order. Ask ONE question per reply and write no code
 until I have answered both questions. Skip a question I already
 answered in my message; never pick either one for me.
