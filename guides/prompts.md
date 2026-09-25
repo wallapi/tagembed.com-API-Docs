@@ -159,7 +159,6 @@ Pick the block for your AI.
 ```
 Help me build a social widget from my Tagembed gallery, using Tagembed's public build guide as the plan (it says where to pause for my answers). Give every file complete, each starting with "### FILE: <name>".
 Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-Theme picker (static page, base64 thumbnails, no scripts) - please show it as an HTML artifact so I can pick: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
 **ChatGPT:** same block, one line added before the link:

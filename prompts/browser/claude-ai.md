@@ -17,14 +17,13 @@ code, reply "build it with the defaults in the prompt".
 
 ## 2. Paste this prompt
 
-Three lines. The whole build - both questions, every step, the file
+Two lines. The whole build - both questions, every step, the file
 delivery format - lives in one linked file, `steps.md`, so the prompt itself
 stays short:
 
 ```
 Help me build a social widget from my Tagembed gallery, using Tagembed's public build guide as the plan (it says where to pause for my answers). Give every file complete, each starting with "### FILE: <name>".
 Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-Theme picker (static page, base64 thumbnails, no scripts) - please show it as an HTML artifact so I can pick: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
 ## 3. Save the files it gives you
