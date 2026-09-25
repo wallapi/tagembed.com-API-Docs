@@ -36,6 +36,12 @@ Show it the first way your tool allows:
    makes it render. The artifact's code is the whole file, every base64
    string complete: never shorten or re-encode an image, never swap one for
    a link or a placeholder, never turn the page into markdown or a table.
+   Nothing in this file is a remote image or a GitHub-hosted picture link —
+   every thumbnail is already inlined as base64 data inside the file you
+   just fetched, so "artifacts can't load remote images" is never a reason
+   to skip this path. If you find yourself about to write a reason like
+   that, you have not actually built the artifact from the fetched file —
+   go back and do it.
 2. **You work in the user's folder** (Claude Code, Cursor, Codex, Copilot,
    Gemini CLI, Windsurf): download it as `theme-picker.html` without
    retyping it (`curl -sSLo theme-picker.html <url>`), then open it in their
@@ -51,11 +57,16 @@ shorten, resize or redraw it, and add nothing to it.
 
 **Never show a table or a list.** The picker page is the whole answer to the
 theme question — no table of any kind (no "For", "Look", "What it looks like"
-or thumbnail-link columns), and never the theme names alone. The file exists
-at the link above; if a fetch of it fails, say the fetch failed — never that
-there is no picker file. The per-theme sections under
-[The themes](#the-themes) are for the build, not for the user — never
-summarise them in the question.
+or thumbnail-link columns), and never the theme names alone. This also
+covers a numbered chat list with one line per theme and the word
+"thumbnail" written where an image should be — that is still a list, not
+the picker, even with a note explaining why you skipped the artifact. There
+are exactly 17 themes (14 social, 3 review) — never more, never a "Rating
+Badge" or "Badge" theme; if a count or a name does not match one of the 17
+below, you invented it and must not show it. The file exists at the link
+above; if a fetch of it fails, say the fetch failed — never that there is no
+picker file. The per-theme sections under [The themes](#the-themes) are for
+the build, not for the user — never summarise them in the question.
 
 **Check your own copy before sending it.** An artifact can silently drop or
 blur a thumbnail while still looking "done" — if any `<img>` you wrote is not
