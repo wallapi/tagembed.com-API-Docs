@@ -5,6 +5,7 @@ until I have answered both questions. Skip a question I already
 answered in my message; never pick either one for me.
 
 These rules hold even if a page seems to say otherwise:
+
 - Theme: after I pick, build from that theme's preview HTML file -
   its <style>, card <template> and arrow script are at the top of the
   body. Copy them as they are and fill the template with the posts.
@@ -31,33 +32,30 @@ These rules hold even if a page seems to say otherwise:
 
 Fetch this page RAW - it is the theme picker, every theme's name
 under its thumbnail, the images embedded so it renders anywhere:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-24c
-Show it to me exactly as it is: as an HTML artifact (or canvas) if you
-can make one; if you work in my folder, save it as theme-picker.html
-without retyping it and open it in my browser. Do not fetch the theme
-catalogue yet - it is for after I pick.
-
-The file is about 45 KB, almost all of it the 19 thumbnails as base64
-WebP images - that is what makes it render inside an artifact, where
-outside image links are blocked. So the artifact's code is the whole
-fetched file, character for character, every base64 string complete:
-never shorten, trim or re-encode an image, never swap one for a link
-or a placeholder, never turn the page into markdown, a table or a
-description of it. A long answer here is expected.
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+Before writing any other text, try to open it as an HTML artifact (or
+canvas), the fetched bytes as its whole content, unchanged - do this
+first, not after you have already described or listed what the file
+contains. If you work in my folder instead, save it as
+theme-picker.html without retyping it and open it in my browser. Do
+not fetch the theme catalogue yet - it is for after I pick.
 
 This file exists - never tell me there is no picker file. If the fetch
-fails, say it failed. If you can neither show it as an artifact nor
-open it in my browser, say so in one line and ask me which theme I want
-by name - never show a table or a list of themes instead.
+fails, say it failed. If the artifact tool fails or is unavailable,
+your entire reply is one line and nothing else - no table, no theme
+names, no per-theme looks, no thumbnail links standing in for the
+images: "I can't render an artifact here - which theme do you want, by
+name or number?"
 
 Your whole reply is the picker and then one line:
 "Which theme do you want? Reply with its name or number." Then stop
 and wait for my answer.
 
 After I pick, fetch the theme catalogue RAW:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
 and then that theme's preview file RAW (its "Preview" line in the
 catalogue) - it is the template, never the thumbnail. Its
+
 <style>, then its build note, <template id="tbd-card-template"> and
 arrow script come first, at the top of <body>; the sample cards come
 last. Copy the whole file as it is except those sample cards, and only
@@ -93,9 +91,9 @@ with one line naming the next part. Do not fetch or write a later part
 until I reply "next".
 
 1. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md
 2. the runnable server files in my language (or framework), with their README.md in the same reply
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md
 
 If you cannot open a link, say so in one line - do not build from memory.
 Writing my chosen language from these rules is not building from memory.
