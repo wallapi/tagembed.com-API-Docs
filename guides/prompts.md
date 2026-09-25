@@ -157,13 +157,9 @@ Pick the block for your AI.
 **Claude (claude.ai) or an editor agent:**
 
 ```
-I'd like to build a social widget from my Tagembed gallery, step by step, using Tagembed's public build guide on GitHub. Please fetch it RAW and use it as the plan - it lists the steps and where to pause for my answer.
+Help me build a social widget from my Tagembed gallery, using Tagembed's public build guide as the plan (it says where to pause for my answers). Give every file complete, each starting with "### FILE: <name>".
 Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-For step 1, please fetch these two in the same turn:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25b
-The second is the theme picker: a static page of 17 theme thumbnails, images inlined as base64, no scripts or external links. Please show it to me as an HTML artifact, as it is, so I can see the pictures and pick one - I'd rather see them than a list of names.
-If a link will not open, tell me in one line instead of building from memory.
+Theme picker (static page, base64 thumbnails, no scripts) - please show it as an HTML artifact so I can pick: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
 **ChatGPT:** same block, one line added before the link:

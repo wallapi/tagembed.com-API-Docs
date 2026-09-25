@@ -17,18 +17,14 @@ code, reply "build it with the defaults in the prompt".
 
 ## 2. Paste this prompt
 
-Five lines. The whole build - both questions, every step, the file
+Three lines. The whole build - both questions, every step, the file
 delivery format - lives in one linked file, `steps.md`, so the prompt itself
 stays short:
 
 ```
-I'd like to build a social widget from my Tagembed gallery, step by step, using Tagembed's public build guide on GitHub. Please fetch it RAW and use it as the plan - it lists the steps and where to pause for my answer. You cannot access my computer, so give every file complete and ready to save, starting each with "### FILE: <name>".
+Help me build a social widget from my Tagembed gallery, using Tagembed's public build guide as the plan (it says where to pause for my answers). Give every file complete, each starting with "### FILE: <name>".
 Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-For step 1, please fetch these two in the same turn:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25b
-The second is the theme picker: a static page of 17 theme thumbnails, images inlined as base64, no scripts or external links. Please show it to me as an HTML artifact, as it is, so I can see the pictures and pick one - I'd rather see them than a list of names.
-If a link will not open, tell me in one line instead of building from memory.
+Theme picker (static page, base64 thumbnails, no scripts) - please show it as an HTML artifact so I can pick: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
 ## 3. Save the files it gives you
