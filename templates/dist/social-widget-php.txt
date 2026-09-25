@@ -422,7 +422,7 @@ header('Content-Type: text/html; charset=utf-8');
 </html>
 
 ===== FILE: themes/classic-card.css =====
-/* Classic Card theme - values from themes-lite.json. Change the look here. */
+  /* Classic Card theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -455,10 +455,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -518,7 +518,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/classic-photo.css =====
-/* Classic Photo theme - values from themes-lite.json. Change the look here. */
+  /* Classic Photo theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -551,10 +551,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -614,7 +614,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/collage.css =====
-/* Collage theme - values from themes-lite.json. Change the look here. */
+  /* Collage theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -647,10 +647,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -721,7 +721,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/horizontal-columns.css =====
-/* Horizontal Columns theme - values from themes-lite.json. Change the look here. */
+  /* Horizontal Columns theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -754,10 +754,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -831,7 +831,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/horizontal-slider.css =====
-/* Horizontal Slider theme - values from themes-lite.json. Change the look here. */
+  /* Horizontal Slider theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -864,10 +864,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -937,7 +937,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/modern-card.css =====
-/* Modern Card theme - values from themes-lite.json. Change the look here. */
+  /* Modern Card theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -970,10 +970,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1034,7 +1034,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/reels.css =====
-/* Reels theme - values from themes-lite.json. Change the look here. */
+  /* Reels theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #ffffff;
     --tbd-surface: #ffffff;
@@ -1067,10 +1067,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1139,7 +1139,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/review-box.css =====
-/* Review Box theme - values from themes-lite.json. Change the look here. */
+  /* Review Box theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #ffffff;
     --tbd-surface: #fafafa;
@@ -1172,10 +1172,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1238,7 +1238,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/review-carousel.css =====
-/* Review Carousel theme - values from themes-lite.json. Change the look here. */
+  /* Review Carousel theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #F0F7FF;
     --tbd-surface: #FFFFFF;
@@ -1271,10 +1271,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1345,7 +1345,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/review-list.css =====
-/* Review List theme - values from themes-lite.json. Change the look here. */
+  /* Review List theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #ffffff;
     --tbd-surface: #FFFFFF;
@@ -1378,10 +1378,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1440,7 +1440,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/single-post.css =====
-/* Single Post theme - values from themes-lite.json. Change the look here. */
+  /* Single Post theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -1473,10 +1473,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1548,7 +1548,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/slider.css =====
-/* Slider theme - values from themes-lite.json. Change the look here. */
+  /* Slider theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #ffffff;
     --tbd-surface: #fafafa;
@@ -1581,10 +1581,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1656,7 +1656,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/social-card.css =====
-/* Social Card theme - values from themes-lite.json. Change the look here. */
+  /* Social Card theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -1689,10 +1689,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1752,7 +1752,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/square-photo.css =====
-/* Square Photo theme - values from themes-lite.json. Change the look here. */
+  /* Square Photo theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -1785,10 +1785,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1847,7 +1847,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/story-theme.css =====
-/* Story Theme theme - values from themes-lite.json. Change the look here. */
+  /* Story Theme theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -1880,10 +1880,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -1960,7 +1960,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/vivid.css =====
-/* Vivid theme - values from themes-lite.json. Change the look here. */
+  /* Vivid theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #ffffff;
     --tbd-surface: #fafafa;
@@ -1993,10 +1993,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
@@ -2064,7 +2064,7 @@ header('Content-Type: text/html; charset=utf-8');
 }
 
 ===== FILE: themes/widget-theme.css =====
-/* Widget Theme theme - values from themes-lite.json. Change the look here. */
+  /* Widget Theme theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -2097,10 +2097,10 @@ header('Content-Type: text/html; charset=utf-8');
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;

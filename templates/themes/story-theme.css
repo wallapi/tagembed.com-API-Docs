@@ -1,4 +1,4 @@
-/* Story Theme theme - values from themes-lite.json. Change the look here. */
+  /* Story Theme theme - values from themes-lite.json. Change the look here. */
   :root {
     --tbd-bg: #E9EAF0;
     --tbd-surface: #ffffff;
@@ -31,10 +31,10 @@
   /* Fallback tile: chat preview panes block outside images, so show the network name */
   .tbd-media::after { content: attr(data-network); position: absolute; inset: 0; display: grid;
     place-items: center; font-size: .85em; letter-spacing: .06em; text-transform: uppercase; opacity: .45; }
-  .tbd-media img, .tbd-media video { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
-  /* Blocked image: cover the broken-image icon with the blurred thumbnail, if any */
-  .tbd-media img::before { content: ""; position: absolute; inset: -16px;
-    background: var(--tbd-ph, none) center / cover no-repeat; filter: blur(8px); }
+  .tbd-media img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Blocked image: cover the broken-image icon with the thumbnail, if any */
+  .tbd-media img::before { content: ""; position: absolute; inset: 0;
+    background: var(--tbd-ph, none) center / cover no-repeat; }
   .tbd-play { position: absolute; z-index: 2; right: 10px; top: 10px; width: 28px; height: 28px;
     border-radius: 50%; background: rgba(0,0,0,.55); }
   .tbd-play::before { content: ""; position: absolute; left: 11px; top: 8px;
