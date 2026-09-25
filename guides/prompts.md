@@ -152,25 +152,23 @@ security), and the server part also fetches the cache contract
 guessed, so the build still works when the AI then fails to open the specs
 they link.
 
-Pick the block for your AI - `BASE` lets you test another branch by
-changing `main` in that one line, and every `BASE/...` link in this
-prompt and in the files it fetches starts from it.
+Pick the block for your AI.
 
 **Claude (claude.ai) or an editor agent:**
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
-Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-Step 1 names two links to fetch together, in that same turn - fetch both before you reply, never just the first one, and render the second one (the picker) as an HTML artifact, unchanged.
-If you cannot open a link, say so in one line - do not build from memory.
+I'd like to build a social widget from my Tagembed gallery, step by step, using Tagembed's public build guide on GitHub. Please fetch it RAW and use it as the plan - it lists the steps and where to pause for my answer.
+Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+For step 1, please fetch these two in the same turn:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25b
+The second is the theme picker: a static page of 17 theme thumbnails, images inlined as base64, no scripts or external links. Please show it to me as an HTML artifact, as it is, so I can see the pictures and pick one - I'd rather see them than a list of names.
+If a link will not open, tell me in one line instead of building from memory.
 ```
 
 **ChatGPT:** same block, one line added before the link:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
@@ -189,7 +187,6 @@ instead of linking it:
 3. Paste this prompt:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link in the attached file starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click.
 Start with step 1 now.

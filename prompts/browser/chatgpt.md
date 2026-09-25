@@ -19,7 +19,6 @@ reproduce large files (the theme thumbnails, a preview page) that it cannot
 copy whole in a chat reply - the extra line below turns those on:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. You cannot access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>". Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md

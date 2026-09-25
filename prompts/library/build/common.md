@@ -1,16 +1,15 @@
 # Social widget - rules every build part follows
 
-Links written BASE/<path> are files in this repo. BASE is the one the
-prompt that sent you here gave; if none was given, BASE is
-`https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main`.
+Every link in this file is a complete URL - fetch it exactly as
+written, character for character.
 
 This file is shared by the part prompts (preview.html, then the server
 code in my language together with its README.md). It carries no
 deliverable of its own.
 
 Read both together, in parallel - the field names and the looks are specified there:
-BASE/llms.txt
-BASE/guides/widget-design-spec.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-25b
 
 What it is: a social widget - a page my own server renders, showing
 the live posts from my Tagembed gallery. preview.html and the server
@@ -36,10 +35,10 @@ header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue:
-BASE/guides/themes/README.md?v=2026-09-25a
-That theme's preview file is the TEMPLATE - fetch it RAW:
-BASE/guides/previews/<theme>.html
-(the "Preview" line under the theme in the catalogue). If it will not
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
+That theme's preview file is the TEMPLATE - fetch it RAW from the
+complete URL on the "Preview" line under that theme in the catalogue,
+copied exactly. If it will not
 open, say so in one line and stop - do not rebuild the theme from
 memory, and do not approximate it from the design spec's Values table
 or the thumbnail either; the preview file's own <style> is the only
@@ -75,9 +74,9 @@ Sample posts: fetch ONLY the file that matches the theme I picked,
 RAW, and bake in every post in it - never skip it, never add posts
 from the other file:
 - a social theme (1-14 in the catalogue):
-BASE/guides/sample-posts-social.json
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
 - a review theme (15-17: Review Box, Review Carousel, Review List):
-BASE/guides/sample-posts-reviews.json
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
 Copy every image and video URL character for character: never retype,
 shorten or invent one. If you cannot reach it, write 8-12 posts in
 the same shape with no media rather than a made-up URL (for a review

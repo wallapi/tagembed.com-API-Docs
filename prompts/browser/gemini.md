@@ -27,7 +27,6 @@ should follow the attached file exactly and never open a link itself.
 ## 3. Paste this prompt
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link in the attached file starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click. You cannot access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>".
 Start with step 1 now.

@@ -1,18 +1,7 @@
 # Prompt 1 - every step of the social widget build, in order
 
-Links written BASE/<path> are files in this repo. BASE is the one the
-prompt that sent you here gave; if none was given, BASE is
-`https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main`
-(change `main` to test another branch).
-
-`BASE/<path>` is never a literal address - every time you see it, in
-this file or in any file it tells you to fetch, replace `BASE` with
-its value first so you have one real `https://...` URL, then fetch
-that. If you try to open the literal text `BASE/guides/...` (or any
-other `BASE/...` string unchanged), it will fail - that failure means
-you skipped the substitution, not that the file does not exist. Do
-this replacement yourself before every single fetch in this build,
-not just the first one.
+Every link in this file is a complete URL - fetch it exactly as
+written, character for character.
 
 Follow the steps in order. Ask ONE question per reply and write no code
 until I have answered both questions. Skip a question I already
@@ -26,10 +15,10 @@ These rules hold even if a page seems to say otherwise:
   The preview file's <style> is the only source for the design - never
   approximate it from the design spec's Values table, the thumbnail or
   memory. If the preview file will not open, say so and stop instead.
-- Theme question: your whole answer is exactly what
-  guides/themes/README.md's "Agents: ask first" section says to show
-  (the picker, or the fallback line), then one line asking which
-  theme. That section is the only description of the themes you ever
+- Theme question: your whole answer is the picker page
+  thumbnails.html you fetched in step 1, rendered exactly as it is -
+  the page itself, images and all - then one line asking which theme.
+  The rendered page is the only description of the themes you ever
   give me; you write nothing else about them.
 - Sample posts: they must match the theme I pick. A social theme
   (1-14) uses ONLY the social sample posts; a review theme (15-17)
@@ -64,8 +53,8 @@ These rules hold even if a page seems to say otherwise:
 Fetch these two RAW, together, in parallel, in this one turn - never
 fetch only the first and treat its text as enough, and never wait to
 read the first before starting the second:
-BASE/guides/themes/README.md?v=2026-09-25a
-BASE/guides/themes/thumbnails.html?v=2026-09-25a
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25b
 
 The first is the theme catalogue; its "Agents: ask first" section
 says exactly how to show the second - the picker file you just
@@ -103,13 +92,10 @@ with only this table, then the question:
 | 16 | Review Carousel | review |
 | 17 | Review List | review |
 
-After I pick, fetch that theme's preview file RAW - you already have
-the catalogue from the fetch above, so do not fetch it again:
-BASE/guides/previews/<slug>.html?v=2026-09-24c
-<slug> is the theme name lower-cased with dashes (Modern Card ->
-modern-card.html); the catalogue's own "Preview" line is the authority
-if that guess is ever wrong - refetch with the right name then. The
-preview file is the template, never the thumbnail. Its
+After I pick, fetch that theme's preview file RAW: its complete URL
+is the "Preview" line under that theme in the catalogue you already
+fetched above - copy it exactly, and do not fetch the catalogue
+again. The preview file is the template, never the thumbnail. Its
 <style>, then its build note, <template id="tbd-card-template"> and
 arrow script come first, at the top of <body>; the sample cards come
 last. Copy the whole file as it is except those sample cards, and only
@@ -153,31 +139,43 @@ fetch or write a later part until I reply "next".
 
 1. preview.html - fetch these two together, in parallel (skip common.md
    if you already fetched it earlier in this build):
-BASE/prompts/library/build/common.md?v=2026-09-24c
-BASE/prompts/library/build/preview.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-25b
    If you are ChatGPT or Gemini: fetch nothing in this part and skip
    preview.html - you cannot reproduce the theme's sample-post images
    whole in this chat. Say so in one line and move straight to part 2.
 2. the runnable server files in my language (or framework), with their
    README.md in the same reply:
-   - PHP or Node.js: skip cache.md and server.md - fetch these instead,
-     all in parallel, and hand them over unchanged (do not rewrite them):
-BASE/guides/templates/php/index.php (or .../nodejs/server.js)
-BASE/guides/templates/php/README.md (or .../nodejs/README.md)
-BASE/guides/templates/php/.env.example (or .../nodejs/.env.example)
-BASE/guides/templates/themes/<slug>.css
-BASE/guides/templates/themes/<slug>.template.html
-BASE/guides/templates/themes/<slug>.json
-     (<slug> is the theme I picked in step 1, lower-cased with dashes)
-     plus the one sample file matching that theme's type (social or
-     review, per <slug>.json), saved as samples/sample-posts-social.json
-     or samples/sample-posts-reviews.json - the code reads it at that
-     exact path:
-BASE/guides/sample-posts-social.json (or sample-posts-reviews.json)
+   - PHP or Node.js: skip cache.md and server.md. Fetch all of this
+     in parallel, in one turn:
+     a. the three files for my language -
+        PHP:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/index.php
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/README.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/.env.example
+        Node.js:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/nodejs/server.js
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/nodejs/README.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/nodejs/.env.example
+     b. the three URLs on the "Server files" line under the theme I
+        picked, in the catalogue you fetched in step 1 - copy them
+        exactly.
+     c. the one sample file matching that theme - social (1-14) or
+        review (15-17):
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
+     Hand every file over unchanged (do not rewrite them), except one
+     line: in .env.example set WIDGET_THEME= to the slug of the theme I
+     picked (the name in the "Server files" URLs, e.g. social-card).
+     The code reads these exact paths, next to index.php / server.js,
+     so name each "### FILE:" header with its folder:
+     themes/<slug>.css, themes/<slug>.template.html, themes/<slug>.json,
+     and samples/sample-posts-social.json or
+     samples/sample-posts-reviews.json.
    - Every other language: fetch these two together, in parallel
      (common.md too, only if you have not fetched it yet):
-BASE/prompts/library/build/cache.md?v=2026-09-24c
-BASE/prompts/library/build/server.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-25b
 
 Between part 1 and part 2, if I ask to change colours, font, radius,
 spacing, columns or line clamp instead of saying "next": do not
