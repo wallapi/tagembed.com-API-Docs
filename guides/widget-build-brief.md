@@ -7,8 +7,8 @@ few things neither of them says:
 | Read | For |
 | ---- | --- |
 | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) | the API: endpoints, envelope, field names, and the numbered **Integration rules** for generated code |
-| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
-| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25a) | the theme catalogue: 17 themes, each with a thumbnail, its layout and its values — the user picks one |
+| [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
+| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) | the theme catalogue: 19 themes, each with a thumbnail, its layout and its values — the user picks one |
 | this file | the delivery contract: what to hand over and how it is wired |
 
 **Agents: fetch them RAW.** A summarising fetch drops the field names,
@@ -24,15 +24,14 @@ rules decide.
 Two choices change what gets built, so they are asked **before any code**, one
 question per reply:
 
-1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25a) raw
+1. **Theme.** Fetch the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) raw
    and show its theme picker the way it says — the thumbnails page itself,
    rendered (an HTML artifact, or the page opened in their browser), **never a
    list of theme names** — and ask which one they want. Stop there.
-2. **Language.** Once they pick, ask this exact question, word for word —
-   never shorten it into an either/or between two languages, never name any
-   two languages in the question itself: "Which language or framework do
-   you want the server code in? Any one you name — your call." Their answer
-   starts the build — do not repeat the choices back or ask them to confirm.
+2. **Language.** Once they pick, ask which language the server code should be
+   in. Any server-side language is fine — PHP, Node.js, Python, Go, Java, C#,
+   … — or a framework they name. Their answer starts the build — do not
+   repeat the choices back or ask them to confirm.
 
 Skip a question the prompt already answers. Never pick either one for them.
 The build starts on the language answer, and it is written in exactly that
@@ -87,16 +86,6 @@ does it take the single smallest package, and the README says so.
 Boot, Rails, …) — the files that framework needs to serve this page, in its
 normal layout: entry point, route, view or template, config and its dependency
 file, and nothing it does not need.
-
-**PHP or Node.js: do not write the file above — fetch it.** Finished, tested
-code for every theme already exists in
-[guides/templates/](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/):
-`php/index.php` or `nodejs/server.js`, plus `themes/<slug>.css`,
-`<slug>.template.html` and `<slug>.json` for the theme picked in §0. Fetch
-those RAW, their README.md and .env.example (same folder), and the one
-sample-posts file matching the theme's type (§4) — hand them over unchanged,
-same as any other deliverable in this brief. Every other language still
-follows the table and rules above, written live.
 
 Either way it is **ready to run**: they run the README's command and the page
 is up — no missing file, no placeholder, no "add your routes here". The code
@@ -183,22 +172,19 @@ the design can still be reviewed before a token exists (llms.txt rule 12).
 The same posts are what `preview.html` renders. Take them from the one file
 that matches the picked theme — [sample-posts-social.json](sample-posts-social.json)
 for a social theme, [sample-posts-reviews.json](sample-posts-reviews.json) for a
-review theme (Review Box, Review Carousel, Review List),
+review theme (Review Box, Review Carousel, Review List, Rating Badge, Badge),
 never both — fetched raw — use every post in it — and copy every media URL
 character for character: never retype, shorten or invent one. If you cannot
 reach it, write 8–12 posts in the same shape with no media rather than a
 made-up URL; for a review theme every one carries a `rating`, or the widget
 never shows its star rating. Video posts
 and the media placeholder follow the design spec §3. The whole build is skinned from the theme picked in §0,
-from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25a). The picked theme's preview file
+from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md). The picked theme's preview file
 (`guides/previews/<theme>.html`) is the **template**: copy the whole file as it
 is and inject the posts — replace the sample cards between its
 `<!-- tbd:cards -->` marks with one card per post from its
 `<template id="tbd-card-template">`, each `{{slot}}` filled as the catalogue's
-"Filling the card" says. The preview file's `<style>` is the only source for
-the design — never approximate it from the Values table below or the
-thumbnail; if the preview file will not open, say so and stop instead of
-building from memory. `preview.html` fills it from these sample posts, the
+"Filling the card" says. `preview.html` fills it from these sample posts, the
 server code from `body.posts` on every request; the thumbnail is only for the
 question. How those values map onto the design tokens is in the design spec,
 under **Themes** in section 2. One theme is the entire skin: no light/dark

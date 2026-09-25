@@ -117,7 +117,7 @@ hand.
   [sample-posts-reviews.json](guides/sample-posts-reviews.json), the shape
   `body.posts` returns. Every build bakes them into a `preview.html`: the same
   page as a static file, openable from disk before a token exists
-- **[Widget themes](guides/themes/)** — the 17 widget themes a build can
+- **[Widget themes](guides/themes/)** — the 19 widget themes a build can
   wear, each with a thumbnail to pick from, an HTML preview the build copies,
   and its colour, font and spacing values. The build prompts show the thumbnails first — the
   picture page, not a list of names — and ask which one you want, then ask

@@ -1,19 +1,26 @@
-  /* Vivid theme - values from themes-lite.json. Change the look here. */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Widget</title>
+<style>
+  /* Badge theme - values from themes-lite.json. Change the look here. */
   :root {
-    --tbd-bg: #ffffff;
+    --tbd-bg: #f5f6f7;
     --tbd-surface: #fafafa;
-    --tbd-text: #1f1b1b;
-    --tbd-author: #1f1b1b;
+    --tbd-text: #000000;
+    --tbd-author: #000000;
     --tbd-font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --tbd-weight: 400;
     --tbd-size: 14px;
     --tbd-radius: 3px;
     --tbd-img-radius: 0px;
     --tbd-gap: 10px;
-    --tbd-pad: 14px;
-    --tbd-cols: 4;
-    --tbd-align: left;
-    --tbd-lines: 4;
+    --tbd-pad: 12px;
+    --tbd-cols: 3;
+    --tbd-align: center;
+    --tbd-lines: 5;
   }
 
   * { box-sizing: border-box; }
@@ -70,18 +77,60 @@
   /* Starters only: no posts yet, and the "sample posts" note */
   .tbd-empty, .tbd-note { text-align: center; opacity: .7; margin: 0 0 16px; }
 
-  /* Masonry: CSS columns, each card keeps its own height */
-  .tbd-track { column-count: var(--tbd-cols); column-gap: var(--tbd-gap); }
-  .tbd-card { break-inside: avoid; margin-bottom: var(--tbd-gap); }
-  @media (max-width: 900px) { .tbd-track { column-count: 2; } }
-  @media (max-width: 560px) { .tbd-track { column-count: 1; } }
+  /* Badge: one summary of all reviews - logo, average score, stars, count */
+  .tbd-badge { display: flex; margin: 0 auto; background: var(--tbd-surface); border-radius: 10px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.09); color: inherit; }
+  .tbd-badge-nets { display: flex; }
+  .tbd-badge-title { font-size: 1.1em; }
+  .tbd-badge-score { display: flex; align-items: center; gap: 10px; }
+  .tbd-badge-avg { font-weight: 700; line-height: 1; }
+  .tbd-badge .tbd-stars { padding: 0; font-size: 1.5em; }
+  .tbd-badge-count { font-size: .9em; opacity: .75; }
 
-  /* Each card gets one of six soft gradients; text-only cards are fully tinted */
-  .tbd-card { background: var(--tbd-tint); }
-  .tbd-card:nth-child(6n + 1) { --tbd-tint: linear-gradient(135deg, #fff1a8, #ffd98a); }
-  .tbd-card:nth-child(6n + 2) { --tbd-tint: linear-gradient(135deg, #b8f0c8, #8fdcc0); }
-  .tbd-card:nth-child(6n + 3) { --tbd-tint: linear-gradient(135deg, #ffd0b8, #f2a98f); }
-  .tbd-card:nth-child(6n + 4) { --tbd-tint: linear-gradient(135deg, #a9c8ff, #5f8ef2); }
-  .tbd-card:nth-child(6n + 5) { --tbd-tint: linear-gradient(135deg, #c3eaff, #9fd6f7); }
-  .tbd-card:nth-child(6n + 6) { --tbd-tint: linear-gradient(135deg, #ffb3c7, #e8708f); }
-  .tbd-media { aspect-ratio: 1 / 1; }
+  .tbd-badge { width: 320px; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 24px; }
+  .tbd-badge-title { display: none; }
+  .tbd-badge-nets .tbd-net { margin-right: -6px; border: 2px solid #fff; }
+  .tbd-badge-avg { font-size: 2.1em; }
+  .tbd-badge-count { text-decoration: underline; }
+</style>
+</head>
+<body>
+<!-- Social Widget preview: Badge. Sample posts only - calls no API. -->
+<!-- tbd:template - how a build uses this file.
+  This note, the template below it and the arrow script (slider themes)
+  sit at the top of the body, above the sample badge, on purpose.
+  Copy this whole file as it is: the style block, this note's template, the
+  arrow script, the section, every class - EXCEPT the sample badge between
+  the tbd:badge marks further down. They are placeholders (with base64
+  images), never copied into a build.
+  Change only two things:
+  1. Between the tbd:badge marks, replace the sample badge with the one in the
+     template below, every {{slot}} filled from the review posts (a rating
+     that is not null), each value HTML-escaped.
+  2. Delete this note and the template element.
+  Slots (full rules in guides/themes/README.md, "Filling the card"):
+  {{average}} the mean rating, one decimal   {{average_stars}} it rounded, as
+  filled stars, rest hollow   {{count}} how many reviews
+  {{networks}} one span.tbd-net per network among them, in first-seen order
+-->
+<template id="tbd-badge-template">
+  <div class="tbd-badge">
+    <div class="tbd-badge-nets">{{networks}}</div>
+    <div class="tbd-badge-title">Customer Reviews</div>
+    <div class="tbd-badge-score"><span class="tbd-badge-avg">{{average}}</span><span class="tbd-stars" aria-label="{{average}} out of 5">{{average_stars}}</span></div>
+    <div class="tbd-badge-count">Based on {{count}} reviews</div>
+  </div>
+</template>
+<section class="tbd-widget tbd-t-badge tbd-l-badge tbd-clamp">
+  <h1 class="tbd-header">Social Widget</h1>
+  <!-- tbd:badge -->
+  <div class="tbd-badge">
+    <div class="tbd-badge-nets"><span class="tbd-net" data-net="google" data-mark="G" title="Google"></span><span class="tbd-net" data-net="yelp" data-mark="y" title="Yelp"></span><span class="tbd-net" data-net="tripadvisor" data-mark="T" title="Tripadvisor"></span><span class="tbd-net" data-net="facebook" data-mark="f" title="Facebook"></span><span class="tbd-net" data-net="trustpilot" data-mark="★" title="Trustpilot"></span></div>
+    <div class="tbd-badge-title">Customer Reviews</div>
+    <div class="tbd-badge-score"><span class="tbd-badge-avg">4.1</span><span class="tbd-stars" aria-label="4.1 out of 5">★★★★☆</span></div>
+    <div class="tbd-badge-count">Based on 8 reviews</div>
+  </div>
+  <!-- /tbd:badge -->
+</section>
+</body>
+</html>

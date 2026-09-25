@@ -1,15 +1,12 @@
 # Social widget - rules every build part follows
 
-Every link in this file is a complete URL - fetch it exactly as
-written, character for character.
-
 This file is shared by the part prompts (preview.html, then the server
 code in my language together with its README.md). It carries no
 deliverable of its own.
 
-Read both together, in parallel - the field names and the looks are specified there:
+Read both first - the field names and the looks are specified there:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 
 What it is: a social widget - a page my own server renders, showing
 the live posts from my Tagembed gallery. preview.html and the server
@@ -35,14 +32,11 @@ header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25c
-That theme's preview file is the TEMPLATE - fetch it RAW from the
-complete URL on the "Preview" line under that theme in the catalogue,
-copied exactly. If it will not
-open, say so in one line and stop - do not rebuild the theme from
-memory, and do not approximate it from the design spec's Values table
-or the thumbnail either; the preview file's own <style> is the only
-source for the design, never a paraphrase of it. Its
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+That theme's preview file is the TEMPLATE - fetch it RAW:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<theme>.html
+(the "Preview" line under the theme in the catalogue). If it will not
+open, say so in one line - do not rebuild the theme from memory. Its
 <style> comes first, then at the top of <body> its build note,
 <template id="tbd-card-template"> and arrow <script>; the sample cards
 with their base64 images come last and are never copied. Copy the whole
@@ -51,7 +45,8 @@ class, the <section>, and its arrow <script> if it has one - and only
 inject the posts: replace the sample cards between <!-- tbd:cards -->
 and <!-- /tbd:cards --> with one card per post, made from the file's
 <template id="tbd-card-template"> with every {{slot}} filled as the
-catalogue's "Filling the card" table says. Then delete the template
+catalogue's "Filling the card" table says (badge themes: the
+tbd:badge marks and tbd-badge-template). Then delete the template
 element and its note. Do not restyle it from the thumbnail, the design
 spec or your own taste, and never copy its sample posts, names or
 image URLs - the posts come only from the sample posts JSON below (or
@@ -75,7 +70,8 @@ RAW, and bake in every post in it - never skip it, never add posts
 from the other file:
 - a social theme (1-14 in the catalogue):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
-- a review theme (15-17: Review Box, Review Carousel, Review List):
+- a review theme (15-19: Review Box, Review Carousel, Review List,
+  Rating Badge, Badge):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
 Copy every image and video URL character for character: never retype,
 shorten or invent one. If you cannot reach it, write 8-12 posts in
@@ -109,11 +105,6 @@ No tests: do not write or run tests, audits or checks - no
 accessibility or contrast scripts, no auth or 401 flow tests, no curl
 calls, no test files. Pick AA-safe colours from the values and note
 any change in a comment. I run and check the build myself.
-
-No narration: do not write a plan, a recap or "here is what I will
-build" before a part, and nothing about a file after it - what it
-contains, whether it is safe, whether it has scripts. The reply is the
-files themselves, then step 3's one line naming the next part.
 
 Every file complete - no placeholders, no "rest stays the same", no
 truncation - with brief comments through the code.

@@ -1,7 +1,7 @@
 # Widget themes — pick one, build from its preview
 
-The 17 widget themes a Tagembed Social Widget build can wear: 14 for social
-posts, 3 for reviews. Each one has a thumbnail of the real widget (to pick
+The 19 widget themes a Tagembed Social Widget build can wear: 14 for social
+posts, 5 for reviews. Each one has a thumbnail of the real widget (to pick
 from), a finished HTML preview of it (to build from), a line on its layout
 and the values its colours, font and spacing come from.
 
@@ -24,7 +24,7 @@ page with every theme's name under its thumbnail, the images embedded as
 base64 so it renders anywhere:
 
 ```
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
 ```
 
 Show it the first way your tool allows:
@@ -36,35 +36,6 @@ Show it the first way your tool allows:
    makes it render. The artifact's code is the whole file, every base64
    string complete: never shorten or re-encode an image, never swap one for
    a link or a placeholder, never turn the page into markdown or a table.
-   Before you decide this needs an external image load, look at what you
-   actually fetched: every `<img>` tag in this file is
-   `src="data:image/webp;base64,..."`, never `src="https://..."` or any
-   other URL — grep the content you fetched for `src="http` and you will
-   find zero matches. The file living at a GitHub URL does not make the
-   pictures inside it remote; they are bytes already in your hands. So
-   "hosted on GitHub", "external images" and "platform restrictions on
-   loading remote images" are never true reasons to fall back to a chat
-   list for this specific file — if that is what you are about to write,
-   you have not looked at the `src=` attributes you just fetched.
-   Before you show the artifact, compare it against these five checks -
-   this exact file has none of the things on the left, so any one of
-   them means you wrote your own page instead of copying this one:
-   a "SOCIAL THEMES" / "REVIEW THEMES" section heading (there is no
-   heading in this file, only one flat grid); a sentence describing the
-   layout under a theme's name (this file's only text per theme is its
-   name, in the `<figcaption>` - no "grid of review cards", no "one big
-   photo at a time"); a card with no picture or a grey/placeholder box
-   (this file has zero cards without a picture); an `<img src=` that is
-   a URL ending in `.png` such as `bigThumb5.png` or
-   `guides/themes/bigThumb5.png` (this file never links a `.png` - every
-   picture is `data:image/webp;base64,...` already inlined; a `bigThumb*`
-   link means you pulled it from a per-theme section under
-   [The themes](#the-themes) below, which is for the build only and
-   explicitly never for this question - even where it looks like a
-   "picker" reference); or more than 17 cards. Each one means you
-   summarised or linked from the catalogue's per-theme sections into a
-   new design instead of fetching and using this file - go back and use
-   the fetched HTML unchanged.
 2. **You work in the user's folder** (Claude Code, Cursor, Codex, Copilot,
    Gemini CLI, Windsurf): download it as `theme-picker.html` without
    retyping it (`curl -sSLo theme-picker.html <url>`), then open it in their
@@ -80,27 +51,17 @@ shorten, resize or redraw it, and add nothing to it.
 
 **Never show a table or a list.** The picker page is the whole answer to the
 theme question — no table of any kind (no "For", "Look", "What it looks like"
-or thumbnail-link columns), and never the theme names alone. This also
-covers a numbered chat list with one line per theme and the word
-"thumbnail" written where an image should be — that is still a list, not
-the picker, even with a note explaining why you skipped the artifact. There
-are exactly 17 themes (14 social, 3 review); if a count or a name does not
-match one of the 17 below, you invented it and must not show it. The file exists at the link
-above; if a fetch of it fails, say the fetch failed — never that there is no
-picker file. The per-theme sections under [The themes](#the-themes) are for
-the build, not for the user — never summarise them in the question.
-
-**Check your own copy before sending it.** An artifact can silently drop or
-blur a thumbnail while still looking "done" — if any `<img>` you wrote is not
-the exact base64 string from the fetched file, character for character, you
-have corrupted it: redo the copy, do not send a partial one.
+or thumbnail-link columns), and never the theme names alone. The file exists
+at the link above; if a fetch of it fails, say the fetch failed — never that
+there is no picker file. The per-theme sections under
+[The themes](#the-themes) are for the build, not for the user — never
+summarise them in the question.
 
 Then ask which theme they want; take its name or its number. If they already named a theme,
 skip the question. Never pick one for them at random.
 
-Your whole reply to the theme question is: the picker (or the note that you
-could not show it), then one line — "Which theme do you want? Reply with its
-name or number."
+Your whole reply to the theme question is: the picker, then one line —
+"Which theme do you want? Reply with its name or number."
 
 ## How a theme becomes the build
 
@@ -129,7 +90,8 @@ retype their images.
    at the top of the body, every `{{slot}}` filled as the table below says.
    `preview.html` fills it from the sample posts JSON; the server code fills
    it from `body.posts`, in a loop, at request time — same template, same
-   output.
+   output. The two badge themes mark `<!-- tbd:badge -->` instead and
+   fill `<template id="tbd-badge-template">` once, from all review posts.
 3. **Delete the build notes**: the `<!-- tbd:template … -->` comment, the
    `<template>` element and the two `tbd:cards` marks.
 4. **Keep the `<script>`** if the theme has one — it is the slider arrows,
@@ -171,6 +133,12 @@ When a part has no data:
   div empty, with no `style`: it shows the network-name tile.
 - **`rating` is null.** Drop the `.tbd-stars` div.
 
+Badge themes (`tbd-badge-template`), from the posts whose `rating` is not
+null: `{{average}}` their mean to one decimal (`4.9`), `{{average_stars}}`
+that mean rounded as stars, `{{count}}` how many there are, and
+`{{networks}}` one `<span class="tbd-net" data-net="{slug}" data-mark="{mark}"
+title="{name}"></span>` per network among them, in the order first seen.
+
 Filled with the sample posts JSON, every template gives back exactly the
 sample cards the preview file shows — that is the check that the injection
 is right.
@@ -179,14 +147,15 @@ is right.
   below describe the same theme in words; if a value there differs from the
   preview's `:root`, use the preview. The design spec maps each `--tbd-*` token, under **Themes** in
   section 2:
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
+  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 - **Sliders:** the slider, carousel and rail previews carry one small
   `<script>` that scrolls the row by one view when an arrow is clicked. It is
   part of the design: copy it as it is, into `preview.html` and the server's
   page alike. It fetches nothing and reads no data — the posts are already in
   the HTML. That script is the only JavaScript a build carries; the row
   itself is CSS scroll-snap, so it still swipes if scripts are off.
-- Review themes are for review posts (a `rating` 0–5).
+- Review themes are for review posts (a `rating` 0–5). Badges show the average
+  `rating` of the posts, rounded to one decimal, and how many there are.
 - One theme is the whole skin: no dark mode, no toggle, no second theme.
 
 ## The themes
@@ -198,9 +167,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Classic Card](bigThumb5.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb5.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb5.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-card.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-card.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-card.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-card.json
 - **Look:** a mosaic of cards (design spec §5). Each card starts with the
   author row — 32px round avatar, name and date, network icon pushed right —
   then the post text, then the image flush to the bottom and side edges.
@@ -213,9 +181,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Social Card](bigThumb19.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb19.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb19.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/social-card.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/social-card.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/social-card.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/social-card.json
 - **Look:** a mosaic of cards. Image flush on top, then the author row
   (avatar, name and date, network icon right), then the post text. Square-ish
   cards with a 1px hairline border.
@@ -227,9 +194,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Modern Card](bigThumb20.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb20.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb20.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/modern-card.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/modern-card.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/modern-card.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/modern-card.json
 - **Look:** a mosaic of cards. Image flush on top, then the post text, then
   the author row at the bottom (avatar, name and date, network icon right).
   1px hairline border, light type.
@@ -241,9 +207,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Classic Photo](bigThumb3.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb3.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb3.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/classic-photo.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-photo.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-photo.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/classic-photo.json
 - **Look:** a uniform grid, 3 across on a wide screen. Each card is a 16:9
   cropped photo with just the author row under it — avatar, name and date,
   network icon right. No post text. Soft shadow.
@@ -255,9 +220,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Square Photo](bigThumb4.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb4.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb4.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/square-photo.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/square-photo.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/square-photo.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/square-photo.json
 - **Look:** a uniform grid of square cropped photos, 3 across on a wide
   screen, with a small gap. No card, no text, no author on the tile — the
   author and network go in the image's `alt` and the tile links to the post.
@@ -270,9 +234,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Collage](bigThumb50.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb50.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb50.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/collage.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/collage.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/collage.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/collage.json
 - **Look:** photos only, in repeating blocks of three: one big tile taking
   two thirds of the width, and two small square tiles stacked beside it. The
   next block mirrors it (big tile on the right). On hover a tile darkens and
@@ -285,9 +248,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Vivid](bigThumb83.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb83.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb83.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/vivid.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/vivid.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/vivid.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/vivid.json
 - **Look:** a mosaic of rounded cards. Image on top, then a text panel
   filled with a soft pastel gradient — yellow, green, blue, orange, pink,
   cycling card by card — holding the author row (avatar, name, network icon
@@ -301,9 +263,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Horizontal Slider](bigThumb16.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb16.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb16.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-slider.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-slider.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-slider.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-slider.json
 - **Look:** one horizontal row of landscape photos, 3 in view on a wide
   screen, no text on them. Dark square prev/next arrows sit over the first and
   last photo's outer edge.
@@ -315,9 +276,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Horizontal Columns](bigThumb47.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb47.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb47.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/horizontal-columns.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-columns.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-columns.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/horizontal-columns.json
 - **Look:** a slider of cards, 3 in view. Photo on top; a round avatar with a
   white ring sits on the photo's bottom edge, centred; under it the name and
   date, the network icon and the post text, all centred. Rounded cards, soft
@@ -330,9 +290,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Slider](bigThumb81.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb81.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb81.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/slider.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/slider.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/slider.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/slider.json
 - **Look:** a slider of square photos with rounded corners, 3 in view, no
   text under them. On hover a photo darkens and shows the network icon in the
   middle. Small white round arrows on the row's ends.
@@ -345,9 +304,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Reels](bigThumb61.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb61.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb61.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/reels.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/reels.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/reels.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/reels.json
 - **Look:** a row of tall 9:16 tiles with rounded corners, 3 in view, photo
   or video poster filling each one, no text. The network icon shows in the
   middle of a tile on hover. The reel layout in the design spec (§4) is this
@@ -360,9 +318,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Story Theme](bigThumb60.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb60.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb60.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/story-theme.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/story-theme.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/story-theme.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/story-theme.json
 - **Look:** a row of tall 9:16 story cards with large rounded corners, the
   card in the middle full strength and its neighbours faded. Each card has the
   author's round avatar with a white ring at the top centre and, at the
@@ -377,9 +334,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Single Post](bigThumb52.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb52.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb52.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/single-post.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/single-post.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/single-post.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/single-post.json
 - **Look:** one post at a time: a large photo centred on the page, nothing
   else on it, with round translucent white prev/next arrows half over its left
   and right edges. Scroll-snap moves one post per step.
@@ -391,9 +347,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Widget Theme](bigThumb49.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb49.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb49.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/widget-theme.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/widget-theme.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/widget-theme.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/widget-theme.json
 - **Look:** single posts in one centred column, about 520px wide. Each post:
   the author row on top (large avatar, name and date, network logo right),
   the photo full width under it, then the post text. Posts follow one another
@@ -406,9 +361,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Review Box](bigThumb79.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb79.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb79.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-box.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-box.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-box.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-box.json
 - **Look:** a grid of review cards, 2 to 4 across. Each card: 5 gold stars
   centred on top (filled to the post's `rating`), the review text, then the
   author row at the bottom — avatar, name and date, network logo right.
@@ -422,9 +376,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Review Carousel](bigThumb80.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb80.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb80.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-carousel.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-carousel.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-carousel.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-carousel.json
 - **Look:** the Review Box card — stars centred on top, text, author row with
   the network logo right — in one horizontal row, 3 in view, with white round
   arrows on the ends.
@@ -436,9 +389,8 @@ sections, or a summary or table of them, to the user when asking which theme.
 
 ![Review List](bigThumb85.png)
 
-- **Reference image (NEVER the picker - do not link or embed this .png anywhere in the theme question or artifact; the picker is only thumbnails.html):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb85.png
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb85.png
 - **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/review-list.html?v=2026-09-24c
-- **Server files (PHP/Node.js builds only, saved in `themes/`):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-list.css · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-list.template.html · https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/review-list.json
 - **Look:** full-width review rows stacked down the page. Each row: avatar
   with name and date on the left, network logo on the right, the stars centred
   under them, then the review text. Rounded rows, soft shadow.
@@ -446,3 +398,30 @@ sections, or a summary or table of them, to the user when asking which theme.
   `#000000` · font Open Sans, 14px · card radius 8 · image radius 0 · gap 0
   (use 12 between rows) · padding 10 · text left · clamp 5 lines
 
+### 18. Rating Badge — reviews
+
+![Rating Badge](bigThumb82.png)
+
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb82.png
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/rating-badge.html?v=2026-09-24c
+- **Look:** one small badge card, not a list of posts: the network logo on
+  top, "<Network> Reviews" under it, the average rating large and bold (e.g.
+  "4.0"), 5 gold stars, then "Based on N reviews". Rounded, soft shadow, on a
+  pale inner panel.
+- **Values:** page `#f5f6f7` · card `#fafafa` · text `#000000` · author not
+  set (use the text colour) · font not set (use Inter), 14px · card radius 3 ·
+  image radius 8 · padding 0 (use 16) · text centred
+
+### 19. Badge — reviews
+
+![Badge](bigThumb84.png)
+
+- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb84.png
+- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/badge.html?v=2026-09-24c
+- **Look:** one wide, low badge card: the logos of the networks the reviews
+  come from as small overlapping circles, then the average rating large and
+  bold with 5 gold stars on the same line, then an underlined "Read our N
+  reviews" link. Rounded, soft shadow.
+- **Values:** page `#f5f6f7` · card `#fafafa` · text `#000000` · author not
+  set (use the text colour) · font not set (use Inter), 14px · card radius 3 ·
+  image radius 0 · padding 0 (use 16) · text left

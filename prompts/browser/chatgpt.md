@@ -1,37 +1,47 @@
 # ChatGPT - build a Tagembed social widget
 
 Use this when you are chatting with ChatGPT in the browser. It cannot touch
-your computer, so the prompt below makes it hand you complete files plus a
-setup checklist, one step at a time - theme, then language, then the build in
-two short replies instead of one long one.
+your computer, so the prompts below make it hand you complete files plus a
+setup checklist. It asks you two things first - which theme, then which
+language the server code should be in - and nothing else before the code.
 
-## 1. Start the chat
+## 1. Get the spec file
 
-Open https://chatgpt.com and start a **new chat**, then paste the prompt from
-step 2 and send.
+Download [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) to your computer
+(right-click the link, "Save link as...", keep the name `llms.txt`), or in a
+terminal:
 
-## 2. Paste this prompt
-
-Five lines. The whole build - both questions, every step, the file
-delivery format - lives in one linked file, `steps.md`, so the prompt itself
-stays short. ChatGPT-specific branches inside `steps.md` avoid asking it to
-reproduce large files (the theme thumbnails, a preview page) that it cannot
-copy whole in a chat reply - the extra line below turns those on:
-
-```
-Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. You cannot access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>". Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-If you cannot open a link, say so in one line - do not build from memory.
+```bash
+curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 ```
 
-If your plan has no URL-fetching, paste the contents of
-[llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt)
-at the bottom of the prompt instead, and add one line: "if you cannot fetch
-other URLs either, follow this attached spec and ask me to paste any other
-file you need."
+## 2. Start the chat and attach the spec
 
-## 3. Save the files it gives you
+1. Open https://chatgpt.com and start a **new chat**.
+2. Click the **+** (paperclip) button next to the message box, choose
+   **Upload from computer**, and pick `llms.txt`.
+3. Paste the prompt from step 3 and send.
+
+ChatGPT can sometimes fetch URLs itself, but attaching the file is more
+reliable than hoping it browses. If your plan has no file upload, paste the
+whole llms.txt at the bottom of the prompt instead. Use the **Copy code**
+button on each code block - never retype a file.
+
+## 3. Paste this prompt
+
+Five lines. Paste the block as your first message with
+llms.txt attached (or its contents pasted underneath). The detailed rules live
+in llms.txt; the AI reads them there.
+
+```
+Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
+First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+```
+
+## 4. Save the files it gives you
 
 For every `### FILE:` block: click the copy button on the code block, open a
 plain-text editor (macOS: TextEdit with Format > Make Plain Text; Windows:
@@ -89,8 +99,8 @@ which.
 - **Blank widget, no error** - the account has no approved posts, or the wall
   token points at a widget with none. Test with the curl command above.
 - **Fields look wrong** (`undefined`, empty author) - the AI guessed field
-  names instead of fetching llms.txt; reply "fetch llms.txt RAW and use its
-  field names" and paste the Post object section from it if it still cannot.
+  names; make sure llms.txt was attached or is in the folder, and paste the
+  Post object section from it.
 
 Spec: [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) · more prompts (filters, load-more, Redis, design):
 [../../guides/prompts.md](../../guides/prompts.md)

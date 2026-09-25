@@ -1,19 +1,26 @@
-  /* Social Card theme - values from themes-lite.json. Change the look here. */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Widget</title>
+<style>
+  /* Rating Badge theme - values from themes-lite.json. Change the look here. */
   :root {
-    --tbd-bg: #E9EAF0;
-    --tbd-surface: #ffffff;
+    --tbd-bg: #f5f6f7;
+    --tbd-surface: #fafafa;
     --tbd-text: #000000;
     --tbd-author: #000000;
-    --tbd-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --tbd-font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --tbd-weight: 400;
     --tbd-size: 14px;
-    --tbd-radius: 8px;
-    --tbd-img-radius: 0px;
+    --tbd-radius: 3px;
+    --tbd-img-radius: 8px;
     --tbd-gap: 10px;
-    --tbd-pad: 14px;
+    --tbd-pad: 12px;
     --tbd-cols: 3;
     --tbd-align: left;
-    --tbd-lines: 5;
+    --tbd-lines: none;
   }
 
   * { box-sizing: border-box; }
@@ -70,10 +77,60 @@
   /* Starters only: no posts yet, and the "sample posts" note */
   .tbd-empty, .tbd-note { text-align: center; opacity: .7; margin: 0 0 16px; }
 
-  /* Grid: --tbd-cols columns, 2 on tablet, 1 on phone */
-  .tbd-track { display: grid; gap: var(--tbd-gap); align-items: start;
-    grid-template-columns: repeat(var(--tbd-cols), minmax(0, 1fr)); }
-  @media (max-width: 900px) { .tbd-track { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .tbd-track { grid-template-columns: 1fr; } }
+  /* Badge: one summary of all reviews - logo, average score, stars, count */
+  .tbd-badge { display: flex; margin: 0 auto; background: var(--tbd-surface); border-radius: 10px;
+    box-shadow: 0 2px 14px rgba(0,0,0,.09); color: inherit; }
+  .tbd-badge-nets { display: flex; }
+  .tbd-badge-title { font-size: 1.1em; }
+  .tbd-badge-score { display: flex; align-items: center; gap: 10px; }
+  .tbd-badge-avg { font-weight: 700; line-height: 1; }
+  .tbd-badge .tbd-stars { padding: 0; font-size: 1.5em; }
+  .tbd-badge-count { font-size: .9em; opacity: .75; }
 
-  .tbd-card { border: 1px solid #dcdde3; }
+  .tbd-badge { width: 180px; flex-direction: column; text-align: center; gap: 8px; padding: 18px 14px; }
+  .tbd-badge-nets .tbd-net:not(:first-child) { display: none; }
+  .tbd-badge-nets .tbd-net { width: 34px; height: 34px; font-size: 15px; }
+  .tbd-badge-score { flex-direction: column; gap: 6px; }
+  .tbd-badge-avg { font-size: 2.4em; }
+</style>
+</head>
+<body>
+<!-- Social Widget preview: Rating Badge. Sample posts only - calls no API. -->
+<!-- tbd:template - how a build uses this file.
+  This note, the template below it and the arrow script (slider themes)
+  sit at the top of the body, above the sample badge, on purpose.
+  Copy this whole file as it is: the style block, this note's template, the
+  arrow script, the section, every class - EXCEPT the sample badge between
+  the tbd:badge marks further down. They are placeholders (with base64
+  images), never copied into a build.
+  Change only two things:
+  1. Between the tbd:badge marks, replace the sample badge with the one in the
+     template below, every {{slot}} filled from the review posts (a rating
+     that is not null), each value HTML-escaped.
+  2. Delete this note and the template element.
+  Slots (full rules in guides/themes/README.md, "Filling the card"):
+  {{average}} the mean rating, one decimal   {{average_stars}} it rounded, as
+  filled stars, rest hollow   {{count}} how many reviews
+  {{networks}} one span.tbd-net per network among them, in first-seen order
+-->
+<template id="tbd-badge-template">
+  <div class="tbd-badge">
+    <div class="tbd-badge-nets">{{networks}}</div>
+    <div class="tbd-badge-title">Customer Reviews</div>
+    <div class="tbd-badge-score"><span class="tbd-badge-avg">{{average}}</span><span class="tbd-stars" aria-label="{{average}} out of 5">{{average_stars}}</span></div>
+    <div class="tbd-badge-count">Based on {{count}} reviews</div>
+  </div>
+</template>
+<section class="tbd-widget tbd-t-rating-badge tbd-l-badge">
+  <h1 class="tbd-header">Social Widget</h1>
+  <!-- tbd:badge -->
+  <div class="tbd-badge">
+    <div class="tbd-badge-nets"><span class="tbd-net" data-net="google" data-mark="G" title="Google"></span><span class="tbd-net" data-net="yelp" data-mark="y" title="Yelp"></span><span class="tbd-net" data-net="tripadvisor" data-mark="T" title="Tripadvisor"></span><span class="tbd-net" data-net="facebook" data-mark="f" title="Facebook"></span><span class="tbd-net" data-net="trustpilot" data-mark="★" title="Trustpilot"></span></div>
+    <div class="tbd-badge-title">Customer Reviews</div>
+    <div class="tbd-badge-score"><span class="tbd-badge-avg">4.1</span><span class="tbd-stars" aria-label="4.1 out of 5">★★★★☆</span></div>
+    <div class="tbd-badge-count">Based on 8 reviews</div>
+  </div>
+  <!-- /tbd:badge -->
+</section>
+</body>
+</html>

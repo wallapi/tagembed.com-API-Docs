@@ -1,41 +1,48 @@
 # Gemini - build a Tagembed social widget
 
 Use this when you are chatting with Gemini in the browser. It cannot touch
-your computer, so the prompt below makes it hand you complete files plus a
-setup checklist. Gemini does not reliably open raw GitHub links, so the
-build's step-by-step file (`steps.md`) is attached rather than linked, and
-the prompt tells Gemini to open no other link either - only write links back
-for you to click.
+your computer, so the prompts below make it hand you complete files plus a
+setup checklist. It asks you two things first - which theme, then which
+language the server code should be in - and nothing else before the code.
 
-## 1. Download steps.md
+## 1. Get the spec file
+
+Download [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) to your computer
+(right-click the link, "Save link as...", keep the name `llms.txt`), or in a
+terminal:
 
 ```bash
-curl -sSLo steps.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
 ```
-Or right-click [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md), "Save link as...", keeping the name `steps.md`.
 
-## 2. Start the chat and attach it
+## 2. Start the chat and attach the spec
 
 1. Open https://gemini.google.com and start a **new chat**.
 2. Click the **+** button in the message box, choose **Upload files**, and
-   pick `steps.md` (rename it `steps.txt` first if Gemini refuses the file).
+   pick `llms.txt`.
 3. Paste the prompt from step 3 and send.
 
-Gemini follows instructions very literally, so the prompt spells out that it
-should follow the attached file exactly and never open a link itself.
+Gemini follows instructions very literally. If you write "ask me for my
+token before you start", it will stop, ask, and write a plan instead of code -
+the code only arrives after you answer. The prompt below therefore names
+the only two questions it may ask - theme, then language - and moves the
+token to the end. Gemini also does not always open raw GitHub URLs, so
+always attach the file. If it offers to open the result in **Canvas**, that is
+fine - the file content is the same.
 
 ## 3. Paste this prompt
 
-```
-Build me a social widget from my Tagembed gallery, step by step.
-The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click. You cannot access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>".
-Start with step 1 now.
-If steps.md is not attached, say so in one line - do not build from memory.
-```
+Five lines. Paste the block as your first message with
+llms.txt attached (or its contents pasted underneath). The detailed rules live
+in llms.txt; the AI reads them there.
 
-PHP or Node.js build fastest here: their files are already written, so
-Gemini only ever hands you links and writes the couple of small config files
-itself, never a whole file it would otherwise have to fetch and repeat back.
+```
+Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
+First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+```
 
 ## 4. Save the files it gives you
 
@@ -94,10 +101,9 @@ which.
   `body.fields` names it. Paste it back to the AI.
 - **Blank widget, no error** - the account has no approved posts, or the wall
   token points at a widget with none. Test with the curl command above.
-- **Fields look wrong** (`undefined`, empty author) - Gemini opens no link
-  and guessed instead; download
-  [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt),
-  attach it too, and paste the Post object section from it.
+- **Fields look wrong** (`undefined`, empty author) - the AI guessed field
+  names; make sure llms.txt was attached or is in the folder, and paste the
+  Post object section from it.
 
 Spec: [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) · more prompts (filters, load-more, Redis, design):
 [../../guides/prompts.md](../../guides/prompts.md)

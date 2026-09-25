@@ -1,34 +1,48 @@
 # claude.ai - build a Tagembed social widget
 
 Use this when you are chatting with claude.ai in the browser. It cannot touch
-your computer, so the prompt below makes it hand you complete files plus a
-setup checklist, one step at a time - theme, then language, then the build in
-two short replies instead of one long one.
+your computer, so the prompts below make it hand you complete files plus a
+setup checklist. It asks you two things first - which theme, then which
+language the server code should be in - and nothing else before the code.
 
-## 1. Start the chat
+## 1. Get the spec file
 
-Open https://claude.ai and start a **new chat**, then paste the prompt from
-step 2 and send.
+Download [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) to your computer
+(right-click the link, "Save link as...", keep the name `llms.txt`), or in a
+terminal:
+
+```bash
+curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+```
+
+## 2. Start the chat and attach the spec
+
+1. Open https://claude.ai and start a **new chat**.
+2. Click the **+** button in the message box, choose **Upload a file**, and
+   pick `llms.txt` (or drag it into the chat).
+3. Paste the prompt from step 3 and send.
 
 Claude usually puts each file in an **Artifact** panel on the right with a
-**Download** button. It shows the theme picker first (as that artifact) and
-asks which theme, then which language; if it asks anything else before the
-code, reply "build it with the defaults in the prompt".
+**Download** button - use it and rename if needed so the filename matches the
+`### FILE:` header exactly. Claude first shows the theme picker and asks which
+theme, then which language; if it asks anything else before the code, reply
+"build it with the defaults in the prompt".
 
-## 2. Paste this prompt
+## 3. Paste this prompt
 
-Four lines. The whole build - both questions, every step, the file
-delivery format - lives in one linked file, `steps.md`, so the prompt itself
-stays short:
+Five lines. Paste the block as your first message with
+llms.txt attached (or its contents pasted underneath). The detailed rules live
+in llms.txt; the AI reads them there.
 
 ```
-Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and use it as the guide - it lists every step and when to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-If you cannot open a link, say so in one line - do not build from memory.
+Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
+Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
+First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
 ```
 
-## 3. Save the files it gives you
+## 4. Save the files it gives you
 
 For every `### FILE:` block: click the copy button on the code block, open a
 plain-text editor (macOS: TextEdit with Format > Make Plain Text; Windows:
@@ -86,8 +100,8 @@ which.
 - **Blank widget, no error** - the account has no approved posts, or the wall
   token points at a widget with none. Test with the curl command above.
 - **Fields look wrong** (`undefined`, empty author) - the AI guessed field
-  names instead of fetching llms.txt; reply "fetch llms.txt RAW and use its
-  field names" and paste the Post object section from it if it still cannot.
+  names; make sure llms.txt was attached or is in the folder, and paste the
+  Post object section from it.
 
 Spec: [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) · more prompts (filters, load-more, Redis, design):
 [../../guides/prompts.md](../../guides/prompts.md)

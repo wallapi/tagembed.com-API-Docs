@@ -19,7 +19,7 @@ HTML page, the raw one returns the file:
 | ---- | --------------- | ---------------- |
 | Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md) |
 | API spec | endpoints, envelope, field names, integration rules | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) |
-| Theme catalogue | the 17 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you the thumbnails first, as pictures | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
+| Theme catalogue | the 19 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you the thumbnails first, as pictures | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
 | Design spec | `--tbd-*` tokens, how a theme maps onto them, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
 
 All of them live in the public docs repo
@@ -48,7 +48,7 @@ the rendered HTML. That is what makes the page safe to put on a public site.
 
 **You pick the look and the language first.** Before any code, the AI shows
 you the theme picker from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) —
-the 17 widget themes as **thumbnail pictures**, rendered as a page (an HTML
+the 19 widget themes as **thumbnail pictures**, rendered as a page (an HTML
 artifact in a chat, or the page opened in your browser by an editor agent),
 never a list of names — and asks which one you want. Then it asks **which
 language you want the server code in** — any server-side language: Python,
@@ -69,15 +69,6 @@ A plain language uses only its standard library, so there is nothing to
 install; the file reads a `.env` beside it on its own. And **`README.md` for
 that language comes in the same reply as the server code** — how to check the
 language is installed, the one command that runs it, where the token goes.
-
-**Say PHP or Node.js and it is instant.** Finished, tested code for every
-theme already exists in
-[guides/templates/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/guides/templates)
-(`php/index.php` or `nodejs/server.js`, skinned per theme by
-`themes/<slug>.css` + `.template.html` + `.json`), so the AI hands those
-files over as they are instead of writing anything — same two questions,
-same reply shape, just nothing left to generate. Any other language is
-still written live, exactly as the table above describes.
 
 **And one file every build gets: `preview.html`.** The same widget, the same
 CSS, with the sample posts written straight into the HTML — no server, no
@@ -139,10 +130,7 @@ be in** (any language) — and starts building the moment you answer the second,
 with no confirm step. It builds in two replies: `preview.html` first, then —
 after you type **next** — the server code in your language **together with
 its `README.md`**, so every reply stays short instead of one long reply that
-runs out of room or times out. Before you type next, ask for colour, font,
-radius or spacing tweaks and the AI patches only the theme's own CSS
-variables into a small `custom.css` — no full rewrite — and that file lands
-in both `preview.html` and the server code once you move on. The full brief is split per deliverable into
+runs out of room or times out. The full brief is split per deliverable into
 files in [build/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/build) — `preview.md` and `server.md` (one file for
 every language) — and the prompt itself is one link, to [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md),
 which carries both questions and the build parts in order. Each part fetches the shared rules
@@ -152,42 +140,12 @@ security), and the server part also fetches the cache contract
 guessed, so the build still works when the AI then fails to open the specs
 they link.
 
-Pick the block for your AI.
-
-**Claude (claude.ai) or an editor agent:**
-
 ```
-Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and use it as the guide - it lists every step and when to stop and wait for my answer. Start with step 1 now:
+Build me a social widget from my Tagembed gallery.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
-```
-
-**ChatGPT:** same block, one line added before the link:
-
-```
-Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-If you cannot open a link, say so in one line - do not build from memory.
-```
-
-**Gemini:** it does not reliably open raw GitHub links, so attach `steps.md`
-instead of linking it:
-
-1. Download it:
-   ```bash
-   curl -sSLo steps.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-   ```
-2. In Gemini, click **+** > **Upload files** and pick `steps.md` (rename it
-   `steps.txt` first if it refuses the file).
-3. Paste this prompt:
-
-```
-Build me a social widget from my Tagembed gallery, step by step.
-The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click.
-Start with step 1 now.
-If steps.md is not attached, say so in one line - do not build from memory.
 ```
 
 ## Prompt A — the short alternative (AI that can browse)
@@ -217,18 +175,7 @@ its files complete - then stop, and end the reply with one line naming
 the next part. Do not fetch or write a later part until I reply "next".
 1. preview.html
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/preview.md
-2. the runnable server files in my language, with their README.md in the same reply.
-If I said PHP or Node.js: skip the link below - fetch instead, RAW and
-unchanged,
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/index.php
-(or .../nodejs/server.js), its README.md and .env.example (same
-folder), and
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/<slug>.css,
-<slug>.template.html and <slug>.json for my theme, plus the one
-matching sample-posts file from
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
-(or sample-posts-reviews.json), saved as samples/<same name>. Any
-other language:
+2. the runnable server files in my language, with their README.md in the same reply
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/server.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```

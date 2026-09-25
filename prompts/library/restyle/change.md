@@ -7,7 +7,7 @@ Restyle the widget in the layout I named (MOSAIC, REEL rail,
 3-column card grid or full-screen signage view) and the style I named
 (rounded cards + soft shadows, flat minimal, or editorial with a serif
 headline). Layouts are in sections 4-5 of
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md?v=2026-09-24c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
 and the REEL rail in full here, only if it is the one I named:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/reel-layout.md
 Keep the --tbd-* tokens already declared - no new colours, no CSS
