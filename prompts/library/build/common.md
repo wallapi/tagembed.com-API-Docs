@@ -35,7 +35,7 @@ header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25c
 That theme's preview file is the TEMPLATE - fetch it RAW from the
 complete URL on the "Preview" line under that theme in the catalogue,
 copied exactly. If it will not

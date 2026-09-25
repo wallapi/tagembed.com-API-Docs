@@ -24,21 +24,21 @@ page with every theme's name under its thumbnail, the images embedded as
 base64 so it renders anywhere:
 
 ```
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25c
 ```
 
 Show it the first way your tool allows:
 
 1. **You can make an HTML artifact** (claude.ai, Claude Code, ChatGPT
    canvas, Gemini canvas): fetch it RAW and show it as an HTML artifact,
-   exactly as it is. The file is about 550 KB, nearly all of it base64 PNG
+   exactly as it is. The file is about 45 KB, nearly all of it base64 WebP
    thumbnails — artifacts block outside image links, so the base64 is what
    makes it render. The artifact's code is the whole file, every base64
    string complete: never shorten or re-encode an image, never swap one for
    a link or a placeholder, never turn the page into markdown or a table.
    Before you decide this needs an external image load, look at what you
    actually fetched: every `<img>` tag in this file is
-   `src="data:image/png;base64,..."`, never `src="https://..."` or any
+   `src="data:image/webp;base64,..."`, never `src="https://..."` or any
    other URL — grep the content you fetched for `src="http` and you will
    find zero matches. The file living at a GitHub URL does not make the
    pictures inside it remote; they are bytes already in your hands. So
@@ -57,7 +57,7 @@ Show it the first way your tool allows:
    (this file has zero cards without a picture); an `<img src=` that is
    a URL ending in `.png` such as `bigThumb5.png` or
    `guides/themes/bigThumb5.png` (this file never links a `.png` - every
-   picture is `data:image/png;base64,...` already inlined; a `bigThumb*`
+   picture is `data:image/webp;base64,...` already inlined; a `bigThumb*`
    link means you pulled it from a per-theme section under
    [The themes](#the-themes) below, which is for the build only and
    explicitly never for this question - even where it looks like a
