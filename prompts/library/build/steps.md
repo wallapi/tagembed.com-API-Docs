@@ -111,17 +111,17 @@ click. If you are ChatGPT or Gemini, or otherwise cannot show a
 fetched HTML file whole in this chat: skip showing it - the githack
 link above is how I see it either way.
 
-Then ask exactly these two questions, word for word, short - never
-shortened, never paraphrased, never reduced to fewer options than
-written here:
-1. Want to change anything in this preview? (colours, font, columns,
-   card style, hide author/date...) - or say "no".
-2. Which stack should I build it in? PHP / Node.js / React / Simple
-   HTML / Other (name it - Laravel, WordPress, Next.js, Vue, Django,
-   Flask...)
-All five named choices in question 2 are equal options, every time -
-never drop React, Simple HTML or Other and turn it into a choice
-between only two.
+Then print these two lines, character for character - copy them, do
+not write your own sentence for either one, even a close one:
+
+Want to change anything in this preview? (colours, font, columns, card style, hide author/date...) - or say "no".
+Which stack should I build it in? PHP / Node.js / React / Simple HTML / Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
+
+The second line names five choices - PHP, Node.js, React, Simple
+HTML, Other - and all five must appear, in that order, every time.
+They are not examples standing in for a shorter question: printing
+"PHP or Node.js?", or any other two-word version, is not this line -
+it is a different, wrong line. Copy the sentence above whole.
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
