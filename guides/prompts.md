@@ -70,6 +70,15 @@ install; the file reads a `.env` beside it on its own. And **`README.md` for
 that language comes in the same reply as the server code** — how to check the
 language is installed, the one command that runs it, where the token goes.
 
+**Say PHP or Node.js and it is instant.** Finished, tested code for every
+theme already exists in
+[guides/templates/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/guides/templates)
+(`php/index.php` or `nodejs/server.js`, skinned per theme by
+`themes/<slug>.css` + `.template.html` + `.json`), so the AI hands those
+files over as they are instead of writing anything — same two questions,
+same reply shape, just nothing left to generate. Any other language is
+still written live, exactly as the table above describes.
+
 **And one file every build gets: `preview.html`.** The same widget, the same
 CSS, with the sample posts written straight into the HTML — no server, no
 token, no API call anywhere in it. Double-click it and the design is on screen,
@@ -178,7 +187,18 @@ its files complete - then stop, and end the reply with one line naming
 the next part. Do not fetch or write a later part until I reply "next".
 1. preview.html
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/preview.md
-2. the runnable server files in my language, with their README.md in the same reply
+2. the runnable server files in my language, with their README.md in the same reply.
+If I said PHP or Node.js: skip the link below - fetch instead, RAW and
+unchanged,
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/index.php
+(or .../nodejs/server.js), its README.md and .env.example (same
+folder), and
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/<slug>.css,
+<slug>.template.html and <slug>.json for my theme, plus the one
+matching sample-posts file from
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
+(or sample-posts-reviews.json), saved as samples/<same name>. Any
+other language:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/server.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```

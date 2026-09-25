@@ -106,6 +106,10 @@ it is never a menu for me, so never repeat an example's language back
 to me as if it were one of my choices, and never turn my open question
 into a pick between two of them.
 
+If I name PHP or Node.js, part 2 of step 3 below fetches already-built,
+tested files instead of server.md - faster, nothing to write. Every
+other language still follows server.md, exactly as always.
+
 My answer starts the build: do not repeat my choices or ask me to
 confirm - reply straight away with part 1 of step 3.
 
@@ -121,8 +125,23 @@ fetch or write a later part until I reply "next".
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/preview.md?v=2026-09-24c
 2. the runnable server files in my language (or framework), with their
-   README.md in the same reply - fetch these two together, in parallel
-   (common.md too, only if you have not fetched it yet):
+   README.md in the same reply:
+   - PHP or Node.js: skip cache.md and server.md - fetch these instead,
+     all in parallel, and hand them over unchanged (do not rewrite them):
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/index.php (or .../nodejs/server.js)
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/README.md (or .../nodejs/README.md)
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/php/.env.example (or .../nodejs/.env.example)
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/<slug>.css
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/<slug>.template.html
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/themes/<slug>.json
+     (<slug> is the theme I picked in step 1, lower-cased with dashes)
+     plus the one sample file matching that theme's type (social or
+     review, per <slug>.json), saved as samples/sample-posts-social.json
+     or samples/sample-posts-reviews.json - the code reads it at that
+     exact path:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json (or sample-posts-reviews.json)
+   - Every other language: fetch these two together, in parallel
+     (common.md too, only if you have not fetched it yet):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/server.md?v=2026-09-24c
 
@@ -136,8 +155,11 @@ tokens from the theme's own :root block (--tbd-bg, --tbd-surface,
 sets), then give me preview.html again with that custom.css pasted
 into its <style>, right before </style>, under a /* custom.css */
 comment - nothing else in the file changes. Keep doing this each time
-I ask for another tweak. Once I say "next", part 2's server file gets
-the same custom.css pasted the same way, so both files stay identical.
+I ask for another tweak. Once I say "next": for PHP or Node.js, hand
+over that same custom.css as its own file, saved next to index.php or
+server.js - both already read it on their own, nothing to paste. Every
+other language gets the custom.css pasted into the server file the
+same way as preview.html, so both stay identical.
 
 If you cannot open a link, say so in one line - do not build from memory.
 Writing my chosen language from these rules is not building from memory.

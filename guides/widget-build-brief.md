@@ -88,6 +88,16 @@ Boot, Rails, …) — the files that framework needs to serve this page, in its
 normal layout: entry point, route, view or template, config and its dependency
 file, and nothing it does not need.
 
+**PHP or Node.js: do not write the file above — fetch it.** Finished, tested
+code for every theme already exists in
+[guides/templates/](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/templates/):
+`php/index.php` or `nodejs/server.js`, plus `themes/<slug>.css`,
+`<slug>.template.html` and `<slug>.json` for the theme picked in §0. Fetch
+those RAW, their README.md and .env.example (same folder), and the one
+sample-posts file matching the theme's type (§4) — hand them over unchanged,
+same as any other deliverable in this brief. Every other language still
+follows the table and rules above, written live.
+
 Either way it is **ready to run**: they run the README's command and the page
 is up — no missing file, no placeholder, no "add your routes here". The code
 writes its cache beside itself (`cache/posts.json`) and creates the directory

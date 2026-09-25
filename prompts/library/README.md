@@ -7,9 +7,16 @@ changes; its part files say how that lands in each file. Every `server.md`
 works for whatever language the server code is in. The themes the
 build prompts offer are in [../../guides/themes/](../../guides/themes/).
 
+PHP and Node.js do not go through `server.md`: finished, tested code for
+every theme already exists in
+[../../guides/templates/](../../guides/templates/) (`php/`, `nodejs/`,
+one `themes/<slug>` triple per theme) - the AI fetches and hands those
+over instead of writing them. Any other language still gets `server.md`,
+written live.
+
 | Folder | Prompt | Parts, in order |
 | ------ | ------ | --------------- |
-| [build/](build/) | Prompt 1 — the main build | the prompt links only `steps.md`, which asks theme (shown as the rendered thumbnails page), then the server language — any language — then builds at once: `preview.md`, then `server.md` (the server code **and** its README in one reply); shared: `common.md`, `cache.md` |
+| [build/](build/) | Prompt 1 — the main build | the prompt links only `steps.md`, which asks theme (shown as the rendered thumbnails page), then the server language — any language — then builds at once: `preview.md`, then `server.md` (the server code **and** its README in one reply); shared: `common.md`, `cache.md`. PHP or Node.js skip `server.md`/`cache.md` - `steps.md` instead links the already-built files in [../../guides/templates/](../../guides/templates/) |
 | [quick-start/](quick-start/) | Prompt A — the brief-driven build | asks theme, then language, then builds at once; `preview.md`, then `server.md` (server code + README together) |
 | [integrate/](integrate/) | Prompt 2 — into an existing site | `section.md`, `preview.md`, `summary.md` |
 | [restyle/](restyle/) | Prompt 3a — restyle | `change.md`; `preview.md`, `server.md` |
