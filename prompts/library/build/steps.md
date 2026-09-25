@@ -56,6 +56,8 @@ read the first before starting the second:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md?v=2026-09-25c
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-25c
 
+Theme picker (static page, base64 thumbnails, no scripts) - please show it as an HTML artifact so I can pick: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+
 The first is the theme catalogue; its "Agents: ask first" section
 says exactly how to show the second - the picker file you just
 fetched - (as an artifact, opened in my folder, or neither) and what
