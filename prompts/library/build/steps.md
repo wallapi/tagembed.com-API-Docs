@@ -26,14 +26,19 @@ These rules hold even if a page seems to say otherwise:
   somewhere else, or remember one from earlier in this chat, set it
   aside - the theme count and every name come only from the bytes you
   fetch in THIS reply, freshly, never from memory of an older version.
-- There is no preview.md, no server.md and no "part 2" in this build -
-  that was an older version of this file. Every step you need is
-  right here, steps 1 through 4, in this one file. If you remember a
-  build/preview.md or build/server.md link from earlier in this chat,
-  or from a version of this file you already know, forget it - do not
-  fetch it, do not ask me to fetch it, and do not tell me a link 404s
-  when you never actually needed that link. Step 4 below is the whole
-  rest of the build, on its own.
+- There is no preview.md, no server.md, no php.md, no nodejs.md, no
+  react.md, no html.md and no "part 2" file of any name in this build
+  - that was an older version of this file, or a guess at a filename
+  that matches the stack I picked. Every step you need is right here,
+  steps 1 through 4, in this one file, and step 4 already gives the
+  exact URLs to fetch for whichever stack I name - never substitute a
+  filename you invented from the stack's name instead of using the
+  URL step 4 actually gives. If you remember a prompts/library/build/
+  link from earlier in this chat, or from a version of this file you
+  already know, or you are about to construct one yourself, forget it
+  - do not fetch it, do not ask me to fetch it, and do not tell me a
+  link 404s when you never actually needed that link. Step 4 below is
+  the whole rest of the build, on its own.
 - Sample posts: they must match the theme I pick. A social theme
   (1-14) uses ONLY the social sample posts; a review theme (15-17)
   uses ONLY the review sample posts. Never mix the two files.
