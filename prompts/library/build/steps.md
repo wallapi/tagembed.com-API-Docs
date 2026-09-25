@@ -26,6 +26,14 @@ These rules hold even if a page seems to say otherwise:
   somewhere else, or remember one from earlier in this chat, set it
   aside - the theme count and every name come only from the bytes you
   fetch in THIS reply, freshly, never from memory of an older version.
+- There is no preview.md, no server.md and no "part 2" in this build -
+  that was an older version of this file. Every step you need is
+  right here, steps 1 through 4, in this one file. If you remember a
+  build/preview.md or build/server.md link from earlier in this chat,
+  or from a version of this file you already know, forget it - do not
+  fetch it, do not ask me to fetch it, and do not tell me a link 404s
+  when you never actually needed that link. Step 4 below is the whole
+  rest of the build, on its own.
 - Sample posts: they must match the theme I pick. A social theme
   (1-14) uses ONLY the social sample posts; a review theme (15-17)
   uses ONLY the review sample posts. Never mix the two files.
