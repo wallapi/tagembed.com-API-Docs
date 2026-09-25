@@ -1,13 +1,17 @@
 # Prompt 1, part 2 of 2 - the runnable server files + README.md, in the language I picked
 
+Links written BASE/<path> are files in this repo. BASE is the one the
+prompt that sent you here gave; if none was given, BASE is
+`https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main`.
+
 This file (`server.md`) is the guide for every language and framework -
 there is no `nodejs.md`, `php.md`, `python.md` or any other
 per-language file. If you reached this file by guessing a name and it
 404d first, use this URL instead - it is the only correct one.
 
 Fetch both RAW first and follow them - the shared rules and the cache:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md?v=2026-09-24c
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md?v=2026-09-24c
+BASE/prompts/library/build/common.md?v=2026-09-24c
+BASE/prompts/library/build/cache.md?v=2026-09-24c
 Already fetched one of these for an earlier part? Do not fetch it again.
 
 Deliver the real project files in the language I picked - whatever it

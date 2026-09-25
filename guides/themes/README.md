@@ -57,11 +57,17 @@ there is no picker file. The per-theme sections under
 [The themes](#the-themes) are for the build, not for the user — never
 summarise them in the question.
 
+**Check your own copy before sending it.** An artifact can silently drop or
+blur a thumbnail while still looking "done" — if any `<img>` you wrote is not
+the exact base64 string from the fetched file, character for character, you
+have corrupted it: redo the copy, do not send a partial one.
+
 Then ask which theme they want; take its name or its number. If they already named a theme,
 skip the question. Never pick one for them at random.
 
-Your whole reply to the theme question is: the picker, then one line —
-"Which theme do you want? Reply with its name or number."
+Your whole reply to the theme question is: the picker (or the note that you
+could not show it), then one line — "Which theme do you want? Reply with its
+name or number."
 
 ## How a theme becomes the build
 

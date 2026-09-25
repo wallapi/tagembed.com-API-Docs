@@ -152,12 +152,47 @@ security), and the server part also fetches the cache contract
 guessed, so the build still works when the AI then fails to open the specs
 they link.
 
+Pick the block for your AI - `BASE` lets you test another branch by
+changing `main` in that one line, and every `BASE/...` link in this
+prompt and in the files it fetches starts from it.
+
+**Claude (claude.ai) or an editor agent:**
+
 ```
-Build me a social widget from my Tagembed gallery.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Start with step 1 now:
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Build me a social widget from my Tagembed gallery, step by step.
+Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
+```
+
+**ChatGPT:** same block, one line added before the link:
+
+```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Build me a social widget from my Tagembed gallery, step by step.
+Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. You are ChatGPT: wherever it says "If you are ChatGPT or Gemini", do that. Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
+```
+
+**Gemini:** it does not reliably open raw GitHub links, so attach `steps.md`
+instead of linking it:
+
+1. Download it:
+   ```bash
+   curl -sSLo steps.md https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+   ```
+2. In Gemini, click **+** > **Upload files** and pick `steps.md` (rename it
+   `steps.txt` first if it refuses the file).
+3. Paste this prompt:
+
+```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link in the attached file starts from it.
+Build me a social widget from my Tagembed gallery, step by step.
+The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click.
+Start with step 1 now.
+If steps.md is not attached, say so in one line - do not build from memory.
 ```
 
 ## Prompt A — the short alternative (AI that can browse)
