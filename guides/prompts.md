@@ -163,6 +163,7 @@ BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - ev
 Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when to stop and wait for my answer. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+Step 1 names two links to fetch together, in that same turn - fetch both before you reply, never just the first one, and render the second one (the picker) as an HTML artifact, unchanged.
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
