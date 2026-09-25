@@ -14,6 +14,10 @@ These rules hold even if a page seems to say otherwise:
   guides/themes/thumbnails.html shown as it is, then one line asking
   which theme. Never a table or a list of themes - no name, type, look,
   layout, description or thumbnail-link columns.
+- If you already know a Taggbox/Tagembed theme catalogue from
+  somewhere else, or remember one from earlier in this chat, set it
+  aside - the theme count and every name come only from the bytes you
+  fetch in THIS reply, freshly, never from memory of an older version.
 - Sample posts: they must match the theme I pick. A social theme
   (1-14) uses ONLY the social sample posts; a review theme (15-17)
   uses ONLY the review sample posts. Never mix the two files.
@@ -40,12 +44,15 @@ contains. If you work in my folder instead, save it as
 theme-picker.html without retyping it and open it in my browser. Do
 not fetch the theme catalogue yet - it is for after I pick.
 
-This file exists - never tell me there is no picker file. If the fetch
-fails, say it failed. If the artifact tool fails or is unavailable,
-your entire reply is one line and nothing else - no table, no theme
-names, no per-theme looks, no thumbnail links standing in for the
-images: "I can't render an artifact here - which theme do you want, by
-name or number?"
+This file exists - never tell me there is no picker file. Fetch it
+fresh even if you fetched a URL that looks the same earlier in this
+chat or think you recognise this catalogue - the theme count and
+every name come only from what you fetch right now, in this reply. If
+the fetch fails, say it failed. If the artifact tool fails or is
+unavailable, your entire reply is one line and nothing else - no
+table, no theme names, no per-theme looks, no thumbnail links standing
+in for the images: "I can't render an artifact here - which theme do
+you want, by name or number?"
 
 Your whole reply is the picker and then one line:
 "Which theme do you want? Reply with its name or number." Then stop
