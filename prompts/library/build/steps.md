@@ -148,8 +148,9 @@ adding to any custom.css from earlier in this chat. Then reply with:
    comment. Change nothing else in the file.
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
-Then ask: "Anything else to change, or which stack? (PHP / Node.js /
-React / Simple HTML / Other)"
+Then print this line, character for character, all five choices
+included, same as in step 2 - not shortened to two: "Anything else to
+change, or which stack? (PHP / Node.js / React / Simple HTML / Other)"
 Fetch nothing in this step. It ends when I name a stack.
 
 ## Step 4 - the files for my stack (fetch what this step names, write no new code - except Other)
@@ -166,10 +167,11 @@ step - the finished bundle already exists. Reply with only:
 - one line: unzip it, put .env and custom.css in the unzipped folder;
 - then everything under "After the files" below, from "how to start
   it" to the token question.
-For an Other stack in this same chat type, say in one line that
-porting needs an AI that can read files whole (Claude, or an editor
-agent) and offer the closest zip above instead. Everything else in
-this step is for every other AI.
+For an Other stack, even in this same chat type: do not refuse and do
+not substitute one of the four zips above - port it, the same as
+every other AI does below, and deliver it the way the "Delivery"
+section further down says a chat like this one delivers (usually one
+zip of the ported files, not the pre-built one).
 
 The code for every stack is finished. Fetch RAW these three - nothing
 else:
