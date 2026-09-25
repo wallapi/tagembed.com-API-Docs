@@ -1,7 +1,7 @@
 # Widget themes — pick one, build from its preview
 
-The 19 widget themes a Tagembed Social Widget build can wear: 14 for social
-posts, 5 for reviews. Each one has a thumbnail of the real widget (to pick
+The 17 widget themes a Tagembed Social Widget build can wear: 14 for social
+posts, 3 for reviews. Each one has a thumbnail of the real widget (to pick
 from), a finished HTML preview of it (to build from), a line on its layout
 and the values its colours, font and spacing come from.
 
@@ -90,8 +90,7 @@ retype their images.
    at the top of the body, every `{{slot}}` filled as the table below says.
    `preview.html` fills it from the sample posts JSON; the server code fills
    it from `body.posts`, in a loop, at request time — same template, same
-   output. The two badge themes mark `<!-- tbd:badge -->` instead and
-   fill `<template id="tbd-badge-template">` once, from all review posts.
+   output.
 3. **Delete the build notes**: the `<!-- tbd:template … -->` comment, the
    `<template>` element and the two `tbd:cards` marks.
 4. **Keep the `<script>`** if the theme has one — it is the slider arrows,
@@ -133,12 +132,6 @@ When a part has no data:
   div empty, with no `style`: it shows the network-name tile.
 - **`rating` is null.** Drop the `.tbd-stars` div.
 
-Badge themes (`tbd-badge-template`), from the posts whose `rating` is not
-null: `{{average}}` their mean to one decimal (`4.9`), `{{average_stars}}`
-that mean rounded as stars, `{{count}}` how many there are, and
-`{{networks}}` one `<span class="tbd-net" data-net="{slug}" data-mark="{mark}"
-title="{name}"></span>` per network among them, in the order first seen.
-
 Filled with the sample posts JSON, every template gives back exactly the
 sample cards the preview file shows — that is the check that the injection
 is right.
@@ -154,8 +147,7 @@ is right.
   page alike. It fetches nothing and reads no data — the posts are already in
   the HTML. That script is the only JavaScript a build carries; the row
   itself is CSS scroll-snap, so it still swipes if scripts are off.
-- Review themes are for review posts (a `rating` 0–5). Badges show the average
-  `rating` of the posts, rounded to one decimal, and how many there are.
+- Review themes are for review posts (a `rating` 0–5).
 - One theme is the whole skin: no dark mode, no toggle, no second theme.
 
 ## The themes
@@ -397,31 +389,3 @@ sections, or a summary or table of them, to the user when asking which theme.
 - **Values:** page `#ffffff` · card `#FFFFFF` · text `#000000` · author
   `#000000` · font Open Sans, 14px · card radius 8 · image radius 0 · gap 0
   (use 12 between rows) · padding 10 · text left · clamp 5 lines
-
-### 18. Rating Badge — reviews
-
-![Rating Badge](bigThumb82.png)
-
-- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb82.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/rating-badge.html?v=2026-09-24c
-- **Look:** one small badge card, not a list of posts: the network logo on
-  top, "<Network> Reviews" under it, the average rating large and bold (e.g.
-  "4.0"), 5 gold stars, then "Based on N reviews". Rounded, soft shadow, on a
-  pale inner panel.
-- **Values:** page `#f5f6f7` · card `#fafafa` · text `#000000` · author not
-  set (use the text colour) · font not set (use Inter), 14px · card radius 3 ·
-  image radius 8 · padding 0 (use 16) · text centred
-
-### 19. Badge — reviews
-
-![Badge](bigThumb84.png)
-
-- **Thumbnail (picker only):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/bigThumb84.png
-- **Preview (build from this):** https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/badge.html?v=2026-09-24c
-- **Look:** one wide, low badge card: the logos of the networks the reviews
-  come from as small overlapping circles, then the average rating large and
-  bold with 5 gold stars on the same line, then an underlined "Read our N
-  reviews" link. Rounded, soft shadow.
-- **Values:** page `#f5f6f7` · card `#fafafa` · text `#000000` · author not
-  set (use the text colour) · font not set (use Inter), 14px · card radius 3 ·
-  image radius 0 · padding 0 (use 16) · text left

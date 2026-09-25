@@ -30,16 +30,16 @@ theme, then which language; if it asks anything else before the code, reply
 
 ## 3. Paste this prompt
 
-Five lines. Paste the block as your first message with
-llms.txt attached (or its contents pasted underneath). The detailed rules live
-in llms.txt; the AI reads them there.
+Three lines. Paste the block below as your first message. It links
+browser-preamble.md (hand over every file complete, each starting with a
+`### FILE:` header) and steps.md (the theme picker, the language question,
+then the build) - fetched one at a time, so every reply stays quick and the
+theme-picker render is never spelled out here.
 
 ```
-Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
-Brief: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
-First show me the theme picker from the theme catalogue as an HTML artifact - the thumbnails page itself, not a list of names - and ask which theme I want; then ask which language I want the server code in (any: Python, PHP, Node.js, Go, ...). One question per reply, and start building on my second answer. Build only in that language: the runnable server file(s) and their README.md in the same reply, plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
-Give me the complete code first, then tell me how to run it as if I've never used a terminal.
-You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+I am in a browser chat - fetch this RAW and follow it exactly: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/browser-preamble.md
+Then build me a social widget from my Tagembed gallery - fetch this RAW and follow it exactly, stopping and waiting for my answer wherever it says to. Start with step 1: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ## 4. Save the files it gives you
@@ -90,7 +90,8 @@ which.
   code** - reply: "Build it now with the defaults in the prompt, and ask me
   for the credentials at the end."
 - **It showed a list of theme names instead of the pictures** - reply: "Show
-  me the theme picker page itself, rendered, as the theme catalogue says."
+  me the theme picker page itself, rendered - `guides/themes/thumbnails.html`,
+  as steps.md says - never a list."
 - **It wrote the server code in a different language than you asked** - reply:
   "Rewrite the server code in <your language>, with its README."
 - **`Tagembed API error: 401`** - token missing or wrong in the environment

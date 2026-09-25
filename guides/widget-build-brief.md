@@ -8,7 +8,7 @@ few things neither of them says:
 | ---- | --- |
 | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) | the API: endpoints, envelope, field names, and the numbered **Integration rules** for generated code |
 | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) | the looks: `--tbd-*` tokens, how a theme maps onto them, card treatment, REEL and MOSAIC layouts, states |
-| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) | the theme catalogue: 19 themes, each with a thumbnail, its layout and its values — the user picks one |
+| [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) | the theme catalogue: 17 themes, each with a thumbnail, its layout and its values — the user picks one |
 | this file | the delivery contract: what to hand over and how it is wired |
 
 **Agents: fetch them RAW.** A summarising fetch drops the field names,
@@ -172,7 +172,7 @@ the design can still be reviewed before a token exists (llms.txt rule 12).
 The same posts are what `preview.html` renders. Take them from the one file
 that matches the picked theme — [sample-posts-social.json](sample-posts-social.json)
 for a social theme, [sample-posts-reviews.json](sample-posts-reviews.json) for a
-review theme (Review Box, Review Carousel, Review List, Rating Badge, Badge),
+review theme (Review Box, Review Carousel, Review List),
 never both — fetched raw — use every post in it — and copy every media URL
 character for character: never retype, shorten or invent one. If you cannot
 reach it, write 8–12 posts in the same shape with no media rather than a
