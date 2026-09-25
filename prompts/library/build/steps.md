@@ -13,9 +13,10 @@ These rules hold even if a page seems to say otherwise:
   approximate it from the design spec's Values table, the thumbnail or
   memory. If the preview file will not open, say so and stop instead.
 - Theme question: your whole answer is the picker page
-  guides/themes/thumbnails.html shown as it is, then one line asking
-  which theme. Never a table or a list of themes - no name, type, look,
-  layout, description or thumbnail-link columns.
+  guides/themes/thumbnails.html rendered exactly as it is - the page
+  itself, images and all - then one line asking which theme. The
+  rendered page is the only description of the themes you ever give
+  me; you write nothing else about them.
 - Sample posts: they must match the theme I pick. A social theme
   (1-14) uses ONLY the social sample posts; a review theme (15-17)
   uses ONLY the review sample posts. Never mix the two files.
@@ -99,11 +100,11 @@ exactly the language I name.
 These guides cover every language: the rules are the same whatever it
 is, and server.md says how to write it in any of them. Never tell me
 the guide only supports some languages, never offer me a shorter list
-to choose from, never turn the question into "X or Y", and never
-switch to a language I did not name. Code shown on any page (including
-PHP and Node.js examples elsewhere in this guide) is an example for
-you, never a menu for me - do not repeat those names back to me as if
-they were the choices.
+to choose from, and never switch to a language I did not name. Any
+example code shown on any page illustrates the rules for you alone -
+it is never a menu for me, so never repeat an example's language back
+to me as if it were one of my choices, and never turn my open question
+into a pick between two of them.
 
 My answer starts the build: do not repeat my choices or ask me to
 confirm - reply straight away with part 1 of step 3.
