@@ -94,9 +94,17 @@ about to show has any of these, you built it yourself instead of
 using the fetched bytes - stop and use the artifact tool on the raw
 fetch result instead.
 
-Your whole reply is the picker and then one line: "Which theme do you
-want? Reply with its name or number." Then stop and wait for my
-answer.
+Then always also give me this one line: the real screenshots, pixel
+for pixel, in my own browser -
+https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+- only for me to click, never fetched by you again. Some fetch tools
+summarise a page into a text list before you ever see it, so your own
+artifact may only approximate the real look - this link is the
+fallback that always shows the exact file.
+
+Your whole reply is the picker artifact, that one link, and then one
+line: "Which theme do you want? Reply with its name or number." Then
+stop and wait for my answer.
 
 ## Step 2 - the preview (fetch ONE file, write no code)
 
