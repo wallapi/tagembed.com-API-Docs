@@ -36,12 +36,16 @@ Show it the first way your tool allows:
    makes it render. The artifact's code is the whole file, every base64
    string complete: never shorten or re-encode an image, never swap one for
    a link or a placeholder, never turn the page into markdown or a table.
-   Nothing in this file is a remote image or a GitHub-hosted picture link —
-   every thumbnail is already inlined as base64 data inside the file you
-   just fetched, so "artifacts can't load remote images" is never a reason
-   to skip this path. If you find yourself about to write a reason like
-   that, you have not actually built the artifact from the fetched file —
-   go back and do it.
+   Before you decide this needs an external image load, look at what you
+   actually fetched: every `<img>` tag in this file is
+   `src="data:image/webp;base64,..."`, never `src="https://..."` or any
+   other URL — grep the content you fetched for `src="http` and you will
+   find zero matches. The file living at a GitHub URL does not make the
+   pictures inside it remote; they are bytes already in your hands. So
+   "hosted on GitHub", "external images" and "platform restrictions on
+   loading remote images" are never true reasons to fall back to a chat
+   list for this specific file — if that is what you are about to write,
+   you have not looked at the `src=` attributes you just fetched.
 2. **You work in the user's folder** (Claude Code, Cursor, Codex, Copilot,
    Gemini CLI, Windsurf): download it as `theme-picker.html` without
    retyping it (`curl -sSLo theme-picker.html <url>`), then open it in their
