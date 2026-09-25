@@ -37,16 +37,16 @@ prompt".
 
 Four lines. Paste the block below as your first message, in a brand-new
 chat (a continued one may reuse an old, stale fetch instead of reading the
-files fresh). It links browser-preamble.md (hand over every file complete,
-each starting with a `### FILE:` header) and steps.md (the theme picker, the
-language question, then the build) - fetched one at a time, so every reply
-stays quick and the theme-picker render is never spelled out here.
+files fresh). It is one link, steps.md - the theme picker, the language
+question, then the build, fetched one step at a time so every reply stays
+quick and the theme-picker render is never spelled out here.
 
 ```
-I am in a browser chat - fetch this RAW and follow it exactly: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/browser-preamble.md
-Then build me a social widget from my Tagembed gallery - fetch this RAW and follow it exactly, stopping and waiting for my answer wherever it says to. Start with step 1: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
-Fetch every file fresh in this reply, even one you think you already know - never answer from memory of an earlier version.
-If you cannot open a link, say so in one line - do not build from memory.
+Build me a social widget from my Tagembed gallery.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer. Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If a link will not open, say so in one line and stop.
 ```
 
 ## 4. Save the files it gives you
