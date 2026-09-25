@@ -65,6 +65,21 @@ a table, a list, a link in place of it, or a description of it
 instead. There is no fallback path here: put the fetched bytes in the
 artifact and it renders.
 
+Do not build your own version of this page from what you know about
+Tagembed or from a typical theme picker - that is not this file, even
+if it looks plausible. The real file's title and its only heading are
+both exactly "Pick a theme", nothing added after it, no subtitle line,
+no theme count. Every thumbnail is a plain photo in a plain white
+card with its number and name below it as one line, "1. Classic
+Card" - no colour-tinted card backgrounds, no circular number badge
+drawn over the corner, no "social"/"reviews" tag, no one-line look
+description, no bigThumb filename or link. Real estate, fashion,
+sports or food stock photos are not in this file at all - the actual
+thumbnails are screenshots of the widget itself. If what you are
+about to show has any of these, you built it yourself instead of
+using the fetched bytes - stop and use the artifact tool on the raw
+fetch result instead.
+
 Your whole reply is the picker and then one line: "Which theme do you
 want? Reply with its name or number." Then stop and wait for my
 answer.
