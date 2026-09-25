@@ -227,7 +227,7 @@ and a mosaic reads as a mosaic precisely BECAUSE the tiles are different heights
 - Every image `loading="lazy" decoding="async"`. A widget puts far more media on
   screen at once than a reel does; this is where it pays.
 
-Other layouts — the grids, sliders, collage, single-post and badge themes in
+Other layouts — the grids, sliders, collage and single-post themes in
 the catalogue, or on request a vertical feed or a full-screen signage view —
 all reuse §2 and §3 unchanged. Sliders and carousels are a CSS scroll-snap row;
 their arrows use the theme preview's own small `<script>`, copied as it is —
