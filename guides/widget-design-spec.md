@@ -51,7 +51,7 @@ when you cannot.
 
 ### Themes — where the design comes from
 
-The catalogue is a folder, `guides/themes/`: 19 themes (14 social, 5 review),
+The catalogue is a folder, `guides/themes/`: 17 themes (14 social, 3 review),
 each with a thumbnail PNG (to pick from), a preview HTML of the finished
 widget in `guides/previews/` (to build from), a *Look* line describing its
 layout in words, and a *Values* line. Fetch its README raw:

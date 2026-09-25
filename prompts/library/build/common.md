@@ -48,8 +48,7 @@ class, the <section>, and its arrow <script> if it has one - and only
 inject the posts: replace the sample cards between <!-- tbd:cards -->
 and <!-- /tbd:cards --> with one card per post, made from the file's
 <template id="tbd-card-template"> with every {{slot}} filled as the
-catalogue's "Filling the card" table says (badge themes: the
-tbd:badge marks and tbd-badge-template). Then delete the template
+catalogue's "Filling the card" table says. Then delete the template
 element and its note. Do not restyle it from the thumbnail, the design
 spec or your own taste, and never copy its sample posts, names or
 image URLs - the posts come only from the sample posts JSON below (or
@@ -73,8 +72,7 @@ RAW, and bake in every post in it - never skip it, never add posts
 from the other file:
 - a social theme (1-14 in the catalogue):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-social.json
-- a review theme (15-19: Review Box, Review Carousel, Review List,
-  Rating Badge, Badge):
+- a review theme (15-17: Review Box, Review Carousel, Review List):
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/sample-posts-reviews.json
 Copy every image and video URL character for character: never retype,
 shorten or invent one. If you cannot reach it, write 8-12 posts in

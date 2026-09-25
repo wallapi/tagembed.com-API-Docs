@@ -272,7 +272,7 @@ user's prompt is deliberately short; this section is the full brief.
     published sample posts when you can reach them — only the file that
     matches the picked theme: guides/sample-posts-social.json for a social
     theme, guides/sample-posts-reviews.json for a review theme (Review Box,
-    Review Carousel, Review List, Rating Badge, Badge), never both — in
+    Review Carousel, Review List), never both — in
     github.com/wallapi/tagembed.com-API-Docs, fetched raw, copying every media URL
     character for character — never retype, shorten or invent one. If you
     cannot reach it, write 8–12 posts in the same shape with no media

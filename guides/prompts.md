@@ -19,7 +19,7 @@ HTML page, the raw one returns the file:
 | ---- | --------------- | ---------------- |
 | Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md) |
 | API spec | endpoints, envelope, field names, integration rules | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) |
-| Theme catalogue | the 19 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you the thumbnails first, as pictures | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
+| Theme catalogue | the 17 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you the thumbnails first, as pictures | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
 | Design spec | `--tbd-*` tokens, how a theme maps onto them, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
 
 All of them live in the public docs repo
@@ -48,7 +48,7 @@ the rendered HTML. That is what makes the page safe to put on a public site.
 
 **You pick the look and the language first.** Before any code, the AI shows
 you the theme picker from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) —
-the 19 widget themes as **thumbnail pictures**, rendered as a page (an HTML
+the 17 widget themes as **thumbnail pictures**, rendered as a page (an HTML
 artifact in a chat, or the page opened in your browser by an editor agent),
 never a list of names — and asks which one you want. Then it asks **which
 language you want the server code in** — any server-side language: Python,

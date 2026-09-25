@@ -17,7 +17,7 @@ These rules hold even if a page seems to say otherwise:
   which theme. Never a table or a list of themes - no name, type, look,
   layout, description or thumbnail-link columns.
 - Sample posts: they must match the theme I pick. A social theme
-  (1-14) uses ONLY the social sample posts; a review theme (15-19)
+  (1-14) uses ONLY the social sample posts; a review theme (15-17)
   uses ONLY the review sample posts. Never mix the two files.
 - Language: Build the server in whatever language or framework I name -
   writing it from the guide's rules is the job.
@@ -84,21 +84,26 @@ last. Copy the whole file as it is except those sample cards, and only
 inject the posts: one card per post from its template, between its
 tbd:cards marks, as the catalogue's "Filling the card" says. The posts
 come from the sample posts JSON that matches the theme - social for
-1-14, reviews for 15-19 - (or the live API), never from the preview's
+1-14, reviews for 15-17 - (or the live API), never from the preview's
 sample cards.
 
 ## Step 2 - language
 
-Ask which language I want the server code in - any server-side
-language works (PHP, Node.js, Python, Ruby, Go, Java, C#, ...) or a
-framework (Laravel, Express, Flask, Django, ...). Then stop and wait
-for my answer, and build in exactly the language I name.
+Ask me this exact question, word for word - never shorten it into an
+either/or between two languages, never pick any two to name in the
+question itself:
+"Which language or framework do you want the server code in? Any one
+you name - your call." Then stop and wait for my answer, and build in
+exactly the language I name.
 
 These guides cover every language: the rules are the same whatever it
 is, and server.md says how to write it in any of them. Never tell me
 the guide only supports some languages, never offer me a shorter list
-to choose from, and never switch to a language I did not name. Code
-shown on any page is an example, not a limit.
+to choose from, never turn the question into "X or Y", and never
+switch to a language I did not name. Code shown on any page (including
+PHP and Node.js examples elsewhere in this guide) is an example for
+you, never a menu for me - do not repeat those names back to me as if
+they were the choices.
 
 My answer starts the build: do not repeat my choices or ask me to
 confirm - reply straight away with part 1 of step 3.
