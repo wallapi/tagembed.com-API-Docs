@@ -44,7 +44,9 @@ quick and the theme-picker render is never spelled out here.
 ```
 Build me a social widget from my Tagembed gallery.
 Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Start with step 1 now:
+to stop and wait for my answer. Every step that is a page (theme
+picker, preview) goes in an Artifact, rendered - never described.
+Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If a link will not open, say so in one line and stop.
 ```

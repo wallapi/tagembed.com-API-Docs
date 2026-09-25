@@ -43,8 +43,12 @@ quick and the theme-picker render is never spelled out here.
 
 ```
 Build me a social widget from my Tagembed gallery.
+llms.txt is attached - read it from there, do not fetch it again.
 Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Start with step 1 now:
+to stop and wait for my answer; the only questions you may ask are
+the ones it names, nothing else, and no plan before step 1. Every
+step that is a page (theme picker, preview) goes in Canvas, rendered
+as HTML - never described. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If a link will not open, say so in one line and stop.
 ```

@@ -106,15 +106,16 @@ for character - same CSS, markup, sample posts, image URLs and base64
 fetch nothing else - it is already built from the sample posts, so
 there is no template to fill and no card to inject.
 
-If you can show it (an HTML artifact, canvas or preview pane): show
-it. Either way, always also give me this one line: the real images
-load full-size in my own browser -
+Show it as an HTML artifact, canvas or preview pane, the same way as
+step 1 - it always renders, on every surface, ChatGPT and Gemini
+included; there is no "cannot show it" case here. Then always also
+give me this one line: the real images load full-size in my own
+browser -
 https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html
 - built the same way as step 1's link (raw.githubusercontent.com
 swapped for raw.githack.com), never fetched yourself, only for me to
-click. If you are ChatGPT or Gemini, or otherwise cannot show a
-fetched HTML file whole in this chat: skip showing it - the githack
-link above is how I see it either way.
+click, since a chat's own preview pane blocks outside photos and
+video and shows a coloured tile in their place.
 
 Then print these two lines, character for character - copy them, do
 not write your own sentence for either one, even a close one:

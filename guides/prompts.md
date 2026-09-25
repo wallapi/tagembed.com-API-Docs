@@ -135,6 +135,11 @@ Next.js, Python, Go, ...) ports that same finished code into your stack, fast,
 using the closest bundle as the reference. Either way you get a runnable
 build plus its `README.md` in the same reply.
 
+**In an editor agent** (Claude Code, Cursor, Codex, Copilot, Windsurf,
+Gemini CLI/Antigravity) - it opens the theme picker straight in your
+browser and writes files in your project, so the prompt needs no
+rendering hint:
+
 ```
 Build me a social widget from my Tagembed gallery.
 Fetch this RAW and follow it exactly - it lists every step and when
@@ -142,6 +147,49 @@ to stop and wait for my answer. Start with step 1 now:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
+
+**In a browser chat**, the wording depends on how that tool renders a
+page, so each names its own surface - otherwise the theme picker and
+the preview get described in words instead of shown:
+
+**claude.ai**
+```
+Build me a social widget from my Tagembed gallery.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer. Every step that is a page (theme
+picker, preview) goes in an Artifact, rendered - never described.
+Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
+```
+
+**ChatGPT**
+```
+Build me a social widget from my Tagembed gallery.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer. Every step that is a page (theme
+picker, preview) goes in Canvas, rendered as HTML - never described.
+Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
+```
+
+**Gemini**
+```
+Build me a social widget from my Tagembed gallery.
+llms.txt is attached - read it from there, do not fetch it again.
+Fetch this RAW and follow it exactly - it lists every step and when
+to stop and wait for my answer; the only questions you may ask are
+the ones it names, nothing else, and no plan before step 1. Every
+step that is a page (theme picker, preview) goes in Canvas, rendered
+as HTML - never described. Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
+```
+
+Full per-tool setup (attaching `llms.txt`, saving the files it gives
+you, run commands) is one document per tool in
+[prompts/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts).
 
 ## Prompt A — the short alternative (AI that can browse)
 
