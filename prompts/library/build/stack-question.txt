@@ -1,0 +1,2 @@
+Want to change anything in this preview? (colours, font, columns, card style, hide author/date...) - or say "no".
+Which stack should I build it in? PHP / Node.js / React / Simple HTML / Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
