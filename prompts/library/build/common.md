@@ -36,7 +36,7 @@ header, the README and the code comments - never "social wall".
 
 Looks: skin everything with the ONE theme I picked from the theme
 catalogue:
-BASE/guides/themes/README.md?v=2026-09-24c
+BASE/guides/themes/README.md?v=2026-09-25a
 That theme's preview file is the TEMPLATE - fetch it RAW:
 BASE/guides/previews/<theme>.html
 (the "Preview" line under the theme in the catalogue). If it will not

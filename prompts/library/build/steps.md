@@ -52,12 +52,19 @@ These rules hold even if a page seems to say otherwise:
 
 ## Step 1 - theme
 
-Fetch this RAW - it is the theme catalogue, and its "Agents: ask
-first" section says exactly how to show the picker (as an artifact,
-opened in my folder, or neither) and what to do if you cannot fetch
-it. Follow it exactly - do not describe the themes yourself or
-shorten its instructions:
-BASE/guides/themes/README.md?v=2026-09-24c
+Fetch these two RAW, together, in parallel, in this one turn - never
+fetch only the first and treat its text as enough, and never wait to
+read the first before starting the second:
+BASE/guides/themes/README.md?v=2026-09-25a
+BASE/guides/themes/thumbnails.html?v=2026-09-25a
+
+The first is the theme catalogue; its "Agents: ask first" section
+says exactly how to show the second - the picker file you just
+fetched - (as an artifact, opened in my folder, or neither) and what
+to do if either fetch fails. Follow it exactly - do not describe the
+themes yourself, shorten its instructions, or build your own picker
+page from the catalogue's per-theme text instead of using the
+thumbnails.html you already have in hand.
 
 Your whole reply is what that section says (the picker or the
 fallback line), then the question. Then stop and wait for my answer.
