@@ -157,8 +157,10 @@ Pick the block for your AI.
 **Claude (claude.ai) or an editor agent:**
 
 ```
-Help me build a social widget from my Tagembed gallery, using Tagembed's public build guide as the plan (it says where to pause for my answers). Give every file complete, each starting with "### FILE: <name>".
-Guide: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+Build me a social widget from my Tagembed gallery, step by step.
+Fetch this RAW and use it as the guide - it lists every step and when to stop and wait for my answer. Start with step 1 now:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 **ChatGPT:** same block, one line added before the link:

@@ -3,6 +3,9 @@
 Every link in this file is a complete URL - fetch it exactly as
 written, character for character.
 
+Give every file complete and ready to save, each starting with
+"### FILE: <name>".
+
 Follow the steps in order. Ask ONE question per reply and write no code
 until I have answered both questions. Skip a question I already
 answered in my message; never pick either one for me.
