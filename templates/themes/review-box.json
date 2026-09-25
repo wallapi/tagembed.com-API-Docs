@@ -1,0 +1,13 @@
+{
+  "name": "Review Box",
+  "slug": "review-box",
+  "type": "review",
+  "layout": "grid",
+  "parts": [
+    "stars",
+    "text",
+    "head"
+  ],
+  "clamp": true,
+  "font_url": ""
+}

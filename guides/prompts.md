@@ -123,22 +123,17 @@ stay out of the source. Nothing runs until you fill them in:
 
 ## Prompt 1 — The main prompt (start here)
 
-One prompt, pasted once. The AI asks you two things first, one per reply —
-**which theme** (it shows you the theme picker — the thumbnail pictures
-themselves, never a list of names) and **which language the server code should
-be in** (any language) — and starts building the moment you answer the second,
-with no confirm step. It builds in two replies: `preview.html` first, then —
-after you type **next** — the server code in your language **together with
-its `README.md`**, so every reply stays short instead of one long reply that
-runs out of room or times out. The full brief is split per deliverable into
-files in [build/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/build) — `preview.md` and `server.md` (one file for
-every language) — and the prompt itself is one link, to [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md),
-which carries both questions and the build parts in order. Each part fetches the shared rules
-([common.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/common.md) — data, field names, looks,
-security), and the server part also fetches the cache contract
-([cache.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/cache.md)). Those two carry the facts that cannot be
-guessed, so the build still works when the AI then fails to open the specs
-they link.
+One prompt, pasted once, and one link: [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md).
+It walks you through four short steps, one reply each — **theme** (the
+thumbnail picker, never a list of names), **preview** (the finished
+`preview.html` for that theme, nothing to fill in), **customise** (optional -
+colours, font, columns... as a `custom.css`), then **stack**: PHP, Node.js,
+React or Simple HTML hand you a link to a finished, already-tested
+`social-widget-<stack>.zip` from [templates/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/templates) — no
+code written, no waiting — while naming anything else (Laravel, Django,
+Next.js, Python, Go, ...) ports that same finished code into your stack, fast,
+using the closest bundle as the reference. Either way you get a runnable
+build plus its `README.md` in the same reply.
 
 ```
 Build me a social widget from my Tagembed gallery.
@@ -207,9 +202,11 @@ so paste the files instead of the prompt's link list:
 1. Open the prompt's file from
    [prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library)
    and paste the text of every file the prompt links instead of the prompt —
-   for Prompt 1, `build/steps.md`, `guides/themes/README.md` (name the theme you want and paste
-   its preview from `guides/previews/`), `build/common.md`, `build/cache.md`, then
-   `preview.md` and `server.md` — and say which language you want.
+   for Prompt 1, `build/steps.md`, then the picked theme's preview from
+   `guides/previews/`, and for PHP/Node.js/React/Simple HTML the matching
+   `templates/dist/social-widget-<stack>.txt` plus that theme's
+   `templates/themes/<slug>.css` and `.json` (any other stack: paste the
+   closest one of those as the reference and name your stack).
 2. Attach or paste [llms.txt](../llms.txt) and
    [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md)
    in the first message, then the prompt.

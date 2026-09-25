@@ -1,9 +1,12 @@
 # Gemini - build a Tagembed social widget
 
 Use this when you are chatting with Gemini in the browser. It cannot touch
-your computer, so the prompts below make it hand you complete files plus a
-setup checklist. It asks you two things first - which theme, then which
-language the server code should be in - and nothing else before the code.
+your computer, so the prompts below make it hand you complete files (or a
+download link) plus a setup checklist. It walks through short steps - theme,
+then the preview, an optional customise, then PHP / Node.js / React /
+Simple HTML / Other - and nothing else before the code. The first four
+stacks are already built and tested, so those arrive as a ready zip in
+seconds; naming anything else ports that same code into your stack instead.
 
 ## 1. Get the spec file
 
@@ -48,25 +51,30 @@ If you cannot open a link, say so in one line - do not build from memory.
 
 ## 4. Save the files it gives you
 
-For every `### FILE:` block: click the copy button on the code block, open a
-plain-text editor (macOS: TextEdit with Format > Make Plain Text; Windows:
-Notepad; or VS Code), paste, and save with the exact filename shown into a
-new folder called `my-social-widget`. Do not let the editor add `.txt`.
+**PHP / Node.js / React / Simple HTML:** click the download link, unzip it
+into a folder called `my-social-widget`, then put the `.env` (and
+`custom.css`, if you asked for a change) it gave you inside that same
+unzipped folder.
+
+**Any other stack:** for every `### FILE:` block, click the copy button on
+the code block, open a plain-text editor (macOS: TextEdit with Format >
+Make Plain Text; Windows: Notepad; or VS Code), paste, and save with the
+exact filename shown into `my-social-widget`. Do not let the editor add
+`.txt`.
 
 ### Run it
 
-The `README.md` the AI hands over **together with the server code** has the
-exact check and run commands for the language you picked. The common ones:
+The `README.md` inside the folder has the exact check and run commands.
+The four built-in stacks:
 
-| Language | Check it is installed | Run it (in `my-social-widget`) | Open |
-| -------- | --------------------- | ------------------------------ | ---- |
-| Python   | `python3 --version` (Windows: `py --version`) | `python3 app.py` | the URL it prints |
-| Node.js  | `node -v` (v18 or higher) | `node server.js` | the URL it prints |
-| PHP      | `php -v` (8.x) | `php -S localhost:8080` | http://localhost:8080 |
-| Go       | `go version` | `go run main.go` | the URL it prints |
+| Stack | Check it is installed | Run it (in `my-social-widget`) | Open |
+| ----- | --------------------- | ------------------------------ | ---- |
+| PHP / Simple HTML | `php -v` (8.x) | `php -S localhost:8080` | http://localhost:8080 |
+| Node.js | `node -v` (v18 or higher) | `npm install`, then `npm start` | http://localhost:3000 |
+| React | `node -v` (v18 or higher) | `npm install`, then `npm run dev` | http://localhost:5173 |
 
-Any other language or a framework you named: the README gives its own check,
-install (only if a framework needs one) and run command.
+Any other stack you named: the README gives its own check, install (only if
+the framework needs one) and run command.
 
 Put your token in a `.env` file beside the server file - the code reads it on
 its own:
@@ -90,14 +98,14 @@ which.
 
 ## If it goes wrong
 
-- **The AI asked anything besides the theme and the language before writing
-  code** - reply: "Build it now with the defaults in the prompt, and ask me
-  for the credentials at the end."
+- **The AI asked anything besides theme, customise-or-not and stack before
+  writing code** - reply: "Build it now with the defaults in the prompt, and
+  ask me for the credentials at the end."
 - **It showed a list of theme names instead of the pictures** - reply: "Show
   me the theme picker page itself, rendered - `guides/themes/thumbnails.html`,
   as steps.md says - never a list."
-- **It wrote the server code in a different language than you asked** - reply:
-  "Rewrite the server code in <your language>, with its README."
+- **It wrote the server code in a different stack than you asked** - reply:
+  "Rewrite it for <your stack>, with its README."
 - **`Tagembed API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's

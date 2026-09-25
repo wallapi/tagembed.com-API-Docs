@@ -9,7 +9,7 @@ build prompts offer are in [../../guides/themes/](../../guides/themes/).
 
 | Folder | Prompt | Parts, in order |
 | ------ | ------ | --------------- |
-| [build/](build/) | Prompt 1 — the main build | the prompt links only `steps.md`, which asks theme (shown as the rendered thumbnails page), then the server language — any language — then builds at once: `preview.md`, then `server.md` (the server code **and** its README in one reply); shared: `common.md`, `cache.md` |
+| [build/](build/) | Prompt 1 — the main build | the prompt links only `steps.md`: theme (the rendered thumbnails page) → preview (already-built `preview.html`, no fetch but its own) → optional customise (`custom.css`) → stack. PHP/Node.js/React/Simple HTML hand over an already-built, already-tested zip from [../../templates/](../../templates/); anything else ports that same code, fast, using the closest bundle as reference - no `common.md`/`cache.md`/`server.md` fetch either way |
 | [quick-start/](quick-start/) | Prompt A — the brief-driven build | asks theme, then language, then builds at once; `preview.md`, then `server.md` (server code + README together) |
 | [integrate/](integrate/) | Prompt 2 — into an existing site | `section.md`, `preview.md`, `summary.md` |
 | [restyle/](restyle/) | Prompt 3a — restyle | `change.md`; `preview.md`, `server.md` |

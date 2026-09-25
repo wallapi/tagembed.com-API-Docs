@@ -7,4 +7,6 @@ ready to save - no placeholders, no "rest stays the same", no
 truncation - each starting with a header line naming its exact path,
 e.g. `### FILE: index.php`. Offer each file as a download if this chat
 can. When I report an error, reply with the corrected COMPLETE file,
-not a diff.
+not a diff. Where a step instead hands over a direct download link (a
+finished zip already built for me), that is not a placeholder - follow
+that step's own instructions as they are, not this one.

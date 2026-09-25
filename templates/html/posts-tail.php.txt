@@ -1,0 +1,25 @@
+// ---------- JSON for index.html ----------
+// posts.php        -> { posts, paging, sample, theme }  (theme = how to lay out a card)
+// posts.php?css=1  -> the theme CSS (and custom.css), with its Google Font
+
+$theme = sw_theme();
+if (isset($_GET['css'])) {
+    header('Content-Type: text/css; charset=utf-8');
+    $font = $theme['meta']['font_url'] ?? '';
+    echo ($font ? '@import url("' . $font . "\");\n" : '') . $theme['css'];
+    exit;
+}
+try {
+    $data = sw_get_posts($theme);
+} catch (Throwable $e) {
+    error_log('[social-widget] ' . $e->getMessage());
+    $data = ['posts' => [], 'paging' => null];
+}
+header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store');
+echo json_encode([
+    'posts' => $data['posts'] ?? [],
+    'paging' => $data['paging'] ?? null,
+    'sample' => !empty($data['sample']),
+    'theme' => $theme['meta'],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

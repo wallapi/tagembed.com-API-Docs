@@ -1,0 +1,12 @@
+{
+  "name": "Classic Photo",
+  "slug": "classic-photo",
+  "type": "social",
+  "layout": "grid",
+  "parts": [
+    "media",
+    "head"
+  ],
+  "clamp": false,
+  "font_url": ""
+}

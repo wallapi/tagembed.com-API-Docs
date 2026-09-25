@@ -1,0 +1,13 @@
+{
+  "name": "Vivid",
+  "slug": "vivid",
+  "type": "social",
+  "layout": "masonry",
+  "parts": [
+    "media",
+    "head",
+    "text"
+  ],
+  "clamp": true,
+  "font_url": ""
+}

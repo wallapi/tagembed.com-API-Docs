@@ -1,0 +1,13 @@
+{
+  "name": "Modern Card",
+  "slug": "modern-card",
+  "type": "social",
+  "layout": "grid",
+  "parts": [
+    "media",
+    "text",
+    "head"
+  ],
+  "clamp": true,
+  "font_url": "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+}

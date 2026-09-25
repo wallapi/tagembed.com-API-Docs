@@ -1,0 +1,11 @@
+{
+  "name": "Slider",
+  "slug": "slider",
+  "type": "social",
+  "layout": "slider",
+  "parts": [
+    "media"
+  ],
+  "clamp": false,
+  "font_url": ""
+}

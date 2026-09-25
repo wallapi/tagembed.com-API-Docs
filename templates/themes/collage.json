@@ -1,0 +1,12 @@
+{
+  "name": "Collage",
+  "slug": "collage",
+  "type": "social",
+  "layout": "collage",
+  "parts": [
+    "media",
+    "text"
+  ],
+  "clamp": false,
+  "font_url": "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+}
