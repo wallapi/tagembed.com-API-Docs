@@ -14,6 +14,4 @@ Deliver one README.md covering preview.html, index.php and the Node.js
 set, as the brief's section 6 describes. Then, at the end of this
 reply, ask me for my token, with the steps to
 find it (dashboard - the gallery's card - its three-dot menu - "Access
-Token"), and that it goes after ACCESS_TOKEN= in .env - offer to add it
-there only if you can write files in my project, and never ask me to
-paste it into a browser chat.
+Token"), and offer to put it in a .env for me.

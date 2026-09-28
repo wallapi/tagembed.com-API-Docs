@@ -4,7 +4,7 @@ Paste this whole file into an AI assistant (Claude, ChatGPT, Gemini, Copilot)
 together with your task, e.g.:
 
   "Using the API described below, build a social WIDGET I can drop
-   into any page of my site, in Python (or PHP, Node.js, Go - any), showing the
+   into any page of my site, in Node.js/Express (or PHP), showing the
    latest 30 Instagram image posts. My access token is in the
    ACCESS_TOKEN environment variable."
 
@@ -152,31 +152,27 @@ user's prompt is deliberately short; this section is the full brief.
    script, no mount point, no same-origin JSON endpoint and no browser-side
    fetch of any kind.
 
-   Any stack works - PHP, Node.js, React, Simple HTML, or any other
-   language or framework the user names (Laravel, WordPress, Next.js, Vue,
-   Django, Flask, Go, ...). Ask which one when the prompt says to, offering
-   that full list; never narrow it to two, never pick for the user, and
-   deliver ONLY the stack they name. When the prompt splits the build into
-   parts, deliver one part per reply, in its order:
+   Deliver BOTH languages — never one or the other, and never a choice
+   handed back to the user. When the prompt splits the build into parts,
+   deliver one part per reply, in its order:
 
-   (a) The server code in that stack. Node.js: `server.js` (the API call,
-       the cache, the HTML and the CSS all inside it), `package.json` and a
-       `cache/posts.json` cache file. PHP: a single `index.php` holding
-       everything, CSS included, nothing to install. Any other stack: the
-       files it needs in its normal layout and nothing more. Plus
+   (a) Node.js — `server.js` (the API call, the cache, the HTML and the CSS
+       all inside it), `package.json`, a `cache/posts.json` cache file, and
        `README.md`.
-   (b) `preview.html` — the same page as a plain static file, with the
+   (b) PHP — a single `index.php` holding everything, CSS included: nothing
+       to install and nothing to require.
+   (c) `preview.html` — the same page as a plain static file, with the
        sample posts of rule 12 written into it as finished markup. It runs
        from a double-click: no server, no build step, nothing installed. It
        calls NOTHING — no fetch, no API call, no token, not even a same-origin one — because the posts are already in the
        file; it carries no JavaScript at all. Name it
        `preview.html`, never `index.html`: an `index.html` beside
-       `index.php` (or any server entry file) is served instead of it by most Apache and nginx
+       `index.php` is served instead of it by most Apache and nginx
        configurations, which silently replaces the live page with the
        sample one.
 
-   Both render the same layout from the same design tokens, so they look
-   identical in a browser and any restyle lands in both at once. The
+   All three render the same layout from the same design tokens, so they look
+   identical in a browser and any restyle lands in all three at once. The
    README documents them (rule 13).
 
    Default layout: a MOSAIC — a masonry layout via CSS multi-column, each image
@@ -185,7 +181,7 @@ user's prompt is deliberately short; this section is the full brief.
 
    Asked for a section inside a site that already exists rather than a whole
    page? Same code, rendered into their template — still server-side, still
-   in the stack they named.
+   both languages.
 2. Credentials: ask for them, but never block on them. The code reads both
    from environment variables (rule 3), so nothing is missing from it before
    the user answers — deliver the complete, runnable code in the FIRST reply,
@@ -249,11 +245,11 @@ user's prompt is deliberately short; this section is the full brief.
     8–12 posts in the same shape, including a review post with a `rating`
     and a text-only post with an empty `media` array.
 13. Hand-off: deliverable first, commentary last — do not open with a plan
-    or a list of what you are about to build. Give every file complete with its exact path — the server code and
+    or a list of what you are about to build. Give every file complete with its exact path — both languages and
     `preview.html` — one part per reply when the prompt splits the build into parts.
     Then a `README.md`,
-    which is itself a deliverable: what this is, the file list,
-    how to set the two environment variables, how to run it
+    which is itself a deliverable: what this is, the file list for each
+    language, how to set the two environment variables, how to run each one
     locally written for someone who has never used a terminal plus the URL to
     open, that `preview.html` is opened by double-clicking it and is a design
     preview rather than the page to deploy,
@@ -267,7 +263,7 @@ user's prompt is deliberately short; this section is the full brief.
     way to filter by network — media_types=, pinned_only=1, min_rating=,
     created_after=, sort=-created_at, expand=album or expand=products)
     instead of filtering client-side.
-15. Tests are out of scope: the build ships without test files or test
-    scripts (no accessibility or contrast scripts, no auth or 401 flow
-    tests), and there is no need to call the API with curl yourself. Pick AA-safe colours from the values themselves
+15. No tests. Do not write or run tests, audits or checks of any kind — no
+    accessibility or contrast scripts, no auth or 401 flow tests, no curl
+    calls, no test files. Pick AA-safe colours from the values themselves
     and note any change in a comment. The user runs and checks the build.
