@@ -19,7 +19,7 @@ Docs: https://docs.anthropic.com/en/docs/claude-code
 macOS / Linux:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b   # change "main" to test another branch
 mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt "$BASE/llms.txt"
 curl -sSLo CLAUDE.md "$BASE/prompts/TAGEMBED_CONTEXT.md"
@@ -28,7 +28,7 @@ curl -sSLo CLAUDE.md "$BASE/prompts/TAGEMBED_CONTEXT.md"
 Windows (PowerShell):
 
 ```powershell
-$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main"   # change "main" to test another branch
+$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b"   # change "main" to test another branch
 mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt "$BASE/llms.txt"
 curl.exe -sSLo CLAUDE.md "$BASE/prompts/TAGEMBED_CONTEXT.md"

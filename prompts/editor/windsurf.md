@@ -13,7 +13,7 @@ Download from https://windsurf.com and install.
 macOS / Linux:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b   # change "main" to test another branch
 mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt "$BASE/llms.txt"
 mkdir -p .windsurf/rules
@@ -23,7 +23,7 @@ curl -sSLo .windsurf/rules/tagembed.md "$BASE/prompts/TAGEMBED_CONTEXT.md"
 Windows (PowerShell):
 
 ```powershell
-$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main"   # change "main" to test another branch
+$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b"   # change "main" to test another branch
 mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt "$BASE/llms.txt"
 New-Item -ItemType Directory -Force .windsurf/rules | Out-Null

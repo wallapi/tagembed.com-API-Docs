@@ -11,7 +11,7 @@ Download [llms.txt](../../llms.txt) to your computer
 terminal:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b   # change "main" to test another branch
 curl -sSLo llms.txt "$BASE/llms.txt"
 ```
 
@@ -37,7 +37,7 @@ llms.txt attached (or its contents pasted underneath). The detailed rules live
 in llms.txt; the AI reads them there.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
 Brief: BASE/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
@@ -54,7 +54,7 @@ the canvas to see the page. If it came as a plain code block instead, reply:
 the canvas; for the real look, save the file (step 4) and double-click it.
 
 Want to browse the themes first? Open
-https://raw.githack.com/wallapi/tagembed.com-API-Docs/build-2026-09-28/guides/theme-gallery.html
+https://raw.githack.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b/guides/theme-gallery.html
 in your browser. Do not ask ChatGPT to copy the gallery or a
 `guides/previews/` file back to you: they are 60-125 KB each, too long for
 one ChatGPT reply, so they come out cut short and will not render.

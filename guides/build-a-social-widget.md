@@ -220,7 +220,7 @@ and it links the other two (the API spec and the design spec), so nothing has
 to be retyped into the prompt:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget - a live feed of the posts Tagembed aggregates
 for me. The brief is here: fetch it RAW, follow it exactly, and fetch
 the two specs it links as well:
@@ -268,7 +268,7 @@ The rules are identical everywhere; only the filename changes:
 | ChatGPT (browser)           | paste into Custom Instructions / the top of the chat              |
 
 ```markdown
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 # Tagembed social widget - project context
 
 Data source: GET {API_BASE_URL}/v3/posts

@@ -131,11 +131,11 @@ are built by `python3 tools/build-previews.py` from
 sample posts.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -160,7 +160,7 @@ default — its `common.md` carries the facts itself, so nothing breaks when a
 later fetch silently fails.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget from my Tagembed gallery (from the build brief). It comes in 4 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -187,7 +187,7 @@ web), in the same message as the build prompt
 fragments.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Before the build prompt below: I am in a browser chat.
 Fetch this RAW and follow it exactly:
 BASE/prompts/library/browser-preamble.md
@@ -238,7 +238,7 @@ will scan the project and adapt; in a browser AI, tell it your stack. The parts
 are in [integrate/](../prompts/library/integrate).
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Render a Tagembed social widget INTO my existing website.
 My stack: [plain PHP | Express | describe yours]. Cache in
 [file | Redis | my framework's cache]. Layout: [MOSAIC | reel rail |
@@ -269,7 +269,7 @@ reel, grid) are specified in the
 [design spec](widget-design-spec.md).
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Restyle the widget as a [MOSAIC | REEL rail | 3-column card grid |
 full-screen signage view] with [rounded cards + soft shadows | flat
 minimal | editorial with a serif headline]. It comes in 3 parts, listed below.
@@ -287,7 +287,7 @@ If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Add a network filter bar above the widget. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -303,7 +303,7 @@ If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Add a "Next page" link under the widget. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -317,7 +317,7 @@ If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Auto-refresh the page every [60] seconds for signage. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -331,7 +331,7 @@ If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Show carousels and shopping tags. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
 it exactly and write its file complete - then stop, and end the
@@ -352,7 +352,7 @@ The parts are in [cache-upgrade/](../prompts/library/cache-upgrade); the bracket
 travel in the prompt.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
 Change the caching layer to [Redis | Memcached | my framework's cache |
 stale-while-revalidate], TTL [5] minutes. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
