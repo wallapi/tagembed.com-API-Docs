@@ -11,7 +11,7 @@ contradicts it.
 Point an AI at it instead of pasting a hundred lines of CSS into every prompt:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/... link, here and in the files you fetch, starts from it.
 Design spec (tokens, layouts, states) - follow it exactly:
 BASE/guides/widget-design-spec.md
 ```
@@ -58,7 +58,7 @@ review), each carrying the `style` fields mapped below, as the widget is really
 rendered with them. Fetch it raw:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/... link, here and in the files you fetch, starts from it.
 BASE/guides/themes-lite.json
 ```
 

@@ -1,6 +1,6 @@
 # Tagembed social widget - project context
 
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/<path> below is a file in that repo (change "main" to use another branch).
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/<path> below is a file in that repo (change "main" to use another branch).
 
 Data source: GET {API_BASE_URL}/v3/posts
 API docs: https://github.com/wallapi/tagembed.com-API-Docs

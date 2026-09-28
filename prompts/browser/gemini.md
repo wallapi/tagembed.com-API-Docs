@@ -11,7 +11,7 @@ Download [llms.txt](../../llms.txt) to your computer
 terminal:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c   # change "main" to test another branch
 curl -sSLo llms.txt "$BASE/llms.txt"
 ```
 
@@ -36,7 +36,7 @@ llms.txt attached (or its contents pasted underneath). The detailed rules live
 in llms.txt; the AI reads them there.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link, here and in the files you fetch, starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
 Brief: BASE/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
 Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
@@ -146,7 +146,7 @@ previews and code, and writes only two small files (`.env`, and
    (right-click, "Save link as...", keep the name `steps.md`), or in a terminal:
 
    ```bash
-   BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b   # change "main" to test another branch
+   BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c   # change "main" to test another branch
    curl -sSLo steps.md "$BASE/prompts/library/build/steps.md"
    ```
 
@@ -156,7 +156,7 @@ previews and code, and writes only two small files (`.env`, and
 3. Paste this prompt and send:
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28b - every BASE/... link in the attached file starts from it.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/... link in the attached file starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
 The attached steps.md lists every step and when to stop and wait for my answer - follow it exactly. You are Gemini: wherever it says "If you are ChatGPT or Gemini", do that. Open no link - only write links for me to click.
 Start with step 1 now.
