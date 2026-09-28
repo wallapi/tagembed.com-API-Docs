@@ -7,7 +7,7 @@ TAG="$1"; [ -n "$TAG" ] || { echo "usage: tools/release.sh <new-tag>"; exit 1; }
 cd "$(dirname "$0")/.."
 REPO=$(basename "$(git rev-parse --show-toplevel)")
 git grep -lIE "raw\.(githubusercontent|githack)\.com/wallapi/$REPO/" -- ':!*.zip' | while read -r f; do
-  perl -pi -e "s#(raw\.(?:githubusercontent|githack)\.com/wallapi/\Q$REPO\E/)[^/\s\"'<>)]+/#\${1}$TAG/#g" "$f"
+  perl -pi -e "s#(raw\.(?:githubusercontent|githack)\.com/wallapi/\Q$REPO\E/)[^/\s\"'<>)]+(?=[/\s\"'<>)]|\$)#\${1}$TAG#g" "$f"
 done
 git add -A
 git commit -q -m "release: point build links at $TAG"
