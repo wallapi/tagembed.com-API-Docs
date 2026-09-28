@@ -267,7 +267,7 @@ user's prompt is deliberately short; this section is the full brief.
     way to filter by network — media_types=, pinned_only=1, min_rating=,
     created_after=, sort=-created_at, expand=album or expand=products)
     instead of filtering client-side.
-15. No tests. Do not write or run tests, audits or checks of any kind — no
-    accessibility or contrast scripts, no auth or 401 flow tests, no curl
-    calls, no test files. Pick AA-safe colours from the values themselves
+15. Tests are out of scope: the build ships without test files or test
+    scripts (no accessibility or contrast scripts, no auth or 401 flow
+    tests), and there is no need to call the API with curl yourself. Pick AA-safe colours from the values themselves
     and note any change in a comment. The user runs and checks the build.

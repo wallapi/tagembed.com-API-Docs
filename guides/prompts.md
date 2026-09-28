@@ -131,12 +131,11 @@ are built by `python3 tools/build-previews.py` from
 sample posts.
 
 ```
-BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c - every BASE/... link, here and in the files you fetch, starts from it.
 Build me a social widget from my Tagembed gallery, step by step.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Start with step 1 now:
+These are the build steps I want you to use - please read them and
+take me through them one step at a time, starting with step 1:
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/prompts/library/build/steps.md
-If you cannot open a link, say so in one line - do not build from memory.
+If a link will not open, tell me in one line and stop.
 ```
 
 **Testing a branch:** change `main` in the `BASE = ...` line to your branch

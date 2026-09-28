@@ -174,9 +174,9 @@ build.
    posts.
 3. Ask for the base URL and the token, offering to write them into `.env`.
 4. Any assumptions you made, listed at the end — not asked at the start.
-5. **No tests.** Do not write or run tests, audits or checks — no
-   accessibility or contrast scripts, no auth or 401 flow tests, no curl
-   calls, no test files. The `curl` in the README is for the user to run.
+5. **Tests are out of scope.** The build ships without test files or
+   test scripts (no accessibility or contrast scripts, no auth or 401
+   flow tests), and there is no need to call the API with curl yourself. The `curl` in the README is for the user to run.
 
 If you cannot write files (a browser chat), output every file complete with its
 filename, then that same README.
