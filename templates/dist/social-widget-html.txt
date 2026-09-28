@@ -29,7 +29,7 @@ Shows the live posts from your Tagembed gallery, in the theme you picked. Until 
 | `index.html` | The page: loads the theme and posts from `posts.php` and draws the cards. No framework, no build step. |
 | `posts.php` | The only server file and the only place the token lives: calls Tagembed with the cache, returns JSON. |
 | `.htaccess` | Keeps `.env` and `cache/` private on Apache hosts. |
-| `themes/` | All 19 themes (`.css` is the look, `.json` is how a card is laid out). |
+| `themes/` | All 17 themes (`.css` is the look, `.json` is how a card is laid out). |
 | `samples/` | The sample posts shown while `ACCESS_TOKEN` is empty. |
 | `.env.example` | The settings - copy it to `.env`. |
 

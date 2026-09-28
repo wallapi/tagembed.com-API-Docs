@@ -10,7 +10,7 @@ Shows the live posts from your Tagembed gallery, in the theme you picked. Until 
 | `src/SocialWidget.jsx` | The drop-in component: fetches `/api/posts` and renders the cards. |
 | `src/main.jsx`, `index.html`, `vite.config.js` | The Vite app around it. |
 | `package.json` | react, react-dom, express, dotenv, vite, @vitejs/plugin-react, concurrently. |
-| `themes/` | All 19 themes (`.css` is the look, `.json` is how a card is laid out). |
+| `themes/` | All 17 themes (`.css` is the look, `.json` is how a card is laid out). |
 | `samples/` | The sample posts shown while `ACCESS_TOKEN` is empty. |
 | `.env.example` | The settings - copy it to `.env`. |
 

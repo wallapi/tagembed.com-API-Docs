@@ -27,13 +27,10 @@ SAMPLE_OUT = ROOT / "templates" / "samples"
 DIST = ROOT / "templates" / "dist"
 STACKS = ["php", "nodejs", "react", "html"]
 POSTS_PER_PREVIEW = 6
-# Gallery sprite: px per thumbnail and WebP quality. Wider = sharper but a longer page to copy.
-SPRITE_WIDTH = 300
-SPRITE_QUALITY = 40
 
 # Theme name -> (file slug, layout, card parts in order).
 # Layouts: grid, list, masonry, collage, slider. Parts: media, head, stars, text.
-# Taken from the Tagembed theme thumbnails (bigThumb<themeId>.png).
+# Taken from the Tagembed theme thumbnails (tools/thumbs/bigThumb<themeId>.png).
 THEMES = {
     "Classic Card":       ("classic-card",       "grid",    ["head", "text", "media"]),
     "Social Card":        ("social-card",        "grid",    ["media", "head", "text"]),
@@ -55,102 +52,6 @@ THEMES = {
     "Rating Badge":       ("rating-badge",       "badge",   []),
     "Badge":              ("badge",              "badge",   []),
 }
-
-# Step 1's theme list: number = position here. (themeId, type label, what it looks like)
-GALLERY = {
-    "Classic Card": (5, "social", "cards: author on top, text, image at the bottom"),
-    "Social Card": (19, "social", "cards: image on top, author, then text"),
-    "Modern Card": (20, "social", "cards: image on top, text, author at the bottom"),
-    "Classic Photo": (3, "social", "16:9 photo cards with only the author row under them"),
-    "Square Photo": (4, "social", "a grid of square photos, nothing else"),
-    "Collage": (50, "social", "one big photo beside two small stacked ones"),
-    "Vivid": (83, "social", "mosaic of cards with pastel gradient text panels"),
-    "Horizontal Slider": (16, "social", "one row of photos, arrows on the ends"),
-    "Horizontal Columns": (47, "social", "a slider of cards, avatar on the photo edge, centred text"),
-    "Slider": (81, "social", "a slider of square rounded photos"),
-    "Reels": (61, "social", "a row of tall 9:16 reel tiles"),
-    "Story Theme": (60, "social", "tall story cards, the middle one in focus"),
-    "Single Post": (52, "social", "one big photo at a time, arrows on its sides"),
-    "Widget Theme": (49, "social", "one post centred: author, wide photo, text"),
-    "Review Box": (79, "reviews", "a grid of review cards, stars on top"),
-    "Review Carousel": (80, "reviews", "one row of review cards, arrows on the ends"),
-    "Review List": (85, "reviews", "full-width review rows stacked down the page"),
-}
-
-GALLERY_PAGE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="https://raw.githack.com/sudarshanbairagi-tagembed/test-code-m/main/guides/" target="_blank">
-<title>Social Widget - themes</title>
-<style>
-  body { margin: 0; font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #f4f5f8; color: #1f1f1f; }
-  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px; }
-  h1 { margin: 0 0 4px; text-align: center; }
-  p { margin: 0 0 24px; text-align: center; opacity: .7; }
-  .g { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .t { display: flex; flex-direction: column; gap: 4px; padding: 10px; background: #fff; border-radius: 10px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.08); color: inherit; text-decoration: none; }
-  .t:hover { box-shadow: 0 4px 16px rgba(0,0,0,.14); }
-  .t i { display: block; aspect-ratio: 971 / 701; border-radius: 6px; overflow: hidden;
-    background: #fff url(SPRITE) 0 0 / 100% FRAMES% no-repeat; }
-  .t img { display: block; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-</style>
-</head>
-<body>
-<main>
-  <h1>Social Widget - pick a theme</h1>
-  <p>Reply in the chat with the theme's number. Click a theme to open its preview with sample posts.</p>
-  <div class="g">
-TILES
-  </div>
-</main>
-</body>
-</html>
-"""
-
-
-def gallery_sprite(ids):
-    """Every thumbnail stacked in one small base64 WebP. The chat that shows the gallery (step 1)
-    often blocks outside images, so this is all it shows - it must be sharp yet short, as the AI
-    copies it character for character. The real PNGs load on top of it where they can."""
-    try:
-        import base64, io
-        from PIL import Image, ImageFilter
-    except ImportError:  # no Pillow: keep the sprite already in the page
-        old = (ROOT / "guides/theme-gallery.html").read_text()
-        return old.split("background: #fff url(", 1)[1].split(")", 1)[0]
-    w = SPRITE_WIDTH
-    h = round(w * 701 / 971)
-    sheet = Image.new("RGB", (w, h * len(ids)), "white")
-    for i, tid in enumerate(ids):
-        im = Image.open(ROOT / f"guides/themes/bigThumb{tid}.png").convert("RGBA")
-        flat = Image.new("RGBA", im.size, "white")
-        flat.alpha_composite(im)
-        im = flat.convert("RGB")
-        im.thumbnail((w, h), Image.LANCZOS)
-        im = im.filter(ImageFilter.UnsharpMask(1, 60, 2))
-        sheet.paste(im, ((w - im.width) // 2, i * h + (h - im.height) // 2))
-    buf = io.BytesIO()
-    sheet.save(buf, "WEBP", quality=SPRITE_QUALITY, method=6)
-    return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
-
-
-def build_gallery():
-    """guides/theme-gallery.html: every theme's thumbnail with its number, for step 1."""
-    tiles = []
-    n = len(GALLERY)
-    for i, (name, (tid, *_)) in enumerate(GALLERY.items(), 1):
-        slug = THEMES[name][0]
-        pos = f"{(i - 1) * 100 / (n - 1):.4g}%"
-        tiles.append(f'  <a class="t" href="previews/{slug}.html"><i style="background-position:0 {pos}">'
-                     f'<img src="themes/bigThumb{tid}.png" alt="" loading="lazy" onerror="this.remove()"></i>'
-                     f'<b>{i}. {esc(name)}</b></a>')
-    page = (GALLERY_PAGE.replace("SPRITE", gallery_sprite([v[0] for v in GALLERY.values()]))
-            .replace("FRAMES", str(n * 100)).replace("TILES", "\n".join(tiles)))
-    (ROOT / "guides/theme-gallery.html").write_text(page)
-
 
 # Short brand marks for the network badge (no external icon files).
 NET_MARK = {
@@ -626,7 +527,6 @@ def main():
         (THEME_OUT / f"{slug}.css").write_text(css)
         (THEME_OUT / f"{slug}.json").write_text(json.dumps(meta, indent=2) + "\n")
     print(f"guides/previews/ and templates/themes/: {len(THEMES)} themes")
-    build_gallery()
     # Themes no longer in THEMES must not linger as stale files.
     keep = {v[0] for v in THEMES.values()}
     for folder, ext in ((OUT, ".html"), (THEME_OUT, ".css"), (THEME_OUT, ".json")):
