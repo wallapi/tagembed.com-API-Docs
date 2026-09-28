@@ -123,7 +123,7 @@ stay out of the source. Nothing runs until you fill them in:
 
 ## Prompt 1 — The main prompt (start here)
 
-One prompt, pasted once, and one link: [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md).
+One prompt, pasted once, and one link: [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28).
 It walks you through four short steps, one reply each — **theme** (the
 thumbnail picker, never a list of names), **preview** (the finished
 `preview.html` for that theme, nothing to fill in), **customise** (optional -
@@ -144,7 +144,7 @@ rendering hint:
 Build me a social widget from my Tagembed gallery.
 Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -154,12 +154,12 @@ the preview get described in words instead of shown:
 
 **claude.ai**
 ```
-Build me a social widget from my Tagembed gallery.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Every step that is a page (theme
-picker, preview) goes in an Artifact, rendered - never described.
-Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+Build me a social widget from my Tagembed gallery. These are the
+build steps I want you to use - please read them and take me through
+them one step at a time, starting with step 1:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
+When a step shows me a page (the theme picker, the preview), put it in
+an Artifact so I can see it.
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -170,7 +170,7 @@ Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Every step that is a page (theme
 picker, preview) goes in Canvas, rendered as HTML - never described.
 Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -183,7 +183,7 @@ to stop and wait for my answer; the only questions you may ask are
 the ones it names, nothing else, and no plan before step 1. Every
 step that is a page (theme picker, preview) goes in Canvas, rendered
 as HTML - never described. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 

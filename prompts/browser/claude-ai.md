@@ -35,19 +35,19 @@ prompt".
 
 ## 3. Paste this prompt
 
-Four lines. Paste the block below as your first message, in a brand-new
+Paste the block below as your first message, in a brand-new
 chat (a continued one may reuse an old, stale fetch instead of reading the
 files fresh). It is one link, steps.md - the theme picker, the language
 question, then the build, fetched one step at a time so every reply stays
 quick and the theme-picker render is never spelled out here.
 
 ```
-Build me a social widget from my Tagembed gallery.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Every step that is a page (theme
-picker, preview) goes in an Artifact, rendered - never described.
-Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+Build me a social widget from my Tagembed gallery. These are the
+build steps I want you to use - please read them and take me through
+them one step at a time, starting with step 1:
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
+When a step shows me a page (the theme picker, the preview), put it in
+an Artifact so I can see it.
 If a link will not open, say so in one line and stop.
 ```
 
@@ -103,6 +103,10 @@ which.
 - **The AI asked anything besides theme, customise-or-not and stack before
   writing code** - reply: "Build it now with the defaults in the prompt, and
   ask me for the credentials at the end."
+- **It mentions 19 themes, bigThumb images or a 404 thumbnail, or builds
+  its own picker** - it read an old copy (from claude.ai's memory or an
+  earlier fetch), not today's files. Start a new **incognito** chat and
+  paste the prompt again.
 - **It showed a list of theme names instead of the pictures** - reply: "Show
   me the theme picker page itself, rendered - `guides/themes/thumbnails.html`,
   as steps.md says - never a list."

@@ -44,7 +44,7 @@ Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Every step that is a page (theme
 picker, preview) goes in Canvas, rendered as HTML - never described.
 Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
 If a link will not open, say so in one line and stop.
 ```
 

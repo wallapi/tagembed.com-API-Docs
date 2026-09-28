@@ -71,7 +71,7 @@ These rules hold even if a page seems to say otherwise:
 
 Fetch this page RAW - it is the theme picker, every theme's name
 under its thumbnail:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-28
 Before writing any other text, open it as an HTML artifact (or
 canvas), the fetched bytes as its whole content, unchanged - do this
 first, not after you have already described or listed what the file
@@ -128,7 +128,7 @@ theme name in lower case with dashes: 1 classic-card, 2 social-card,
 16 review-carousel, 17 review-list.
 
 Fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-28
 and give it back to me as preview.html, exactly as it is, character
 for character - same CSS, markup, sample posts, image URLs and base64
 "data:image" thumbnails. Do not redesign, restyle or rewrite it - it
@@ -148,7 +148,7 @@ click, since a chat's own preview pane blocks outside photos and
 video and shows a coloured tile in their place.
 
 Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt?v=2026-09-28
 and paste its two lines as your reply's last lines, exactly as
 fetched, byte for byte - do not type these two lines yourself from
 memory or from what they look like above, even if you are sure you
@@ -177,7 +177,7 @@ adding to any custom.css from earlier in this chat. Then reply with:
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
 Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt?v=2026-09-28
 and paste its one line as your reply's last line, exactly as fetched,
 byte for byte - do not type it yourself from memory. This is the only
 fetch in this step; it ends when I name a stack.
@@ -206,12 +206,12 @@ The code for every stack is finished. Fetch RAW these three - nothing
 else:
 1. My stack's files, all in one text file - each file starts with a
    line "===== FILE: <path> =====":
-   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt
-   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt
-   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt
-   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt
-2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css
-3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json
+   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt?v=2026-09-28
+   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt?v=2026-09-28
+   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt?v=2026-09-28
+   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt?v=2026-09-28
+2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css?v=2026-09-28
+3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json?v=2026-09-28
 
 Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character
