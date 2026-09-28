@@ -54,9 +54,9 @@ Non-negotiable: every call runs server-side and the token never
 reaches the browser. Escape everything you print; allow only
 http/https links.
 
-Tests are out of scope: the build ships without test files or test
-scripts (no accessibility or contrast scripts, no auth or 401 flow
-tests), and there is no need to call the API with curl yourself. Keep preview.html's colours as they are. I run
+No tests: do not write or run tests, audits or checks - no
+accessibility or contrast scripts, no auth or 401 flow tests, no curl
+calls, no test files. Keep preview.html's colours as they are. I run
 and check the build myself.
 
 Every file complete - no placeholders, no "rest stays the same", no
