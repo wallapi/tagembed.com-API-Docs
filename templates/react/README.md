@@ -10,7 +10,7 @@ Shows the live posts from your Tagembed gallery, in the theme you picked. Until 
 | `src/SocialWidget.jsx` | The drop-in component: fetches `/api/posts` and renders the cards. |
 | `src/main.jsx`, `index.html`, `vite.config.js` | The Vite app around it. |
 | `package.json` | react, react-dom, express, dotenv, vite, @vitejs/plugin-react, concurrently. |
-| `themes/` | All 17 themes (`.css` is the look, `.json` is how a card is laid out). |
+| `themes/` | All 19 themes (`.css` is the look, `.json` is how a card is laid out). |
 | `samples/` | The sample posts shown while `ACCESS_TOKEN` is empty. |
 | `.env.example` | The settings - copy it to `.env`. |
 
@@ -36,7 +36,7 @@ Copy `.env.example` to a new file named `.env` in the same folder and fill it in
 |---|---|
 | `ACCESS_TOKEN` | Your gallery's token: Tagembed dashboard, the gallery's card, three-dot menu, **Access Token**. Leave it empty to see the sample posts. |
 | `API_BASE_URL` | Always `https://api.tagembed.com/api` - nothing to copy. |
-| `WIDGET_THEME` | The theme, by file name in `themes/`: `classic-card`, `social-card`, `modern-card`, `classic-photo`, `square-photo`, `collage`, `vivid`, `horizontal-slider`, `horizontal-columns`, `slider`, `reels`, `story-theme`, `single-post`, `widget-theme`, `review-box`, `review-carousel`, `review-list`. |
+| `WIDGET_THEME` | The theme, by file name in `themes/`: `classic-card`, `social-card`, `modern-card`, `classic-photo`, `square-photo`, `collage`, `vivid`, `horizontal-slider`, `horizontal-columns`, `slider`, `reels`, `story-theme`, `single-post`, `widget-theme`, `review-box`, `review-carousel`, `review-list`, `rating-badge`, `badge`. |
 | `PORT` | The API server's port (default `3001`). |
 
 The token stays on the server. It never appears in the page, in View Source or in the browser.

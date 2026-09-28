@@ -1,4 +1,4 @@
-# Social widget - the cache (the server code follows this, in whatever language)
+# Social widget - the cache (index.php and server.js follow this)
 
 Cache: a local JSON file, 5 minutes in one named constant, keyed per
 request - about 288 calls a day at any traffic, however many visitors.

@@ -2,27 +2,24 @@
 
 Copy-paste prompts for building a **server-rendered social widget** with the
 Tagembed Developer API (v3). Start with
-[Prompt 1](#prompt-1--the-main-prompt-start-here), paste it, answer its two
-questions (which theme — shown as the thumbnail pictures — then which language
-you want the server code in), and set the token it asks you for
-at the end — that is the whole workflow.
+[Prompt 1](#prompt-1--the-main-prompt-start-here), paste it, set the token it
+asks you for at the end — that is the whole workflow.
 
 **The prompts live in files, not in this page.** Every prompt below is one
 short block: your choices, plus one raw URL per deliverable, all in
-[prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library).
-The AI fetches those files, and they link the files below, so it has
+[prompts/library/](../prompts/library).
+The AI fetches those files, and they link the three specs below, so it has
 the full contract without you pasting sixty lines.
 They are raw URLs on purpose — a `github.com/…/blob` link returns an
 HTML page, the raw one returns the file:
 
 | File | What it carries | Raw URL to paste |
 | ---- | --------------- | ---------------- |
-| Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md) |
-| API spec | endpoints, envelope, field names, integration rules | [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) |
-| Theme catalogue | the 17 widget themes — a thumbnail to pick from and an HTML preview to build from; the AI shows you the thumbnails first, as pictures | [themes/README.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) |
-| Design spec | `--tbd-*` tokens, how a theme maps onto them, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md) |
+| Build brief | what to build, the file manifest, the delivery checklist — and it links the other two | [widget-build-brief.md](widget-build-brief.md) |
+| API spec | endpoints, envelope, field names, integration rules | [llms.txt](../llms.txt) |
+| Design spec | `--tbd-*` tokens, the shipped themes in themes-lite.json, card treatment, widget and reel layouts, page shell | [widget-design-spec.md](widget-design-spec.md) |
 
-All of them live in the public docs repo
+All three live in the public docs repo
 [github.com/wallapi/tagembed.com-API-Docs](https://github.com/wallapi/tagembed.com-API-Docs),
 so they are versioned once and every prompt, tool document and agent reads the
 same copy. If your AI cannot open URLs, see
@@ -46,44 +43,31 @@ with the posts already in the HTML — nothing in the browser calls anything:
 Your server is the only thing that ever sees the token, and it never reaches
 the rendered HTML. That is what makes the page safe to put on a public site.
 
-**You pick the look and the language first.** Before any code, the AI shows
-you the theme picker from the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md) —
-the 17 widget themes as **thumbnail pictures**, rendered as a page (an HTML
-artifact in a chat, or the page opened in your browser by an editor agent),
-never a list of names — and asks which one you want. Then it asks **which
-language you want the server code in** — any server-side language: Python,
-PHP, Node.js, Go, Java, C#, … or a framework you name (Flask, Django,
-Express, Laravel, …). As soon as you answer, it starts to build — no confirm
-step — in exactly that language:
+**You get both languages, every time** — not a choice you have to make up
+front. Each one is complete on its own, CSS included, so there is no stylesheet
+to wire up:
 
-| You say | You get | You run |
-| ------- | ------- | ------- |
-| Python | `app.py` — **one file**: the API call, the cache, the HTML and the CSS | `python app.py` |
-| Node.js | `server.js` — one file, same contents | `node server.js` |
-| PHP | `index.php` — one file, same contents | `php -S localhost:8080` |
-| Go | `main.go` — one file, same contents | `go run main.go` |
-| any other language | its own one entry file | its own one command |
-| a framework | the files that framework needs, in its normal layout | its own run command |
+| Node.js | PHP |
+| ------- | --- |
+| `server.js` — the API call, the cache, the HTML and the CSS, all in it | `index.php` — **one file**, everything in it, CSS included |
+| `package.json` | nothing to install |
+| `README.md` — documents **both** languages | covered by the same README |
 
-A plain language uses only its standard library, so there is nothing to
-install; the file reads a `.env` beside it on its own. And **`README.md` for
-that language comes in the same reply as the server code** — how to check the
-language is installed, the one command that runs it, where the token goes.
-
-**And one file every build gets: `preview.html`.** The same widget, the same
+**And one file both of them share: `preview.html`.** The same widget, the same
 CSS, with the sample posts written straight into the HTML — no server, no
 token, no API call anywhere in it. Double-click it and the design is on screen,
 which is how you review the look before you have a token, on a laptop with no
-server language installed, or in a chat window that cannot run one. Because
-it and the server file render the same markup from the same tokens, a restyle
-has to land in both or they drift apart. Its skin is the theme you picked: its
-preview HTML is copied for the layout, every colour, the font, the radius and
-the spacing (the thumbnail is only for picking). That is the whole skin — no light/dark switch anywhere in the
-build. How the values map onto the tokens is in [the design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
+PHP and no Node installed, or in a chat window that cannot run either. Because
+all three render the same markup from the same tokens, a restyle has to land in
+all three or they drift apart. Its skin comes from
+[themes-lite.json](themes-lite.json) — the 23 shipped widget themes as data. One theme
+supplies every colour, the font, the radius, the spacing, the column count and
+the author/date toggles, and that is the whole skin: no light/dark switch
+anywhere in the build. The field-by-field mapping is in [the design spec](widget-design-spec.md),
 under **Themes** in section 2, and the build names the theme it used.
 
 It is `preview.html` and not `index.html` on purpose: an `index.html` sitting
-next to the server's entry file (`index.php` above all) is served *instead* of it by most Apache and nginx
+next to `index.php` is served *instead* of it by most Apache and nginx
 configurations, so the live page would silently become the sample page the
 first time the folder is uploaded.
 
@@ -102,8 +86,8 @@ Two environments, same prompts:
 **One you fetch, one you already know.** The only thing you get from the
 dashboard is the token. The base URL is the same for every account — nothing
 to look up and nothing to copy. Every prompt below asks you for the token at
-the _end_, once the code is already written — the only questions before the
-code are the theme and the language, and the token is not needed for either. The code reads both from
+the _end_ of the reply, once the code is already written, so you are never sat
+waiting on a question before you have anything. The code reads both from
 environment variables, so wherever you put them (`.env`, cPanel, Vercel) they
 stay out of the source. Nothing runs until you fill them in:
 
@@ -123,103 +107,73 @@ stay out of the source. Nothing runs until you fill them in:
 
 ## Prompt 1 — The main prompt (start here)
 
-One prompt, pasted once, and one link: [steps.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c).
-It walks you through four short steps, one reply each — **theme** (the
-thumbnail picker, never a list of names), **stack**, **preview** (the
-finished `preview.html` for that theme, nothing to fill in - change colours,
-font, columns... there as a `custom.css` if you like), then the **code**: PHP, Node.js,
-React or Simple HTML hand you a link to a finished, already-tested
-`social-widget-<stack>.zip` from [templates/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/templates) — no
-code written, no waiting — while naming anything else (Laravel, Django,
-Next.js, Python, Go, ...) ports that same finished code into your stack, fast,
-using the closest bundle as the reference. Either way you get a runnable
-build plus its `README.md` in the same reply.
+One prompt, pasted once — the AI then walks you through a short guided build,
+one step per reply:
 
-**In an editor agent** (Claude Code, Cursor, Codex, Copilot, Windsurf,
-Gemini CLI/Antigravity) - it opens the theme picker straight in your
-browser and writes files in your project, so the prompt needs no
-rendering hint:
+1. **Theme** — it lists the themes; answer with a number, or `skip` for the
+   default (Modern Card).
+2. **Preview** — it hands over the theme's finished `preview.html`
+   ([guides/previews/](previews)) with sample posts baked in, shown right in
+   the chat (blurred thumbnails there; full images in a browser).
+3. **Stack + changes** — it asks which stack (PHP / Node.js / React / Simple
+   HTML) and whether to change anything. Each change comes back as a few
+   lines of `custom.css`, not a rewritten file.
+4. **Code + README** — it links the stack's ready zip
+   ([templates/dist/](../templates/dist)): finished code, all 19 themes, the
+   sample posts and a README. You set `WIDGET_THEME` in `.env`, add
+   `custom.css` if you made one, and run it. Then it lists what you could
+   add next and asks for your token.
+
+The AI fetches only [build/steps.md](../prompts/library/build/steps.md) and one
+preview file, and writes no code, so the whole flow is quick. The previews, theme files and zips
+are built by `python3 tools/build-previews.py` from
+[templates/](../templates) — run it after changing a starter, a theme or the
+sample posts.
 
 ```
-Build me a social widget from my Tagembed gallery.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
-**In a browser chat**, the wording depends on how that tool renders a
-page, so each names its own surface - otherwise the theme picker and
-the preview get described in words instead of shown:
+**Testing a branch:** change `main` in the `BASE = ...` line to your branch
+(e.g. `feat/check-code`). That line is the only place a branch is named, so
+every file the AI fetches after it comes from the same branch. The same goes
+for every prompt on this page. Prompt 1 is the one exception: its steps.md
+link is written out in full (some AIs open only a complete link), so change
+`main` there too.
 
-**claude.ai**
-```
-Build me a social widget from my Tagembed gallery. These are the
-build steps I want you to use - please read them and take me through
-them one step at a time, starting with step 1:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
-When a step shows me a page (the theme picker, the preview), put it in
-an Artifact so I can see it.
-If you cannot open a link, say so in one line - do not build from memory.
-```
-
-**ChatGPT**
-```
-Build me a social widget from my Tagembed gallery.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Every step that is a page (theme
-picker, preview) goes in Canvas, rendered as HTML - never described.
-Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
-If you cannot open a link, say so in one line - do not build from memory.
-```
-
-**Gemini**
-```
-Build me a social widget from my Tagembed gallery.
-llms.txt is attached - read it from there, do not fetch it again.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer; the only questions you may ask are
-the ones it names, nothing else, and no plan before step 1. Every
-step that is a page (theme picker, preview) goes in Canvas, rendered
-as HTML - never described. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
-If you cannot open a link, say so in one line - do not build from memory.
-```
-
-Full per-tool setup (attaching `llms.txt`, saving the files it gives
-you, run commands) is one document per tool in
-[prompts/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts).
+**Gemini:** it does not open raw GitHub files at all - with this prompt it
+replies "I cannot open the link" and stops. Attach steps.md instead and use
+the Gemini version of this prompt in
+[prompts/browser/gemini.md](../prompts/browser/gemini.md#step-by-step-prompt-1-in-gemini).
 
 ## Prompt A — the short alternative (AI that can browse)
 
-Same questions first, same result, driven by the build brief instead of
-`common.md`: its parts in [quick-start/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/quick-start) point at the build brief, which names
+Same result, driven by the build brief instead of `common.md`: its four parts
+in [quick-start/](../prompts/library/quick-start) point at the build brief, which names
 what to build and links the API and design specs. Prompt 1 is the safer
 default — its `common.md` carries the facts itself, so nothing breaks when a
 later fetch silently fails.
 
 ```
-Build me a social widget from my Tagembed gallery (from the build brief).
-First ask me two things, ONE question per reply, and write no code
-until I answer both:
-Q1 - theme: fetch this RAW and show me its theme picker the way it
-says - the thumbnails page itself, rendered (an HTML artifact, or the
-page opened in my browser), never a list of theme names - and ask
-which one I want:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
-Q2 - language: once I pick, ask which language I want the server code
-in - any server-side language (PHP, Node.js, Python, Go, ...) or a
-framework I name - and build in exactly that one.
-As soon as I answer Q2, start the build - do not repeat my choices or
-ask me to confirm. The build comes in 2 parts. Deliver ONE part per
-reply: fetch only that part's link RAW, follow it exactly and write
-its files complete - then stop, and end the reply with one line naming
-the next part. Do not fetch or write a later part until I reply "next".
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Build me a social widget from my Tagembed gallery (from the build brief). It comes in 4 parts, listed below.
+Deliver ONE part per reply: fetch only that part's link RAW, follow
+it exactly and write its file complete - then stop, and end the
+reply with one line naming the next part. Do not fetch or write a
+later part until I reply "next". Start with part 1 now.
 1. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/preview.md
-2. the runnable server files in my language, with their README.md in the same reply
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/quick-start/server.md
+BASE/prompts/library/quick-start/preview.md
+2. index.php
+BASE/prompts/library/quick-start/php.md
+3. server.js + package.json
+BASE/prompts/library/quick-start/nodejs.md
+4. README.md
+BASE/prompts/library/quick-start/readme-file.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -229,13 +183,14 @@ If you cannot open a link, say so in one line - do not build from memory.
 
 Prepend this when you are NOT in a code editor (ChatGPT/Gemini/claude.ai
 web), in the same message as the build prompt
-([browser-preamble.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/browser-preamble.md)). It makes the AI hand you finished files and exact setup steps instead of
+([browser-preamble.md](../prompts/library/browser-preamble.md)). It makes the AI hand you finished files and exact setup steps instead of
 fragments.
 
 ```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Before the build prompt below: I am in a browser chat.
 Fetch this RAW and follow it exactly:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/browser-preamble.md
+BASE/prompts/library/browser-preamble.md
 If you cannot open it, say so in one line - do not build from memory.
 ```
 
@@ -248,15 +203,11 @@ model, an editor with web access switched off). Then the links carry nothing —
 so paste the files instead of the prompt's link list:
 
 1. Open the prompt's file from
-   [prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library)
+   [prompts/library/](../prompts/library)
    and paste the text of every file the prompt links instead of the prompt —
-   for Prompt 1, `build/steps.md`, then the picked theme's preview from
-   `guides/previews/`, and for PHP/Node.js/React/Simple HTML the matching
-   `templates/dist/social-widget-<stack>.txt` plus that theme's
-   `templates/themes/<slug>.css` and `.json` (any other stack: paste the
-   closest one of those as the reference and name your stack).
+   for Prompt 1, `build/common.md`, then its four parts.
 2. Attach or paste [llms.txt](../llms.txt) and
-   [widget-design-spec.md](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md)
+   [widget-design-spec.md](widget-design-spec.md)
    in the first message, then the prompt.
 3. In-editor agents: drop both files in the repo once (see the
    [context files](build-a-social-widget.md#per-tool-context-files)) and every
@@ -283,13 +234,13 @@ mode, no prefers-color-scheme remap, no theme toggle.
 ## Prompt 2 — Integrate into my existing website
 
 For rendering the widget INTO a site that already exists. In an editor agent it
-will scan the project and adapt; in a browser AI, tell it your language or
-framework. The parts
-are in [integrate/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/integrate).
+will scan the project and adapt; in a browser AI, tell it your stack. The parts
+are in [integrate/](../prompts/library/integrate).
 
 ```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Render a Tagembed social widget INTO my existing website.
-My stack: [plain PHP | Python/Django | Express | describe yours]. Cache in
+My stack: [plain PHP | Express | describe yours]. Cache in
 [file | Redis | my framework's cache]. Layout: [MOSAIC | reel rail |
 uniform grid | vertical feed]. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
@@ -297,11 +248,11 @@ it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
 later part until I reply "next". Start with part 1 now.
 1. the widget section in my site
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/integrate/section.md
+BASE/prompts/library/integrate/section.md
 2. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/integrate/preview.md
+BASE/prompts/library/integrate/preview.md
 3. what changed and how to check it
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/integrate/summary.md
+BASE/prompts/library/integrate/summary.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -312,74 +263,84 @@ If you cannot open a link, say so in one line - do not build from memory.
 Follow-up prompts after Prompt 1 or 2 — send them one at a time, iterate
 small. Fill in the brackets, and type **next** after each reply: like every
 prompt here, they deliver one file per reply. Each prompt's parts are in its own folder in
-[prompts/library/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library): a `change.md` with what changes, fetched by each
+[prompts/library/](../prompts/library): a `change.md` with what changes, fetched by each
 part, and one part per file it touches. The layouts these reference (widget,
 reel, grid) are specified in the
-[design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md).
+[design spec](widget-design-spec.md).
 
 ```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Restyle the widget as a [MOSAIC | REEL rail | 3-column card grid |
 full-screen signage view] with [rounded cards + soft shadows | flat
-minimal | editorial with a serif headline]. It comes in 2 parts, listed below.
+minimal | editorial with a serif headline]. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
+later part until I reply "next". Start with part 1 now.
 1. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/restyle/preview.md
-2. the server code
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/restyle/server.md
+BASE/prompts/library/restyle/preview.md
+2. index.php
+BASE/prompts/library/restyle/php.md
+3. server.js
+BASE/prompts/library/restyle/nodejs.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-Add a network filter bar above the widget. It comes in 2 parts, listed below.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Add a network filter bar above the widget. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
-1. the server code
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/network-filter/server.md
-2. preview.html
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/network-filter/preview.md
+later part until I reply "next". Start with part 1 now.
+1. index.php
+BASE/prompts/library/network-filter/php.md
+2. server.js
+BASE/prompts/library/network-filter/nodejs.md
+3. preview.html
+BASE/prompts/library/network-filter/preview.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-Add a "Next page" link under the widget. It comes in 1 part, listed below.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Add a "Next page" link under the widget. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
-1. the server code
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/pagination/server.md
+later part until I reply "next". Start with part 1 now.
+1. index.php
+BASE/prompts/library/pagination/php.md
+2. server.js
+BASE/prompts/library/pagination/nodejs.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-Auto-refresh the page every [60] seconds for signage. It comes in 1 part, listed below.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Auto-refresh the page every [60] seconds for signage. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
-1. the server code
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/auto-refresh/server.md
+later part until I reply "next". Start with part 1 now.
+1. index.php
+BASE/prompts/library/auto-refresh/php.md
+2. server.js
+BASE/prompts/library/auto-refresh/nodejs.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
 ```
-Show carousels and shopping tags. It comes in 1 part, listed below.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Show carousels and shopping tags. It comes in 2 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
-1. the server code
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/carousel-products/server.md
+later part until I reply "next". Start with part 1 now.
+1. index.php
+BASE/prompts/library/carousel-products/php.md
+2. server.js
+BASE/prompts/library/carousel-products/nodejs.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -387,19 +348,23 @@ If you cannot open a link, say so in one line - do not build from memory.
 
 ## Prompt 4 — Upgrade or change the cache
 
-The parts are in [cache-upgrade/](https://github.com/wallapi/tagembed.com-API-Docs/tree/main/prompts/library/cache-upgrade); the bracket choices
+The parts are in [cache-upgrade/](../prompts/library/cache-upgrade); the bracket choices
 travel in the prompt.
 
 ```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Change the caching layer to [Redis | Memcached | my framework's cache |
-stale-while-revalidate], TTL [5] minutes. It comes in 1 part, listed below.
+stale-while-revalidate], TTL [5] minutes. It comes in 3 parts, listed below.
 Deliver ONE part per reply: fetch only that part's link RAW, follow
-it exactly and write its files complete - then stop, and end the
+it exactly and write its file complete - then stop, and end the
 reply with one line naming the next part. Do not fetch or write a
-later part until I reply "next". The server part is for whatever
-language my server code is in - keep it in that language.
-1. the server code, with its updated README.md in the same reply
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/cache-upgrade/server.md
+later part until I reply "next". Start with part 1 now.
+1. index.php
+BASE/prompts/library/cache-upgrade/php.md
+2. server.js + package.json
+BASE/prompts/library/cache-upgrade/nodejs.md
+3. README.md
+BASE/prompts/library/cache-upgrade/readme-file.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
@@ -409,15 +374,13 @@ If you cannot open a link, say so in one line - do not build from memory.
 
 Worth knowing before you paste one, so you can add the missing line yourself.
 
-**You get, after two questions (theme, then the server language):** the
-server code in the language you picked, ready to run, a `preview.html` that
+**You get, without asking:** both languages in full, a `preview.html` that
 renders the sample posts with no server and no token, the server-side fetch, the
 5-minute file cache, the stale-on-failure fallback, an empty state, escaped
-output, the token kept out of the rendered HTML, a README for your language
-(delivered with the server code),
+output, the token kept out of the rendered HTML, a README that documents both,
 and step-by-step run instructions. That is the part that decides whether the
 thing survives contact with real traffic, and it is fully specified — in the
-[build brief](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-build-brief.md)
+[build brief](widget-build-brief.md)
 and the specs it links, which is why the prompts themselves are short.
 
 **The one failure mode of the link-based prompts:** an AI that silently could
@@ -431,28 +394,22 @@ paste-the-files route in
 **API calls it will make:** one per cache period — roughly **288 a day** at a
 5-minute TTL, no matter how many visitors. Two things break that number, and
 both are covered in the prompts: a per-process cache (multiply by the number of
-PHP-FPM workers, Node instances or gunicorn workers) and uncached pagination (scales with clicks,
+PHP-FPM workers or Node instances) and uncached pagination (scales with clicks,
 not with time). If you host the same gallery on several sites, each one counts
 separately against the daily ceiling.
 
 **You DO get a styled page, on brand.** The full token set (palette, type
-scale, radius, elevation, focus ring, card treatment, responsive rule), how a
-theme maps onto it, AA-checked contrast and the page shell live in the
-[design spec](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md),
+scale, radius, elevation, focus ring, card treatment, responsive rule) plus a
+the shipped themes, AA-checked contrast and the page shell live in the
+[design spec](widget-design-spec.md),
 so the first render already looks like ours instead of an unstyled list. The
-layout is decided too: in **Prompt 1** it is the theme you pick — its
-preview HTML is what you get. **Prompt 2** builds a MOSAIC, because a full-width
-section has the width for one; it is a bracket you can swap. Iterate on the look with
+layout is decided too: **Prompt 1** and **Prompt 2** both build a MOSAIC,
+because a page and a full-width section each have the width for one. It is a
+bracket you can swap. Iterate on the look with
 [Prompt 3](#prompt-3--design-the-widget-iterate-on-looks); it reuses the same
 tokens, so restyling never drifts off-brand.
 
-Video posts play without asking: a `<video>` with controls and the post's
-photo as its poster. A chat's own preview pane (Claude's artifact view,
-ChatGPT canvas) blocks outside photos and video, so there each one shows as a
-coloured tile with the network name; open `preview.html` in a browser for the
-real media.
-
-Also only-if-you-ask: carousels
+Also only-if-you-ask: video playback (`<video>` for video media), carousels
 (`expand=album`), shopping tags (`expand=products`), filters, a network bar,
 auto-refresh, i18n, and accessibility beyond the contrast and focus rules the
 tokens already carry.
@@ -468,14 +425,16 @@ tokens already carry.
 2. **State the constraints** — they are what separate a demo from something
    shippable: server-side rendering, token in an env var, 5-minute cache with
    a stale fallback, escaped output, cursor pagination via `next_cursor`.
-3. **Choices first, token last.** The theme and the language change what gets
-   built, so the prompts ask for those before any code — one short question
-   per reply, and the build starts on the last answer — no confirm step. The token changes nothing in the code
-   (it is read from the environment), so it is asked last: code first, then
-   "what is your token?". Keep that ordering if you rewrite a prompt.
+3. **Ask at the end, not at the start.** An assistant told to ask before
+   starting ends its turn with questions and a plan, and the code only arrives
+   after you answer (Gemini does this literally). So the prompts put the
+   question last: code first, then "what is your token?" — you get both, in
+   the order that wastes none of your time. Keep that ordering if you rewrite
+   a prompt.
 4. **Iterate in small steps**: one prompt = one change ("make it masonry",
    "swap file cache for Redis"). When something breaks, paste the exact error
-   back and ask for the corrected complete file — in your language.
+   back and ask for the corrected complete file — and say "both languages", or
+   you will get one of them.
 
 ## What an AI gets wrong unless you tell it
 
@@ -492,8 +451,8 @@ already inside the three linked files — this is what the links are buying you.
 | Missing values are `""` or `0`            | They are `null` — including `network.name` and `author.name`                     |
 | The default sort needs fixing             | It is already pinned-first, then newest by creation time                        |
 | The page can fetch the API from JavaScript | It would succeed — and hand your token to every visitor. Only your server calls Tagembed, and the posts are in the HTML before it is sent |
-| A separate stylesheet is fine             | The CSS lives inside the server file (`app.py`, `server.js`, `index.php`, …) and inside `preview.html`; each file runs alone |
-| It can pick the theme and the language    | It asks you first: which theme (showing the thumbnail picker, not a list of names), then which language — and builds in exactly that one |
+| A separate stylesheet is fine             | The CSS lives inside `server.js`, inside `index.php` and inside `preview.html`; each file runs alone |
+| One language is enough                    | Every build ships both: the Node.js set and the single-file PHP                 |
 | The sample-data preview can just fetch the API | `preview.html` calls nothing — the sample posts are already markup inside it. Fetching there would mean a token in the browser |
-| The preview may as well be `index.html`   | It is `preview.html`: an `index.html` next to the server entry file (`index.php` above all) is served *instead* of it by most Apache and nginx setups |
+| The preview may as well be `index.html`   | It is `preview.html`: an `index.html` next to `index.php` is served *instead* of it by most Apache and nginx setups |
 | Posts can be created or hidden via API    | Read-only. Moderation happens in the dashboard                                  |

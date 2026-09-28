@@ -9,7 +9,7 @@ Shows the live posts from your Tagembed gallery, in the theme you picked. Until 
 | `index.html` | The page: loads the theme and posts from `posts.php` and draws the cards. No framework, no build step. |
 | `posts.php` | The only server file and the only place the token lives: calls Tagembed with the cache, returns JSON. |
 | `.htaccess` | Keeps `.env` and `cache/` private on Apache hosts. |
-| `themes/` | All 17 themes (`.css` is the look, `.json` is how a card is laid out). |
+| `themes/` | All 19 themes (`.css` is the look, `.json` is how a card is laid out). |
 | `samples/` | The sample posts shown while `ACCESS_TOKEN` is empty. |
 | `.env.example` | The settings - copy it to `.env`. |
 
@@ -37,7 +37,7 @@ Copy `.env.example` to a new file named `.env` in the same folder and fill it in
 |---|---|
 | `ACCESS_TOKEN` | Your gallery's token: Tagembed dashboard, the gallery's card, three-dot menu, **Access Token**. Leave it empty to see the sample posts. |
 | `API_BASE_URL` | Always `https://api.tagembed.com/api` - nothing to copy. |
-| `WIDGET_THEME` | The theme, by file name in `themes/`: `classic-card`, `social-card`, `modern-card`, `classic-photo`, `square-photo`, `collage`, `vivid`, `horizontal-slider`, `horizontal-columns`, `slider`, `reels`, `story-theme`, `single-post`, `widget-theme`, `review-box`, `review-carousel`, `review-list`. |
+| `WIDGET_THEME` | The theme, by file name in `themes/`: `classic-card`, `social-card`, `modern-card`, `classic-photo`, `square-photo`, `collage`, `vivid`, `horizontal-slider`, `horizontal-columns`, `slider`, `reels`, `story-theme`, `single-post`, `widget-theme`, `review-box`, `review-carousel`, `review-list`, `rating-badge`, `badge`. |
 
 The token stays on the server. It never appears in the page, in View Source or in the browser.
 

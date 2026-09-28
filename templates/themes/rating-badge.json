@@ -1,0 +1,9 @@
+{
+  "name": "Rating Badge",
+  "slug": "rating-badge",
+  "type": "review",
+  "layout": "badge",
+  "parts": [],
+  "clamp": false,
+  "font_url": ""
+}

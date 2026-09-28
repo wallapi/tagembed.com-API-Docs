@@ -1,7 +1,7 @@
 # Fallback palette — only when the themes cannot be read
 
 Part of [widget-design-spec.md](../widget-design-spec.md), section 2. Use it
-only when the theme catalogue (guides/themes/README.md) cannot be fetched at all.
+only when themes-lite.json cannot be fetched at all.
 
 If the network is blocked and you genuinely cannot fetch the catalogue, say so
 in one line and use these instead. Never mix them with a theme's values — a
@@ -44,13 +44,11 @@ build is skinned by one or the other, not both.
 A gradient, where one is wanted:
 `linear-gradient(135deg, var(--tbd-indigo), var(--tbd-blue))`.
 
-Every text/surface pair above is at or beyond WCAG AA. Measured on white:
-`--tbd-indigo` 9.0:1, `--tbd-blue` 5.1:1, `--tbd-blue-ink` 6.4:1, the muted
-tone 5.6:1. Two consequences worth keeping: `--tbd-blue-lite` and `--tbd-brand`
-are fills, never text, and a lighter grey must not be substituted for the muted
-tone — that is the usual way this palette gets broken, and dates and handles
-are the first things to become unreadable.
+Every text/surface pair above is at or beyond WCAG AA — the muted tone is
+5.6:1 on the card. Do not substitute a lighter grey for it: that is the usual
+way this palette gets broken, and dates and handles are the first things to
+become unreadable.
 
 `--tbd-brand` is Tagembed's product CTA blue (`#526ff9`, the same value the
 app uses); the other four are derived from it to clear AA as text, which
-`#526ff9` itself does not at body size.
+`#526ff9` itself does not at body size, so it is a fill, never text.

@@ -1,5 +1,7 @@
 # Widget design spec — tokens, layouts, states
 
+Links written BASE/<path> are files in this repo. BASE is the one my prompt gave; if it gave none, BASE is where you got this file: the URL up to and including the branch name, or the local repo folder.
+
 The visual half of the brief for anything built on the Tagembed Developer API
 (v3): the design tokens and the theme catalogue their values come from, the two
 default layouts, the card treatment and the states a feed has to handle. The data half — endpoints, envelope, field names,
@@ -9,14 +11,14 @@ contradicts it.
 Point an AI at it instead of pasting a hundred lines of CSS into every prompt:
 
 ```
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
 Design spec (tokens, layouts, states) - follow it exactly:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/widget-design-spec.md
+BASE/guides/widget-design-spec.md
 ```
 
-The design itself comes from the theme the user picked in the [theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md)
-(`guides/themes/`, beside this file) — read that first (section 2). Only if the
-AI can reach neither file are the five fallback brand colours worth pasting
-inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
+The design itself lives in [themes-lite.json](themes-lite.json) beside this file — read
+that first (section 2). Only if the AI can reach neither file are the five
+fallback brand colours worth pasting inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
 `--tbd-blue-ink:#3350d6`, `--tbd-blue-lite:#8ea2fb`, `--tbd-brand:#526ff9`.
 
 ---
@@ -28,95 +30,89 @@ inline: `--tbd-indigo:#283da8`, `--tbd-blue:#4462e8`,
   CSS can later drop into a template that has its own variables without
   colliding.
 - Prefix every class (`.tbd-*`). Do not load a CSS framework, and do not pull
-  a stylesheet over the network: the CSS ships **inside** the server file
-  (`app.py`, `server.js`, `index.php`, … or the framework's template) and
-  **inside** `preview.html` — in one `<style>` block, because each deliverable is meant to be a
-  file you can drop somewhere and run. The same block in every one, so the preview is worth trusting and a
+  a stylesheet over the network: the CSS ships **inside** `server.js`,
+  **inside** `index.php` and **inside** `preview.html`, in one `<style>` block,
+  because each deliverable is meant to be a file you can drop somewhere and
+  run. The same block in all three, so the preview is worth trusting and a
   restyle cannot land in one and miss the others.
-- Set the font on `:root`, from the theme's font, and load that family from
-  Google Fonts only behind a fallback stack that still looks right when it
-  does not load.
+- Set the font on `:root`, from the theme's `css_font`, and load its
+  `link_font` family from Google Fonts only behind a fallback stack that still
+  looks right when it does not load.
 - Asked to render into a section of a site that already exists? Then put the
   tokens on that section's own root instead of `:root`, and keep every
   selector under its class — the surrounding page has its own CSS.
 
-## 2. Design tokens — the values come from the theme catalogue
+## 2. Design tokens — the values come from themes-lite.json
 
 The token **names** are the contract: `--tbd-bg`, `--tbd-surface`, `--tbd-ink` and the
-rest below, every class under `.tbd-`, and the rules in sections 3–8. The
-**values** are not yours to invent — they come from one theme in the
-[theme catalogue](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md), the themes Tagembed itself renders widgets with.
+rest below, every class under `.tbd-`, and the layouts and rules in
+sections 3–8. The **values** are not yours to invent — they come from a theme in
+[themes-lite.json](themes-lite.json), the catalogue Tagembed itself renders widgets with.
 Read that file first; the palette further down is only what you fall back to
 when you cannot.
 
 ### Themes — where the design comes from
 
-The catalogue is a folder, `guides/themes/`: 17 themes (14 social, 3 review),
-each with a thumbnail PNG (to pick from), a preview HTML of the finished
-widget in `guides/previews/` (to build from), a *Look* line describing its
-layout in words, and a *Values* line. Fetch its README raw:
+[themes-lite.json](themes-lite.json) is that catalogue as data: 23 themes (18 social, 5
+review), each carrying the `style` fields mapped below, as the widget is really
+rendered with them. Fetch it raw:
 
 ```
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/README.md
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+BASE/guides/themes-lite.json
 ```
 
-**Ask before you write any CSS.** If the user already named a theme, use it.
-If not, show them the catalogue's theme picker — the thumbnails file as an HTML
-artifact, names and thumbnails — and ask which one they want; the build prompts do this as
-their first question. Never pick one silently. Only when the prompt tells you
-not to ask, pick one — a social theme for a social widget, a review theme for
-reviews — and say in one line which one you used.
+The full export, with every app field, is [themes.json](themes.json) —
+not needed for a build.
 
-That theme then decides two things:
+**Pick one before you write any CSS.** If the user named a theme, use it. If
+not, pick at random — from the `social` themes for a social widget, the `review`
+ones for a reviews widget — and say in one line which one you used, so they can
+ask for a different one.
 
-- **The layout** — which parts a card shows, in what order, and how the cards
-  are arranged — comes from its preview HTML, which is the template: copy
-  the file as it is and inject the posts through its
-  `<template id="tbd-card-template">` (the theme catalogue's "Filling the
-  card"). The *Look* line says the same in words. Sections 4 and
-  5 are how the reel and the mosaic are built when the theme is one of them
-  (Reels is the reel; the card themes that say "mosaic" are the mosaic);
-  every other layout keeps section 3's card treatment and section 6–8's rules.
-- **The value of every token** comes from the preview's `:root`; the
-  *Values* line is the same set in words, and where they differ the preview
-  wins. The names, the
-  `--tbd-` prefix and sections 3–8 stay exactly as they are, so one theme
-  reskins the whole page:
+That theme then supplies the value of every token. The names, the `--tbd-` prefix
+and sections 3–8 stay exactly as they are, so one file reskins the whole page:
 
 ```
-Values entry        →  what it sets
-page #…             →  --tbd-bg
-card #…             →  --tbd-surface   (not set: fall back to the page colour)
-text #…             →  --tbd-body
-author #…           →  --tbd-ink       (not set: fall back to the text colour)
-font, weight, size  →  --tbd-font, its weight, the post text size
-card radius         →  --tbd-radius
-image radius        →  the image corner radius
-gap                 →  --tbd-gap — the gutter between cards
-padding             →  the card padding
-text left/centred   →  the card's text-align
-clamp N lines       →  -webkit-line-clamp: N; "no clamp" means none
-image ratio         →  natural keeps each image's own ratio; square, 16:9,
-                       4:3, 9:16 crop to it with object-fit: cover
+theme.style field                    →  what it sets
+backgroundColor                      →  --tbd-bg
+cardColor                            →  --tbd-surface   (empty: fall back to the page ground)
+fontColor                            →  --tbd-body
+authorColor                          →  --tbd-ink       (empty: fall back to fontColor)
+css_font, font_varient, fontSize     →  --tbd-font, its weight, the post text size
+link_font                            →  the Google Fonts family to load, when it names a real one
+roundEdge                            →  --tbd-radius
+borderRadius                         →  the image corner radius
+spacing                              →  --tbd-gap — the column gutter
+padding                              →  the card padding
+numberOfColumn                       →  mosaic columns; 0 means the theme is not a grid, so use 4
+textAlignment                        →  the card's text-align
+lineTrim, with trimcontent           →  -webkit-line-clamp; 0 means no clamp
+postAuthor, postTime                 →  show or hide the author name and the date
+hideContent                          →  hide content.text entirely
+aspectImageRatio                     →  0 natural, 100 square, 56.25 sixteen-by-nine
 ```
-
-The thumbnail is only for the user to pick from; never build from it. Where
-the preview and a value disagree, follow the preview.
 
 Three rules come with it:
 
-- **The muted tone is derived, never taken.** No theme carries a muted text
-  colour. Blend the text colour toward the card colour and stop at the last
-  step still above 4.5:1.
+- **The muted tone is derived, never taken.** No field in a theme is a muted
+  text colour — `iconColor` is for icons and runs as light as `#a3a3a3`. Blend
+  `fontColor` toward the card colour and stop at the last step still above
+  4.5:1.
 - **Raise any pair too faint to read** — judged from the values, no contrast
-  script or audit. These are production values tuned for a widget whose text
-  sits over media behind a scrim, so some are not readable as plain text on a
-  card: `Slider` ships `#ffffff` text on its `#fafafa` card (1.04:1). Keep the
-  theme's own colour wherever it clears AA; otherwise walk it toward black or
-  white until it does, and note in a comment what you changed and why.
+  script or audit. These are production values tuned
+  for a widget whose text sits over media behind a scrim, so several are not
+  readable as plain text on a card: `Slider` ships `#ffffff` text on its
+  `#fafafa` card (1.04:1), `Gallery Slider` a `#FFFFFF` author on `#f0f2ff`
+  (1.11:1). Keep the theme's own colour wherever it clears AA; otherwise walk it
+  toward black or white until it does, and note in a comment what you changed
+  and why.
 - **A theme is the entire skin.** Exactly as with the default palette, a themed
   build carries no `prefers-color-scheme` remap, no `data-theme` attribute and
   no toggle — one set of values, the same page for every reader.
+
+themes-lite.json carries only the fields in this table; the rest of the app's
+fields drive widget behaviour a rendered page does not have.
 
 ### Tokens no theme sets — always these
 
@@ -148,10 +144,10 @@ does not, so every build declares them as they are, alongside the theme's:
 
 ### Fallback palette — only when the themes cannot be read
 
-If the network is blocked and you genuinely cannot fetch the theme catalogue,
-say so in one line and use the fallback palette instead — never mixed with a theme's
+If the network is blocked and you genuinely cannot fetch the themes, say so in
+one line and use the fallback palette instead — never mixed with a theme's
 values:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/fallback-palette.md
+BASE/guides/design/fallback-palette.md
 If that cannot be read either, the five brand colours at the top of this file
 are enough.
 
@@ -159,7 +155,7 @@ are enough.
 
 The build ships a single palette. Do **not** add a
 `@media (prefers-color-scheme: dark)` remap, a `data-theme` attribute or a theme
-toggle: the theme's values are the whole skin, and the page
+toggle: the values above — or a theme's, below — are the whole skin, and the page
 looks the same whatever the reader's OS is set to.
 
 ## 3. Card treatment (the shared baseline)
@@ -170,16 +166,7 @@ looks the same whatever the reader's OS is set to.
 - Hover lifts the card 2px and swaps to `--tbd-shadow-up` over `--tbd-ease`.
 - Image flush to the top edge, `object-fit: cover`, with a `--tbd-bg`
   placeholder behind it so the grid never jumps while images load. Explicit
-    `width`/`height` plus `loading="lazy" decoding="async"`.
-- **Media box.** Every image and video sits in a box with its own background:
-  the header gradient (§8) with the network name centred on it in white, and
-  the `<img>` alt text set to `color: transparent`. Preview panes (Claude's
-  artifact view, ChatGPT canvas) block outside images and video, so there the
-  card shows that tile instead of a broken icon; everywhere else the real media
-  loads over it.
-- **Video posts** render `<video controls muted playsinline preload="none">`
-  with the video entry's `cdn_url` as the source and the post's first image as
-  the `poster` — never autoplay (§7), no JavaScript.
+  `width`/`height` plus `loading="lazy" decoding="async"`.
 - Header row: 32px round avatar (`author.avatar_url`, omitted entirely when
   null) beside the author name in `--tbd-ink` at 14px/600. Under it, handle +
   network name + date in `--tbd-muted` at `--tbd-meta`, separated by "·", the
@@ -197,12 +184,11 @@ looks the same whatever the reader's OS is set to.
 
 A rail of 9:16 media tiles, for a widget embedded in a page it does not own.
 Fetch its full spec only when a reel is asked for:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/design/reel-layout.md
+BASE/guides/design/reel-layout.md
 
-## 5. Layout B — MOSAIC (the card themes, and the default when no theme is set)
+## 5. Layout B — MOSAIC (default for a section on your own site)
 
-A masonry mosaic. It is the default for a section on your own site because it
-gets real width,
+A masonry mosaic. It is the default there because the section gets real width,
 and a mosaic reads as a mosaic precisely BECAUSE the tiles are different heights.
 
 - Columns via CSS multi-column so heights pack naturally: `columns: 4`,
@@ -227,11 +213,8 @@ and a mosaic reads as a mosaic precisely BECAUSE the tiles are different heights
 - Every image `loading="lazy" decoding="async"`. A widget puts far more media on
   screen at once than a reel does; this is where it pays.
 
-Other layouts — the grids, sliders, collage and single-post themes in
-the catalogue, or on request a vertical feed or a full-screen signage view —
-all reuse §2 and §3 unchanged. Sliders and carousels are a CSS scroll-snap row;
-their arrows use the theme preview's own small `<script>`, copied as it is —
-the only JavaScript in the build, and it fetches nothing.
+Other layouts on request: a uniform card grid, a vertical feed, or a
+full-screen signage view — all of them reuse §2 and §3 unchanged.
 
 ## 6. States
 
@@ -250,7 +233,7 @@ the only JavaScript in the build, and it fetches nothing.
 - **The static preview.** The same posts, already expanded into markup, ship as
   `preview.html` — a file that opens from a double-click with no server, no
   build step and no call of any kind. It carries the same note and the same
-  CSS as the server deliverable, and it is where this spec gets reviewed
+  CSS as the two server deliverables, and it is where this spec gets reviewed
   before a token exists. It wears the same theme as the rest of the build — see
   **Themes** in section 2.
 - **Loading.** Skeleton tiles in `--tbd-bg` at the final tile shape, so the
@@ -285,6 +268,5 @@ not to compete with them.
   nothing to render.
 - **One skin, no switching.** No `prefers-color-scheme` remap, no `data-theme`
   attribute and no light/dark toggle anywhere in the build.
-- **Responsive to ~400px**, and byte-for-byte the same result from
-  `preview.html` and the server deliverable, whatever language it is
-  written in.
+- **Responsive to ~400px**, and byte-for-byte the same result from the Node.js
+  and the PHP deliverable.

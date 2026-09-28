@@ -1,22 +1,18 @@
 # ChatGPT - build a Tagembed social widget
 
 Use this when you are chatting with ChatGPT in the browser. It cannot touch
-your computer, so the prompts below make it hand you complete files (or a
-download link) plus a setup checklist. It walks through short steps - theme,
-then PHP / Node.js / React / Simple HTML / Other, then that theme's
-preview (change the look there if you like), then the code - and nothing
-else before it. The first four
-stacks are already built and tested, so those arrive as a ready zip in
-seconds; naming anything else ports that same code into your stack instead.
+your computer, so the prompts below make it hand you complete files plus a
+setup checklist, and forbid it from asking questions before the code.
 
 ## 1. Get the spec file
 
-Download [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) to your computer
+Download [llms.txt](../../llms.txt) to your computer
 (right-click the link, "Save link as...", keep the name `llms.txt`), or in a
 terminal:
 
 ```bash
-curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main   # change "main" to test another branch
+curl -sSLo llms.txt "$BASE/llms.txt"
 ```
 
 ## 2. Start the chat and attach the spec
@@ -24,7 +20,10 @@ curl -sSLo llms.txt https://raw.githubusercontent.com/wallapi/tagembed.com-API-D
 1. Open https://chatgpt.com and start a **new chat**.
 2. Click the **+** (paperclip) button next to the message box, choose
    **Upload from computer**, and pick `llms.txt`.
-3. Paste the prompt from step 3 and send.
+3. Click **+** again and choose **Canvas**. ChatGPT only draws an HTML page
+   inside a canvas; in a normal chat it shows the file as code, so without
+   this you get no preview.
+4. Paste the prompt from step 3 and send.
 
 ChatGPT can sometimes fetch URLs itself, but attaching the file is more
 reliable than hoping it browses. If your plan has no file upload, paste the
@@ -33,63 +32,116 @@ button on each code block - never retype a file.
 
 ## 3. Paste this prompt
 
-Four lines. Paste the block below as your first message, in a brand-new
-chat (a continued one may reuse an old, stale fetch instead of reading the
-files fresh). It is one link, steps.md - the theme picker, the language
-question, then the build, fetched one step at a time so every reply stays
-quick and the theme-picker render is never spelled out here.
+Six lines. Paste the block as your first message with
+llms.txt attached (or its contents pasted underneath). The detailed rules live
+in llms.txt; the AI reads them there.
 
 ```
-Build me a social widget from my Tagembed gallery.
-Fetch this RAW and follow it exactly - it lists every step and when
-to stop and wait for my answer. Every step that is a page (theme
-picker, preview) goes in Canvas, rendered as HTML - never described.
-Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
-If a link will not open, say so in one line and stop.
+BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - every BASE/... link, here and in the files you fetch, starts from it.
+Build me a social widget: one web page that shows the live posts from my Tagembed gallery.
+Brief: BASE/guides/widget-build-brief.md - fetch it RAW and the two specs it links (the API spec and the design spec); if you cannot fetch URLs, follow the attached llms.txt.
+Give me BOTH languages: a single self-contained index.php (PHP 8, nothing to install) AND the Node.js set (server.js, package.json, cache file) - plus a preview.html - the same page as a static file with the sample posts baked into the HTML, calling nothing, so I can double-click it and see the design before I have a token - and one README.md covering them. Token comes from the ACCESS_TOKEN env var - write the code first, then ask me for it at the end.
+Give me the complete code first, then tell me how to run it as if I've never used a terminal.
+You can't access my computer, so output every file complete and ready to save, starting each with "### FILE: <name>", then a setup checklist.
+Put preview.html in its own canvas so I can click Preview and see the design here; give the other files as normal code blocks.
 ```
+
+## See the design in the chat
+
+When `preview.html` opens in a canvas, click **Preview** at the top right of
+the canvas to see the page. If it came as a plain code block instead, reply:
+"Open preview.html in a canvas." Images can show blurred or missing inside
+the canvas; for the real look, save the file (step 4) and double-click it.
+
+Want to browse the themes first? Open
+https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/theme-gallery.html
+in your browser. Do not ask ChatGPT to copy the gallery or a
+`guides/previews/` file back to you: they are 60-125 KB each, too long for
+one ChatGPT reply, so they come out cut short and will not render.
 
 ## 4. Save the files it gives you
 
-**PHP / Node.js / React / Simple HTML:** click the download link, unzip it
-into a folder called `my-social-widget`, then put the `.env` (and
-`custom.css`, if you asked for a change) it gave you inside that same
-unzipped folder.
+For every `### FILE:` block: click the copy button on the code block, open a
+plain-text editor (macOS: TextEdit with Format > Make Plain Text; Windows:
+Notepad; or VS Code), paste, and save with the exact filename shown into a
+new folder called `my-social-widget`. Do not let the editor add `.txt`.
 
-**Any other stack:** for every `### FILE:` block, click the copy button on
-the code block, open a plain-text editor (macOS: TextEdit with Format >
-Make Plain Text; Windows: Notepad; or VS Code), paste, and save with the
-exact filename shown into `my-social-widget`. Do not let the editor add
-`.txt`.
+### Run it (PHP)
 
-### Run it
+Check the runtime once:
 
-The `README.md` inside the folder has the exact check and run commands.
-The four built-in stacks:
-
-| Stack | Check it is installed | Run it (in `my-social-widget`) | Open |
-| ----- | --------------------- | ------------------------------ | ---- |
-| PHP / Simple HTML | `php -v` (8.x) | `php -S localhost:8080` | http://localhost:8080 |
-| Node.js | `node -v` (v18 or higher) | `npm install`, then `npm start` | http://localhost:3000 |
-| React | `node -v` (v18 or higher) | `npm install`, then `npm run dev` | http://localhost:5173 |
-
-Any other stack you named: the README gives its own check, install (only if
-the framework needs one) and run command.
-
-Put your token in a `.env` file beside the server file - the code reads it on
-its own:
-
-```
-ACCESS_TOKEN=wt1_your_token_here
-API_BASE_URL=https://api.tagembed.com/api
+```bash
+php -v    # must print PHP 8.x
 ```
 
-Stop the server with Ctrl+C.
+Install PHP if the check fails: macOS `brew install php`, Windows https://windows.php.net/download, Ubuntu `sudo apt install php-cli php-curl`.
+
+macOS / Linux (Terminal):
+
+```bash
+cd my-social-widget
+export ACCESS_TOKEN="wt1_your_token_here"
+export API_BASE_URL="https://api.tagembed.com/api"
+php -S localhost:8080
+```
+
+Windows (PowerShell):
+
+```powershell
+cd my-social-widget
+$env:ACCESS_TOKEN="wt1_your_token_here"
+$env:API_BASE_URL="https://api.tagembed.com/api"
+php -S localhost:8080
+```
+
+Open http://localhost:8080 in your browser. Stop the server with Ctrl+C.
 
 Verify the API side independently of the page:
 
 ```bash
-curl -s -H "Authorization: Bearer wt1_your_token_here" "https://api.tagembed.com/api/v3/posts?limit=1"
+curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
+```
+
+You should see `"status":true` and one post inside `body.posts`. A 401 means
+the token is wrong or the API is disabled for the account; the message says
+which.
+
+### Run it (Node.js)
+
+Check the runtime once:
+
+```bash
+node -v   # must print v18 or higher
+```
+
+Install Node.js from https://nodejs.org (LTS) if the check fails.
+
+macOS / Linux (Terminal):
+
+```bash
+cd my-social-widget
+npm install
+export ACCESS_TOKEN="wt1_your_token_here"
+export API_BASE_URL="https://api.tagembed.com/api"
+node server.js
+```
+
+Windows (PowerShell):
+
+```powershell
+cd my-social-widget
+npm install
+$env:ACCESS_TOKEN="wt1_your_token_here"
+$env:API_BASE_URL="https://api.tagembed.com/api"
+node server.js
+```
+
+Open http://localhost:3000 in your browser. Stop the server with Ctrl+C.
+
+Verify the API side independently of the page:
+
+```bash
+curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "$API_BASE_URL/v3/posts?limit=1"
 ```
 
 You should see `"status":true` and one post inside `body.posts`. A 401 means
@@ -98,14 +150,12 @@ which.
 
 ## If it goes wrong
 
-- **The AI asked anything besides theme, customise-or-not and stack before
-  writing code** - reply: "Build it now with the defaults in the prompt, and
-  ask me for the credentials at the end."
-- **It showed a list of theme names instead of the pictures** - reply: "Show
-  me the theme picker page itself, rendered - `guides/themes/thumbnails.html`,
-  as steps.md says - never a list."
-- **It wrote the server code in a different stack than you asked** - reply:
-  "Rewrite it for <your stack>, with its README."
+- **The AI asked questions instead of writing code** - your prompt (or a
+  follow-up) asked before writing anything. Reply: "Build it now with the
+  defaults in the prompt, and ask me for the credentials at the end."
+- **No preview in the chat, only code** - Canvas was not on. Reply: "Open
+  preview.html in a canvas", then click **Preview**. Or save `preview.html`
+  and double-click it.
 - **`Tagembed API error: 401`** - token missing or wrong in the environment
   variable, or the API is switched off for the account.
 - **`422 Validation Failed`** - a query parameter is wrong; the response's
@@ -116,5 +166,5 @@ which.
   names; make sure llms.txt was attached or is in the folder, and paste the
   Post object section from it.
 
-Spec: [llms.txt](https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/llms.txt) · more prompts (filters, load-more, Redis, design):
+Spec: [llms.txt](../../llms.txt) · more prompts (filters, load-more, Redis, design):
 [../../guides/prompts.md](../../guides/prompts.md)
