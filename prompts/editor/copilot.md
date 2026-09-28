@@ -15,7 +15,7 @@ your GitHub account when prompted.
 macOS / Linux:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build   # change "main" to test another branch
 mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt "$BASE/llms.txt"
 mkdir -p .github
@@ -25,7 +25,7 @@ curl -sSLo .github/copilot-instructions.md "$BASE/prompts/TAGEMBED_CONTEXT.md"
 Windows (PowerShell):
 
 ```powershell
-$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d"   # change "main" to test another branch
+$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build"   # change "main" to test another branch
 mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt "$BASE/llms.txt"
 New-Item -ItemType Directory -Force .github | Out-Null
