@@ -109,11 +109,10 @@ fetch result instead.
 Then always also give me this one line: the real screenshots, pixel
 for pixel, in my own browser -
 https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html
-
 - only for me to click, never fetched by you again. Some fetch tools
-  summarise a page into a text list before you ever see it, so your own
-  artifact may only approximate the real look - this link is the
-  fallback that always shows the exact file.
+summarise a page into a text list before you ever see it, so your own
+artifact may only approximate the real look - this link is the
+fallback that always shows the exact file.
 
 Your whole reply is the picker artifact, that one link, and then one
 line: "Which theme do you want? Reply with its name or number." Then
@@ -143,11 +142,10 @@ included; there is no "cannot show it" case here. Then always also
 give me this one line: the real images load full-size in my own
 browser -
 https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html
-
 - built the same way as step 1's link (raw.githubusercontent.com
-  swapped for raw.githack.com), never fetched yourself, only for me to
-  click, since a chat's own preview pane blocks outside photos and
-  video and shows a coloured tile in their place.
+swapped for raw.githack.com), never fetched yourself, only for me to
+click, since a chat's own preview pane blocks outside photos and
+video and shows a coloured tile in their place.
 
 Then fetch RAW
 https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt
@@ -172,25 +170,23 @@ Class names, for anything else: .tbd-card, .tbd-media, .tbd-head,
 
 Write custom.css - only what changes, mostly one `:root { ... }` block,
 adding to any custom.css from earlier in this chat. Then reply with:
-
 1. preview.html again, so this chat shows the change, if you can show
    one: the step 2 file exactly as it was, with the whole custom.css
-   pasted in just before its </style>, under a /_ custom.css _/
+   pasted in just before its </style>, under a /* custom.css */
    comment. Change nothing else in the file.
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
-   Then fetch RAW
-   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt
-   and paste its one line as your reply's last line, exactly as fetched,
-   byte for byte - do not type it yourself from memory. This is the only
-   fetch in this step; it ends when I name a stack.
+Then fetch RAW
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt
+and paste its one line as your reply's last line, exactly as fetched,
+byte for byte - do not type it yourself from memory. This is the only
+fetch in this step; it ends when I name a stack.
 
 ## Step 4 - the files for my stack (fetch what this step names, write no new code - except Other)
 
 If this chat can offer a download (ChatGPT, claude.ai, Gemini...) and
 I named PHP, Node.js, React or Simple HTML: fetch nothing in this
 step - the finished bundle already exists. Reply with only:
-
 - the download link:
   https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-<php|nodejs|react|html>.zip
   - finished code, every theme, the sample posts and README.md;
@@ -200,20 +196,19 @@ step - the finished bundle already exists. Reply with only:
 - one line: unzip it, put .env and custom.css in the unzipped folder;
 - then everything under "After the files" below, from "how to start
   it" to the token question.
-  For an Other stack, even in this same chat type: do not refuse and do
-  not substitute one of the four zips above - port it, the same as
-  every other AI does below, and deliver it the way the "Delivery"
-  section further down says a chat like this one delivers (usually one
-  zip of the ported files, not the pre-built one).
+For an Other stack, even in this same chat type: do not refuse and do
+not substitute one of the four zips above - port it, the same as
+every other AI does below, and deliver it the way the "Delivery"
+section further down says a chat like this one delivers (usually one
+zip of the ported files, not the pre-built one).
 
 The code for every stack is finished. Fetch RAW these three - nothing
 else:
-
 1. My stack's files, all in one text file - each file starts with a
    line "===== FILE: <path> =====":
-   - PHP: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt
-   - Node.js: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt
-   - React: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt
+   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt
+   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt
+   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt
    - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt
 2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css
 3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json
@@ -222,7 +217,6 @@ Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character
 for character. Do not rewrite, shorten, "improve" or merge any of
 them, and write no "rest stays the same". The files, in this order:
-
 - every file from the stack text file - README.md included (it is
   already written: how to run, settings, the look, the cache, fixes) -
   except .env.example and except the sample file I do not need:
@@ -239,8 +233,7 @@ them, and write no "rest stays the same". The files, in this order:
 
 Still fetch only 3 files, then port - fast, no plan, no scaffold. The
 closest finished bundle is the reference; copy its logic, markup,
-.tbd-\* classes and cache as they are, changing only the language:
-
+.tbd-* classes and cache as they are, changing only the language:
 - PHP frameworks (Laravel, WordPress, CodeIgniter, Symfony...):
   social-widget-php.txt
 - Frontend-only (Vue, Angular, Svelte, plain JS...):
@@ -248,11 +241,10 @@ closest finished bundle is the reference; copy its logic, markup,
   port only the component
 - Everything else (Next.js, Nuxt, Express, Python, Ruby, Go, Java,
   .NET...): social-widget-nodejs.txt
-  plus themes/<slug>.css and themes/<slug>.json as above, from
-  https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/.
+plus themes/<slug>.css and themes/<slug>.json as above, from
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/.
 
 Write only the files that stack needs to run - usually 2-4:
-
 - one server-side file that calls the API with the token and caches
   (a route/controller, or the framework's server route - e.g. a
   Next.js route handler or server component, a Django/Flask view);
@@ -261,12 +253,12 @@ Write only the files that stack needs to run - usually 2-4:
   requirements.txt, composer.json, go.mod...), with the fewest
   packages;
 - themes/ and custom.css exactly as in the list above;
-- .env - the reference bundle's .env.example keys (ACCESS*TOKEN empty,
+- .env - the reference bundle's .env.example keys (ACCESS_TOKEN empty,
   API_BASE_URL, WIDGET_THEME=<slug>, PORT only if the stack uses one),
   read on the server the stack's usual way (Laravel env()/config,
   Django/Flask python-dotenv, Next.js .env.local, Rails/Go/others a
-  dotenv package or the host's settings) - never with a NEXT_PUBLIC*,
-  VITE*, REACT_APP* or other browser prefix. In a project I already
+  dotenv package or the host's settings) - never with a NEXT_PUBLIC_,
+  VITE_, REACT_APP_ or other browser prefix. In a project I already
   have, do not replace my .env: give only these lines to add to it.
   One line: add .env to .gitignore;
 - README.md: the reference bundle's README (already fetched) adapted
@@ -275,11 +267,11 @@ Write only the files that stack needs to run - usually 2-4:
   someone who has never used a terminal. Change only the file names,
   commands and where each file goes; keep its line that the token
   stays on the server.
-  No samples/ folder and no sample posts for an Other stack: drop
-  samplePosts() / sw_samples() and the file read. An empty ACCESS_TOKEN
-  returns no posts (touching neither the API nor the cache) and the page
-  shows the bundle's .tbd-note line instead: "Set ACCESS_TOKEN in .env
-  to show your gallery."
+No samples/ folder and no sample posts for an Other stack: drop
+samplePosts() / sw_samples() and the file read. An empty ACCESS_TOKEN
+returns no posts (touching neither the API nor the cache) and the page
+shows the bundle's .tbd-note line instead: "Set ACCESS_TOKEN in .env
+to show your gallery."
 
 For a framework I already have (Laravel, WordPress, Django, Rails...),
 give only the files to drop into my project and one line on where each
@@ -290,7 +282,6 @@ The token stays server-side in every port: the browser only ever
 calls my own server's route, never api.tagembed.com.
 
 Delivery, so I can download instead of copying code blocks:
-
 - Can write files in my project: save them there (as said at the top).
 - Otherwise, if this chat can make a downloadable file (ChatGPT,
   claude.ai, Gemini...): put every file in one
@@ -301,7 +292,6 @@ Delivery, so I can download instead of copying code blocks:
   with its path.
 
 After the files, short:
-
 - one line: save them all in one folder, keeping the paths (themes/,
   samples/, and src/ for React; for Other, where each file goes).
 - how to start it, one line:
@@ -311,16 +301,16 @@ After the files, short:
   - React: `npm install`, then `npm run dev`, open http://localhost:5173
   - Other: that stack's own one-line start command.
 - "README.md has every step, for someone who has never used a terminal."
-  Then a short "What you can add next" list - 4 to 6 one-line ideas I
-  could send back as my next request, picked from: a network filter bar,
-  a "Load more" / next-page link, auto-refresh, a lightbox for images and
-  videos, shopping tags on posts, dropping the widget into a section of
-  my existing site, Redis or another cache.
+Then a short "What you can add next" list - 4 to 6 one-line ideas I
+could send back as my next request, picked from: a network filter bar,
+a "Load more" / next-page link, auto-refresh, a lightbox for images and
+videos, shopping tags on posts, dropping the widget into a section of
+my existing site, Redis or another cache.
 
-Always add this one line, for every stack: keep ACCESS*TOKEN (and any
+Always add this one line, for every stack: keep ACCESS_TOKEN (and any
 other key) only on the server - in .env or the host's environment
-settings - never in frontend code, a public folder, a VITE* /
-NEXT*PUBLIC* / REACT*APP* variable, or git (put .env in .gitignore);
+settings - never in frontend code, a public folder, a VITE_ /
+NEXT_PUBLIC_ / REACT_APP_ variable, or git (put .env in .gitignore);
 anywhere the browser can reach, the token is disclosed.
 
 End by asking for my access token - Tagembed dashboard, the gallery's
