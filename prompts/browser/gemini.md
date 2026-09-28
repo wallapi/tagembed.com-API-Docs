@@ -3,8 +3,9 @@
 Use this when you are chatting with Gemini in the browser. It cannot touch
 your computer, so the prompts below make it hand you complete files (or a
 download link) plus a setup checklist. It walks through short steps - theme,
-then the preview, an optional customise, then PHP / Node.js / React /
-Simple HTML / Other - and nothing else before the code. The first four
+then PHP / Node.js / React / Simple HTML / Other, then that theme's
+preview (change the look there if you like), then the code - and nothing
+else before it. The first four
 stacks are already built and tested, so those arrive as a ready zip in
 seconds; naming anything else ports that same code into your stack instead.
 
@@ -49,7 +50,7 @@ to stop and wait for my answer; the only questions you may ask are
 the ones it names, nothing else, and no plan before step 1. Every
 step that is a page (theme picker, preview) goes in Canvas, rendered
 as HTML - never described. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
 If a link will not open, say so in one line and stop.
 ```
 

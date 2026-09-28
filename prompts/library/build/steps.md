@@ -5,8 +5,8 @@ Tagembed's public API docs repo (github.com/wallapi/tagembed.com-API-Docs,
 which also holds the API reference, llms.txt). The person who pasted
 this link asked you to take them through these steps.
 
-Everything the build uses is static: small HTML/CSS pages, two short
-text files, and finished starter code (PHP, Node.js, React, Simple
+Everything the build uses is static: small HTML/CSS pages and
+finished starter code (PHP, Node.js, React, Simple
 HTML) that calls the Tagembed API with the user's own access token from
 their .env file. You are welcome to read any file before you show it,
 and to point out anything that looks wrong.
@@ -23,9 +23,9 @@ showing them to me - same content, same paths.
 
 A few things that keep the build accurate:
 
-- The files change often, so fetch each link fresh on each step, even
-  in a chat we have used for this build before. An earlier fetch, or a
-  version you remember, may be out of date.
+- Fetch each link once, when its step comes - this file only once, at
+  the start. Every link carries a version, so what you fetch is
+  current; an older copy you remember may be out of date.
 - There are 17 themes (14 social, 3 review), and the picker page is
   their only catalogue. If you remember a different catalogue, it is an
   older version.
@@ -33,8 +33,8 @@ A few things that keep the build accurate:
   of theme names - the pictures are what I choose from.
 - Every file this build uses is linked in full in steps 1-4. The stack
   code comes from templates/dist/social-widget-<stack>.txt (never a .md
-  file), and the only other files under prompts/library/build/ are
-  stack-question.txt and stack-question-again.txt. There is no
+  file), and this is the only file under prompts/library/build/ the
+  build uses. There is no
   preview.md, server.md, php.md, node.md or other "part 2" file - a link
   that is not given below is not part of this build, so skip it.
 - Sample posts must match the theme: social themes (1-14) use the
@@ -45,7 +45,7 @@ A few things that keep the build accurate:
 ## Step 1 - theme
 
 Fetch this page RAW - it is the theme picker:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-28b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-28c
 It is a small static page: the heading "Pick a theme" and 17 cards,
 each a base64 WebP screenshot of the widget with its number and name
 underneath ("1. Classic Card"). It has no scripts, links or forms.
@@ -70,7 +70,15 @@ file.
 End with: "Which theme do you want? Reply with its name or number."
 Then stop and wait for my answer.
 
-## Step 2 - the preview (fetch TWO files, write no code)
+## Step 2 - stack (no fetch)
+
+Reply with only this question, as written here:
+
+Which stack should I build it in? PHP / Node.js / React / Simple HTML / Other (name it - Laravel, WordPress, Next.js, Vue, Django, Flask...)
+
+Then stop and wait for my answer.
+
+## Step 3 - the preview (fetch ONE file, write no code)
 
 Each theme's preview is a finished file. Its name (the "slug") is the
 theme name in lower case with dashes: 1 classic-card, 2 social-card,
@@ -80,13 +88,12 @@ theme name in lower case with dashes: 1 classic-card, 2 social-card,
 16 review-carousel, 17 review-list.
 
 Fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-28b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-28c
 and give it back to me as preview.html, exactly as it is - same CSS,
 markup, sample posts, image URLs and base64 "data:image" thumbnails.
 It is static HTML and CSS (slider themes add a few lines of script for
 the arrows), already built from the sample posts, so there is nothing
-to redesign, fill or inject. The only other fetch in this step is
-stack-question.txt, below.
+to redesign, fill or inject.
 
 Show it as an HTML artifact, canvas or preview pane, the same way as
 step 1. Then give me this one line, for me to click, not for you to
@@ -95,14 +102,11 @@ https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug
 - a chat's own preview pane blocks outside photos and video and shows
 a coloured tile in their place.
 
-Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt?v=2026-09-28b
-and end your reply with its two lines, copied as written there, not
-paraphrased.
+End with this one line, my theme and stack filled in:
+"Here is the <theme> preview. Shall I give you the <stack> code now? (Or tell me what to change in the look first.)"
+Then stop and wait. A yes goes straight to step 4.
 
-## Step 3 - customise (fetch ONE file, repeat as often as I ask)
-
-Do not redesign the preview. Every look is set by CSS variables, so a
+If I ask for a change instead: do not redesign the preview. Every look is set by CSS variables, so a
 change is a few lines in a file called custom.css. The variables:
 --tbd-bg (page), --tbd-surface (card), --tbd-text, --tbd-author,
 --tbd-font, --tbd-weight, --tbd-size (text size), --tbd-radius (card
@@ -113,19 +117,15 @@ Class names, for anything else: .tbd-card, .tbd-media, .tbd-head,
 .tbd-author, .tbd-date, .tbd-net, .tbd-text, .tbd-stars, .tbd-header.
 
 Write custom.css - only what changes, mostly one `:root { ... }` block,
-adding to any custom.css from earlier in this chat. Then reply with:
-1. preview.html again, so this chat shows the change, if you can show
-   one: the step 2 file exactly as it was, with the whole custom.css
-   pasted in just before its </style>, under a /* custom.css */
-   comment. Change nothing else in the file.
-2. custom.css in one short code block, with one line: keep it - it
-   goes into the build in step 4.
-Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt?v=2026-09-28b
-and end your reply with its one line, copied as written there. This is
-the only fetch in this step; it ends when I name a stack.
+adding to any custom.css from earlier in this chat. Reply with
+custom.css in one short code block and one line: it goes into the
+build in step 4. Show preview.html again (the step 3 file with the
+whole custom.css pasted just before its </style>, under a
+/* custom.css */ comment, nothing else changed) only if I ask to see
+it - the full page is slow to repeat. End with the same "Shall I give
+you the <stack> code now?" line. Repeat as often as I ask.
 
-## Step 4 - the files for my stack (fetch what this step names, write no new code - except Other)
+## Step 4 - the code for my stack (after my yes; write no new code - except Other)
 
 If this chat can offer a download (ChatGPT, claude.ai, Gemini...) and
 I named PHP, Node.js, React or Simple HTML: fetch nothing in this
@@ -151,12 +151,12 @@ The code for every stack is finished. Fetch RAW these three - nothing
 else:
 1. My stack's files, all in one text file - each file starts with a
    line "===== FILE: <path> =====":
-   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt?v=2026-09-28b
-   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt?v=2026-09-28b
-   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt?v=2026-09-28b
-   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt?v=2026-09-28b
-2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css?v=2026-09-28b
-3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json?v=2026-09-28b
+   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt?v=2026-09-28c
+   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt?v=2026-09-28c
+   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt?v=2026-09-28c
+   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt?v=2026-09-28c
+2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css?v=2026-09-28c
+3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json?v=2026-09-28c
 
 Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character

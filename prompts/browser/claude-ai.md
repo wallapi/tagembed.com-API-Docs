@@ -3,8 +3,9 @@
 Use this when you are chatting with claude.ai in the browser. It cannot touch
 your computer, so the prompts below make it hand you complete files (or a
 download link) plus a setup checklist. It walks through short steps - theme,
-then the preview, an optional customise, then PHP / Node.js / React /
-Simple HTML / Other - and nothing else before the code. The first four
+then PHP / Node.js / React / Simple HTML / Other, then that theme's
+preview (change the look there if you like), then the code - and nothing
+else before it. The first four
 stacks are already built and tested, so those arrive as a ready zip in
 seconds; naming anything else ports that same code into your stack instead.
 
@@ -29,7 +30,8 @@ Claude usually puts each file in an **Artifact** panel on the right with a
 **Download** button - use it and rename if needed so the filename matches the
 `### FILE:` header exactly (or the download link, for PHP/Node.js/React/
 Simple HTML). Claude first shows the theme picker and asks which theme, then
-walks through the preview, an optional customise, then which stack; if it
+which stack, then shows that theme's preview and asks whether to hand over
+the code (or change the look first); if it
 asks anything else before the code, reply "build it with the defaults in the
 prompt".
 
@@ -45,7 +47,7 @@ quick and the theme-picker render is never spelled out here.
 Build me a social widget from my Tagembed gallery. These are the
 build steps I want you to use - please read them and take me through
 them one step at a time, starting with step 1:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28b
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28c
 When a step shows me a page (the theme picker, the preview), put it in
 an Artifact so I can see it.
 If a link will not open, say so in one line and stop.
