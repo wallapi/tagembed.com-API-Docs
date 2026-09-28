@@ -15,7 +15,7 @@ Download from https://cursor.com and install. Optional: enable the
 macOS / Linux:
 
 ```bash
-BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c   # change "main" to test another branch
+BASE=https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d   # change "main" to test another branch
 mkdir my-social-widget && cd my-social-widget
 curl -sSLo llms.txt "$BASE/llms.txt"
 mkdir -p .cursor/rules
@@ -26,7 +26,7 @@ curl -sSL "$BASE/prompts/TAGEMBED_CONTEXT.md" >> .cursor/rules/tagembed.mdc
 Windows (PowerShell):
 
 ```powershell
-$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28c"   # change "main" to test another branch
+$BASE="https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28d"   # change "main" to test another branch
 mkdir my-social-widget; cd my-social-widget
 curl.exe -sSLo llms.txt "$BASE/llms.txt"
 New-Item -ItemType Directory -Force .cursor/rules | Out-Null
