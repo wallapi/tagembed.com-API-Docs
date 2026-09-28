@@ -45,7 +45,7 @@ quick and the theme-picker render is never spelled out here.
 Build me a social widget from my Tagembed gallery. These are the
 build steps I want you to use - please read them and take me through
 them one step at a time, starting with step 1:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md?v=2026-09-28b
 When a step shows me a page (the theme picker, the preview), put it in
 an Artifact so I can see it.
 If a link will not open, say so in one line and stop.

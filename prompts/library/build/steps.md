@@ -45,7 +45,7 @@ A few things that keep the build accurate:
 ## Step 1 - theme
 
 Fetch this page RAW - it is the theme picker:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-28
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/themes/thumbnails.html?v=2026-09-28b
 It is a small static page: the heading "Pick a theme" and 17 cards,
 each a base64 WebP screenshot of the widget with its number and name
 underneath ("1. Classic Card"). It has no scripts, links or forms.
@@ -80,7 +80,7 @@ theme name in lower case with dashes: 1 classic-card, 2 social-card,
 16 review-carousel, 17 review-list.
 
 Fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-28
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug>.html?v=2026-09-28b
 and give it back to me as preview.html, exactly as it is - same CSS,
 markup, sample posts, image URLs and base64 "data:image" thumbnails.
 It is static HTML and CSS (slider themes add a few lines of script for
@@ -96,7 +96,7 @@ https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/previews/<slug
 a coloured tile in their place.
 
 Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt?v=2026-09-28
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question.txt?v=2026-09-28b
 and end your reply with its two lines, copied as written there, not
 paraphrased.
 
@@ -121,7 +121,7 @@ adding to any custom.css from earlier in this chat. Then reply with:
 2. custom.css in one short code block, with one line: keep it - it
    goes into the build in step 4.
 Then fetch RAW
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt?v=2026-09-28
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/stack-question-again.txt?v=2026-09-28b
 and end your reply with its one line, copied as written there. This is
 the only fetch in this step; it ends when I name a stack.
 
@@ -151,12 +151,12 @@ The code for every stack is finished. Fetch RAW these three - nothing
 else:
 1. My stack's files, all in one text file - each file starts with a
    line "===== FILE: <path> =====":
-   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt?v=2026-09-28
-   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt?v=2026-09-28
-   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt?v=2026-09-28
-   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt?v=2026-09-28
-2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css?v=2026-09-28
-3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json?v=2026-09-28
+   - PHP:         https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-php.txt?v=2026-09-28b
+   - Node.js:     https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-nodejs.txt?v=2026-09-28b
+   - React:       https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-react.txt?v=2026-09-28b
+   - Simple HTML: https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/dist/social-widget-html.txt?v=2026-09-28b
+2. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.css?v=2026-09-28b
+3. https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/templates/themes/<slug>.json?v=2026-09-28b
 
 Hand every file over here in the chat, each as its own code block
 headed with its path, ready to save - exactly as fetched, character
