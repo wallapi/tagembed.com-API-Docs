@@ -54,7 +54,7 @@ the canvas to see the page. If it came as a plain code block instead, reply:
 the canvas; for the real look, save the file (step 4) and double-click it.
 
 Want to browse the themes first? Open
-https://raw.githack.com/wallapi/tagembed.com-API-Docs/main/guides/theme-gallery.html
+https://raw.githack.com/wallapi/tagembed.com-API-Docs/build-2026-09-28/guides/theme-gallery.html
 in your browser. Do not ask ChatGPT to copy the gallery or a
 `guides/previews/` file back to you: they are 60-125 KB each, too long for
 one ChatGPT reply, so they come out cut short and will not render.

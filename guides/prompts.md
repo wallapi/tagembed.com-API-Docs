@@ -135,7 +135,7 @@ BASE = https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main - ev
 Build me a social widget from my Tagembed gallery, step by step.
 Fetch this RAW and follow it exactly - it lists every step and when
 to stop and wait for my answer. Start with step 1 now:
-https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/main/prompts/library/build/steps.md
+https://raw.githubusercontent.com/wallapi/tagembed.com-API-Docs/build-2026-09-28/prompts/library/build/steps.md
 If you cannot open a link, say so in one line - do not build from memory.
 ```
 
