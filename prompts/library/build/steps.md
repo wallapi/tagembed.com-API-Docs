@@ -25,21 +25,16 @@ Fetch RAW BASE/guides/theme-gallery.html and give it back to me as
 gallery.html, exactly as it is, character for character - same CSS,
 markup, links and base64 "data:image" picture - so this chat shows it
 (as an artifact, canvas or preview pane). Do not redesign, shorten or
-rewrite it, and fetch nothing else. Then reply with only one line: the
-gallery in full size, click a theme to see its preview:
-<host>/guides/theme-gallery.html, where <host> is BASE with
-"https://raw.githubusercontent.com/" swapped for
-"https://raw.githack.com/" (raw GitHub would show the page as code; if
-BASE is a local folder, give the file path). Then ask which one I
+rewrite it, and fetch nothing else. Then ask which one I
 want - "skip", or any reply that is not a number or name, means
 3. Modern Card.
 
 Only if this chat cannot show a preview: skip gallery.html and show
-me this table instead, then the same line and question.
+me this table instead, then the same question.
 
 If you are ChatGPT or Gemini: fetch nothing in this step and skip
 gallery.html - you cannot open or read it whole from this chat. Show
-this table, then the same line and question.
+this table, then the same question.
 
 | # | Theme | For |
 |---|---|---|
@@ -75,13 +70,8 @@ so this chat shows it (as an artifact, canvas or preview pane). Do not
 redesign, shorten or rewrite it, and fetch nothing else.
 
 Then reply with only this:
-- one line: images show blurred inside this chat's preview; the full
-  images load in a browser - open <link> or save preview.html and
-  double-click it. Build <link> from BASE with
-  "https://raw.githubusercontent.com/" swapped for
-  "https://raw.githack.com/" (the rest of the path, branch included,
-  stays the same) + /guides/previews/<slug>.html; raw GitHub would
-  show it as code. If BASE is a local folder, give the file path.
+- one line: images show blurred inside this chat's preview; for the
+  full images, save preview.html and double-click it.
 - these two questions:
   1. Want to change anything? (colours, font, columns, corners,
      spacing...) - or say "no".
@@ -91,8 +81,8 @@ Then reply with only this:
 If you are ChatGPT or Gemini: fetch nothing in this step and skip
 preview.html - you cannot open or read it whole from this chat. The slug never carries the
 number: 5 is square-photo, not 5-square-photo. Reply with only one
-line: open <link> to see the design with the sample posts (<link> built
-as above), then the same two questions.
+line: the design shows with the sample posts once the build runs
+(step 4), then the same two questions.
 
 ## Step 3 - customise (optional, repeat as often as I ask)
 
